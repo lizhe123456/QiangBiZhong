@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">抢必中</string>
+    <string name="home_page">首页</string>
+    <string name="yimei">医美</string>
+    <string name="shopping">商城</string>
+    <string name="shopping_car">购物车</string>
+    <string name="me">我的</string>
 </resources>

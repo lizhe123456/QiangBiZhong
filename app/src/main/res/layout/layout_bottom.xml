@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_navigation"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dm_49"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:weightSum="5">
+
+    <TextView
+        android:id="@+id/tv_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/btn_home_page"
+        android:gravity="center"
+        android:padding="@dimen/dm_3"
+        android:text="@string/home_page"
+        android:textColor="@color/tv_navigation"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_yimei"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/btn_yimei"
+        android:gravity="center"
+        android:padding="@dimen/dm_3"
+        android:text="@string/yimei"
+        android:textColor="@color/tv_navigation"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_shopping"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="@dimen/dm_2"
+        android:drawableTop="@drawable/btn_shoping"
+        android:gravity="center"
+        android:padding="@dimen/dm_3"
+        android:text="@string/shopping"
+        android:textColor="@color/tv_navigation"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_shopping_car"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/btn_shoping_car"
+        android:gravity="center"
+        android:padding="@dimen/dm_3"
+        android:text="@string/shopping_car"
+        android:textColor="@color/tv_navigation"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_mine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/btn_me"
+        android:gravity="center"
+        android:padding="@dimen/dm_3"
+        android:text="@string/me"
+        android:textColor="@color/tv_navigation"
+        android:textSize="12sp" />
+</LinearLayout>
+

@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="tv_333">#333333</color>
+    <color name="tv_navigation">#858996</color>
+    <color name="tv_navigation_select">#4F5FFF</color>
+    <color name="goods_text">#19191E</color>
+    <color name="goods_price">#F40B2C</color>
 </resources>

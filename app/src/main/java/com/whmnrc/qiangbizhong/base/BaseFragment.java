@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -17,9 +18,12 @@ import butterknife.Unbinder;
  * Created by lizhe on 2018/7/5.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<V extends BaseView,P extends BasePresenter> extends Fragment {
 
     protected View mRootView;
+    protected V view;
+    protected P presenter;
+    protected Context mContext;
 
     private Unbinder mUnbinder;
 
@@ -33,7 +37,16 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(setLayout(),container,false);
         mUnbinder = ButterKnife.bind(this,mRootView);
-        init();
+        mContext = getActivity();
+        if(presenter == null){
+            presenter = createPresenter();
+        }
+        if(view == null){
+            view = createView();
+        }
+        if(presenter != null && view != null){
+            presenter.attachView(view);
+        }
         return mRootView;
     }
 
@@ -65,14 +78,21 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroyView();
         hasFetchData = false;
         isViewPrepared = false;
-        mUnbinder.unbind();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
+        if (presenter != null){
+            presenter.detachView();
+        }
     }
 
     @LayoutRes
     protected abstract int setLayout();
 
-    protected abstract void init();
-
     protected abstract void initData();
+
+    public abstract P createPresenter();
+    public abstract V createView();
+
 
 }
