@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dm_68"
+    android:layout_height="@dimen/dm_48"
     android:orientation="vertical"
-    android:id="@+id/ll_all_title">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_20"/>
+    android:id="@+id/ll_all_title"
+    android:background="@color/white">
     <RelativeLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
@@ -33,7 +31,7 @@
             android:id="@+id/iv_menu"
             android:layout_width="@dimen/dm_48"
             android:layout_height="@dimen/dm_48"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:scaleType="center"
             android:visibility="gone" />
 

@@ -118,14 +118,28 @@ public class HomePageBean {
         this.goodsBeans = goodsBeans;
     }
 
-    public class MenuBean{
+    public static class MenuBean{
         int resId;
+        String url;
 
         String text;
 
         public MenuBean(int resId, String text) {
             this.resId = resId;
             this.text = text;
+        }
+
+        public MenuBean(String url, String text) {
+            this.url = url;
+            this.text = text;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
         }
 
         public int getResId() {
@@ -278,7 +292,7 @@ public class HomePageBean {
 
 
     //为你推荐
-    public class GoodsBean{
+    public static class GoodsBean{
         String url;
         String name;
         String money;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SnapUpCountDownTimerView">
+        <attr format="integer" name="viewSize"/>
+        <attr name="view_bg" format="reference|color"/>
+    </declare-styleable>
+
+</resources>

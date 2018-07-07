@@ -19,16 +19,16 @@ import com.whmnrc.qiangbizhong.R;
 public class GlideuUtil {
 
     private static RequestOptions options = new RequestOptions()
-            .placeholder(R.drawable.ic_launcher)
-            .error(R.drawable.ic_launcher);
+            .placeholder(R.drawable.img_error)
+            .error(R.drawable.img_error);
 
     private static RequestOptions options1 = new RequestOptions()
-            .placeholder(R.drawable.ic_launcher)
-            .error(R.drawable.ic_launcher);
+            .placeholder(R.drawable.img_error)
+            .error(R.drawable.img_error);
 
     private static RequestOptions options2 = new RequestOptions()
-            .placeholder(R.drawable.ic_launcher)
-            .error(R.drawable.ic_launcher);
+            .placeholder(R.drawable.img_error)
+            .error(R.drawable.img_error);
 
     //默认加载
     public static void loadImageView(Context mContext, String path, ImageView mImageView) {

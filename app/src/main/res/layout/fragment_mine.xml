@@ -1,10 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_f5f5f5">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_150"
+        android:background="@drawable/ic_mine_bg">
+        <ImageView
+            android:id="@+id/iv_scan"
+            android:layout_width="@dimen/dm_30"
+            android:layout_height="@dimen/dm_30"
+            android:src="@drawable/ic_shop_menu_13"
+            android:layout_marginLeft="@dimen/dm_42"
+            android:layout_marginTop="@dimen/dm_31"/>
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/dm_55"
+            android:layout_height="@dimen/dm_55"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dm_20"/>
+        <TextView
+            android:id="@+id/tv_purchase_restrictions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dm_34"
+            android:background="@drawable/ic_purchase_restrictions"
+            android:text="今日可够50.0w"
+            android:textColor="@color/white"
+            android:paddingTop="@dimen/dm_3"
+            android:paddingBottom="@dimen/dm_3"
+            android:paddingLeft="@dimen/dm_8"
+            android:paddingRight="@dimen/dm_17" />
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="哈哈哈"
+            android:layout_below="@+id/iv_head"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:layout_marginTop="@dimen/dm_7"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/tv_yudou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="98656"
+            android:layout_below="@+id/tv_username"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:layout_marginTop="@dimen/dm_7"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_menu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sammmdas"
-        />
-</android.support.constraint.ConstraintLayout>
+        android:overScrollMode="never"
+        android:layout_marginTop="@dimen/dm_10"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:layout_marginTop="@dimen/dm_10"/>
+</LinearLayout>

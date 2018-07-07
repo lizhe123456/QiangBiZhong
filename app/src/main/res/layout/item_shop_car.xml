@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dm_11"
+    android:layout_marginLeft="@dimen/dm_10"
+    android:layout_marginRight="@dimen/dm_10"
+    android:background="@drawable/bg_fillet">
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#19191E"
+        android:textSize="15sp"
+        android:paddingRight="@dimen/dm_5"
+        android:paddingLeft="@dimen/dm_5"
+        android:paddingTop="@dimen/dm_10"
+        android:paddingBottom="@dimen/dm_10"
+        android:drawableLeft="@drawable/ic_selece_no"
+        android:drawableRight="@drawable/ic_more"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:background="#DDDDDD"
+        android:layout_marginLeft="@dimen/dm_5"
+        android:layout_marginRight="@dimen/dm_5"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_goods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:nestedScrollingEnabled="false"
+        android:paddingLeft="@dimen/dm_5"
+        android:paddingRight="@dimen/dm_5"
+        android:layout_marginTop="@dimen/dm_10"/>
+</LinearLayout>

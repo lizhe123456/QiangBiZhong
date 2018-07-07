@@ -10,6 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:background="#cccccc"/>
     <include layout="@layout/layout_bottom"/>
 </LinearLayout>

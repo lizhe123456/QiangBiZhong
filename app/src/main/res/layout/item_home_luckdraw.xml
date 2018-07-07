@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dm_10"
+    android:paddingTop="@dimen/dm_15"
+    android:paddingLeft="@dimen/dm_10"
+    android:paddingRight="@dimen/dm_10">
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_goods_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_10"
+        android:ellipsize="end"
+        android:maxLength="10"
+        android:textColor="@color/goods_text"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_moeny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="5000"
+            android:textColor="@color/tv_navigation"
+            android:textSize="10sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBarHorizontal"
+            style="@style/StyleProgressBarMini"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="50"
+            android:secondaryProgress="80"
+            android:layout_marginTop="@dimen/dm_2"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dm_2">
+            <TextView
+                android:id="@+id/tv_number_of_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="5000"
+                android:textColor="@color/tv_navigation"
+                android:textSize="10sp" />
+            <TextView
+                android:id="@+id/tv_surplus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="5000"
+                android:textSize="10sp"
+                android:layout_toRightOf="@+id/tv_number_of_people"
+                android:layout_marginLeft="@dimen/dm_10"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -2,7 +2,147 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_188" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_10"
+                android:background="#f5f5f5"/>
+            <include layout="@layout/layout_list_head"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_second_kill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_10"
+                android:background="#f5f5f5"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/dm_15">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#19191E"
+                    android:textSize="15sp"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/dm_7"
+                    android:text="最新揭晓"
+                    android:drawableLeft="@drawable/ic_jiexiao"/>
+                <TextView
+                    android:id="@+id/tv_jiexiao_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#19191E"
+                    android:textSize="13sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/ic_more"
+                    android:drawablePadding="@dimen/dm_3"
+                    android:text="@string/tv_more"/>
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_new_unveileds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_10"
+                android:background="#f5f5f5"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/dm_15">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#19191E"
+                    android:textSize="15sp"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/dm_7"
+                    android:text="最新抽奖"
+                    android:drawableLeft="@drawable/ic_chouj"/>
+                <TextView
+                    android:id="@+id/tv_chouj_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#19191E"
+                    android:textSize="13sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/ic_more"
+                    android:drawablePadding="@dimen/dm_3"
+                    android:text="@string/tv_more"/>
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_luck_draw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_10"
+                android:background="#f5f5f5"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/dm_15">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#19191E"
+                    android:textSize="15sp"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="@dimen/dm_7"
+                    android:text="为你推荐"
+                    android:drawableLeft="@drawable/ic_for_you"/>
+                <TextView
+                    android:id="@+id/tv_for_you_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#19191E"
+                    android:textSize="13sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/ic_more"
+                    android:drawablePadding="@dimen/dm_3"
+                    android:text="@string/tv_more"/>
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:paddingLeft="@dimen/dm_7"
+                android:paddingRight="@dimen/dm_7"
+                />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dm_48">
@@ -33,45 +173,4 @@
                 android:layout_gravity="right|top"/>
         </FrameLayout>
     </RelativeLayout>
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_188" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_second_kill"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_new_unveileds"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_luck_draw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"/>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

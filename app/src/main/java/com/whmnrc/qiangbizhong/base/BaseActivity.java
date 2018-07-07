@@ -6,7 +6,9 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.whmnrc.qiangbizhong.R;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,6 +25,7 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
     private V view;
 
     private Unbinder mUnbinder;
+//    private ImmersionBar mImmersionBar;
 
     public P getPresenter(){
         return presenter;
@@ -34,6 +37,11 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
         super.onCreate(savedInstanceState);
         setContentView(setLayout());
         mUnbinder = ButterKnife.bind(this);
+//        mImmersionBar = ImmersionBar.with(this)
+//                .statusBarColor(R.color.white)
+//                .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
+//                .flymeOSStatusBarFontColor(R.color.tv_000) ;
+//        mImmersionBar.init();   //所有子类都将继承这些相同的属性
         if(presenter == null){
             presenter = createPresenter();
         }
@@ -63,6 +71,9 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
         if(presenter != null){
             presenter.detachView();
         }
+//        if (mImmersionBar != null) {
+//            mImmersionBar.destroy();
+//        }
     }
 
 }
