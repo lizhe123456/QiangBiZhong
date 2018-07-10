@@ -13,11 +13,14 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.BasePresenter;
 import com.whmnrc.qiangbizhong.base.BaseView;
+import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
+import com.whmnrc.qiangbizhong.ui.home.activity.LuckDrawActivity;
 import com.whmnrc.qiangbizhong.ui.home.adapter.KillAdapter;
 import com.whmnrc.qiangbizhong.ui.home.adapter.LuckDrawAdapter;
 import com.whmnrc.qiangbizhong.ui.home.adapter.MenuAdapter;
 import com.whmnrc.qiangbizhong.ui.home.adapter.NewUnveiledsAdapter;
+import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.youth.banner.Banner;
 
 import java.util.List;
@@ -98,6 +101,26 @@ public class HomeFragment extends BaseFragment {
         rvMenu.setLayoutManager(new GridLayoutManager(mContext,5));
         rvMenu.setAdapter(menuAdapter);
         menuAdapter.addFirstDataSet(menuBeans);
+        menuAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Object item, int position) {
+                switch (position){
+                    case 0:
+                        AccountRechargeActivity.start(getContext(),0);
+                        break;
+                    case 1:
+                        LuckDrawActivity.start(getContext());
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+
+                        break;
+                }
+            }
+        });
     }
 
     private void initLuckDraw(List<HomePageBean.LuckDrawBean> luckDrawBeans) {

@@ -67,6 +67,7 @@ public class ShopCarFragment extends BaseFragment {
         shopCarBean.initShopCar();
         shopCarBeans = shopCarBean.getList();
         rvGoodsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        shopCarAdapter = new ShopCarAdapter(getContext());
         rvGoodsList.setAdapter(shopCarAdapter);
         shopCarAdapter.addFirstDataSet(shopCarBeans);
     }

@@ -46,7 +46,7 @@ public class MineBean {
         this.itemBeans = itemBeans;
         List<HomePageBean.MenuBean> list = new ArrayList<>();
         list.add(new HomePageBean.MenuBean(R.drawable.ic_wait_pay,"待付款"));
-        list.add(new HomePageBean.MenuBean(R.drawable.ic_wait_pay,"待发货"));
+        list.add(new HomePageBean.MenuBean(R.drawable.ic_send_goods,"待发货"));
         list.add(new HomePageBean.MenuBean(R.drawable.ic_pending_delivery,"待收货"));
         list.add(new HomePageBean.MenuBean(R.drawable.ic_wait_evaluate,"待评价"));
         menuBeans.add(new MenuBean("我的订单","全部订单",list));

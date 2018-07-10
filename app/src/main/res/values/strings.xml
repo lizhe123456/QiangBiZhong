@@ -14,4 +14,17 @@
     <string name="purchase">立即抢</string>
     <string name="open">展开全部</string>
     <string name="take_up">收起</string>
+    <string name="get_code_tv">获取验证码</string>
+    <string name="rule">（1）每人每天必须支付了预付金才有抽奖资格 （2）每人每天必须支付了预付金才有抽奖资格 （3）每人每天必须支付了预付金才有抽奖资格</string>
+    
+    <!--api-->
+    <string name="server_address">http://192.168.0.157:8010/swagger/docs/v1</string>
+    <string name="register">/api/user/register</string>
+    <string name="updatePwd">/api/user/updatePwd</string>
+    <string name="updateUserNick">/api/user/updateUserNick</string>
+    <string name="updateHeadImage">/api/user/updateHeadImage</string>
+    <string name="sendSmsCode">/api/user/sendsmscode</string>
+    <string name="login">/api/user/login</string>
+    <string name="wechatPay">/api/pay/wechatpay</string>
+
 </resources>

@@ -10,7 +10,8 @@
         android:id="@+id/iv_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_luck_draw"/>
+        android:src="@drawable/ic_luck_draw"
+        android:layout_gravity="center"/>
     <TextView
         android:id="@+id/tv_text"
         android:layout_width="wrap_content"

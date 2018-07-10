@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_fillet"
+    android:layout_marginBottom="@dimen/dm_10"
+    android:layout_marginRight="@dimen/dm_10"
+    android:layout_marginLeft="@dimen/dm_10">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_15"
+        android:layout_marginBottom="@dimen/dm_10">
+        <ImageView
+            android:id="@+id/tv_dian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_blue"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_15" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#19191E"
+            android:layout_toRightOf="@+id/tv_dian"
+            android:layout_marginLeft="@dimen/dm_11"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#858996"
+            android:textSize="12sp"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@drawable/ic_more"
+            android:drawablePadding="@dimen/dm_5"
+            android:layout_marginRight="@dimen/dm_5"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_oreder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:layout_marginLeft="@dimen/dm_30"/>
+</LinearLayout>

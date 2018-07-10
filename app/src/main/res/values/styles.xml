@@ -43,4 +43,6 @@
 
     </style>
 
+    <style name="TabLayoutTextStyle">15sp</style>
+
 </resources>

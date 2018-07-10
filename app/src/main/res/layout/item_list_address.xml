@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dm_15"
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/dm_10">
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tv_191"
+        android:textSize="18sp"
+        android:text="哈哈哈"/>
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="@color/tv_191"
+        android:text="@string/search"
+        android:layout_toRightOf="@+id/tv_name"
+        android:layout_alignBottom="@+id/tv_name"
+        android:layout_marginLeft="@dimen/dm_15"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/tv_navigation"
+        android:text="湖北省武汉市江岸区解放大道690号武汉国际广场
+C座7F 办公室"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginTop="@dimen/dm_5" />
+
+    <View
+        android:id="@+id/v_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:background="@color/divider_color"
+        android:layout_below="@+id/tv_address"
+        android:layout_marginTop="@dimen/dm_10"
+        android:layout_marginBottom="@dimen/dm_10"/>
+
+    <TextView
+        android:id="@+id/tv_select_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#4F5FFF"
+        android:textSize="15sp"
+        android:layout_below="@+id/v_divider"
+        android:text="herhe"
+        android:drawableLeft="@drawable/ic_selece_no"
+        android:drawablePadding="@dimen/dm_10"/>
+
+    <TextView
+        android:id="@+id/tv_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/tv_navigation"
+        android:text="编辑"
+        android:layout_alignBottom="@+id/tv_select_address"
+        android:layout_toLeftOf="@+id/tv_delete"
+        android:layout_marginRight="@dimen/dm_22"/>
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tv_navigation"
+        android:textSize="15sp"
+        android:drawableLeft="@drawable/ic_address_delete"
+        android:layout_alignBottom="@+id/tv_select_address"
+        android:layout_alignParentRight="true"
+        android:text="删除"
+        android:drawablePadding="@dimen/dm_5"
+        />
+
+</RelativeLayout>
