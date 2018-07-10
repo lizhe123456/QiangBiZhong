@@ -2,22 +2,15 @@ package com.whmnrc.qiangbizhong.ui.me.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
-import android.view.ActionMode;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
 import com.whmnrc.qiangbizhong.ui.me.fragment.AgentRechargeFragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.OpenVipFragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.RechargeFragment;
@@ -73,17 +66,6 @@ public class AccountRechargeActivity extends BaseActivity {
         ViewPagerUtil.initViewPage(vpContent,tlTitle,this,fragments,titles,0,page);
 
     }
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    protected BaseView createView() {
-        return null;
-    }
-
 
     @OnClick(R.id.iv_back)
     public void onViewClicked() {

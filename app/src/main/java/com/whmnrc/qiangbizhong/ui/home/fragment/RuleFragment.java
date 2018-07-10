@@ -4,8 +4,6 @@ import android.os.Bundle;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
 
 /**
  * Company 武汉麦诺软创
@@ -32,13 +30,4 @@ public class RuleFragment extends BaseFragment {
 
     }
 
-    @Override
-    public BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    public BaseView createView() {
-        return null;
-    }
 }

@@ -48,4 +48,9 @@
     <dimen name="dm_6">6dp</dimen>
     <dimen name="dm_105">105dp</dimen>
     <dimen name="dm_50">50dp</dimen>
+    <dimen name="dm_70">70dp</dimen>
+    <dimen name="dm_37">37dp</dimen>
+    <dimen name="dm_74">74dp</dimen>
+    <dimen name="dm_127">127dp</dimen>
+    <dimen name="dm_90">90dp</dimen>
 </resources>

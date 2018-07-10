@@ -1,10 +1,10 @@
-package com.whmnrc.qiangbizhong.ui.home.activity;
+package com.whmnrc.qiangbizhong.ui;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-import com.youth.banner.Banner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,10 +19,11 @@ import butterknife.OnClick;
 
 /**
  * Company 武汉麦诺软创
- * Created by lizhe on 2018/7/10.
+ * Created by lizhe on 2018/7/9.
  */
 
-public class UnveiledActivity extends BaseActivity {
+public class ZhaoPwdActivity extends BaseActivity {
+
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -39,32 +39,44 @@ public class UnveiledActivity extends BaseActivity {
     View vDivider;
     @BindView(R.id.ll_all_title)
     LinearLayout llAllTitle;
-    @BindView(R.id.bannerView)
-    Banner bannerView;
-    @BindView(R.id.rv_goods)
-    RecyclerView rvGoods;
-    @BindView(R.id.tv_chouj_more)
-    TextView tvChoujMore;
-    @BindView(R.id.rv_luck_draw)
-    RecyclerView rvLuckDraw;
+    @BindView(R.id.et_pwd)
+    EditText etPwd;
+    @BindView(R.id.et_code)
+    EditText etCode;
+    @BindView(R.id.bt_get_code)
+    TextView btGetCode;
+    @BindView(R.id.et_phone_number)
+    EditText etPhoneNumber;
+    @BindView(R.id.tv_login)
+    TextView tvLogin;
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, UnveiledActivity.class);
+        Intent starter = new Intent(context, ZhaoPwdActivity.class);
         context.startActivity(starter);
     }
 
     @Override
     protected int setLayout() {
-        return R.layout.activity_unveiled;
+        return R.layout.activity_zhao_paw;
     }
 
     @Override
     protected void setData() {
         ivBack.setVisibility(View.VISIBLE);
+        tvTitle.setText("找回密码");
     }
 
-    @OnClick(R.id.iv_back)
-    public void onViewClicked() {
-        this.finish();
+
+    @OnClick({R.id.iv_back, R.id.bt_get_code, R.id.tv_login})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                this.finish();
+                break;
+            case R.id.bt_get_code:
+                break;
+            case R.id.tv_login:
+                break;
+        }
     }
 }

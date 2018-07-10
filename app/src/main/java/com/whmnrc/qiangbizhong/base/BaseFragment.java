@@ -18,11 +18,10 @@ import butterknife.Unbinder;
  * Created by lizhe on 2018/7/5.
  */
 
-public abstract class BaseFragment<V extends BaseView,P extends BasePresenter> extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     protected View mRootView;
-    protected V view;
-    protected P presenter;
+
     protected Context mContext;
 
     private Unbinder mUnbinder;
@@ -38,15 +37,6 @@ public abstract class BaseFragment<V extends BaseView,P extends BasePresenter> e
         mRootView = inflater.inflate(setLayout(),container,false);
         mUnbinder = ButterKnife.bind(this,mRootView);
         mContext = getActivity();
-        if(presenter == null){
-            presenter = createPresenter();
-        }
-        if(view == null){
-            view = createView();
-        }
-        if(presenter != null && view != null){
-            presenter.attachView(view);
-        }
         return mRootView;
     }
 
@@ -81,9 +71,7 @@ public abstract class BaseFragment<V extends BaseView,P extends BasePresenter> e
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
-        if (presenter != null){
-            presenter.detachView();
-        }
+
     }
 
     @LayoutRes
@@ -91,8 +79,6 @@ public abstract class BaseFragment<V extends BaseView,P extends BasePresenter> e
 
     protected abstract void initData();
 
-    public abstract P createPresenter();
-    public abstract V createView();
 
 
 }

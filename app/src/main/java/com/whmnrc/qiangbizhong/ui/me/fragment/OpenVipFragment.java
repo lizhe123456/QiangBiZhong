@@ -1,19 +1,12 @@
 package com.whmnrc.qiangbizhong.ui.me.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -36,7 +29,6 @@ public class OpenVipFragment extends BaseFragment {
     TextView tvKegoumai;
     @BindView(R.id.et_recharge)
     EditText etRecharge;
-    Unbinder unbinder;
 
     public static OpenVipFragment newInstance() {
         Bundle args = new Bundle();
@@ -53,16 +45,6 @@ public class OpenVipFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-    }
-
-    @Override
-    public BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    public BaseView createView() {
-        return null;
     }
 
 

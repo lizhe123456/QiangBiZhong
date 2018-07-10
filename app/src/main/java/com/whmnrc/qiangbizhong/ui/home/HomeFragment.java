@@ -4,17 +4,12 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-
-import com.gyf.barlibrary.ImmersionBar;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
+import com.whmnrc.qiangbizhong.ui.home.activity.FlashSaleActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.LuckDrawActivity;
 import com.whmnrc.qiangbizhong.ui.home.adapter.KillAdapter;
 import com.whmnrc.qiangbizhong.ui.home.adapter.LuckDrawAdapter;
@@ -22,13 +17,9 @@ import com.whmnrc.qiangbizhong.ui.home.adapter.MenuAdapter;
 import com.whmnrc.qiangbizhong.ui.home.adapter.NewUnveiledsAdapter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.youth.banner.Banner;
-
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Company 武汉麦诺软创
@@ -148,19 +139,24 @@ public class HomeFragment extends BaseFragment {
         bannerView.start();
     }
 
-    @Override
-    public BasePresenter createPresenter() {
-        return null;
-    }
 
-    @Override
-    public BaseView createView() {
-        return null;
-    }
-
-
-    @OnClick(R.id.fl_meg)
-    public void onViewClicked() {
+    @OnClick({R.id.fl_meg,R.id.tv_more,R.id.tv_chouj_more,R.id.tv_jiexiao_more,R.id.tv_for_you_more})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.fl_meg:
+                break;
+            case R.id.tv_more:
+                FlashSaleActivity.start(mContext);
+                break;
+            case R.id.tv_chouj_more:
+                LuckDrawActivity.start(mContext);
+                break;
+            case R.id.tv_for_you_more:
+                break;
+            case R.id.tv_jiexiao_more:
+                FlashSaleActivity.start(mContext);
+                break;
+        }
     }
 
 }

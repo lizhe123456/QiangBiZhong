@@ -2,26 +2,19 @@ package com.whmnrc.qiangbizhong.ui.home.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.FragmentUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
 import com.whmnrc.qiangbizhong.ui.home.fragment.LuckDrawFragment;
 import com.whmnrc.qiangbizhong.ui.home.fragment.MyLuckDrawFragment;
 import com.whmnrc.qiangbizhong.ui.home.fragment.RuleFragment;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -93,15 +86,6 @@ public class LuckDrawActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    protected BaseView createView() {
-        return null;
-    }
 
     private void switchFragment(int index){
         if (index != shopIndex) {

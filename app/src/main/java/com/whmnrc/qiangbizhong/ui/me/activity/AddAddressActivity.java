@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.widget.TextView;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -34,16 +32,6 @@ public class AddAddressActivity extends BaseActivity {
     @Override
     protected void setData() {
         tvTitle.setText("新增收货地址");
-    }
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    protected BaseView createView() {
-        return null;
     }
 
     @OnClick(R.id.iv_back)

@@ -3,25 +3,16 @@ package com.whmnrc.qiangbizhong.ui.shopping;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
 import com.whmnrc.qiangbizhong.model.bean.ShopCarBean;
 import com.whmnrc.qiangbizhong.ui.shopping.adpter.ShopCarAdapter;
-
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Company 武汉麦诺软创
@@ -70,16 +61,6 @@ public class ShopCarFragment extends BaseFragment {
         shopCarAdapter = new ShopCarAdapter(getContext());
         rvGoodsList.setAdapter(shopCarAdapter);
         shopCarAdapter.addFirstDataSet(shopCarBeans);
-    }
-
-    @Override
-    public BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    public BaseView createView() {
-        return null;
     }
 
     @OnClick({R.id.tv_all_select, R.id.tv_collection, R.id.tv_delete})

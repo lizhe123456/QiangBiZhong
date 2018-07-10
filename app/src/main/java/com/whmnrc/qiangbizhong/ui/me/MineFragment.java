@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.MineBean;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
@@ -117,16 +115,6 @@ public class MineFragment extends BaseFragment {
 
     }
 
-
-    @Override
-    public BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    public BaseView createView() {
-        return null;
-    }
 
 
     @OnClick({R.id.iv_scan, R.id.iv_head, R.id.tv_purchase_restrictions})

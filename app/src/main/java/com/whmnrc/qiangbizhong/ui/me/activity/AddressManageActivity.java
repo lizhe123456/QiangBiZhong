@@ -2,21 +2,15 @@ package com.whmnrc.qiangbizhong.ui.me.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -54,16 +48,6 @@ public class AddressManageActivity extends BaseActivity {
         tvMenu.setText("新增");
         tvMenu.setVisibility(View.VISIBLE);
         tvTitle.setText("收货地址管理");
-    }
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    protected BaseView createView() {
-        return null;
     }
 
 

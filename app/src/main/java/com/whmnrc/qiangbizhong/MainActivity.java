@@ -6,13 +6,14 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.blankj.utilcode.util.FragmentUtils;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
+import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.home.HomeFragment;
 import com.whmnrc.qiangbizhong.ui.me.MineFragment;
 import com.whmnrc.qiangbizhong.ui.shop.ShopFragment;
 import com.whmnrc.qiangbizhong.ui.shopping.ShopCarFragment;
 import com.whmnrc.qiangbizhong.ui.yimei.YiMeiFragment;
+import com.whmnrc.qiangbizhong.util.UserManage;
+
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -61,15 +62,6 @@ public class MainActivity extends BaseActivity {
         switchBtn(HOME);
     }
 
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    protected BaseView createView() {
-        return null;
-    }
 
 
     private void switchFragment(int index){
@@ -130,10 +122,19 @@ public class MainActivity extends BaseActivity {
                 switchFragment(SHOP);
                 break;
             case R.id.tv_shopping_car:
-                switchFragment(SHOPCAR);
+                if (UserManage.getInstance().getLoginBean() != null) {
+                    switchFragment(SHOPCAR);
+                }else {
+                    LoginActivity.start(this);
+                }
                 break;
             case R.id.tv_mine:
-                switchFragment(ME);
+                if (UserManage.getInstance().getLoginBean() != null){
+                    switchFragment(ME);
+                }else {
+                    LoginActivity.start(this);
+                }
+
                 break;
         }
     }

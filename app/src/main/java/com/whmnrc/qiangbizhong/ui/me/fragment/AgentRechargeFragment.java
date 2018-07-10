@@ -2,18 +2,9 @@ package com.whmnrc.qiangbizhong.ui.me.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Company 武汉麦诺软创
@@ -41,16 +32,6 @@ public class AgentRechargeFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-    }
-
-    @Override
-    public BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    public BaseView createView() {
-        return null;
     }
 
 

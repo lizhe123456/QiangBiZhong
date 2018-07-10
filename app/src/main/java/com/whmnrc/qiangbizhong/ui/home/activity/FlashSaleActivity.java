@@ -1,12 +1,12 @@
 package com.whmnrc.qiangbizhong.ui.home.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -29,6 +29,11 @@ public class FlashSaleActivity extends BaseActivity {
     @BindView(R.id.rv_goods)
     RecyclerView rvGoods;
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, FlashSaleActivity.class);
+        context.startActivity(starter);
+    }
+
     @Override
     protected int setLayout() {
         return R.layout.activity_flash_sale;
@@ -37,16 +42,6 @@ public class FlashSaleActivity extends BaseActivity {
     @Override
     protected void setData() {
 
-    }
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    protected BaseView createView() {
-        return null;
     }
 
 

@@ -9,8 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
-import com.whmnrc.qiangbizhong.base.BasePresenter;
-import com.whmnrc.qiangbizhong.base.BaseView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -55,15 +53,6 @@ public class MyLuckDrawFragment extends BaseFragment {
 
     }
 
-    @Override
-    public BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
-    public BaseView createView() {
-        return null;
-    }
 
 
     @OnClick(R.id.iv_back)
