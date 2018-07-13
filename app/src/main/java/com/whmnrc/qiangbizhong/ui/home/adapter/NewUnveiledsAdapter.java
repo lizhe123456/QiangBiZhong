@@ -9,20 +9,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.ServiceUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
+import com.whmnrc.qiangbizhong.model.bean.HomeResult;
+import com.whmnrc.qiangbizhong.util.DateUtil;
 
 /**
  * Company 武汉麦诺软创
  * Created by lizhe on 2018/7/7.
  */
 
-public class NewUnveiledsAdapter extends BaseAdapter<HomePageBean.NewUnveiled> {
+public class NewUnveiledsAdapter extends BaseAdapter<HomeResult.GoodsNewAwardBean> {
 
     private int width;
 
@@ -32,14 +36,14 @@ public class NewUnveiledsAdapter extends BaseAdapter<HomePageBean.NewUnveiled> {
     }
 
     @Override
-    protected void bindDataToItemView(BaseViewHolder holder, HomePageBean.NewUnveiled item, int position) {
-        holder.setText(R.id.tv_goods_name,item.getName())
-                .setText(R.id.tv_number_of_people,item.getParticipateIn()+"")
-                .setText(R.id.tv_time,"距离开奖:" + item.getTime())
-                .setGlieuImage(R.id.iv_img,item.getUrl());
+    protected void bindDataToItemView(BaseViewHolder holder, HomeResult.GoodsNewAwardBean item, int position) {
+
+        holder.setText(R.id.tv_goods_name,item.getGoods_Name())
+                .setText(R.id.tv_time,"距离开奖:" + DateUtil.getDate(item.getAwardTime()))
+                .setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
 
         TextView textView = holder.getView(R.id.tv_number_of_people);
-        String str = "已有" + item.getParticipateIn()+"人抢购";
+        String str = "已有" + item.getAwardPeopleCount()+"人抢购";
         textView.setText(str);
         Spannable span = new SpannableString(textView.getText());
         span.setSpan(new AbsoluteSizeSpan(38), 2, str.length()-3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -54,7 +58,7 @@ public class NewUnveiledsAdapter extends BaseAdapter<HomePageBean.NewUnveiled> {
     }
 
     @Override
-    protected int getItemViewLayoutId(int position, HomePageBean.NewUnveiled item) {
+    protected int getItemViewLayoutId(int position, HomeResult.GoodsNewAwardBean item) {
         return R.layout.item_home_new_unveileds;
     }
 }

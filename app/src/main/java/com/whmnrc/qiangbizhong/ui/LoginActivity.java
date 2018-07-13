@@ -2,13 +2,23 @@ package com.whmnrc.qiangbizhong.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.ToastUtils;
+import com.whmnrc.qiangbizhong.MainActivity;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
+import com.whmnrc.qiangbizhong.model.bean.LoginBean;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
+import com.whmnrc.qiangbizhong.util.ToastUtil;
+import com.whmnrc.qiangbizhong.util.UserManage;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -17,7 +27,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/9.
  */
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements LoginPresenter.LoginCall{
 
 
     @BindView(R.id.iv_back)
@@ -58,14 +68,46 @@ public class LoginActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.bt_get_code:
+                if (TextUtils.isEmpty(etPhoneNumber.getText().toString().trim())) {
+                    ToastUtils.showShort("手机号不能为空");
+                    return;
+                }
+                if (RegexUtils.isMobileSimple(etPhoneNumber.getText())) {
+                    loginPresenter.sendsmscode(etPhoneNumber.getText().toString().trim());
+                }else {
+                    ToastUtils.showShort("手机号格式有误");
+                }
+                loginPresenter.sendsmscode(etPhoneNumber.getText().toString().trim());
                 break;
             case R.id.tv_register:
                 RegisterActivity.start(this);
                 break;
             case R.id.tv_login:
+                if (TextUtils.isEmpty(etPhoneNumber.getText().toString().trim())) {
+                    ToastUtils.showShort("手机号不能为空");
+                    return;
+                }
+
+                if (!RegexUtils.isMobileSimple(etPhoneNumber.getText())) {
+                    ToastUtils.showShort("手机号格式有误");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(etCode.getText().toString().trim())){
+                    ToastUtils.showShort("验证码不能为空");
+                    return;
+                }
+                showLoading("登录中..");
+                loginPresenter.login(etPhoneNumber.getText().toString().trim(),"",etCode.getText().toString().trim(),1,this);
                 break;
         }
     }
 
 
+    @Override
+    public void loginBack(LoginBean loginBean) {
+        UserManage.getInstance().updateLoginBena(loginBean);
+        MainActivity.start(this);
+        this.finish();
+    }
 }

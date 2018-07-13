@@ -3,6 +3,7 @@ package com.whmnrc.qiangbizhong.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 
@@ -49,6 +52,8 @@ public class ZhaoPwdActivity extends BaseActivity {
     EditText etPhoneNumber;
     @BindView(R.id.tv_login)
     TextView tvLogin;
+    @BindView(R.id.et_pwd_2)
+    EditText editText2;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ZhaoPwdActivity.class);
@@ -74,8 +79,39 @@ public class ZhaoPwdActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.bt_get_code:
+                if (TextUtils.isEmpty(etPhoneNumber.getText().toString().trim())){
+                    ToastUtils.showShort("手机号为空");
+                    return;
+                }
                 break;
             case R.id.tv_login:
+                //注册
+                if (TextUtils.isEmpty(etPhoneNumber.getText().toString().trim())) {
+                    ToastUtils.showShort("手机号不能为空");
+                    return;
+                }
+
+                if (!RegexUtils.isMobileSimple(etPhoneNumber.getText())) {
+                    ToastUtils.showShort("手机号格式有误");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(etCode.getText().toString().trim())){
+                    ToastUtils.showShort("验证码不能为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(etPwd.getText().toString().trim())){
+                    ToastUtils.showShort("密码不能为空");
+                    return;
+                }
+                if (etPwd.getText().toString().trim().length() < 6){
+                    ToastUtils.showShort("密码不能小于6位");
+                    return;
+                }
+                if (editText2.getText().toString().trim().equals(etPwd.getText().toString().trim())){
+                    ToastUtils.showShort("两次输入不一致");
+                    return;
+                }
                 break;
         }
     }

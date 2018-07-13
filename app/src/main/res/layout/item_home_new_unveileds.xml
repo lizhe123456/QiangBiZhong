@@ -57,7 +57,8 @@
             android:text="@string/purchase"
             android:layout_toRightOf="@+id/tv_time"
             android:layout_marginLeft="@dimen/dm_11"
-            android:layout_alignBottom="@+id/tv_time"/>
+            android:layout_alignBottom="@+id/tv_time"
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 </LinearLayout>

@@ -3,16 +3,20 @@ package com.whmnrc.qiangbizhong.ui.home.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-import com.youth.banner.Banner;
+import com.whmnrc.qiangbizhong.ui.home.fragment.OpenLuckDrawFragment;
+import com.whmnrc.qiangbizhong.ui.home.fragment.WaitLuckDrawFragment;
+import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,18 +39,13 @@ public class UnveiledActivity extends BaseActivity {
     TextView tvMenu;
     @BindView(R.id.ll_title)
     RelativeLayout llTitle;
-    @BindView(R.id.v_divider)
-    View vDivider;
-    @BindView(R.id.ll_all_title)
-    LinearLayout llAllTitle;
-    @BindView(R.id.bannerView)
-    Banner bannerView;
-    @BindView(R.id.rv_goods)
-    RecyclerView rvGoods;
-    @BindView(R.id.tv_chouj_more)
-    TextView tvChoujMore;
-    @BindView(R.id.rv_luck_draw)
-    RecyclerView rvLuckDraw;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+    @BindView(R.id.vp_content)
+    ViewPager vpContent;
+
+    SparseArray<Fragment> fragments;
+    SparseArray<String> strings;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, UnveiledActivity.class);
@@ -61,10 +60,21 @@ public class UnveiledActivity extends BaseActivity {
     @Override
     protected void setData() {
         ivBack.setVisibility(View.VISIBLE);
+        strings = new SparseArray<>();
+        fragments = new SparseArray<>();
+        strings.append(0,"中奖用户");
+        strings.append(1,"等待开奖");
+        fragments.append(0,new OpenLuckDrawFragment());
+        fragments.append(1,new WaitLuckDrawFragment());
+        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,strings,120,0);
+        tvTitle.setText("最新揭晓");
+        ivBack.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         this.finish();
     }
+
+
 }

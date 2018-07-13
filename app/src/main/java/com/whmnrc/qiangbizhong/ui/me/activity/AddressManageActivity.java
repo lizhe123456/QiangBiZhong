@@ -10,6 +10,11 @@ import android.widget.TextView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
+import com.whmnrc.qiangbizhong.model.bean.AddressBean;
+import com.whmnrc.qiangbizhong.presenter.me.AddressPresenter;
+
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -18,7 +23,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/10.
  */
 
-public class AddressManageActivity extends BaseActivity {
+public class AddressManageActivity extends BaseActivity implements AddressPresenter.AddManageCall{
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -47,7 +52,10 @@ public class AddressManageActivity extends BaseActivity {
     protected void setData() {
         tvMenu.setText("新增");
         tvMenu.setVisibility(View.VISIBLE);
+        ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("收货地址管理");
+        AddressPresenter addressPresenter = new AddressPresenter(this);
+        addressPresenter.getaddressList(this);
     }
 
 
@@ -58,7 +66,18 @@ public class AddressManageActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.tv_menu:
+                AddAddressActivity.start(this);
                 break;
         }
+    }
+
+    @Override
+    public void getAddressList(List<AddressBean> list) {
+
+    }
+
+    @Override
+    public void deleteAddress() {
+
     }
 }

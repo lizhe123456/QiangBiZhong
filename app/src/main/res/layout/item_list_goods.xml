@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:paddingTop="@dimen/dm_13"
-    android:paddingBottom="@dimen/dm_15">
+    android:paddingBottom="@dimen/dm_15"
+    android:layout_marginTop="@dimen/dm_10">
     <ImageView
         android:id="@+id/iv_img"
         android:layout_width="@dimen/dm_105"
@@ -18,8 +19,7 @@
         android:textColor="@color/tv_191"
         android:textSize="15sp"
         android:layout_toRightOf="@+id/iv_img"
-        android:layout_marginLeft="@dimen/dm_15"
-        android:text="sddsdsdsds"/>
+        android:layout_marginLeft="@dimen/dm_15" />
     <TextView
         android:id="@+id/tv_desc"
         android:layout_width="wrap_content"
@@ -28,8 +28,7 @@
         android:textColor="@color/tv_989898"
         android:layout_toRightOf="@+id/iv_img"
         android:layout_marginLeft="@dimen/dm_15"
-        android:layout_below="@+id/tv_goods_name"
-        android:text="sddsdsds"/>
+        android:layout_below="@+id/tv_goods_name"/>
     <TextView
         android:id="@+id/tv_purchased_num"
         android:layout_width="wrap_content"
@@ -39,8 +38,7 @@
         android:layout_toRightOf="@+id/iv_img"
         android:layout_marginLeft="@dimen/dm_15"
         android:layout_below="@+id/tv_desc"
-        android:layout_marginTop="@dimen/dm_3"
-        android:text="sdadsa"/>
+        android:layout_marginTop="@dimen/dm_3"/>
     <TextView
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
@@ -49,14 +47,12 @@
         android:layout_marginLeft="@dimen/dm_15"
         android:textSize="18sp"
         android:textColor="@color/goods_price"
-        android:layout_below="@+id/tv_purchased_num"
-        android:text="sdaasda"/>
+        android:layout_below="@+id/tv_purchased_num" />
     <TextView
         android:id="@+id/tv_old_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
-        android:text="sdsds"
         android:textColor="@color/tv_989898"
         android:layout_toRightOf="@+id/iv_img"
         android:layout_marginLeft="@dimen/dm_15"
@@ -70,7 +66,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/tv_purchased_num"
         android:textSize="10sp"
-        android:text="sadsad"
         android:layout_marginRight="@dimen/dm_15"/>
     <TextView
         android:id="@+id/tv_confirm"
@@ -80,6 +75,12 @@
         android:textColor="@color/white"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/iv_img"
-        android:layout_marginRight="@dimen/dm_15"/>
+        android:layout_marginRight="@dimen/dm_15"
+        android:text="立即抢购"
+        android:paddingBottom="@dimen/dm_5"
+        android:paddingTop="@dimen/dm_5"
+        android:paddingLeft="@dimen/dm_7"
+        android:paddingRight="@dimen/dm_7"
+        android:background="@drawable/bg_red_v2"/>
 
 </RelativeLayout>

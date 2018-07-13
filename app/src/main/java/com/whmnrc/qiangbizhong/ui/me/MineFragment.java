@@ -6,12 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.gyf.barlibrary.ImmersionBar;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.MineBean;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AddressManageActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.UserInfoActivity;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OderMenuAdapter;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OptionAdapter;
 import java.util.List;
@@ -40,6 +43,8 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.rv_option)
     RecyclerView rvOption;
 
+    ImmersionBar mImmersionBar;
+
     public static MineFragment newInstance() {
         Bundle args = new Bundle();
         MineFragment fragment = new MineFragment();
@@ -58,6 +63,11 @@ public class MineFragment extends BaseFragment {
         mineBean.initMineBean();
         initMenu(mineBean.getMenuBeans());
         initOption(mineBean.getItemBeans());
+        mImmersionBar = ImmersionBar.with(this)
+                .statusBarColor(R.color.tv_navigation_select)
+                .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
+                .fitsSystemWindows(true)
+                .flymeOSStatusBarFontColor(R.color.white);
     }
 
     private void initOption(List<MineBean.ItemBean> itemBeans) {
@@ -99,6 +109,7 @@ public class MineFragment extends BaseFragment {
                         break;
                     case 8:
                         //设置
+                        UserInfoActivity.start(getContext());
                         break;
                 }
             }
@@ -127,5 +138,11 @@ public class MineFragment extends BaseFragment {
             case R.id.tv_purchase_restrictions:
                 break;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mImmersionBar.destroy();
     }
 }

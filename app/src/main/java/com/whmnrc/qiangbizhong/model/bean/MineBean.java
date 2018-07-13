@@ -50,18 +50,18 @@ public class MineBean {
         list.add(new HomePageBean.MenuBean(R.drawable.ic_pending_delivery,"待收货"));
         list.add(new HomePageBean.MenuBean(R.drawable.ic_wait_evaluate,"待评价"));
         menuBeans.add(new MenuBean("我的订单","全部订单",list));
-        List<HomePageBean.MenuBean> list1 = new ArrayList<>();
-        list1.add(new HomePageBean.MenuBean(R.drawable.ic_to_examine,"审核中"));
-        list1.add(new HomePageBean.MenuBean(R.drawable.ic_on_sale,"在出售"));
-        list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_sold,"已出售"));
-        list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_down,"已下架"));
-        menuBeans.add(new MenuBean("商品管理","所有商品",list1));
-        List<HomePageBean.MenuBean> list2 = new ArrayList<>();
-        list2.add(new HomePageBean.MenuBean(R.drawable.ic_pending_payment,"待付款"));
-        list2.add(new HomePageBean.MenuBean(R.drawable.ic_in_the_transaction,"交易中"));
-        list2.add(new HomePageBean.MenuBean(R.drawable.ic_successful_trade,"交易成功"));
-        list2.add(new HomePageBean.MenuBean(R.drawable.ic_transaction_cancellation,"交易取消"));
-        menuBeans.add(new MenuBean("商家管理","全部订单",list2));
+//        List<HomePageBean.MenuBean> list1 = new ArrayList<>();
+//        list1.add(new HomePageBean.MenuBean(R.drawable.ic_to_examine,"审核中"));
+//        list1.add(new HomePageBean.MenuBean(R.drawable.ic_on_sale,"在出售"));
+//        list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_sold,"已出售"));
+//        list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_down,"已下架"));
+//        menuBeans.add(new MenuBean("商品管理","所有商品",list1));
+//        List<HomePageBean.MenuBean> list2 = new ArrayList<>();
+//        list2.add(new HomePageBean.MenuBean(R.drawable.ic_pending_payment,"待付款"));
+//        list2.add(new HomePageBean.MenuBean(R.drawable.ic_in_the_transaction,"交易中"));
+//        list2.add(new HomePageBean.MenuBean(R.drawable.ic_successful_trade,"交易成功"));
+//        list2.add(new HomePageBean.MenuBean(R.drawable.ic_transaction_cancellation,"交易取消"));
+//        menuBeans.add(new MenuBean("商家管理","全部订单",list2));
         this.menuBeans = menuBeans;
     }
 

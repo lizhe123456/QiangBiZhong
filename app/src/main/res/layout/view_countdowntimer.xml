@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:background="@android:color/white"
+              android:background="@android:color/transparent"
               android:orientation="horizontal"
     >
 
@@ -10,7 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_snap_up"
-        android:padding="5dp">
+        android:paddingTop="@dimen/dm_3"
+        android:paddingBottom="@dimen/dm_3"
+        android:paddingLeft="@dimen/dm_2"
+        android:paddingRight="@dimen/dm_2">
 
         <TextView
             android:id="@+id/tv_hour_decade"
@@ -34,7 +37,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_snap_up"
-        android:padding="5dp"
+        android:paddingTop="@dimen/dm_3"
+        android:paddingBottom="@dimen/dm_3"
+        android:paddingLeft="@dimen/dm_2"
+        android:paddingRight="@dimen/dm_2"
         >
 
         <TextView
@@ -60,7 +66,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_snap_up"
-        android:padding="5dp"
+        android:paddingTop="@dimen/dm_3"
+        android:paddingBottom="@dimen/dm_3"
+        android:paddingLeft="@dimen/dm_2"
+        android:paddingRight="@dimen/dm_2"
         >
 
         <TextView

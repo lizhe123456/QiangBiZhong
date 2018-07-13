@@ -10,6 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.whmnrc.qiangbizhong.model.bean.LodingBean;
+import com.whmnrc.qiangbizhong.widget.LoadingDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -31,12 +38,21 @@ public abstract class BaseFragment extends Fragment {
     //标识已经触发过懒加载数据
     private boolean hasFetchData;
 
+    private LoadingDialog loadingDialog;
+
+    //统一初始化加载框
+    private void initLoading() {
+        loadingDialog = new LoadingDialog(mContext);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         mRootView = inflater.inflate(setLayout(),container,false);
         mUnbinder = ButterKnife.bind(this,mRootView);
         mContext = getActivity();
+        initLoading();
         return mRootView;
     }
 
@@ -71,7 +87,21 @@ public abstract class BaseFragment extends Fragment {
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
+        EventBus.getDefault().unregister(this);
+    }
 
+    protected void showLoading(String msg) {
+        if (!loadingDialog.isShowing()) {
+            loadingDialog.setMessage(msg);
+            loadingDialog.show();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void unLoading(LodingBean lodingBean) {
+        if (loadingDialog.isShowing()) {
+            loadingDialog.cancel();
+        }
     }
 
     @LayoutRes

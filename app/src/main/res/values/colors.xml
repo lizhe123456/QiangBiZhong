@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#4F5FFF</color>
     <color name="white">#FFFFFF</color>
     <color name="tv_333">#333333</color>
     <color name="tv_navigation">#858996</color>
@@ -21,4 +21,8 @@
     <color name="tv_191">#19191E</color>
     <color name="tv_989898">#989898</color>
     <color name="tv_999">#999999</color>
+    <color name="black">#000000</color>
+    <color name="tv_title_color">#4F5FFF</color>
+    <color name="slide_line">#DDDDDD</color>
+    <color name="tv_777">#777777</color>
 </resources>

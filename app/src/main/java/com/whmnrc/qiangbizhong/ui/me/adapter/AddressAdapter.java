@@ -20,9 +20,9 @@ public class AddressAdapter extends BaseAdapter<AddressBean>{
 
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, AddressBean item, int position) {
-        holder.setText(R.id.tv_name,"")
-                .setText(R.id.tv_phone,"")
-                .setText(R.id.tv_address,"")
+        holder.setText(R.id.tv_name,item.getAddress_Name())
+                .setText(R.id.tv_phone,item.getAddress_Mobile())
+                .setText(R.id.tv_address,item.getAddress_Provice()+item.getAddress_City()+item.getAddress_Region()+item.getAddress_Detail())
                 .setText(R.id.tv_select_address,"")
                 .setText(R.id.tv_edit,"")
                 .setText(R.id.tv_delete,"");

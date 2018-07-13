@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dm_5"
+    android:layout_marginRight="@dimen/dm_5">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dm_5"
+        android:background="@drawable/bg_fl">
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/dm_110"
+            android:layout_height="@dimen/dm_110"
+            android:scaleType="centerCrop"/>
+    </FrameLayout>
+    <com.whmnrc.qiangbizhong.widget.RoundedImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/dm_32"
+        android:layout_height="@dimen/dm_32"
+        android:scaleType="centerCrop"
+        app:riv_oval="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-16dp"
+        />
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tv_191"
+        android:textSize="@dimen/dm_15"
+        android:layout_marginTop="@dimen/dm_5"
+        android:text="06月12日榜单"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获奖：qq***p"
+        android:textSize="@dimen/dm_12"
+        android:textColor="@color/tv_navigation"
+        android:layout_marginTop="@dimen/dm_5"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/dm_5"/>
+
+</LinearLayout>

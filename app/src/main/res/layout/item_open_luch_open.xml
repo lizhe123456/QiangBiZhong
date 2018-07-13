@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dm_10"
+    android:paddingLeft="@dimen/dm_10"
+    android:paddingRight="@dimen/dm_10"
+    android:paddingTop="@dimen/dm_15">
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_goods_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_10"
+        android:ellipsize="end"
+        android:maxLength="10"
+        android:textColor="@color/goods_text"
+        android:textSize="13sp"
+        android:text="苹果 iPhone 8 Plus"/>
+
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="距离开奖：04:12:12"
+        android:drawableLeft="@drawable/ic_time"
+        android:drawablePadding="@dimen/dm_5"
+        android:textColor="@color/tv_navigation"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tv_surplus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_toRightOf="@+id/tv_number_of_people"
+        android:text="已有9999人抢购"
+        android:layout_marginTop="@dimen/dm_3"
+        android:textSize="10sp"/>
+
+
+</LinearLayout>

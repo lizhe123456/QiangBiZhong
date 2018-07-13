@@ -18,13 +18,35 @@
     <string name="rule">（1）每人每天必须支付了预付金才有抽奖资格 （2）每人每天必须支付了预付金才有抽奖资格 （3）每人每天必须支付了预付金才有抽奖资格</string>
     
     <!--api-->
-    <string name="server_address">http://192.168.0.157:8010/swagger/docs/v1</string>
+    <string name="server_address">http://192.168.0.157:8010</string>
+    <!--注册-->
     <string name="register">/api/user/register</string>
+    <!--修改密码-->
     <string name="updatePwd">/api/user/updatePwd</string>
+    <!--修改昵称-->
     <string name="updateUserNick">/api/user/updateUserNick</string>
+    <!--修改头像-->
     <string name="updateHeadImage">/api/user/updateHeadImage</string>
+    <!--发送验证码-->
     <string name="sendSmsCode">/api/user/sendsmscode</string>
+    <!--登录-->
     <string name="login">/api/user/login</string>
+    <!--微信支付-->
     <string name="wechatPay">/api/pay/wechatpay</string>
-
+    <!--首页-->
+    <string name="homeIndex">/api/home/index</string>
+    <!--限时折扣-->
+    <string name="goodsrushlist">/api/home/goodsrushlist</string>
+    <!--订单列表-->
+    <string name="orderlist">/api/home/orderlist</string>
+    <!--商品详情-->
+    <string name="goodsrushinfo">/api/home/goodsrushinfo</string>
+    <!--提交订单-->
+    <string name="submitOrder">/api/app/rushGoods/submitOrder</string>
+    <!--添加地址-->
+    <string name="addAddress">/api/address/add</string>
+    <!--删除地址-->
+    <string name="deleteAddress">/api/address/delete</string>
+    <!--收货地址-->
+    <string name="getaddresslist">/api/address/getaddresslist</string>
 </resources>

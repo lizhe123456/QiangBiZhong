@@ -10,13 +10,14 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
+import com.whmnrc.qiangbizhong.model.bean.HomeResult;
 
 /**
  * Company 武汉麦诺软创
  * Created by lizhe on 2018/7/6.
  */
 
-public class KillAdapter extends BaseAdapter<HomePageBean.GoodsBean>{
+public class KillAdapter extends BaseAdapter<HomeResult.GoodsRushBean>{
 
     private int width;
 
@@ -30,8 +31,8 @@ public class KillAdapter extends BaseAdapter<HomePageBean.GoodsBean>{
     }
 
     @Override
-    protected void bindDataToItemView(BaseViewHolder holder, HomePageBean.GoodsBean item, int position) {
-        holder.setText(R.id.tv_moeny,item.getMoney()).setText(R.id.tv_goods_name,item.getName()).setGlieuImage(R.id.iv_img,item.getUrl());
+    protected void bindDataToItemView(BaseViewHolder holder, HomeResult.GoodsRushBean item, int position) {
+        holder.setText(R.id.tv_moeny,item.getGoodsPrice_Price()+"").setText(R.id.tv_goods_name,item.getGoods_Name()).setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
         ImageView imageView = holder.getView(R.id.iv_img);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
         layoutParams.width = width;
@@ -41,7 +42,7 @@ public class KillAdapter extends BaseAdapter<HomePageBean.GoodsBean>{
     }
 
     @Override
-    protected int getItemViewLayoutId(int position, HomePageBean.GoodsBean item) {
+    protected int getItemViewLayoutId(int position, HomeResult.GoodsRushBean item) {
         return R.layout.item_home_kill;
     }
 }

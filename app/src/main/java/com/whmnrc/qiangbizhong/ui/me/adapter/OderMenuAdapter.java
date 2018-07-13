@@ -3,12 +3,14 @@ package com.whmnrc.qiangbizhong.ui.me.adapter;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.MineBean;
 import com.whmnrc.qiangbizhong.ui.home.adapter.MenuAdapter;
+import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 
 /**
  * Company 武汉麦诺软创
@@ -30,6 +32,14 @@ public class OderMenuAdapter extends BaseAdapter<MineBean.MenuBean> {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(menuAdapter);
         menuAdapter.addFirstDataSet(item.getList());
+        if (position == 0){
+            menuAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onClick(View view, Object item, int position) {
+                    MyOrderActivity.start(getContext(),position);
+                }
+            });
+        }
     }
 
     @Override

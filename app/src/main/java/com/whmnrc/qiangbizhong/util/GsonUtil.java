@@ -21,7 +21,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.whmnrc.qiangbizhong.base.BaseResponse;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -79,5 +82,33 @@ public class GsonUtil {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static BaseResponse fromJson(String json, Class clazz) {
+        Gson gson = new Gson();
+        Type objectType = type(BaseResponse.class, clazz);
+        return gson.fromJson(json, objectType);
+    }
+
+    public <T>String toJson(Class<T> clazz) {
+        Gson gson = new Gson();
+        Type objectType = type(BaseResponse.class, clazz);
+        return gson.toJson(this, objectType);
+    }
+
+    static ParameterizedType type(final Class raw, final Type... args) {
+        return new ParameterizedType() {
+            public Type getRawType() {
+                return raw;
+            }
+
+            public Type[] getActualTypeArguments() {
+                return args;
+            }
+
+            public Type getOwnerType() {
+                return null;
+            }
+        };
     }
 }

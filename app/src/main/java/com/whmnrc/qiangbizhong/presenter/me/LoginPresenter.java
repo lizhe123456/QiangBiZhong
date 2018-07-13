@@ -3,6 +3,8 @@ package com.whmnrc.qiangbizhong.presenter.me;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.app.App;
@@ -10,6 +12,7 @@ import com.whmnrc.qiangbizhong.base.BaseResponse;
 import com.whmnrc.qiangbizhong.model.bean.LoginBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
+import com.whmnrc.qiangbizhong.util.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.HashMap;
@@ -35,33 +38,42 @@ public class LoginPresenter{
         map.put("LoginType",type+"");
         map.put("Phone",phone);
         if (type == 0){
-            map.put("Pwd",pwd);
+            map.put("Pwd",EncryptUtils.encryptMD5ToString(pwd));
         }else {
             map.put("Code",code);
         }
 
-        OkhttpUtil.post(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.login), map, new OkhttpUtil.ObjectCallback() {
+        OkhttpUtil.post(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.login), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String st) {
                 if (!TextUtils.isEmpty(st)) {
-                    BaseResponse response = GsonUtil.changeGsonToBean(st,BaseResponse.class);
-                    LoginBean loginBean = (LoginBean) response.getResult();
-                    loginCall.loginBack(loginBean);
+                    LoginBean response = JSON.parseObject(st,LoginBean.class);
+                    loginCall.loginBack(response);
                 }
             }
+
             @Override
             public void onFailure(int code, String errorMsg) {
-                ToastUtils.showShort(errorMsg);
+
             }
+
         });
     }
 
     public void sendsmscode(String phone){
         Map<String,String> map = new HashMap<>();
         map.put("phone",phone);
-        OkhttpUtil.get(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.register), map, new OkhttpUtil.ObjectCallback() {
+        OkhttpUtil.get(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.sendSmsCode), map, new OkhttpUtil.ObjectCallback() {
             @Override
             public void onSuccess(String st) {
+                if (!TextUtils.isEmpty(st)) {
+                    BaseResponse response = GsonUtil.changeGsonToBean(st,BaseResponse.class);
+                    if (response.getStatus() == 1){
+                        ToastUtils.showShort("验证码发送成功");
+                        return;
+                    }
+                    ToastUtils.showShort(response.getMessage());
+                }
 
             }
 
@@ -72,19 +84,25 @@ public class LoginPresenter{
         });
     }
 
-    public void register (String phone,String headImage, String nickname){
+    public void register (String phone,String pwd, String code,RegisterCall registerCall){
         Map<String,String> map = new HashMap<>();
-        map.put("phone",phone);
-        OkhttpUtil.get(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.register), map, new OkhttpUtil.ObjectCallback() {
+        map.put("Phone",phone);
+        map.put("Pwd", EncryptUtils.encryptMD5ToString(pwd));
+        map.put("Code",code);
+        OkhttpUtil.post(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.register), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String st) {
-
+                ToastUtils.showShort("注册成功");
+                if (registerCall != null){
+                    registerCall.registerBack();
+                }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                ToastUtils.showShort(errorMsg);
+
             }
+
         });
     }
 

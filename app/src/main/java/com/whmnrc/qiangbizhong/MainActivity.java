@@ -1,5 +1,7 @@
 package com.whmnrc.qiangbizhong;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -43,6 +45,11 @@ public class MainActivity extends BaseActivity {
 
     private Fragment showFragment;
     private int shopIndex = HOME;
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, MainActivity.class);
+        context.startActivity(starter);
+    }
 
     @Override
     protected int setLayout() {
@@ -129,11 +136,12 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_mine:
-                if (UserManage.getInstance().getLoginBean() != null){
-                    switchFragment(ME);
-                }else {
-                    LoginActivity.start(this);
-                }
+                switchFragment(ME);
+//                if (UserManage.getInstance().getLoginBean() != null){
+//                    switchFragment(ME);
+//                }else {
+//                    LoginActivity.start(this);
+//                }
 
                 break;
         }
