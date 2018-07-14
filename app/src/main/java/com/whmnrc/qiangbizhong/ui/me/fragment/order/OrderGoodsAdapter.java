@@ -12,22 +12,22 @@ import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
  * Created by lizhe on 2018/7/12.
  */
 
-public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.GoodsBean>{
+public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.DetailBean>{
 
     public OrderGoodsAdapter(Context context) {
         super(context);
     }
 
     @Override
-    protected void bindDataToItemView(BaseViewHolder holder, OrderListBean.GoodsBean item, int position) {
-        holder.setText(R.id.tv_goods_desc,item.getDesc()).setText(R.id.tv_desc,"")
-                .setText(R.id.tv_moeny,item.getPrice())
-                .setGlieuImage(R.id.iv_goods,item.getUrl())
-                .setText(R.id.tv_goods_num,"x"+item.getNum());
+    protected void bindDataToItemView(BaseViewHolder holder, OrderListBean.DetailBean item, int position) {
+        holder.setText(R.id.tv_goods_desc,item.getProduct_Name()).setText(R.id.tv_desc,item.getSpec_Name() +"  " + item.getSpecAttr_Name())
+                .setText(R.id.tv_moeny,item.getOrderItem_Money()+"")
+                .setGlieuImage(R.id.iv_goods,item.getProduct_ImgPath())
+                .setText(R.id.tv_goods_num,"x"+item.getOrderItem_Number());
     }
 
     @Override
-    protected int getItemViewLayoutId(int position, OrderListBean.GoodsBean item) {
+    protected int getItemViewLayoutId(int position, OrderListBean.DetailBean item) {
         return R.layout.order_goods_item_v2;
     }
 }

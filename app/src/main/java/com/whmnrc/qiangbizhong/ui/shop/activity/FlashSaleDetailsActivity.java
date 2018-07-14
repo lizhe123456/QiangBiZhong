@@ -67,7 +67,7 @@ public class FlashSaleDetailsActivity extends BaseActivity {
     private SparseArray<String> strings;
 
     private String goodsId;
-    private GoodsRushinfoBean goodsRushinfoBean;
+    private GoodsRushinfoBean.RushGoodsInfoBean goodsRushinfoBean;
 
     public static void start(Context context,String goodsId) {
         Intent starter = new Intent(context, FlashSaleDetailsActivity.class);
@@ -107,7 +107,7 @@ public class FlashSaleDetailsActivity extends BaseActivity {
     }
 
     public void goodsInfoBack(GoodsRushinfoBean goodsRushinfoBean) {
-        this.goodsRushinfoBean = goodsRushinfoBean;
+        this.goodsRushinfoBean = goodsRushinfoBean.getRushGoodsInfo();
         initData(goodsRushinfoBean);
     }
 
@@ -132,7 +132,7 @@ public class FlashSaleDetailsActivity extends BaseActivity {
         bannerView.start();
 
         tvGoodsName.setText(goodsRushinfoBean.getRushGoodsInfo().getGoods_Name());
-        tvMoeny.setText(String.valueOf(goodsRushinfoBean.getRushGoodsInfo().getPrice()));
+        tvMoeny.setText(String.valueOf(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_Price()));
         tvOldMoeny.setText(String.valueOf(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_VirtualPrice()));
         tvScep.setText(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_SpecName()+"   "+goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_AttrName());
         tvCanYuNum.setText("已有"+goodsRushinfoBean.getRushGoodsInfo().getRushNumber()+"人参加");

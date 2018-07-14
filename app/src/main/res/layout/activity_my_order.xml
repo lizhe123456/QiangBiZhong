@@ -15,7 +15,6 @@
         app:tabIndicatorHeight="@dimen/dm_2"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/tv_title_color"
-        app:tabTextAppearance="@style/TabLayoutTextStyle"
         app:tabTextColor="@color/tv_191" />
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_content"

@@ -32,8 +32,8 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
 
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, OrderListBean item, int position) {
-        holder.setText(R.id.tv_order_num,item.getName()).setText(R.id.tv_num,"共有"+item.getGoodsBeans().size()+"件商品");
-        if (item.getType() == -1){
+        holder.setText(R.id.tv_order_num,item.getAddress_Name()).setText(R.id.tv_num,"共有"+item.getOrder_Number()+"件商品");
+        if (item.getOrder_PayType() == -1){
             //-1已预约
             holder.setText(R.id.order_state,"已预约");
             holder.setText(R.id.tv_btn_2,"去抢购");
@@ -46,7 +46,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 if (onOrderListener != null)
                     onOrderListener.customerServicePhoneClick(item);
             });
-        }else if (item.getType() == 0){
+        }else if (item.getOrder_PayType() == 0){
             //0未支付
             holder.setText(R.id.order_state,"未支付");
             holder.setText(R.id.tv_btn_2,"去支付");
@@ -59,7 +59,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 if (onOrderListener != null)
                     onOrderListener.customerServicePhoneClick(item);
             });
-        }else if (item.getType() == 1){
+        }else if (item.getOrder_PayType() == 1){
             //1已支付
             holder.setText(R.id.order_state,"待发货");
             holder.setText(R.id.tv_btn_3,"联系客服");
@@ -68,7 +68,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 if (onOrderListener != null)
                     onOrderListener.customerServicePhoneClick(item);
             });
-        }else if (item.getType() == 2){
+        }else if (item.getOrder_PayType() == 2){
             //2待收货
             holder.setText(R.id.order_state,"待收货");
             holder.setText(R.id.tv_btn_2,"确认收货");
@@ -81,7 +81,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 if (onOrderListener != null)
                     onOrderListener.collectGoods(item);
             });
-        }else if (item.getType() == 3){
+        }else if (item.getOrder_PayType() == 3){
             //已完成
             holder.setText(R.id.order_state,"已完成");
             holder.setText(R.id.tv_btn_3,"联系客服");
@@ -94,12 +94,12 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 if (onOrderListener != null)
                     onOrderListener.evaluate(item);
             });
-        }else if (item.getType() == 4){
+        }else if (item.getOrder_PayType() == 4){
             //已取消
             holder.setText(R.id.order_state,"已取消");
             holder.setVisible(R.id.tv_btn_2,false);
             holder.setVisible(R.id.tv_btn_3,false);
-        }else if (item.getType() == 5){
+        }else if (item.getOrder_PayType() == 5){
             //5抢购成功
             holder.setText(R.id.order_state,"抢购成功");
             holder.setText(R.id.tv_btn_2,"去支付");
@@ -112,12 +112,12 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 if (onOrderListener != null)
                     onOrderListener.customerServicePhoneClick(item);
             });
-        }else if (item.getType() == 6){
+        }else if (item.getOrder_PayType() == 6){
             //6抢购失败
             holder.setText(R.id.order_state,"抢购失败");
             holder.setVisible(R.id.tv_btn_2,false);
             holder.setVisible(R.id.tv_btn_3,false);
-        }else if (item.getType() == 7){
+        }else if (item.getOrder_PayType() == 7){
             //7已中奖
             holder.setText(R.id.order_state,"已中奖");
             holder.setText(R.id.tv_btn_2,"付尾款");
@@ -130,7 +130,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 if (onOrderListener != null)
                     onOrderListener.customerServicePhoneClick(item);
             });
-        }else if (item.getType() == 8){
+        }else if (item.getOrder_PayType() == 8){
             //8未中奖
             holder.setText(R.id.order_state,"未中奖");
             holder.setVisible(R.id.tv_btn_2,false);
@@ -143,7 +143,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         goodsList.setLayoutManager(layoutManager);
         goodsList.setAdapter(adapter);
-        adapter.addFirstDataSet(item.getGoodsBeans());
+        adapter.addFirstDataSet(item.getDetail());
         adapter.setOnItemClickListener((view, item1, position1) -> FlashSaleDetailsActivity.start(getContext(),""));
     }
 

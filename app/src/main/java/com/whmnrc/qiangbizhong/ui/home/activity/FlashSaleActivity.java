@@ -222,7 +222,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
             holder.setText(R.id.tv_goods_name,item.getGoods_Name())
                     .setText(R.id.tv_desc, "")
                     .setText(R.id.tv_purchased_num, "已抢购"+item.getBond()+"件")
-                    .setText(R.id.tv_price,String.valueOf(item.getPrice()))
+                    .setText(R.id.tv_price,String.valueOf(item.getGoodsPrice_Price()))
                     .setText(R.id.tv_old_price,String.valueOf(item.getGoodsPrice_Price()))
                     .setText(R.id.tv_surplus, "仅剩"+item.getRushNumber()+"件")
                     .setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());

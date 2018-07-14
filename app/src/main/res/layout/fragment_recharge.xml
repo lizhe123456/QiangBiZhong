@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="单价￥"
+                android:text="单价¥"
                 android:textColor="@color/tv_navigation"
                 android:textSize="13sp" />
 

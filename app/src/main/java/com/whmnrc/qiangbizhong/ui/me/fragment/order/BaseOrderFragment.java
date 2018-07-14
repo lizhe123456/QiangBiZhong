@@ -14,6 +14,9 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
+import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -22,7 +25,7 @@ import butterknife.BindView;
  * Created by lizhe on 2018/7/11.
  */
 
-public abstract class BaseOrderFragment extends BaseFragment{
+public abstract class BaseOrderFragment extends BaseFragment {
 
     @BindView(R.id.recyclerView)
     protected RecyclerView recyclerView;
@@ -33,7 +36,7 @@ public abstract class BaseOrderFragment extends BaseFragment{
 
     protected OrderAdapter mAdapter;
     protected OrderListBean orderBean;
-
+    private OrderPresenter orderPresenter;
     @Override
     protected int setLayout() {
         return R.layout.fragment_order;
@@ -45,6 +48,7 @@ public abstract class BaseOrderFragment extends BaseFragment{
     }
 
     public void initRecyclerView() {
+        orderPresenter = new OrderPresenter(getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -66,19 +70,21 @@ public abstract class BaseOrderFragment extends BaseFragment{
             getData(request(),false);
             refresh.finishLoadMore(3000);
         });
-
     }
 
 
 
     public abstract void setClick();
 
-    public abstract int request();
+    public abstract String request();
 
-    public void getData(int type, boolean isR){
-
+    public void getData(String type, boolean isR){
+        orderPresenter.getOrderList(type+"",isR,this::orderlistBack);
     }
 
+    private void orderlistBack(List<OrderListBean> orderListBeans) {
+        mAdapter.addFirstDataSet(orderListBeans);
+    }
 
 
     public void showEmpty() {

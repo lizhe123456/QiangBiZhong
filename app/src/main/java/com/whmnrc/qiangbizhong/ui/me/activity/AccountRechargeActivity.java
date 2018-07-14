@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ public class AccountRechargeActivity extends BaseActivity {
     ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tl_title)
+    @BindView(R.id.tab_layout)
     TabLayout tlTitle;
     @BindView(R.id.vp_content)
     ViewPager vpContent;
@@ -54,6 +55,7 @@ public class AccountRechargeActivity extends BaseActivity {
     @Override
     protected void setData() {
         tvTitle.setText("账户充值");
+        ivBack.setVisibility(View.VISIBLE);
         fragments = new SparseArray<>();
         titles = new SparseArray<>();
         fragments.append(0, AgentRechargeFragment.newInstance());

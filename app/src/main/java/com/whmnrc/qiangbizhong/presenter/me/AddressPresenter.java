@@ -2,15 +2,12 @@ package com.whmnrc.qiangbizhong.presenter.me;
 
 import android.content.Context;
 import android.text.TextUtils;
-
 import com.alibaba.fastjson.JSON;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.model.bean.AddressBean;
+import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
-import com.whmnrc.qiangbizhong.util.ToastUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,12 +44,35 @@ public class AddressPresenter {
     }
 
     //删除地址
-    public void deleteAddress(){
+    public void deleteAddress(String addressId,AddManageCall addManageCall){
         Map<String,String> map = new HashMap<>();
+        map.put("addressId",addressId);
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.deleteAddress),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
+                if (addManageCall != null){
+                    addManageCall.updateData();
+                }
+            }
 
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+
+        });
+    }
+
+    public void setDefault(String addressId,AddManageCall addManageCall){
+        Map<String,String> map = new HashMap<>();
+        map.put("addressId",addressId);
+        map.put("userId",UserManage.getInstance().getUserID());
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.setdefault),map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (addManageCall != null){
+                    addManageCall.updateData();
+                }
             }
 
             @Override
@@ -71,7 +91,7 @@ public class AddressPresenter {
             @Override
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)) {
-                    List<AddressBean> list = JSON.parseArray(data, AddressBean.class);
+                    List<AddressBean> list = GsonUtil.changeGsonToList(data, AddressBean.class);
                     if (addManageCall != null){
                         addManageCall.getAddressList(list);
                     }
@@ -93,7 +113,7 @@ public class AddressPresenter {
     public interface AddManageCall{
         void getAddressList(List<AddressBean> list);
 
-        void deleteAddress();
+        void updateData();
     }
 
 }

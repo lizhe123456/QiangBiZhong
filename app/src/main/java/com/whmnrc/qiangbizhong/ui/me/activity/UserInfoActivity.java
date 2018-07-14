@@ -4,7 +4,10 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
+import com.whmnrc.qiangbizhong.model.bean.LoginBean;
 import com.whmnrc.qiangbizhong.presenter.me.UserPresenter;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
@@ -53,6 +57,8 @@ public class UserInfoActivity extends BaseActivity {
     TextView tvUpdatePass;
     @BindView(R.id.tv_login)
     TextView tvLogin;
+    @BindView(R.id.et_nickName)
+    EditText etNickName;
 
     UserPresenter userPresenter;
 
@@ -70,8 +76,38 @@ public class UserInfoActivity extends BaseActivity {
     protected void setData() {
         tvTitle.setText("设置");
         ivBack.setVisibility(View.VISIBLE);
-        GlideuUtil.loadImageView(this,"",ivImg);
         userPresenter = new UserPresenter(this);
+        LoginBean loginBean = UserManage.getInstance().getLoginBean();
+        GlideuUtil.loadImageView(this,loginBean.getUserInfo_HeadImg(),ivImg);
+        tvUsername.setText(loginBean.getUserInfo_NickName());
+        UserManage.getInstance().getUserInfo(new UserManage.UserInfoCall() {
+            @Override
+            public void userInfoBack(LoginBean loginBean) {
+
+            }
+        });
+
+//        etNickName.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                //输入的内容变化的监听
+//                if (s.toString().equals())
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count,
+//                                          int after) {
+//                // 输入前的监听
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                // 输入后的监听
+//
+//            }
+//        });
     }
 
 

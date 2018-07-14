@@ -14,7 +14,7 @@ public class GoodsRushinfoBean implements Parcelable {
 
 
     /**
-     * RushGoodsInfo : {"RushId":"f79b404f-4e9f-49a2-932c-106395d4ffa5","Goods_MonthCount":0,"GoodsPrice_Stock":911,"Goods_ID":"f2cfb2f8-b6ec-41fc-bf6b-59c522e80fa7","Goods_ShopType":1,"GoodsPrice_ID":"45bc81fb-7ca8-4e2e-848c-d4e0b673392e","Goods_Name":"IPhone 兵222","Goods_ImaPath":"http://www.eehsxui.cn/Resource/PhotoFile/c6d130e9-285a-4f7a-bef2-c044d91ce061.jpg","Goods_Content":"<p>464684<\/p>","Goods_Parameter":null,"GoodsPrice_SpecName":"IPhone 7 亮黑色","GoodsPrice_AttrName":"32G","GoodsPrice_VirtualPrice":4000,"RushStartTime":"2018-07-13 22:00:00","RushEndTime":"2018-07-14 00:00:00","RushNumber":2,"Bond":100,"Price":4000,"GoodsPrice_Price":6000,"IsEnd":0}
+     * RushGoodsInfo : {"RushId":"f79b404f-4e9f-49a2-932c-106395d4ffa5","Goods_MonthCount":0,"GoodsPrice_Stock":911,"Goods_ID":"f2cfb2f8-b6ec-41fc-bf6b-59c522e80fa7","Goods_ShopType":1,"GoodsPrice_ID":"45bc81fb-7ca8-4e2e-848c-d4e0b673392e","Goods_Name":"IPhone 兵222","Goods_ImaPath":"http://www.eehsxui.cn/Resource/PhotoFile/c6d130e9-285a-4f7a-bef2-c044d91ce061.jpg","Goods_Content":"<p><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881242772590514752915.jpg\" title=\"未标题-2_01.jpg\" alt=\"未标题-2_01.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881243096028019464110.jpg\" title=\"未标题-2_02.jpg\" alt=\"未标题-2_02.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881243725715516873941.jpg\" title=\"未标题-2_03.jpg\" alt=\"未标题-2_03.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881243958528018729124.jpg\" title=\"未标题-2_04.jpg\" alt=\"未标题-2_04.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881244175715516099166.jpg\" title=\"未标题-2_05.jpg\" alt=\"未标题-2_05.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881244425715516668735.jpg\" title=\"未标题-2_06.jpg\" alt=\"未标题-2_06.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881244652278015010592.jpg\" title=\"未标题-2_07.jpg\" alt=\"未标题-2_07.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881244867903018151389.jpg\" title=\"未标题-2_08.jpg\" alt=\"未标题-2_08.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881245099153016777327.jpg\" title=\"未标题-2_09.jpg\" alt=\"未标题-2_09.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881245313215512390706.jpg\" title=\"未标题-2_10.jpg\" alt=\"未标题-2_10.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881245555403015217704.jpg\" title=\"未标题-2_11.jpg\" alt=\"未标题-2_11.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881245794465511586213.jpg\" title=\"未标题-2_12.jpg\" alt=\"未标题-2_12.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881246055403016356843.jpg\" title=\"未标题-2_13.jpg\" alt=\"未标题-2_13.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881246335090518369277.jpg\" title=\"未标题-2_14.jpg\" alt=\"未标题-2_14.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881246555403017495981.jpg\" title=\"未标题-2_15.jpg\" alt=\"未标题-2_15.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881246800715513079643.jpg\" title=\"未标题-2_16.jpg\" alt=\"未标题-2_16.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881247019465517977102.jpg\" title=\"未标题-2_17.jpg\" alt=\"未标题-2_17.jpg\"/><img src=\"/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881247231965519361236.jpg\" title=\"未标题-2_18.jpg\" alt=\"未标题-2_18.jpg\"/><\/p>","Goods_Parameter":null,"GoodsPrice_SpecName":"IPhone 7 亮黑色","GoodsPrice_AttrName":"32G","GoodsPrice_VirtualPrice":4000,"RushStartTime":"2018-07-14 22:00:00","RushEndTime":"2018-07-15 00:00:00","RushNumber":2,"Bond":100,"GoodsPrice_Price":6000,"IsEnd":0}
      * RushGoodsBanner : [{"Img_ID":"7a3a67a8-d6ed-4cfa-aa1c-42c40414a6a9","Object_ID":"f2cfb2f8-b6ec-41fc-bf6b-59c522e80fa7","Img_Path":"http://www.eehsxui.cn/Resource/PhotoFile/8e80378f-bcbf-46c1-991b-24b64032f55c.jpg","Img_Sort":1,"Img_Type":0},{"Img_ID":"f3512bd8-5d0e-4cc8-8ca1-84bd150a9793","Object_ID":"f2cfb2f8-b6ec-41fc-bf6b-59c522e80fa7","Img_Path":"http://www.eehsxui.cn/Resource/PhotoFile/0eecb43e-c6aa-4c59-bd4a-d0d1dd584e0b.jpg","Img_Sort":2,"Img_Type":0}]
      * Record :
      * Participate : 0
@@ -28,6 +28,17 @@ public class GoodsRushinfoBean implements Parcelable {
     protected GoodsRushinfoBean(Parcel in) {
         Record = in.readString();
         Participate = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Record);
+        dest.writeInt(Participate);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<GoodsRushinfoBean> CREATOR = new Creator<GoodsRushinfoBean>() {
@@ -74,18 +85,7 @@ public class GoodsRushinfoBean implements Parcelable {
         this.RushGoodsBanner = RushGoodsBanner;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(Record);
-        dest.writeInt(Participate);
-    }
-
-    public static class RushGoodsInfoBean implements Parcelable{
+    public static class RushGoodsInfoBean implements Parcelable {
         /**
          * RushId : f79b404f-4e9f-49a2-932c-106395d4ffa5
          * Goods_MonthCount : 0
@@ -95,16 +95,15 @@ public class GoodsRushinfoBean implements Parcelable {
          * GoodsPrice_ID : 45bc81fb-7ca8-4e2e-848c-d4e0b673392e
          * Goods_Name : IPhone 兵222
          * Goods_ImaPath : http://www.eehsxui.cn/Resource/PhotoFile/c6d130e9-285a-4f7a-bef2-c044d91ce061.jpg
-         * Goods_Content : <p>464684</p>
+         * Goods_Content : <p><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881242772590514752915.jpg" title="未标题-2_01.jpg" alt="未标题-2_01.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881243096028019464110.jpg" title="未标题-2_02.jpg" alt="未标题-2_02.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881243725715516873941.jpg" title="未标题-2_03.jpg" alt="未标题-2_03.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881243958528018729124.jpg" title="未标题-2_04.jpg" alt="未标题-2_04.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881244175715516099166.jpg" title="未标题-2_05.jpg" alt="未标题-2_05.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881244425715516668735.jpg" title="未标题-2_06.jpg" alt="未标题-2_06.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881244652278015010592.jpg" title="未标题-2_07.jpg" alt="未标题-2_07.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881244867903018151389.jpg" title="未标题-2_08.jpg" alt="未标题-2_08.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881245099153016777327.jpg" title="未标题-2_09.jpg" alt="未标题-2_09.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881245313215512390706.jpg" title="未标题-2_10.jpg" alt="未标题-2_10.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881245555403015217704.jpg" title="未标题-2_11.jpg" alt="未标题-2_11.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881245794465511586213.jpg" title="未标题-2_12.jpg" alt="未标题-2_12.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881246055403016356843.jpg" title="未标题-2_13.jpg" alt="未标题-2_13.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881246335090518369277.jpg" title="未标题-2_14.jpg" alt="未标题-2_14.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881246555403017495981.jpg" title="未标题-2_15.jpg" alt="未标题-2_15.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881246800715513079643.jpg" title="未标题-2_16.jpg" alt="未标题-2_16.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881247019465517977102.jpg" title="未标题-2_17.jpg" alt="未标题-2_17.jpg"/><img src="/Content/scripts/plugins/ueditor/net/../../../../../upload/image/20180408/6365881247231965519361236.jpg" title="未标题-2_18.jpg" alt="未标题-2_18.jpg"/></p>
          * Goods_Parameter : null
          * GoodsPrice_SpecName : IPhone 7 亮黑色
          * GoodsPrice_AttrName : 32G
          * GoodsPrice_VirtualPrice : 4000
-         * RushStartTime : 2018-07-13 22:00:00
-         * RushEndTime : 2018-07-14 00:00:00
+         * RushStartTime : 2018-07-14 22:00:00
+         * RushEndTime : 2018-07-15 00:00:00
          * RushNumber : 2
          * Bond : 100
-         * Price : 4000
          * GoodsPrice_Price : 6000
          * IsEnd : 0
          */
@@ -126,7 +125,6 @@ public class GoodsRushinfoBean implements Parcelable {
         private String RushEndTime;
         private int RushNumber;
         private int Bond;
-        private int Price;
         private int GoodsPrice_Price;
         private int IsEnd;
 
@@ -147,7 +145,6 @@ public class GoodsRushinfoBean implements Parcelable {
             RushEndTime = in.readString();
             RushNumber = in.readInt();
             Bond = in.readInt();
-            Price = in.readInt();
             GoodsPrice_Price = in.readInt();
             IsEnd = in.readInt();
         }
@@ -300,14 +297,6 @@ public class GoodsRushinfoBean implements Parcelable {
             this.Bond = Bond;
         }
 
-        public int getPrice() {
-            return Price;
-        }
-
-        public void setPrice(int Price) {
-            this.Price = Price;
-        }
-
         public int getGoodsPrice_Price() {
             return GoodsPrice_Price;
         }
@@ -347,13 +336,12 @@ public class GoodsRushinfoBean implements Parcelable {
             dest.writeString(RushEndTime);
             dest.writeInt(RushNumber);
             dest.writeInt(Bond);
-            dest.writeInt(Price);
             dest.writeInt(GoodsPrice_Price);
             dest.writeInt(IsEnd);
         }
     }
 
-    public static class RushGoodsBannerBean implements Parcelable{
+    public static class RushGoodsBannerBean implements Parcelable {
         /**
          * Img_ID : 7a3a67a8-d6ed-4cfa-aa1c-42c40414a6a9
          * Object_ID : f2cfb2f8-b6ec-41fc-bf6b-59c522e80fa7

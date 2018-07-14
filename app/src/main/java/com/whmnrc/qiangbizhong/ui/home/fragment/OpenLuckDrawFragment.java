@@ -14,7 +14,9 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
+import com.whmnrc.qiangbizhong.model.bean.LuckDrawBean;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBean;
+import com.whmnrc.qiangbizhong.presenter.home.LuckDrawPresenter;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 
 import java.util.ArrayList;
@@ -33,6 +35,8 @@ public class OpenLuckDrawFragment extends BaseFragment {
     @BindView(R.id.rv_list)
     RecyclerView rvList;
 
+    private LuckDrawPresenter luckDrawPresenter;
+    private OpenLuckDrawAdapter openLuckDrawAdapter;
 
     public static OpenLuckDrawFragment newInstance(int type) {
 
@@ -51,22 +55,25 @@ public class OpenLuckDrawFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        OpenLuckDrawAdapter openLuckDrawAdapter = new OpenLuckDrawAdapter(mContext);
+        openLuckDrawAdapter = new OpenLuckDrawAdapter(mContext);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         rvList.setLayoutManager(gridLayoutManager);
         rvList.setAdapter(openLuckDrawAdapter);
+        luckDrawPresenter = new LuckDrawPresenter(mContext);
+        luckDrawPresenter.awardlist2(1,this::luckDrawBack);
         List<LuckDrawGoodsBean> luckDrawGoodsBeans = new ArrayList<>();
-        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","苹果 iPhone 8 Plus","已有9999人抢购","距离开奖：04:12:12"));
-        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","苹果 iPhone 8 Plus","已有9999人抢购","距离开奖：04:12:12"));
-        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","苹果 iPhone 8 Plus","已有9999人抢购","距离开奖：04:12:12"));
-        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","苹果 iPhone 8 Plus","已有9999人抢购","距离开奖：04:12:12"));
-        openLuckDrawAdapter.addFirstDataSet(luckDrawGoodsBeans);
+
+
         openLuckDrawAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
 //                FlashSaleDetailsActivity.start(mContext);
             }
         });
+    }
+
+    private void luckDrawBack(List<LuckDrawGoodsBean> luckDrawGoodsBeans) {
+        openLuckDrawAdapter.addFirstDataSet(luckDrawGoodsBeans);
     }
 
     class OpenLuckDrawAdapter extends BaseAdapter<LuckDrawGoodsBean>{
@@ -80,7 +87,7 @@ public class OpenLuckDrawFragment extends BaseFragment {
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, LuckDrawGoodsBean item, int position) {
-            holder.setText(R.id.tv_goods_name,item.getName()).setText(R.id.tv_time,item.getJuliTime()).setText(R.id.tv_surplus,item.getNum()).setGlieuImage(R.id.iv_img,"");
+            holder.setText(R.id.tv_goods_name,item.getAwardTime()).setText(R.id.tv_time,item.getAwardTime()).setText(R.id.tv_surplus,"").setGlieuImage(R.id.iv_img,item.getProduct_ImgPath());
 
             ImageView imageView = holder.getView(R.id.iv_img);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();

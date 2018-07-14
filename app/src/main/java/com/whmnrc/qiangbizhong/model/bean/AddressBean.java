@@ -1,11 +1,14 @@
 package com.whmnrc.qiangbizhong.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Company 武汉麦诺软创
  * Created by lizhe on 2018/7/10.
  */
 
-public class AddressBean {
+public class AddressBean implements Parcelable {
 
 
     /**
@@ -37,6 +40,34 @@ public class AddressBean {
     private String ProviceName;
     private String CityName;
     private String RegionName;
+
+    protected AddressBean(Parcel in) {
+        Address_ID = in.readString();
+        Address_Mobile = in.readString();
+        Address_Name = in.readString();
+        Address_Provice = in.readString();
+        Address_City = in.readString();
+        Address_Region = in.readString();
+        Address_Detail = in.readString();
+        Address_CreateTime = in.readString();
+        UserInfo_ID = in.readString();
+        Address_IsDefault = in.readInt();
+        ProviceName = in.readString();
+        CityName = in.readString();
+        RegionName = in.readString();
+    }
+
+    public static final Creator<AddressBean> CREATOR = new Creator<AddressBean>() {
+        @Override
+        public AddressBean createFromParcel(Parcel in) {
+            return new AddressBean(in);
+        }
+
+        @Override
+        public AddressBean[] newArray(int size) {
+            return new AddressBean[size];
+        }
+    };
 
     public String getAddress_ID() {
         return Address_ID;
@@ -140,5 +171,27 @@ public class AddressBean {
 
     public void setRegionName(String RegionName) {
         this.RegionName = RegionName;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Address_ID);
+        dest.writeString(Address_Mobile);
+        dest.writeString(Address_Name);
+        dest.writeString(Address_Provice);
+        dest.writeString(Address_City);
+        dest.writeString(Address_Region);
+        dest.writeString(Address_Detail);
+        dest.writeString(Address_CreateTime);
+        dest.writeString(UserInfo_ID);
+        dest.writeInt(Address_IsDefault);
+        dest.writeString(ProviceName);
+        dest.writeString(CityName);
+        dest.writeString(RegionName);
     }
 }

@@ -17,6 +17,7 @@ import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBean;
+import com.whmnrc.qiangbizhong.presenter.home.LuckDrawPresenter;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ public class WaitLuckDrawFragment extends BaseFragment {
     @BindView(R.id.rv_list)
     RecyclerView rvList;
 
+    private LuckDrawPresenter luckDrawPresenter;
+    private OpenLuckDrawAdapter adapter;
+
     @Override
     protected int setLayout() {
         return R.layout.fragment_wait_luck_draw;
@@ -46,20 +50,25 @@ public class WaitLuckDrawFragment extends BaseFragment {
     protected void initData() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         rvList.setLayoutManager(gridLayoutManager);
-        OpenLuckDrawAdapter adapter = new OpenLuckDrawAdapter(mContext);
+        adapter = new OpenLuckDrawAdapter(mContext);
         rvList.setAdapter(adapter);
-        List<LuckDrawGoodsBean> luckDrawGoodsBeans = new ArrayList<>();
-        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","Eason","2018-07-11 \n" +" 16:00"));
-        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","xians","2018-07-11 \n" +" 16:00"));
-        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","xians","2018-07-12 \n" +" 15:00"));
-        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","huixnk","2018-07-13 \n" +" 15:00"));
-        adapter.addFirstDataSet(luckDrawGoodsBeans);
+        luckDrawPresenter = new LuckDrawPresenter(mContext);
+        luckDrawPresenter.awardlist2(1,this::luckDrawBack);
+//        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","Eason","2018-07-11 \n" +" 16:00"));
+//        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","xians","2018-07-11 \n" +" 16:00"));
+//        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","xians","2018-07-12 \n" +" 15:00"));
+//        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","huixnk","2018-07-13 \n" +" 15:00"));
+//        adapter.addFirstDataSet(luckDrawGoodsBeans);
         adapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
                 FlashSaleDetailsActivity.start(mContext,"");
             }
         });
+    }
+
+    private void luckDrawBack(List<LuckDrawGoodsBean> luckDrawGoodsBeans) {
+        adapter.addFirstDataSet(luckDrawGoodsBeans);
     }
 
 
@@ -74,7 +83,7 @@ public class WaitLuckDrawFragment extends BaseFragment {
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, LuckDrawGoodsBean item, int position) {
-            holder.setText(R.id.tv_time,item.getTime()).setText(R.id.tv_name,item.getZhongName()).setGlieuImage(R.id.iv_img,"");
+            holder.setText(R.id.tv_time,item.getAwardTime()).setText(R.id.tv_name,item.getUserNick()).setGlieuImage(R.id.iv_img,item.getProduct_ImgPath());
 
             ImageView imageView = holder.getView(R.id.iv_img);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();

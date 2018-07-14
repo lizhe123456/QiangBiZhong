@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dm_15"
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/dm_10">
+    <TextView
+        android:id="@+id/tv_isDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000"
+        android:textSize="@dimen/dm_13"
+        android:text="[默认地址]"
+        android:layout_marginBottom="@dimen/dm_5"/>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tv_191"
+        android:textSize="18sp"
+        android:text="哈哈哈"
+        android:layout_below="@+id/tv_isDefault"
+        />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="@color/tv_191"
+        android:text="@string/search"
+        android:layout_toRightOf="@+id/tv_name"
+        android:layout_alignBottom="@+id/tv_name"
+        android:layout_marginLeft="@dimen/dm_15"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/tv_navigation"
+        android:text="湖北省武汉市江岸区解放大道690号武汉国际广场
+C座7F 办公室"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginTop="@dimen/dm_5" />
+</RelativeLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,12 +23,14 @@
                 android:layout_marginTop="@dimen/dm_31"
                 android:src="@drawable/ic_scan" />
 
-            <ImageView
+            <com.whmnrc.qiangbizhong.widget.RoundedImageView
                 android:id="@+id/iv_head"
                 android:layout_width="@dimen/dm_55"
                 android:layout_height="@dimen/dm_55"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dm_20" />
+                android:layout_marginTop="@dimen/dm_20"
+                android:scaleType="centerCrop"
+                app:riv_oval="true"/>
 
             <TextView
                 android:id="@+id/tv_purchase_restrictions"
@@ -43,7 +45,7 @@
                 android:paddingLeft="@dimen/dm_8"
                 android:paddingRight="@dimen/dm_17"
                 android:paddingTop="@dimen/dm_3"
-                android:text="今日可够50.0w"
+                android:text="今日可够0"
                 android:textColor="@color/white" />
 
             <TextView
@@ -53,7 +55,6 @@
                 android:layout_below="@+id/iv_head"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dm_7"
-                android:text="哈哈哈"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
@@ -64,7 +65,6 @@
                 android:layout_below="@+id/tv_username"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dm_7"
-                android:text="98656"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
         </RelativeLayout>

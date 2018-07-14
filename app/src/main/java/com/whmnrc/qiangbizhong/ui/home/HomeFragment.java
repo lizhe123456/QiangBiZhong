@@ -231,6 +231,8 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        countDownTimerView.stop();
+        if (countDownTimerView != null) {
+            countDownTimerView.stop();
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.model.bean.GoodsRushinfoBean;
+import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
@@ -33,7 +34,7 @@ public class GoodsRushInfoPresenter {
             @Override
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)){
-                    GoodsRushinfoBean goodsRushinfoBean = JSON.parseObject(data,GoodsRushinfoBean.class);
+                    GoodsRushinfoBean goodsRushinfoBean = GsonUtil.changeGsonToBean(data,GoodsRushinfoBean.class);
                     if (goodsInfoCall != null){
                         goodsInfoCall.goodsInfoBack(goodsRushinfoBean);
                     }

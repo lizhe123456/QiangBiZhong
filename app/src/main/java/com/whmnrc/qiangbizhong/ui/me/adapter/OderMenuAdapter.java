@@ -9,6 +9,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.MineBean;
+import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.home.adapter.MenuAdapter;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 
@@ -19,8 +20,11 @@ import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 
 public class OderMenuAdapter extends BaseAdapter<MineBean.MenuBean> {
 
-    public OderMenuAdapter(Context context) {
+    private boolean isLogin;
+
+    public OderMenuAdapter(Context context,boolean isLogin) {
         super(context);
+        this.isLogin = isLogin;
     }
 
     @Override
@@ -36,7 +40,12 @@ public class OderMenuAdapter extends BaseAdapter<MineBean.MenuBean> {
             menuAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onClick(View view, Object item, int position) {
-                    MyOrderActivity.start(getContext(),position);
+                    if (isLogin){
+                        MyOrderActivity.start(getContext(),position);
+                    }else {
+                        LoginActivity.start(getContext());
+                    }
+
                 }
             });
         }

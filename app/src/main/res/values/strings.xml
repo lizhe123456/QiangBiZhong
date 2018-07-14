@@ -49,4 +49,13 @@
     <string name="deleteAddress">/api/address/delete</string>
     <!--收货地址-->
     <string name="getaddresslist">/api/address/getaddresslist</string>
+    <!--设置默认地址-->
+    <string name="setdefault">/api/address/setdefault</string>
+    <!--下单-->
+    <string name="submitorder">/api/app/recharge/submitorder</string>
+
+    <string name="rechargequery">/api/home/recharge/query</string>
+
+    <string name="awardlist2">/api/home/awardlist2</string>
+
 </resources>
