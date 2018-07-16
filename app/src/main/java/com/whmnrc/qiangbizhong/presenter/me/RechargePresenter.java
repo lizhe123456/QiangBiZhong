@@ -3,8 +3,11 @@ package com.whmnrc.qiangbizhong.presenter.me;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.model.bean.RechargeBean;
+import com.whmnrc.qiangbizhong.pay.alipay.AliPayTools;
+import com.whmnrc.qiangbizhong.pay.listener.OnSuccessAndErrorListener;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
@@ -27,7 +30,8 @@ public class RechargePresenter {
 
 
 
-    public void submitorder(String monery,String orderType,String agentshopId,String agentShopDiscountId){
+
+    public void submitorder(String monery,String orderType,String agentshopId,String agentShopDiscountId,RechargeCall rechargeCall){
         Map<String,String> map = new HashMap<>();
         map.put("UserId", UserManage.getInstance().getUserID());
         if (orderType.equals("0")){
@@ -43,7 +47,7 @@ public class RechargePresenter {
         OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.submitorder),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-
+                pay(data,rechargeCall);
             }
 
             @Override
@@ -56,6 +60,7 @@ public class RechargePresenter {
     public void rechargeQuery(int type,RechargeCall rechargeCall){
         Map<String,String> map = new HashMap<>();
         map.put("isVip",type+"");
+        map.put("userId",UserManage.getInstance().getUserID());
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.rechargequery), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
@@ -72,11 +77,31 @@ public class RechargePresenter {
         });
     }
 
+    public void pay(String orerId,RechargeCall rechargeCall){
+        Map<String,String> map = new HashMap<>();
+        map.put("orderNo",orerId);
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.alipay),map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (rechargeCall != null){
+                    rechargeCall.payS(data);
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+        });
+    }
+
     public interface RechargeCall{
 
         void rechargeBack();
 
         void rechargeData(RechargeBean rechargeBean);
+
+        void payS(String data);
     }
 
 

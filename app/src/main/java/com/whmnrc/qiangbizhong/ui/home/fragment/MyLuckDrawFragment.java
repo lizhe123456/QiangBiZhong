@@ -50,6 +50,8 @@ public class MyLuckDrawFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        ivBack.setVisibility(View.VISIBLE);
+        tvTitle.setText("我的奖品");
 
     }
 
@@ -57,6 +59,6 @@ public class MyLuckDrawFragment extends BaseFragment {
 
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
-
+        getActivity().finish();
     }
 }

@@ -17,6 +17,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
+import com.whmnrc.qiangbizhong.model.bean.AddressBean;
 import com.whmnrc.qiangbizhong.model.bean.AddressJsonBean;
 import com.whmnrc.qiangbizhong.presenter.me.AddressPresenter;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
@@ -78,6 +79,12 @@ public class AddAddressActivity extends BaseActivity {
         context.startActivity(starter);
     }
 
+    public static void start(Context context, AddressBean addressBean) {
+        Intent starter = new Intent(context, AddAddressActivity.class);
+        starter.putExtra("addressBean",addressBean);
+        context.startActivity(starter);
+    }
+
 
     @Override
     protected int setLayout() {
@@ -91,6 +98,33 @@ public class AddAddressActivity extends BaseActivity {
         addressPresenter = new AddressPresenter(this);
         initJsonData();
         initPickerView();
+        if (getIntent().getParcelableExtra("addressBean") != null){
+            AddressBean addressBean = getIntent().getParcelableExtra("addressBean");
+            etName.setText(addressBean.getAddress_Name());
+            etPhone.setText(addressBean.getAddress_Mobile());
+            etAddress.setText(addressBean.getAddress_Detail());
+            tvItem1.setText(addressBean.getAddress_Provice());
+            ttItem2.setText(addressBean.getAddress_City());
+            tvItem3.setText(addressBean.getAddress_Region());
+            item1Id = addressBean.getAddress_Provice();
+            item2Id = addressBean.getAddress_Provice();
+            item3Id = addressBean.getAddress_Provice();
+            params.put("Address_ID",addressBean.getAddress_ID());
+            tvTitle.setText("编辑收货地址");
+            if (addressBean.getAddress_IsDefault() == 1){
+                isDefault = true;
+                Drawable nav_up=getResources().getDrawable(R.drawable.ic_select);
+                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                tvDefault.setCompoundDrawables(null, null, nav_up, null);
+            }else {
+                isDefault = false;
+                Drawable nav_up=getResources().getDrawable(R.drawable.ic_selece_no);
+                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                tvDefault.setCompoundDrawables(null, null, nav_up, null);
+            }
+        }else {
+
+        }
     }
 
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();

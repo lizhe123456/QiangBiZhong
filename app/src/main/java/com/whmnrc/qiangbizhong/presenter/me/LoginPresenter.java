@@ -13,6 +13,7 @@ import com.whmnrc.qiangbizhong.model.bean.LoginBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.ToastUtil;
+import com.whmnrc.qiangbizhong.util.UserManage;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.HashMap;
@@ -103,6 +104,25 @@ public class LoginPresenter{
 
             }
 
+        });
+    }
+
+    public void updatePwd(String pwd,String newPwd){
+        Map<String,String> map = new HashMap<>();
+        map.put("UserId", UserManage.getInstance().getUserID());
+        map.put("Pwd",EncryptUtils.encryptMD5ToString(pwd));
+        map.put("NewPwd",EncryptUtils.encryptMD5ToString(newPwd));
+        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.updatePwd),map, new OkhttpUtil.BeanCallback(){
+
+            @Override
+            public void onSuccess(String data) {
+
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
         });
     }
 

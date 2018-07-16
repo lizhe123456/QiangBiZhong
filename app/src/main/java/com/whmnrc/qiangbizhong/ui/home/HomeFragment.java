@@ -1,24 +1,22 @@
 package com.whmnrc.qiangbizhong.ui.home;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-import com.blankj.utilcode.constant.TimeConstants;
-import com.blankj.utilcode.util.TimeUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
 import com.whmnrc.qiangbizhong.model.bean.HomeResult;
 import com.whmnrc.qiangbizhong.presenter.home.HomePresenter;
+import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.FlashSaleActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.LuckDrawActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.UnveiledActivity;
@@ -29,22 +27,21 @@ import com.whmnrc.qiangbizhong.ui.home.adapter.MenuAdapter;
 import com.whmnrc.qiangbizhong.ui.home.adapter.NewUnveiledsAdapter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
+import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
 import com.whmnrc.qiangbizhong.widget.SnapUpCountDownTimerView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Company 武汉麦诺软创
@@ -68,6 +65,8 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     RecyclerView rvList;
     @BindView(R.id.countDownTimerView)
     SnapUpCountDownTimerView countDownTimerView;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout refreshLayout;
 
 
     private HomePageBean homePageBean;
@@ -92,7 +91,12 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         homePageBean = new HomePageBean();
         homePageBean = homePageBean.intiHome();
         initMenu(homePageBean.getMenuBeans());
-
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                homePresenter.getHomepage();
+            }
+        });
     }
 
     private void initGoods(List<HomeResult.GoodsTjBean> goodsBeans) {
@@ -114,8 +118,12 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         newUnveiledsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-                HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
-                FlashSaleDetailsActivity.start(getContext(), goodsNewAwardBean.getGoods_ID());
+                if (UserManage.getInstance().getLoginBean() != null) {
+                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+                    FlashSaleDetailsActivity.start(getContext(), goodsNewAwardBean.getGoods_ID(), 1);
+                }else {
+                    LoginActivity.start(getContext());
+                }
             }
         });
     }
@@ -129,22 +137,26 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         menuAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-                switch (position) {
-                    case 0:
-                        AccountRechargeActivity.start(getContext(), 0);
-                        break;
-                    case 1:
-                        LuckDrawActivity.start(getContext());
-                        break;
-                    case 2:
-                        FlashSaleActivity.start(getContext());
-                        break;
-                    case 3:
-                        UnveiledActivity.start(getContext());
-                        break;
-                    case 4:
+                if (UserManage.getInstance().getLoginBean() != null) {
+                    switch (position) {
+                        case 0:
+                            AccountRechargeActivity.start(getContext(), 0);
+                            break;
+                        case 1:
+                            LuckDrawActivity.start(getContext());
+                            break;
+                        case 2:
+                            FlashSaleActivity.start(getContext());
+                            break;
+                        case 3:
+                            UnveiledActivity.start(getContext());
+                            break;
+                        case 4:
 
-                        break;
+                            break;
+                    }
+                }else {
+                    LoginActivity.start(getContext());
                 }
             }
         });
@@ -162,12 +174,19 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
 
     private void initKill(List<HomeResult.GoodsRushBean> secondKillBean) {
         if (!TextUtils.isEmpty(UserManage.getInstance().getServerTime())) {
-            String time = UserManage.getInstance().getServerTime().trim();
-            String strings = time.substring(10, time.length()-1).trim();
-            time = com.whmnrc.qiangbizhong.util.TimeUtils.date2String(new Date(com.whmnrc.qiangbizhong.util.TimeUtils.getIntervalTime(strings,"24:00:00", com.whmnrc.qiangbizhong.util.TimeUtils.TimeUnit.SEC)),new SimpleDateFormat("HH:dd:ss"));
-            String[] date = time.split(":");
-            countDownTimerView.setTime(Integer.parseInt(date[0].trim()), Integer.parseInt(date[1].trim()), Integer.parseInt(date[2].trim()));
-            countDownTimerView.start();
+            long current = System.currentTimeMillis();
+            long lend = current/(1000*3600*24)*(1000*3600*24) - TimeZone.getDefault().getRawOffset() + 24*60*60*1000;
+            String serverTime = UserManage.getInstance().getServerTime();
+            long now =  TimeUtils.string2Milliseconds(serverTime,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+            long time =  lend - now;
+            if (time > 0){
+                long day = time / (24 * 60 * 60 * 1000);
+                long hour = (time / (60 * 60 * 1000) - day * 24);
+                long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
+                long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+                countDownTimerView.setTime((int) hour, (int) min, (int) ss);
+                countDownTimerView.start();
+            }
         }
         KillAdapter killAdapter = new KillAdapter(mContext, 0);
         rvSecondKill.setNestedScrollingEnabled(false);
@@ -176,6 +195,15 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         rvSecondKill.setLayoutManager(layoutManager);
         rvSecondKill.setAdapter(killAdapter);
         killAdapter.addFirstDataSet(secondKillBean);
+
+            killAdapter.setOnItemClickListener((view, item, position) -> {
+                if (UserManage.getInstance().getLoginBean() != null) {
+                    HomeResult.GoodsRushBean goodsRushBean = (HomeResult.GoodsRushBean) item;
+                    FlashSaleDetailsActivity.start(mContext, goodsRushBean.getRushId(), 1);
+                }else {
+                    LoginActivity.start(getContext());
+                }
+            });
     }
 
     private void initBanner(List<HomeResult.BannerBean> list) {
@@ -226,6 +254,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         initLuckDraw(homeResult.getGoodsNewAward());
         initGoods(homeResult.getGoodsTj());
         initNewUnveileds(homeResult.getGoodsNewAward());
+        refreshLayout.finishRefresh(true);
     }
 
     @Override

@@ -41,8 +41,10 @@
     <string name="orderlist">/api/home/orderlist</string>
     <!--商品详情-->
     <string name="goodsrushinfo">/api/home/goodsrushinfo</string>
-    <!--提交订单-->
+    <!--抢购下单-->
     <string name="submitOrder">/api/app/rushGoods/submitOrder</string>
+    <!--开始抢购-->
+    <string name="rushbuy">/api/app/rushGoods/buy</string>
     <!--添加地址-->
     <string name="addAddress">/api/address/add</string>
     <!--删除地址-->
@@ -51,11 +53,40 @@
     <string name="getaddresslist">/api/address/getaddresslist</string>
     <!--设置默认地址-->
     <string name="setdefault">/api/address/setdefault</string>
-    <!--下单-->
+    <!--充值下单-->
     <string name="submitorder">/api/app/recharge/submitorder</string>
 
-    <string name="rechargequery">/api/home/recharge/query</string>
 
+    <string name="rechargequery">/api/home/recharge/query</string>
+    <!--最新揭晓-->
     <string name="awardlist2">/api/home/awardlist2</string>
+    <!--支付宝支付-->
+    <string name="alipay">/api/pay/alipay</string>
+    <!--微信支付-->
+    <string name="wechatpay">/api/pay/wechatpay</string>
+
+    <!--我的订单-->
+    <string name="myawardlist">/api/home/myawardlist</string>
+    <!--我的抢购记录-->
+    <string name="myrushgoodsrecord">/api/home/myrushgoodsrecord</string>
+
+
+
+    <!--抽奖详情-->
+    <string name="awardInfo">/api/home/awardInfo</string>
+    <!--抽奖列表-->
+    <string name="awardlist">/api/home/awardlist</string>
+    <!--查询充值记录信息-->
+    <string name="recordquery">/api/home/recharge/recordquery</string>
+    <!--中奖 支付尾款-->
+    <string name="buy">/api/app/awardGoods/buy</string>
+    <!--抽奖预约下单-->
+    <string name="awardSubmitOrder">/api/app/awardGoods/submitOrder</string>
+    <!--确认收货-->
+    <string name="collectgoods">/api/app/confirm/collectgoods</string>
+    <!--放弃抢购-->
+    <string name="abandon">/api/app/rushGoods/abandon</string>
+
+
 
 </resources>

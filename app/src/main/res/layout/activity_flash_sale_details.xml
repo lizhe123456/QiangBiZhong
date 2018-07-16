@@ -45,6 +45,7 @@
                     android:layout_marginLeft="@dimen/dm_18"
                     android:layout_centerVertical="true">
                     <TextView
+                        android:id="@+id/tv_juli_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="距结束仅剩"
@@ -229,6 +230,7 @@
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/tv_title_color"
                 app:tabTextColor="@color/tv_191" />
+
             <com.whmnrc.qiangbizhong.widget.WrapContentHeightViewPager
                 android:id="@+id/vp_content"
                 android:layout_width="match_parent"
@@ -243,6 +245,7 @@
         android:orientation="vertical"
         android:background="@color/white">
         <RelativeLayout
+            android:id="@+id/rl_canyu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -307,6 +310,7 @@
             android:text="已结束"
             android:textSize="@dimen/dm_18"
             android:textColor="@color/tv_999"
-            android:background="#DDDDDD"/>
+            android:background="#DDDDDD"
+            android:gravity="center"/>
     </LinearLayout>
 </LinearLayout>

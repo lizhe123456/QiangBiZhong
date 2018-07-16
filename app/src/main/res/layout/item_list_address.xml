@@ -66,7 +66,9 @@ C座7F 办公室"
         android:text="编辑"
         android:layout_alignBottom="@+id/tv_select_address"
         android:layout_toLeftOf="@+id/tv_delete"
-        android:layout_marginRight="@dimen/dm_22"/>
+        android:layout_marginRight="@dimen/dm_22"
+        android:drawableLeft="@drawable/ic_edit"
+        android:drawablePadding="@dimen/dm_10"/>
     <TextView
         android:id="@+id/tv_delete"
         android:layout_width="wrap_content"

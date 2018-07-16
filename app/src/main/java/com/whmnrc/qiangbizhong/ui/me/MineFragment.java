@@ -1,6 +1,7 @@
 package com.whmnrc.qiangbizhong.ui.me;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
@@ -32,7 +36,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/6.
  */
 
-public class MineFragment extends BaseFragment {
+public class MineFragment extends BaseFragment implements UserManage.UserInfoCall{
 
     @BindView(R.id.iv_scan)
     ImageView ivScan;
@@ -48,6 +52,8 @@ public class MineFragment extends BaseFragment {
     RecyclerView rvMenu;
     @BindView(R.id.rv_option)
     RecyclerView rvOption;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout refreshLayout;
 
     ImmersionBar mImmersionBar;
 
@@ -61,30 +67,48 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        update();
+
+    }
+
+    public void update(){
+        loginBean = UserManage.getInstance().getLoginBean();
+        if (loginBean != null){
+            tvUsername.setText(loginBean.getUserInfo_NickName());
+            GlideuUtil.loadImageView(mContext,loginBean.getUserInfo_HeadImg(),ivHead);
+            tvYudou.setText(loginBean.getUserInfo_Money()+"");
+            tvPurchaseRestrictions.setText("今日可购"+loginBean.getUserInfo_TotalMoney());
+        }else {
+            tvUsername.setText("请先登录");
+        }
+        MineBean mineBean = new MineBean();
+        mineBean.initMineBean();
+        initMenu(mineBean.getMenuBeans());
+        initOption(mineBean.getItemBeans());
+        initMenu(mineBean.getMenuBeans());
+    }
+
+    @Override
     protected int setLayout() {
         return R.layout.fragment_mine;
     }
 
     @Override
     protected void initData() {
-        MineBean mineBean = new MineBean();
-        mineBean.initMineBean();
-        initMenu(mineBean.getMenuBeans());
-        initOption(mineBean.getItemBeans());
+
         mImmersionBar = ImmersionBar.with(this)
                 .statusBarColor(R.color.tv_navigation_select)
                 .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
                 .fitsSystemWindows(true)
                 .flymeOSStatusBarFontColor(R.color.white);
-        loginBean = UserManage.getInstance().getLoginBean();
-        if (loginBean != null){
-            tvUsername.setText(loginBean.getUserInfo_NickName());
-            GlideuUtil.loadImageView(mContext,loginBean.getUserInfo_HeadImg(),ivHead);
-            tvYudou.setText(loginBean.getUserInfo_Money()+"");
-            tvPurchaseRestrictions.setText("今日可够"+loginBean.getUserInfo_TotalMoney());
-        }else {
-            tvUsername.setText("请先登录");
-        }
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                UserManage.getInstance().getUserInfo(MineFragment.this);
+            }
+        });
     }
 
     private void initOption(List<MineBean.ItemBean> itemBeans) {
@@ -141,9 +165,9 @@ public class MineFragment extends BaseFragment {
     private void initMenu(List<MineBean.MenuBean> menuBeans) {
         OderMenuAdapter oderMenuAdapter;
         if (loginBean == null) {
-            oderMenuAdapter = new OderMenuAdapter(getContext(),true);
-        }else {
             oderMenuAdapter = new OderMenuAdapter(getContext(),false);
+        }else {
+            oderMenuAdapter = new OderMenuAdapter(getContext(),true);
         }
         rvMenu.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMenu.setNestedScrollingEnabled(false);
@@ -178,5 +202,11 @@ public class MineFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mImmersionBar.destroy();
+    }
+
+    @Override
+    public void userInfoBack(LoginBean loginBean) {
+        update();
+        refreshLayout.finishRefresh(true);
     }
 }

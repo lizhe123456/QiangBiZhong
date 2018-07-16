@@ -116,7 +116,6 @@
         android:text="登录"
         android:layout_marginLeft="@dimen/dm_22"
         android:layout_marginRight="@dimen/dm_22"
-
         android:paddingTop="@dimen/dm_12"
         android:paddingBottom="@dimen/dm_12"
         android:layout_marginTop="@dimen/dm_62"

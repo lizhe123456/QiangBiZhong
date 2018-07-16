@@ -62,6 +62,8 @@ public class UserInfoActivity extends BaseActivity {
 
     UserPresenter userPresenter;
 
+    String nickName;
+
     public static void start(Context context) {
         Intent starter = new Intent(context, UserInfoActivity.class);
         context.startActivity(starter);
@@ -80,6 +82,7 @@ public class UserInfoActivity extends BaseActivity {
         LoginBean loginBean = UserManage.getInstance().getLoginBean();
         GlideuUtil.loadImageView(this,loginBean.getUserInfo_HeadImg(),ivImg);
         tvUsername.setText(loginBean.getUserInfo_NickName());
+        nickName = loginBean.getUserInfo_NickName();
         UserManage.getInstance().getUserInfo(new UserManage.UserInfoCall() {
             @Override
             public void userInfoBack(LoginBean loginBean) {
@@ -87,27 +90,31 @@ public class UserInfoActivity extends BaseActivity {
             }
         });
 
-//        etNickName.addTextChangedListener(new TextWatcher() {
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                //输入的内容变化的监听
-//                if (s.toString().equals())
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count,
-//                                          int after) {
-//                // 输入前的监听
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                // 输入后的监听
-//
-//            }
-//        });
+        etNickName.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().trim().equals("")) {
+                    tvUsername.setText(nickName);
+                }else {
+                    tvUsername.setText(s);
+                }
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // 输入前的监听
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // 输入后的监听
+
+            }
+        });
     }
 
 
@@ -143,8 +150,32 @@ public class UserInfoActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.tv_update_img:
+                rxPermissions = new RxPermissions(this);
+                rxPermissions
+                        .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .subscribe(granted -> {
+                            if (granted) {
+                                PictureSelector.create(this)
+                                        .openGallery(PictureMimeType.ofImage())
+                                        .maxSelectNum(1)
+                                        .imageSpanCount(4)
+                                        .withAspectRatio(1,1)
+                                        .enableCrop(true)// 是否裁剪 true or false
+                                        .circleDimmedLayer(false)
+                                        .showCropFrame(true)
+                                        .cropWH(SizeUtils.dp2px(90),SizeUtils.dp2px(90))
+                                        .showCropGrid(false)
+                                        .compress(true)
+                                        .cropCompressQuality(50)
+                                        .previewImage(true)
+                                        .forResult(PictureConfig.CHOOSE_REQUEST);
+                            } else {
+                                ToastUtils.showShort("未开启读写权限，请开启读写");
+                            }
+                        });
                 break;
             case R.id.tv_update_pass:
+
                 break;
             case R.id.tv_login:
                 //退出登录

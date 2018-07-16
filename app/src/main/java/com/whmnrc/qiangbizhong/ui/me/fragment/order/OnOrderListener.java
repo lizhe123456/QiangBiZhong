@@ -29,4 +29,8 @@ public interface OnOrderListener {
 
     //查看物流
     void lookProgress(OrderListBean item);
+
+    void toQiangGou(OrderListBean item);
+
+    void cancel(OrderListBean item);
 }

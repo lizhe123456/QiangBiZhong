@@ -48,7 +48,11 @@ public class OrderPresenter {
                 if (!TextUtils.isEmpty(data)){
                     List<OrderListBean> orderListBeans = GsonUtil.changeGsonToList(data, OrderListBean.class);
                     if (orderCall != null){
-                        orderCall.orderlistBack(orderListBeans);
+                        if (isRefresh) {
+                            orderCall.orderlistBack(orderListBeans);
+                        }else {
+                            orderCall.loadMore(orderListBeans);
+                        }
                     }
                 }
             }
@@ -81,11 +85,36 @@ public class OrderPresenter {
         });
     }
 
+    public void abandon(String goodsId,CancelCall cancelCall){
+        Map<String,String> map = new HashMap<>();
+        map.put("userId",UserManage.getInstance().getUserID());
+        map.put("goodsRushId",goodsId);
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.abandon),map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (cancelCall != null){
+                    cancelCall.cancelS();
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+        });
+    }
+
     public interface OrderCall{
         void orderlistBack(List<OrderListBean> orderListBeans);
+
+        void loadMore(List<OrderListBean> orderListBeans);
     }
 
     public interface SubmitOrederCall{
         void submitOrederBack();
+    }
+
+    public interface CancelCall{
+        void cancelS();
     }
 }

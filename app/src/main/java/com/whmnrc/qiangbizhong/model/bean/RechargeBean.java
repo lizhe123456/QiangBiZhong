@@ -9,14 +9,16 @@ public class RechargeBean {
 
 
     /**
-     * GoodsPrice_Stock : 100000
-     * CanPayCount : 10000
-     * Price : 6000
+     * GoodsPrice_Stock : 1000000
+     * CanPayCount : 1000000
+     * Price : 0.1
+     * TotalMoney : 200
      */
 
     private int GoodsPrice_Stock;
     private int CanPayCount;
-    private int Price;
+    private double Price;
+    private int TotalMoney;
 
     public int getGoodsPrice_Stock() {
         return GoodsPrice_Stock;
@@ -34,11 +36,19 @@ public class RechargeBean {
         this.CanPayCount = CanPayCount;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return Price;
     }
 
-    public void setPrice(int Price) {
+    public void setPrice(double Price) {
         this.Price = Price;
+    }
+
+    public int getTotalMoney() {
+        return TotalMoney;
+    }
+
+    public void setTotalMoney(int TotalMoney) {
+        this.TotalMoney = TotalMoney;
     }
 }

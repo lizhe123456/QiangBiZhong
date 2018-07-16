@@ -60,12 +60,14 @@ public class MyOrderActivity extends BaseActivity {
         strings.append(0,"待发货");
         strings.append(1,"已发货");
         strings.append(2,"已完成");
-        strings.append(3,"全部订单");
+        strings.append(3,"待评价");
+        strings.append(4,"全部订单");
         fragments.append(0,new Order1Fragment());
         fragments.append(1,new Order2Fragment());
         fragments.append(2,new Order3Fragment());
-        fragments.append(3,new Order4Fragment());
-        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,strings,20,getIntent().getIntExtra("page",0));
+        fragments.append(3,new Order5Fragment());
+        fragments.append(4,new Order4Fragment());
+        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,strings,0,getIntent().getIntExtra("page",0));
 
     }
 

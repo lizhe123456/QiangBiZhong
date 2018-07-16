@@ -1,107 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_f5f5f5"
     android:orientation="vertical">
 
     <include layout="@layout/layout_title" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"
-        android:nestedScrollingEnabled="false"/>
-
-
-    <android.support.v4.widget.NestedScrollView
+        android:nestedScrollingEnabled="false"
+        android:overScrollMode="never" />
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="@dimen/dm_60"
+            app:srlAccentColor="@color/tv_191"
+            app:srlTextSizeTime="@dimen/dm_14"
+            app:srlTextSizeTitle="@dimen/dm_14" />
 
-            <LinearLayout
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rl_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dm_10"
-                android:background="@color/white">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dm_15"
-                    android:src="@drawable/ic_good_goods" />
+                    android:orientation="vertical">
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="38dp"
-                    android:layout_marginLeft="@dimen/dm_20"
-                    android:background="@color/bg_f5f5f5" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dm_10"
+                        android:background="@color/white">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dm_20"
-                    android:text="超值人气王"
-                    android:textColor="@color/tv_191"
-                    android:textSize="13sp" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/dm_15"
+                            android:src="@drawable/ic_good_goods" />
 
-            </LinearLayout>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="38dp"
+                            android:layout_marginLeft="@dimen/dm_20"
+                            android:background="@color/bg_f5f5f5" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/bg_f5f5f5" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/dm_20"
+                            android:text="超值人气王"
+                            android:textColor="@color/tv_191"
+                            android:textSize="13sp" />
 
-            <include layout="@layout/item_list_goods"/>
+                    </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_10"
-                android:background="@color/bg_f5f5f5" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/bg_f5f5f5" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/dm_10"
-                android:paddingTop="@dimen/dm_10">
+                    <include layout="@layout/item_list_goods" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dm_16"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dm_15"
-                    android:src="@drawable/ic_vertical" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dm_10"
+                        android:background="@color/bg_f5f5f5" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dm_6"
-                    android:text="还有宝贝可以继续抢购哦"
-                    android:textColor="@color/tv_191"
-                    android:textSize="13sp" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/dm_10"
+                        android:paddingTop="@dimen/dm_10">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/bg_f5f5f5" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dm_16"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/dm_15"
+                            android:src="@drawable/ic_vertical" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_goods"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never"
-                android:nestedScrollingEnabled="false"/>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/dm_6"
+                            android:text="还有宝贝可以继续抢购哦"
+                            android:textColor="@color/tv_191"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/bg_f5f5f5" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_goods"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never" />
+                </LinearLayout>
+
+                <ViewStub
+                    android:id="@+id/vs_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout="@layout/layout_empty" />
+            </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_60"
+            app:srlAccentColor="@color/tv_191"
+            app:srlTextSizeTime="@dimen/dm_14"
+            app:srlTextSizeTitle="@dimen/dm_14" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

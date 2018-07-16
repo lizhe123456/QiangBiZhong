@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Size;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
@@ -64,6 +68,12 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
     TextView tvConfirm;
     @BindView(R.id.iv_img)
     ImageView ivImg;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout refreshLayout;
+    @BindView(R.id.vs_empty)
+    ViewStub vsEmpty;
+    @BindView(R.id.rl_layout)
+    RelativeLayout relativeLayout;
 
     private TimeAdapter timeAdapter;
     private GoodsAdapter goodsAdapter;
@@ -75,8 +85,10 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
     /**
      * 记录目标项位置
      */
-    private int mToPosition;
+    private int mToPosition = 9;
     private KillGoodsBean killGoodsBeans;
+    String[] strings = new String[]{"13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"};
+    FlashSalePresenter flashSalePresenter;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, FlashSaleActivity.class);
@@ -103,9 +115,28 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         timeAdapter.setOnItemClickListener((view, item, position) -> {
             timeAdapter.setSelect(position);
             smoothMoveToPosition(rvNavigation,position);
+            flashSalePresenter.getFlashSale(strings[position],this);
         });
-        FlashSalePresenter flashSalePresenter = new FlashSalePresenter(this);
-        flashSalePresenter.getFlashSale("22:00",this);
+        flashSalePresenter = new FlashSalePresenter(this);
+        flashSalePresenter.getFlashSale(strings[mToPosition],this);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+
+            }
+        });
+    }
+
+    public void showEmpty() {
+        if (vsEmpty.getParent() != null) {
+            View view = vsEmpty.inflate();
+            ImageView imageView = view.findViewById(R.id.iv_empty);
+            TextView textView = view.findViewById(R.id.tv_text);
+            imageView.setImageResource(R.drawable.ic_empty_order);
+            textView.setText("暂无更多订单~");
+            vsEmpty.setVisibility(View.VISIBLE);
+            relativeLayout.setVisibility(View.GONE);
+        }
     }
 
     private void smoothMoveToPosition(RecyclerView mRecyclerView, final int position) {
@@ -142,7 +173,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
                 this.finish();
                 break;
             case R.id.tv_confirm:
-                FlashSaleDetailsActivity.start(this,killGoodsBeans.getHotGoods().getRushId());
+                FlashSaleDetailsActivity.start(this,killGoodsBeans.getHotGoods().getRushId(),0);
                 break;
         }
 
@@ -159,14 +190,25 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         goodsAdapter = new GoodsAdapter(this);
         rvGoods.setLayoutManager(new LinearLayoutManager(this));
         rvGoods.setAdapter(goodsAdapter);
-        goodsAdapter.addFirstDataSet(killGoodsBeans.getGoods());
-        tvGoodsName.setText(killGoodsBeans.getHotGoods().getGoods_Name());
-        tvDesc.setText(killGoodsBeans.getHotGoods().getGoods_Name());
-        tvPurchasedNum.setText("已抢购"+String.valueOf(killGoodsBeans.getHotGoods().getBond())+"件");
-        tvPrice.setText(String.valueOf(killGoodsBeans.getHotGoods().getPrice()));
-        tvOldPrice.setText(String.valueOf(killGoodsBeans.getHotGoods().getGoodsPrice_Price()));
-        tvSurplus.setText("仅剩"+String.valueOf(killGoodsBeans.getHotGoods().getRushNumber())+"件");
-        GlideuUtil.loadImageView(this,killGoodsBeans.getHotGoods().getGoods_ImaPath(),ivImg);
+        if (killGoodsBeans.getHotGoods() == null && killGoodsBeans.getGoods().size() == 0){
+            showEmpty();
+            relativeLayout.setVisibility(View.GONE);
+        }else {
+            goodsAdapter.addFirstDataSet(killGoodsBeans.getGoods());
+            if (killGoodsBeans.getHotGoods() != null) {
+                tvGoodsName.setText(killGoodsBeans.getHotGoods().getGoods_Name());
+                tvDesc.setText(killGoodsBeans.getHotGoods().getGoods_Name());
+                tvPurchasedNum.setText("已抢购" + String.valueOf(killGoodsBeans.getHotGoods().getBond()) + "件");
+                tvPrice.setText(String.valueOf(killGoodsBeans.getHotGoods().getGoodsPrice_Price()));
+                tvOldPrice.setText(String.valueOf(killGoodsBeans.getHotGoods().getGoodsPrice_Price()));
+                tvSurplus.setText("仅剩" + String.valueOf(killGoodsBeans.getHotGoods().getRushNumber()) + "件");
+                GlideuUtil.loadImageView(this, killGoodsBeans.getHotGoods().getGoods_ImaPath(), ivImg);
+            }
+            if (vsEmpty.getParent() == null) {
+                vsEmpty.setVisibility(View.GONE);
+            }
+            relativeLayout.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -221,16 +263,16 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         protected void bindDataToItemView(BaseViewHolder holder, KillGoodsBean.GoodsBean item, int position) {
             holder.setText(R.id.tv_goods_name,item.getGoods_Name())
                     .setText(R.id.tv_desc, "")
-                    .setText(R.id.tv_purchased_num, "已抢购"+item.getBond()+"件")
+                    .setText(R.id.tv_purchased_num, "已抢购0件")
                     .setText(R.id.tv_price,String.valueOf(item.getGoodsPrice_Price()))
-                    .setText(R.id.tv_old_price,String.valueOf(item.getGoodsPrice_Price()))
+                    .setText(R.id.tv_old_price,String.valueOf(item.getGoodsPrice_VirtualPrice()))
                     .setText(R.id.tv_surplus, "仅剩"+item.getRushNumber()+"件")
                     .setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
 
             holder.setOnClickListener(R.id.tv_confirm, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashSaleDetailsActivity.start(getContext(),item.getRushId());
+                    FlashSaleDetailsActivity.start(getContext(),item.getRushId(),0);
                 }
             });
         }

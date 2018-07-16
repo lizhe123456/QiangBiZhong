@@ -43,4 +43,14 @@ public class OnOrderListenerAdapter implements OnOrderListener {
     public void lookProgress(OrderListBean item) {
 
     }
+
+    @Override
+    public void toQiangGou(OrderListBean item) {
+
+    }
+
+    @Override
+    public void cancel(OrderListBean item) {
+
+    }
 }

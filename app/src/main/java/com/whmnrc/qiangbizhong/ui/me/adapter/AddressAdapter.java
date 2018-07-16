@@ -57,6 +57,15 @@ public class AddressAdapter extends BaseAdapter<AddressBean>{
                 }
             }
         });
+
+        holder.setOnClickListener(R.id.tv_edit, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onDeleteClickListener != null){
+                    onDeleteClickListener.onEdit(item);
+                }
+            }
+        });
     }
 
     @Override
@@ -66,6 +75,8 @@ public class AddressAdapter extends BaseAdapter<AddressBean>{
 
     public interface OnDeleteClickListener{
         void onDelete(AddressBean addressBean);
+
+        void onEdit(AddressBean addressBean);
     }
 
 }

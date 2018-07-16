@@ -80,6 +80,11 @@ public class AddressManageActivity extends BaseActivity implements AddressPresen
             public void onDelete(AddressBean addressBean) {
                 addressPresenter.deleteAddress(addressBean.getAddress_ID(),AddressManageActivity.this);
             }
+
+            @Override
+            public void onEdit(AddressBean addressBean) {
+                AddAddressActivity.start(AddressManageActivity.this,addressBean);
+            }
         });
     }
 

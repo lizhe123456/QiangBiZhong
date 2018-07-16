@@ -16,6 +16,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
+import com.whmnrc.qiangbizhong.model.bean.LuckDrawBean;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBean;
 import com.whmnrc.qiangbizhong.presenter.home.LuckDrawPresenter;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
@@ -53,16 +54,12 @@ public class WaitLuckDrawFragment extends BaseFragment {
         adapter = new OpenLuckDrawAdapter(mContext);
         rvList.setAdapter(adapter);
         luckDrawPresenter = new LuckDrawPresenter(mContext);
-        luckDrawPresenter.awardlist2(1,this::luckDrawBack);
-//        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","Eason","2018-07-11 \n" +" 16:00"));
-//        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","xians","2018-07-11 \n" +" 16:00"));
-//        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","xians","2018-07-12 \n" +" 15:00"));
-//        luckDrawGoodsBeans.add(new LuckDrawGoodsBean("","huixnk","2018-07-13 \n" +" 15:00"));
-//        adapter.addFirstDataSet(luckDrawGoodsBeans);
+        luckDrawPresenter.awardlist2(0,this::luckDrawBack);
         adapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-                FlashSaleDetailsActivity.start(mContext,"");
+                LuckDrawBean.GoodsBean luckDrawBean = (LuckDrawBean.GoodsBean) item;
+//                FlashSaleDetailsActivity.start(mContext,luckDrawBean.getAwardId(),1);
             }
         });
     }

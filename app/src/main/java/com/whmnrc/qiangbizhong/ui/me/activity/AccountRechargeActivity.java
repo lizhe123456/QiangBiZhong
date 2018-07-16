@@ -58,14 +58,12 @@ public class AccountRechargeActivity extends BaseActivity {
         ivBack.setVisibility(View.VISIBLE);
         fragments = new SparseArray<>();
         titles = new SparseArray<>();
-        fragments.append(0, AgentRechargeFragment.newInstance());
-        fragments.append(1, OpenVipFragment.newInstance());
-        fragments.append(2, RechargeFragment.newInstance());
-        titles.append(0,"代理商充值");
-        titles.append(1,"会员充值");
-        titles.append(2,"普通充值");
+        fragments.append(0, OpenVipFragment.newInstance());
+        fragments.append(1, RechargeFragment.newInstance());
+        titles.append(0,"会员充值");
+        titles.append(1,"普通充值");
         page = getIntent().getIntExtra("page",0);
-        ViewPagerUtil.initViewPage(vpContent,tlTitle,this,fragments,titles,0,page);
+        ViewPagerUtil.initViewPage(vpContent,tlTitle,this,fragments,titles,60,page);
 
     }
 

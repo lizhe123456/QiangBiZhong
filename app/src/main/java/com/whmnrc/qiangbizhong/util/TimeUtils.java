@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.util;
 
+import com.blankj.utilcode.constant.TimeConstants;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,11 +31,11 @@ public class TimeUtils {
     /**
      * 秒与毫秒的倍数
      */
-    public static final int SEC  = 1000;
+    public static final int SEC = 1000;
     /**
      * 分与毫秒的倍数
      */
-    public static final int MIN  = 60000;
+    public static final int MIN = 60000;
     /**
      * 时与毫秒的倍数
      */
@@ -42,7 +43,7 @@ public class TimeUtils {
     /**
      * 天与毫秒的倍数
      */
-    public static final int DAY  = 86400000;
+    public static final int DAY = 86400000;
 
     public enum TimeUnit {
         MSEC,
@@ -75,20 +76,20 @@ public class TimeUtils {
         return format.format(new Date(milliseconds));
     }
 
-    public static String parseDate(long create){
+    public static String parseDate(long create) {
         try {
             String ret = "";
             Calendar now = Calendar.getInstance();
-            long ms  = 1000*(now.get(Calendar.HOUR_OF_DAY)*3600+now.get(Calendar.MINUTE)*60+now.get(Calendar.SECOND));//毫秒数
+            long ms = 1000 * (now.get(Calendar.HOUR_OF_DAY) * 3600 + now.get(Calendar.MINUTE) * 60 + now.get(Calendar.SECOND));//毫秒数
             long ms_now = now.getTimeInMillis();
-            if(ms_now-create<ms){
-                ret = "今天 " + milliseconds2String(create,new SimpleDateFormat("HH:mm", Locale.getDefault()));
-            }else if(ms_now-create<(ms+24*3600*1000)){
-                ret = "昨天 " + milliseconds2String(create,new SimpleDateFormat("HH:mm", Locale.getDefault()));
-            }else if(ms_now-create<(ms+24*3600*1000*2)){
-                ret = "前天 " + milliseconds2String(create,new SimpleDateFormat("HH:mm", Locale.getDefault()));
-            }else{
-                ret= milliseconds2String(create,ADVERT_SDF);
+            if (ms_now - create < ms) {
+                ret = "今天 " + milliseconds2String(create, new SimpleDateFormat("HH:mm", Locale.getDefault()));
+            } else if (ms_now - create < (ms + 24 * 3600 * 1000)) {
+                ret = "昨天 " + milliseconds2String(create, new SimpleDateFormat("HH:mm", Locale.getDefault()));
+            } else if (ms_now - create < (ms + 24 * 3600 * 1000 * 2)) {
+                ret = "前天 " + milliseconds2String(create, new SimpleDateFormat("HH:mm", Locale.getDefault()));
+            } else {
+                ret = milliseconds2String(create, ADVERT_SDF);
             }
             return ret;
         } catch (Exception e) {
@@ -534,4 +535,61 @@ public class TimeUtils {
     public static String getSystemTime() {
         return String.valueOf(System.currentTimeMillis());
     }
+
+
+    public static String getTimeDifference(String starTime, String endTime) {
+        String timeString = "";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        try {
+            Date parse = dateFormat.parse(starTime);
+            Date parse1 = dateFormat.parse(endTime);
+
+            long diff = parse1.getTime() - parse.getTime();
+
+            long day = diff / (24 * 60 * 60 * 1000);
+            long hour = (diff / (60 * 60 * 1000) - day * 24);
+            long min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
+            long s = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+            long ms = (diff - day * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000
+                    - min * 60 * 1000 - s * 1000);
+            // System.out.println(day + "天" + hour + "小时" + min + "分" + s +
+            // "秒");
+            long hour1 = diff / (60 * 60 * 1000);
+            String hourString = hour1 + "";
+            long min1 = ((diff / (60 * 1000)) - hour1 * 60);
+            timeString = hour1 + "小时" + min1 + "分";
+            // System.out.println(day + "天" + hour + "小时" + min + "分" + s +
+            // "秒");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return timeString;
+
+    }
+
+    public String getStart(String start) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd/ HH:mm:ss");
+        Date parse = com.blankj.utilcode.util.TimeUtils.getDate(start, format, 0, TimeConstants.SEC);
+        long between = getCurTimeDate().getTime() - parse.getTime();
+        long day = between / (24 * 60 * 60 * 1000);
+        long hour = (between / (60 * 60 * 1000) - day * 24);
+        long min = ((between / (60 * 1000)) - day * 24 * 60 - hour * 60);
+        long s = (between / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        return hour + ":" + min + ":" + s;
+    }
+
+
+    public String getEnd(String end) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd/ HH:mm:ss");
+        Date parse = com.blankj.utilcode.util.TimeUtils.getDate(end, format, 0, TimeConstants.SEC);
+        long between = getCurTimeDate().getTime() - parse.getTime();
+        long day = between / (24 * 60 * 60 * 1000);
+        long hour = (between / (60 * 60 * 1000) - day * 24);
+        long min = ((between / (60 * 1000)) - day * 24 * 60 - hour * 60);
+        long s = (between / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        return hour + ":" + min + ":" + s;
+    }
+
 }

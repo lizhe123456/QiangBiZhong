@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.model.bean.GoodsRushinfoBean;
+import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
@@ -34,7 +35,7 @@ public class GoodsRushInfoPresenter {
             @Override
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)){
-                    GoodsRushinfoBean goodsRushinfoBean = GsonUtil.changeGsonToBean(data,GoodsRushinfoBean.class);
+                    GoodsRushinfoBean goodsRushinfoBean = JSON.parseObject(data,GoodsRushinfoBean.class);
                     if (goodsInfoCall != null){
                         goodsInfoCall.goodsInfoBack(goodsRushinfoBean);
                     }
@@ -49,11 +50,59 @@ public class GoodsRushInfoPresenter {
         });
     }
 
+    public void cayu(String goodId){
+        Map<String,String> map = new HashMap<>();
+        map.put("userId", UserManage.getInstance().getUserID());
+        map.put("goodsRushId",goodId);
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.rushbuy),map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                MyOrderActivity.start(context,0);
+                if (!TextUtils.isEmpty(data)){
+
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+
+        });
+    }
+
+    //抽奖详情
+    public void awardInfo(String awardId){
+        Map<String,String> map = new HashMap<>();
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.awardInfo) + "?awardId="+awardId,map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+        });
+    }
+
 
     public interface GoodsInfoCall{
 
         void goodsInfoBack(GoodsRushinfoBean goodsRushinfoBean);
 
+    }
+
+    public interface CanYuCall{
+
+        void canyuBack();
+
+    }
+
+    public interface AwardCall{
+
+        void awardBack();
     }
 
 
