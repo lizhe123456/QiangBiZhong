@@ -59,6 +59,7 @@ public class UserPresenter {
             @Override
             public void onSuccess(String data) {
                 ToastUtils.showShort("上传成功");
+                UserManage.getInstance().getUserInfo(null);
             }
 
             @Override
@@ -73,11 +74,11 @@ public class UserPresenter {
     public void updateNickName(String nickName){
         Map<String,String> map = new HashMap<>();
         map.put("UserId",UserManage.getInstance().getUserID());
-        map.put("UserHeadImage", nickName);
+        map.put("UserNick", nickName);
         OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.updateUserNick), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-
+                UserManage.getInstance().getUserInfo(null);
             }
 
             @Override

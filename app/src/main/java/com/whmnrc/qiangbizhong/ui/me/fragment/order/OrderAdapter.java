@@ -14,7 +14,7 @@ import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 /**
  * Company 武汉麦诺软创
  * Created by lizhe on 2018/7/11.
- * 1已预约 0未支付 1已支付 2待收货 3已完成 4已取消  5抢购成功 6抢购失败 7已中奖 8未中奖 9已退款
+ * 1已预约 0未支付 1已支付 2待收货 3待评价 4已取消  5抢购成功 6抢购失败 7已中奖 8未中奖 9已退款
  * Order_CreateType 0 商城商品订单 1抢购订单 2抽奖订单 3医美服务订单
  */
 
@@ -33,6 +33,8 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, OrderListBean item, int position) {
         holder.setText(R.id.tv_order_num,item.getAddress_Name()).setText(R.id.tv_num,"共有"+item.getOrder_Number()+"件商品");
+//        holder.setVisible(R.id.tv_btn_2,false);
+//        holder.setVisible(R.id.tv_btn_3,false);
         if (item.getOrder_State() == -1){
             //-1已预约
             holder.setText(R.id.order_state,"已预约");
@@ -46,7 +48,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
             holder.setText(R.id.tv_btn_3,"取消抢购");
             holder.setOnClickListener(R.id.tv_btn_2, v -> {
                 if (onOrderListener != null)
-                    FlashSaleDetailsActivity.start(getContext(),item.getDetail().get(0).getOrder_ID(),1);
+                    FlashSaleDetailsActivity.start(getContext(),item.getRushRecord().getRushId(),1);
             });
             holder.setOnClickListener(R.id.tv_btn_3, v -> {
                 if (onOrderListener != null)
@@ -78,6 +80,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
             //2待收货
             holder.setText(R.id.order_state,"待收货");
             holder.setText(R.id.tv_btn_2,"确认收货");
+            holder.setVisible(R.id.tv_btn_2,true);
             holder.setText(R.id.tv_btn_3,"联系客服");
             holder.setOnClickListener(R.id.tv_btn_3, v -> {
                 if (onOrderListener != null)
@@ -89,17 +92,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
             });
         }else if (item.getOrder_State() == 3){
             //已完成
-            holder.setText(R.id.order_state,"已完成");
-            holder.setText(R.id.tv_btn_3,"联系客服");
-            holder.setText(R.id.tv_btn_2,"去评价");
-            holder.setOnClickListener(R.id.tv_btn_3, v -> {
-                if (onOrderListener != null)
-                    onOrderListener.customerServicePhoneClick(item);
-            });
-            holder.setOnClickListener(R.id.tv_btn_2, v -> {
-                if (onOrderListener != null)
-                    onOrderListener.evaluate(item);
-            });
+
         }else if (item.getOrder_State() == 4){
             //已取消
             holder.setText(R.id.order_state,"已取消");
@@ -108,7 +101,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
         }else if (item.getOrder_State() == 6){
             //5抢购成功
             holder.setText(R.id.order_state,"抢购成功");
-            holder.setText(R.id.tv_btn_2,"去支付");
+            holder.setVisible(R.id.tv_btn_2,false);
             holder.setText(R.id.tv_btn_3,"联系客服");
             holder.setOnClickListener(R.id.tv_btn_2, v -> {
                 if (onOrderListener != null)
@@ -141,7 +134,21 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
             holder.setText(R.id.order_state,"未中奖");
             holder.setVisible(R.id.tv_btn_2,false);
             holder.setVisible(R.id.tv_btn_3,false);
+        }else if (item.getOrder_State() == 10){
+            holder.setText(R.id.order_state,"已完成");
+            holder.setText(R.id.tv_btn_3,"联系客服");
+            holder.setText(R.id.tv_btn_2,"去评价");
+            holder.setVisible(R.id.tv_btn_2,false);
+            holder.setOnClickListener(R.id.tv_btn_3, v -> {
+                if (onOrderListener != null)
+                    onOrderListener.customerServicePhoneClick(item);
+            });
+            holder.setOnClickListener(R.id.tv_btn_2, v -> {
+                if (onOrderListener != null)
+                    onOrderListener.evaluate(item);
+            });
         }
+
 
         RecyclerView goodsList = holder.getView(R.id.rv_goods_list);
         OrderGoodsAdapter adapter = new OrderGoodsAdapter(getContext());

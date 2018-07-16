@@ -97,7 +97,6 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
 
     @Override
     protected void initData() {
-
         mImmersionBar = ImmersionBar.with(this)
                 .statusBarColor(R.color.tv_navigation_select)
                 .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
@@ -106,7 +105,11 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                UserManage.getInstance().getUserInfo(MineFragment.this);
+                if (UserManage.getInstance().getLoginBean() == null) {
+                    UserManage.getInstance().getUserInfo(MineFragment.this);
+                }else {
+                    refreshLayout.finishRefresh(3000);
+                }
             }
         });
     }

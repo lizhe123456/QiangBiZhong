@@ -69,12 +69,14 @@ public class UnveiledActivity extends BaseActivity {
         ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,strings,120,0);
         tvTitle.setText("最新揭晓");
         ivBack.setVisibility(View.VISIBLE);
+
     }
 
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         this.finish();
     }
+
 
 
 }

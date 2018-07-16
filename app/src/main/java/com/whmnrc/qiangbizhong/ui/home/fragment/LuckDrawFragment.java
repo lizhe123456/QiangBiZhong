@@ -38,8 +38,6 @@ public class LuckDrawFragment extends BaseFragment{
     TextView tvTitle;
     @BindView(R.id.bannerView)
     Banner bannerView;
-//    @BindView(R.id.rv_luck_draw)
-//    RecyclerView rvLuckDraw;
     @BindView(R.id.rv_goods)
     RecyclerView rvGoods;
 
@@ -69,7 +67,6 @@ public class LuckDrawFragment extends BaseFragment{
         rvGoods.setAdapter(luckDrawItemAdapter);
 
         awardPresenter.getAwardList(0,this::awardBack);
-//        initBanner();
         tvTitle.setText("抽奖");
         ivBack.setVisibility(View.VISIBLE);
 
@@ -112,5 +109,7 @@ public class LuckDrawFragment extends BaseFragment{
         initBanner(list);
         luckDrawItemAdapter.addFirstDataSet(luckDrawBeans.getGoods());
     }
+
+
 
 }

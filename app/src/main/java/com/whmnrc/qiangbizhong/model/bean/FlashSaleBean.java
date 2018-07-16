@@ -177,7 +177,7 @@ public class FlashSaleBean {
 
 
 
-    public class TimeBean {
+    public static class TimeBean {
         String time;
         String name;
         boolean isSelect;

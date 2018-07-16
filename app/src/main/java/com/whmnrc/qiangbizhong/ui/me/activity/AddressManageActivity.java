@@ -67,12 +67,8 @@ public class AddressManageActivity extends BaseActivity implements AddressPresen
         addressAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-                if (position > 0) {
-                    AddressBean addressBean = (AddressBean) item;
-                    addressPresenter.setDefault(addressBean.getAddress_ID(),AddressManageActivity.this);
-                }else {
-
-                }
+                AddressBean addressBean = (AddressBean) item;
+                addressPresenter.setDefault(addressBean.getAddress_ID(),AddressManageActivity.this);
             }
         });
         addressAdapter.setOnDeleteClickListener(new AddressAdapter.OnDeleteClickListener() {
@@ -117,5 +113,11 @@ public class AddressManageActivity extends BaseActivity implements AddressPresen
         addressPresenter.getaddressList(this);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        addressPresenter.getaddressList(this);
+    }
 
 }

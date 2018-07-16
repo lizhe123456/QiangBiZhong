@@ -11,5 +11,5 @@ public class Constants {
     //微信统一下单接口
     public static final String WX_TOTAL_ORDER = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
-    public static final String INFO_ADDRESS = "http://192.168.0.157:8011/GoodsDetail/index";
+    public static final String INFO_ADDRESS = "http://testaml.whmnx.com/GoodsDetail/index";
 }

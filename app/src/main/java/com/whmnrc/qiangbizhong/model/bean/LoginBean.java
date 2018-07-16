@@ -7,19 +7,18 @@ package com.whmnrc.qiangbizhong.model.bean;
 
 public class LoginBean {
 
-
     /**
      * UserInfo_ID : bda06fce-e199-47a9-9a45-6ee3c4fae39c
      * UserInfo_ParentID : null
-     * UserInfo_HeadImg : http://192.168.0.157:8010/Resource/HeadImage/default.jpg
+     * UserInfo_HeadImg : http://testaml.whmnx.com/Resource/HeadImage/bda06fce-e199-47a9-9a45-6ee3c4fae39c.jpg
      * UserInfo_Pwd : E10ADC3949BA59ABBE56E057F20F883E
      * UserInfo_Mobile : 17688943972
      * UserInfo_Sex : null
      * UserInfo_CreateTime : 2018-07-12 17:38:59
      * UserInfo_State : 0
-     * UserInfo_NickName : 17688943972
+     * UserInfo_NickName : null
      * UserInfo_RealName : null
-     * UserInfo_Money : 0
+     * UserInfo_Money : 10213
      * UserInfo_TotalMoney : 0
      * OpenID : null
      * UserInfo_Integer : 0
@@ -40,7 +39,7 @@ public class LoginBean {
     private String UserInfo_CreateTime;
     private int UserInfo_State;
     private String UserInfo_NickName;
-    private Object UserInfo_RealName;
+    private String UserInfo_RealName;
     private int UserInfo_Money;
     private int UserInfo_TotalMoney;
     private Object OpenID;
@@ -124,11 +123,11 @@ public class LoginBean {
         this.UserInfo_NickName = UserInfo_NickName;
     }
 
-    public Object getUserInfo_RealName() {
+    public String getUserInfo_RealName() {
         return UserInfo_RealName;
     }
 
-    public void setUserInfo_RealName(Object UserInfo_RealName) {
+    public void setUserInfo_RealName(String UserInfo_RealName) {
         this.UserInfo_RealName = UserInfo_RealName;
     }
 

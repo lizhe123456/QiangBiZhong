@@ -10,11 +10,11 @@ public class Order3Fragment extends BaseOrderFragment {
 
     @Override
     public void setClick() {
-
+        mAdapter.setOnOrderListener(new OnOrderListenerAdapter());
     }
 
     @Override
     public String request() {
-        return "10";
+        return "2";
     }
 }

@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
+import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.ZhaoPwdActivity;
 import com.whmnrc.qiangbizhong.util.ToastUtil;
 
@@ -86,11 +87,17 @@ public class UpdatePassActivity extends BaseActivity {
                     ToastUtils.showShort("两次输入密码不一致");
                     return;
                 }
-                loginPresenter.updatePwd(etOldPass.getText().toString(),etNewPass.getText().toString());
+                loginPresenter.updatePwd(etOldPass.getText().toString(),etNewPass.getText().toString(),this::updatePaw);
                 break;
             case R.id.tv_address:
                 ZhaoPwdActivity.start(this);
                 break;
         }
+    }
+
+    private void updatePaw() {
+        ToastUtils.showShort("修改成功，请重新登录");
+        this.finish();
+        LoginActivity.start(this);
     }
 }

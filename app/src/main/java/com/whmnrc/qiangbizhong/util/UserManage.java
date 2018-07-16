@@ -76,7 +76,7 @@ public class UserManage {
         } catch (Exception e) {
             return null;
         }
-        return loginBean.getUserInfo_ID();
+        return loginBean.getUserInfo_ID() == null ? "" : loginBean.getUserInfo_ID();
     }
 
     public void getUserInfo(UserInfoCall userInfoCall) {
@@ -90,8 +90,10 @@ public class UserManage {
             @Override
             public void onSuccess(String st) {
                 if (!TextUtils.isEmpty(st)) {
-                    LoginBean response = JSON.parseObject(st, LoginBean.class);
-                    userInfoCall.userInfoBack(response);
+                    LoginBean response = GsonUtil.changeGsonToBean(st, LoginBean.class);
+                    if (userInfoCall != null) {
+                        userInfoCall.userInfoBack(response);
+                    }
                     updateLoginBena(response);
                 }
             }

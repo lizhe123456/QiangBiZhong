@@ -119,8 +119,8 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
             @Override
             public void onClick(View view, Object item, int position) {
                 if (UserManage.getInstance().getLoginBean() != null) {
-                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
-                    FlashSaleDetailsActivity.start(getContext(), goodsNewAwardBean.getGoods_ID(), 1);
+//                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+//                    FlashSaleDetailsActivity.start(getContext(), goodsNewAwardBean.getGoods_ID(), 1);
                 }else {
                     LoginActivity.start(getContext());
                 }
@@ -234,15 +234,27 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
             case R.id.fl_meg:
                 break;
             case R.id.tv_more:
-                FlashSaleActivity.start(mContext);
+                if (UserManage.getInstance().getLoginBean() == null){
+                    LoginActivity.start(getContext());
+                }else {
+                    FlashSaleActivity.start(mContext);
+                }
                 break;
             case R.id.tv_chouj_more:
-                LuckDrawActivity.start(mContext);
+                if (UserManage.getInstance().getLoginBean() == null){
+                    LoginActivity.start(getContext());
+                }else {
+                    LuckDrawActivity.start(mContext);
+                }
                 break;
             case R.id.tv_for_you_more:
                 break;
             case R.id.tv_jiexiao_more:
-                UnveiledActivity.start(mContext);
+                if (UserManage.getInstance().getLoginBean() == null){
+                    LoginActivity.start(getContext());
+                }else {
+                    UnveiledActivity.start(mContext);
+                }
                 break;
         }
     }

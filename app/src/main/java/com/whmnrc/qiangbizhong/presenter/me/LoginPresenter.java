@@ -107,7 +107,7 @@ public class LoginPresenter{
         });
     }
 
-    public void updatePwd(String pwd,String newPwd){
+    public void updatePwd(String pwd,String newPwd,UpdatePwdCall updatePwdCall){
         Map<String,String> map = new HashMap<>();
         map.put("UserId", UserManage.getInstance().getUserID());
         map.put("Pwd",EncryptUtils.encryptMD5ToString(pwd));
@@ -116,7 +116,9 @@ public class LoginPresenter{
 
             @Override
             public void onSuccess(String data) {
-
+                if (updatePwdCall != null){
+                    updatePwdCall.updatePaw();
+                }
             }
 
             @Override
@@ -132,6 +134,10 @@ public class LoginPresenter{
 
     public interface RegisterCall{
         void registerBack();
+    }
+
+    public interface UpdatePwdCall{
+        void updatePaw();
     }
 
 }

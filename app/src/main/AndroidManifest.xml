@@ -17,11 +17,11 @@
         tools:ignore="GradleOverrides" />
 
     <application
-        android:icon="@drawable/ic_launcher"
-        android:roundIcon="@drawable/ic_launcher_background"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        tools:replace="android:icon, android:theme"
         android:name=".app.App"
         android:allowBackup="true">
 
@@ -34,15 +34,17 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
+        <activity android:name=".ui.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeSplash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.me.activity.AccountRechargeActivity"
             android:screenOrientation="portrait"
@@ -94,6 +96,9 @@
             android:screenOrientation="portrait"
             android:launchMode="singleTop"/>
         <activity android:name=".ui.shop.activity.SelectAddressActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"/>
+        <activity android:name=".ui.home.activity.AwardDetailActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"/>
     </application>

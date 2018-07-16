@@ -18,7 +18,8 @@
     <string name="rule">（1）每人每天必须支付了预付金才有抽奖资格 （2）每人每天必须支付了预付金才有抽奖资格 （3）每人每天必须支付了预付金才有抽奖资格</string>
     
     <!--api-->
-    <string name="server_address">http://192.168.0.157:8010</string>
+    <!--<string name="server_address">http://192.168.1.157:8010</string>-->
+    <string name="server_address">http://testaml.whmnx.com/Api</string>
     <!--注册-->
     <string name="register">/api/user/register</string>
     <!--修改密码-->
@@ -37,6 +38,8 @@
     <string name="homeIndex">/api/home/index</string>
     <!--限时折扣-->
     <string name="goodsrushlist">/api/home/goodsrushlist</string>
+    <!--时间-->
+    <string name="goodsrushtimelist">/api/home/goodsrushtimelist</string>
     <!--订单列表-->
     <string name="orderlist">/api/home/orderlist</string>
     <!--商品详情-->

@@ -125,7 +125,7 @@ public class SelectAddressActivity extends BaseActivity implements AddressPresen
 
             holder.setText(R.id.tv_name,item.getAddress_Name())
                     .setText(R.id.tv_phone,item.getAddress_Mobile())
-                    .setText(R.id.tv_address,item.getAddress_Provice()+item.getAddress_City()+item.getAddress_Region()+item.getAddress_Detail());
+                    .setText(R.id.tv_address,item.getProviceName()+item.getCityName()+item.getRegionName()+item.getAddress_Detail());
         }
 
         @Override

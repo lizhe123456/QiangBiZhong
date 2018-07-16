@@ -49,6 +49,16 @@ public class OderMenuAdapter extends BaseAdapter<MineBean.MenuBean> {
                 }
             });
         }
+        holder.setOnClickListener(R.id.tv_more, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLogin){
+                    MyOrderActivity.start(getContext(),4);
+                }else {
+                    LoginActivity.start(getContext());
+                }
+            }
+        });
     }
 
     @Override

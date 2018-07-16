@@ -28,17 +28,25 @@ public class LuckDrawPresenter {
         this.context = context;
     }
 
-    public void awardlist2(int type, LuckDrawCall luckDrawCall){
+    public void awardlist2(int type, LuckDrawCall luckDrawCall, boolean isR){
         Map<String,String> map = new HashMap<>();
-        map.put("PageIndex",page+"");
+        if (isR) {
+            page = 1;
+        }
+        map.put("PageIndex", page + "");
         map.put("PageCount",size+"");
-        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.awardlist2)+"?type="+type,map, new OkhttpUtil.BeanCallback(){
 
+        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.awardlist2)+"?type="+type,map, new OkhttpUtil.BeanCallback(){
             @Override
             public void onSuccess(String data) {
                 List<LuckDrawGoodsBean> luckDrawGoodsBean = GsonUtil.changeGsonToList(data,LuckDrawGoodsBean.class);
                 if (luckDrawCall != null){
-                    luckDrawCall.luckDrawBack(luckDrawGoodsBean);
+                    if (isR) {
+                        luckDrawCall.luckDrawBack(luckDrawGoodsBean);
+                    }else {
+                        luckDrawCall.loadMore(luckDrawGoodsBean);
+                    }
+                    page++;
                 }
             }
 
@@ -77,6 +85,7 @@ public class LuckDrawPresenter {
 
         void luckDrawBack(List<LuckDrawGoodsBean> luckDrawGoodsBean);
 
+        void loadMore(List<LuckDrawGoodsBean> luckDrawGoodsBean);
     }
 
 }

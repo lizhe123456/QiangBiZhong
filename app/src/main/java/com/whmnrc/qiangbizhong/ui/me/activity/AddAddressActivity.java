@@ -86,6 +86,8 @@ public class AddAddressActivity extends BaseActivity {
     }
 
 
+
+
     @Override
     protected int setLayout() {
         return R.layout.activity_add_address;
@@ -103,9 +105,9 @@ public class AddAddressActivity extends BaseActivity {
             etName.setText(addressBean.getAddress_Name());
             etPhone.setText(addressBean.getAddress_Mobile());
             etAddress.setText(addressBean.getAddress_Detail());
-            tvItem1.setText(addressBean.getAddress_Provice());
-            ttItem2.setText(addressBean.getAddress_City());
-            tvItem3.setText(addressBean.getAddress_Region());
+            tvItem1.setText(addressBean.getProviceName());
+            ttItem2.setText(addressBean.getCityName());
+            tvItem3.setText(addressBean.getRegionName());
             item1Id = addressBean.getAddress_Provice();
             item2Id = addressBean.getAddress_Provice();
             item3Id = addressBean.getAddress_Provice();

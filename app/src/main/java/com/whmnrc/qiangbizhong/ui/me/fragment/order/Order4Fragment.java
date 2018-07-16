@@ -10,7 +10,7 @@ import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
  * Created by lizhe on 2018/7/11.
  */
 
-public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.CancelCall{
+public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.CancelCall,OrderPresenter.CollectCall{
 
 
     @Override
@@ -26,6 +26,12 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
                 showLoading("取消中..");
                 orderPresenter.abandon(item.getRushRecord().getRushId(),Order4Fragment.this);
             }
+
+            @Override
+            public void collectGoods(OrderListBean item) {
+                orderPresenter.collectgoods(item.getOrder_ID(),Order4Fragment.this);
+            }
+
         });
     }
 
@@ -37,5 +43,10 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
     @Override
     public void cancelS() {
 
+    }
+
+    @Override
+    public void collect() {
+        refresh.autoRefresh();
     }
 }

@@ -16,6 +16,6 @@ public class Order5Fragment extends BaseOrderFragment {
 
     @Override
     public String request() {
-        return "4";
+        return "3";
     }
 }

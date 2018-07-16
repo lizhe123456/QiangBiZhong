@@ -18,6 +18,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
@@ -30,6 +31,7 @@ import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.fragment.GoodsDetailsFragment;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -85,9 +87,9 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
     /**
      * 记录目标项位置
      */
-    private int mToPosition = 9;
+    private int mToPosition = 0;
     private KillGoodsBean killGoodsBeans;
-    String[] strings = new String[]{"13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"};
+    List<String> strings = new ArrayList<>();
     FlashSalePresenter flashSalePresenter;
 
     public static void start(Context context) {
@@ -111,20 +113,41 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvNavigation.setLayoutManager(layoutManager);
         rvNavigation.setAdapter(timeAdapter);
-        timeAdapter.addFirstDataSet(flashSaleBean.getTimeBeans());
         timeAdapter.setOnItemClickListener((view, item, position) -> {
             timeAdapter.setSelect(position);
             smoothMoveToPosition(rvNavigation,position);
-            flashSalePresenter.getFlashSale(strings[position],this);
+            flashSalePresenter.getFlashSale(strings.get(position),this,true);
         });
         flashSalePresenter = new FlashSalePresenter(this);
-        flashSalePresenter.getFlashSale(strings[mToPosition],this);
+        flashSalePresenter.goodsrushtimelist(this::onflashSale);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-
+                flashSalePresenter.goodsrushtimelist(FlashSaleActivity.this::onflashSale);
             }
         });
+
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                flashSalePresenter.getFlashSale(strings.get(mToPosition), FlashSaleActivity.this,false);
+            }
+        });
+    }
+
+    private void onflashSale(List<String> list) {
+        strings = list;
+        List<FlashSaleBean.TimeBean> timeBeans = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            timeBeans.add(new FlashSaleBean.TimeBean(list.get(i),"开抢"));
+        }
+        timeAdapter.addFirstDataSet(timeBeans);
+        timeAdapter.setSelect(mToPosition);
+        if (list.size() > 0) {
+            flashSalePresenter.getFlashSale(strings.get(mToPosition), this,true);
+        }
+
+
     }
 
     public void showEmpty() {
@@ -163,6 +186,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
             mToPosition = position;
             mShouldScroll = true;
         }
+        mToPosition = position;
     }
 
 
@@ -184,6 +208,14 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
 //        timeAdapter.addFirstDataSet(killGoodsBeans);
         this.killGoodsBeans = killGoodsBeans;
         initKill(killGoodsBeans);
+        refreshLayout.finishRefresh(true);
+    }
+
+    @Override
+    public void loadMore(KillGoodsBean killGoodsBean) {
+        this.killGoodsBeans = killGoodsBeans;
+        initKill(killGoodsBeans);
+        refreshLayout.finishLoadMore(true);
     }
 
     private void initKill(KillGoodsBean killGoodsBeans) {
@@ -219,12 +251,17 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
 
         public TimeAdapter(Context context) {
             super(context);
-            width = ScreenUtils.getScreenWidth()/5;
+//            width = ScreenUtils.getScreenWidth()/5;
         }
 
         @Override
         protected void bindDataToItemView(final BaseViewHolder holder, FlashSaleBean.TimeBean item, int position) {
             holder.setText(R.id.tv_time, item.getTime()).setText(R.id.tv_name, item.getName());
+            if (getDataSource().size() < 5){
+                width = ScreenUtils.getScreenWidth()/getDataSource().size();
+            }else {
+                width = ScreenUtils.getScreenWidth()/5;
+            }
             RelativeLayout imageView = holder.getView(R.id.rl_time);
             FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
             layoutParams.width = width;
@@ -234,7 +271,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
             } else {
 
                 holder.setBackgroundResource(R.id.rl_time, R.drawable.bg_000);
-                layoutParams.height = SizeUtils.dp2px(61);
+                layoutParams.height = SizeUtils.dp2px(60);
             }
             imageView.setLayoutParams(layoutParams);
         }

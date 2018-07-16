@@ -43,6 +43,12 @@ public class SnapUpCountDownTimerView extends LinearLayout {
 
     private Timer timer;
 
+    private JiShiWanCheng jiShiWanCheng;
+
+    public void setJiShiWanCheng(JiShiWanCheng jiShiWanCheng) {
+        this.jiShiWanCheng = jiShiWanCheng;
+    }
+
     private Handler handler = new Handler() {
 
         public void handleMessage(Message msg) {
@@ -133,8 +139,9 @@ public class SnapUpCountDownTimerView extends LinearLayout {
                     if (isCarry4Decade(tv_min_decade)) {
                         if (isCarry4Unit(tv_hour_unit)) {
                             if (isCarry4Decade(tv_hour_decade)) {
-                                Toast.makeText(context, "计数完成",
-                                        Toast.LENGTH_SHORT).show();
+                                if (jiShiWanCheng != null){
+                                    jiShiWanCheng.jsS();
+                                }
                                 stop();
                                 setTime(0, 0, 0);//重置为0
                             }
@@ -173,6 +180,11 @@ public class SnapUpCountDownTimerView extends LinearLayout {
             tv.setText(time + "");
             return false;
         }
+    }
+
+    public interface JiShiWanCheng{
+        void jsS();
+
     }
 }
 

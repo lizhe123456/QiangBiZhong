@@ -104,6 +104,24 @@ public class OrderPresenter {
         });
     }
 
+    public void collectgoods(String orderId,CollectCall cancelCall){
+        Map<String,String> map = new HashMap<>();
+        map.put("orderId",orderId);
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.collectgoods),map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (cancelCall != null){
+                    cancelCall.collect();
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+        });
+    }
+
     public interface OrderCall{
         void orderlistBack(List<OrderListBean> orderListBeans);
 
@@ -116,5 +134,10 @@ public class OrderPresenter {
 
     public interface CancelCall{
         void cancelS();
+    }
+
+    public interface CollectCall{
+
+        void collect();
     }
 }
