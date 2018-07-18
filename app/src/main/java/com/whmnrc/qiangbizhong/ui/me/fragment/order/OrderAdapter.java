@@ -9,6 +9,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
+import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 
 /**
@@ -32,28 +33,61 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
 
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, OrderListBean item, int position) {
-        holder.setText(R.id.tv_order_num,item.getAddress_Name()).setText(R.id.tv_num,"共有"+item.getOrder_Number()+"件商品");
+        holder.setText(R.id.tv_num,"共有"+item.getOrder_Number()+"件商品");
 //        holder.setVisible(R.id.tv_btn_2,false);
 //        holder.setVisible(R.id.tv_btn_3,false);
+        if (item.getOrder_CreateType() == 0){
+            holder.setText(R.id.tv_order_num,"商城商品订单");
+        }else if (item.getOrder_CreateType() == 1){
+            holder.setText(R.id.tv_order_num,"抢购订单");
+        }else if (item.getOrder_CreateType() == 2){
+            holder.setText(R.id.tv_order_num,"抽奖订单");
+        }else if (item.getOrder_CreateType() == 3){
+            holder.setText(R.id.tv_order_num,"医美服务订单");
+        }
         if (item.getOrder_State() == -1){
             //-1已预约
-            holder.setText(R.id.order_state,"已预约");
-            holder.setText(R.id.tv_btn_2,"去抢购");
-            holder.setOnClickListener(R.id.tv_btn_2, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onOrderListener.toQiangGou(item);
-                }
-            });
-            holder.setText(R.id.tv_btn_3,"取消抢购");
-            holder.setOnClickListener(R.id.tv_btn_2, v -> {
-                if (onOrderListener != null)
-                    FlashSaleDetailsActivity.start(getContext(),item.getRushRecord().getRushId(),1);
-            });
-            holder.setOnClickListener(R.id.tv_btn_3, v -> {
-                if (onOrderListener != null)
-                    onOrderListener.cancel(item);
-            });
+            if (item.getOrder_CreateType() == 0){
+                //商城商品订单
+            }else if (item.getOrder_CreateType() == 1){
+                //抢购订单
+                holder.setText(R.id.order_state,"已支付");
+                holder.setText(R.id.tv_btn_2,"去抢购");
+                holder.setOnClickListener(R.id.tv_btn_2, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onOrderListener.toQiangGou(item);
+                    }
+                });
+                holder.setText(R.id.tv_btn_3,"取消抢购");
+                holder.setOnClickListener(R.id.tv_btn_2, v -> {
+                    if (onOrderListener != null)
+                        FlashSaleDetailsActivity.start(getContext(),item.getRushRecord().getRushId(),1);
+                });
+                holder.setOnClickListener(R.id.tv_btn_3, v -> {
+                    if (onOrderListener != null)
+                        onOrderListener.cancel(item);
+                });
+            }else if (item.getOrder_CreateType() == 2){
+                //抽奖订单
+                holder.setText(R.id.order_state,"等待开奖");
+                holder.setText(R.id.tv_btn_2,"去查看");
+                holder.setText(R.id.tv_btn_3,"联系客服");
+                holder.setOnClickListener(R.id.tv_btn_2, v -> {
+                    if (onOrderListener != null)
+                        AwardDetailActivity.start(getContext(),item.getAward().getGoodsAwardId());
+                });
+                holder.setOnClickListener(R.id.tv_btn_3, v -> {
+                    if (onOrderListener != null)
+                        onOrderListener.customerServicePhoneClick(item);
+                });
+            }else if (item.getOrder_CreateType() == 3){
+                //医美服务订单
+            }else if (item.getOrder_CreateType() == 4){
+
+            }
+
+
         }else if (item.getOrder_State() == 0){
             //0未支付
             holder.setText(R.id.order_state,"未支付");
@@ -67,9 +101,9 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 if (onOrderListener != null)
                     onOrderListener.customerServicePhoneClick(item);
             });
-        }else if (item.getOrder_PayType() == 1){
+        }else if (item.getOrder_State() == 1){
             //1已支付
-            holder.setText(R.id.order_state,"待发货");
+            holder.setText(R.id.order_state,"已支付");
             holder.setText(R.id.tv_btn_3,"联系客服");
             holder.setVisible(R.id.tv_btn_2,false);
             holder.setOnClickListener(R.id.tv_btn_3, v -> {
@@ -116,7 +150,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
             holder.setText(R.id.order_state,"抢购失败");
             holder.setVisible(R.id.tv_btn_2,false);
             holder.setVisible(R.id.tv_btn_3,false);
-        }else if (item.getOrder_PayType() == 8){
+        }else if (item.getOrder_State() == 8){
             //7已中奖
             holder.setText(R.id.order_state,"已中奖");
             holder.setText(R.id.tv_btn_2,"付尾款");
@@ -151,13 +185,23 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
 
 
         RecyclerView goodsList = holder.getView(R.id.rv_goods_list);
-        OrderGoodsAdapter adapter = new OrderGoodsAdapter(getContext());
+        OrderGoodsAdapter adapter = new OrderGoodsAdapter(getContext(),item.getOrder_CreateType());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         goodsList.setLayoutManager(layoutManager);
         goodsList.setAdapter(adapter);
         adapter.addFirstDataSet(item.getDetail());
-//        adapter.setOnItemClickListener((view, item1, position1) -> FlashSaleDetailsActivity.start(getContext(),item.getDetail().get(0).getOrder_ID(),1));
+        if (item.getOrder_CreateType() == 0){
+
+        }else if (item.getOrder_CreateType() == 1){
+            adapter.setOnItemClickListener((view, item1, position1) ->
+                    FlashSaleDetailsActivity.start(getContext(),item.getRushRecord().getRushId(),0));
+        }else if (item.getOrder_CreateType() == 2){
+            adapter.setOnItemClickListener((view, item1, position1) -> AwardDetailActivity.start(getContext(),item.getAward().getGoodsAwardId()));
+        }else if (item.getOrder_CreateType() == 3){
+
+        }
+
     }
 
     @Override

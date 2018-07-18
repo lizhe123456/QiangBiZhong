@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.AwardBeanInfo;
 import com.whmnrc.qiangbizhong.model.bean.GoodsRushinfoBean;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
@@ -31,25 +32,27 @@ public class GoodsRushInfoPresenter {
 
     public void getGoodsInfo(String goodId,GoodsInfoCall goodsInfoCall){
         Map<String,String> map = new HashMap<>();
-        map.put("userId", UserManage.getInstance().getUserID());
-        map.put("rushId",goodId);
-        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.goodsrushinfo),map, new OkhttpUtil.BeanCallback() {
-            @Override
-            public void onSuccess(String data) {
-                if (!TextUtils.isEmpty(data)){
-                    GoodsRushinfoBean goodsRushinfoBean = JSON.parseObject(data,GoodsRushinfoBean.class);
-                    if (goodsInfoCall != null){
-                        goodsInfoCall.goodsInfoBack(goodsRushinfoBean);
+        if (UserManage.getInstance().getUserID() != null) {
+            map.put("userId", UserManage.getInstance().getUserID());
+            map.put("rushId", goodId);
+            OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.goodsrushinfo), map, new OkhttpUtil.BeanCallback() {
+                @Override
+                public void onSuccess(String data) {
+                    if (!TextUtils.isEmpty(data)) {
+                        GoodsRushinfoBean goodsRushinfoBean = JSON.parseObject(data, GoodsRushinfoBean.class);
+                        if (goodsInfoCall != null) {
+                            goodsInfoCall.goodsInfoBack(goodsRushinfoBean);
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(int code, String errorMsg) {
+                @Override
+                public void onFailure(int code, String errorMsg) {
 
-            }
+                }
 
-        });
+            });
+        }
     }
 
     public void cayu(String goodId){
@@ -59,8 +62,8 @@ public class GoodsRushInfoPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.rushbuy),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                MyOrderActivity.start(context,4);
                 context.finish();
+                MyOrderActivity.start(context,4);
                 if (!TextUtils.isEmpty(data)){
 
                 }
@@ -77,35 +80,18 @@ public class GoodsRushInfoPresenter {
     //抽奖详情
     public void awardInfo(String awardId,AwardCall awardCall){
         Map<String,String> map = new HashMap<>();
-        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.awardInfo) + "?awardId="+awardId,map, new OkhttpUtil.BeanCallback() {
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.awardInfo) + "?awardId="+awardId +"&userId="+UserManage.getInstance().getUserID(),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                AwardBeanInfo awardBeanInfo = GsonUtil.changeGsonToBean(data,AwardBeanInfo.class);
-                if (awardCall != null){
-                    awardCall.awardBack(awardBeanInfo);
+                try {
+                    AwardBeanInfo awardBeanInfo = GsonUtil.changeGsonToBean(data,AwardBeanInfo.class);
+                    if (awardCall != null){
+                        awardCall.awardBack(awardBeanInfo);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
-            }
 
-            @Override
-            public void onFailure(int code, String errorMsg) {
-
-            }
-        });
-    }
-
-    public void awardSubmitOrder(String awardId,String addressId){
-        Map<String,String> map = new HashMap<>();
-        map.put("awardId", awardId);
-        map.put("userId", UserManage.getInstance().getUserID());
-        map.put("addressId", addressId);
-        OkhttpUtil.post(context.getString(R.string.server_address)+context.getString(R.string.awardSubmitOrder),map, new OkhttpUtil.BeanCallback() {
-            @Override
-            public void onSuccess(String data) {
-                MyOrderActivity.start(context,4);
-                context.finish();
-                if (!TextUtils.isEmpty(data)){
-
-                }
             }
 
             @Override
@@ -116,19 +102,21 @@ public class GoodsRushInfoPresenter {
     }
 
 
-    public interface GoodsInfoCall{
+
+
+    public interface GoodsInfoCall extends BaseCall {
 
         void goodsInfoBack(GoodsRushinfoBean goodsRushinfoBean);
 
     }
 
-    public interface CanYuCall{
+    public interface CanYuCall extends BaseCall{
 
         void canyuBack();
 
     }
 
-    public interface AwardCall{
+    public interface AwardCall extends BaseCall{
 
         void awardBack(AwardBeanInfo awardBeanInfo);
     }

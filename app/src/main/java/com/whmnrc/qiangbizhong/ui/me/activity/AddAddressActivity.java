@@ -40,7 +40,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/10.
  */
 
-public class AddAddressActivity extends BaseActivity {
+public class AddAddressActivity extends BaseActivity implements AddressPresenter.AddressCall{
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -264,13 +264,18 @@ public class AddAddressActivity extends BaseActivity {
                 }
                 params.put("Address_Detail",etAddress.getText().toString());
                 showLoading("提交中");
-                addressPresenter.addAddress(params,this::addressBack);
+                addressPresenter.addAddress(params,this);
                 break;
         }
     }
 
-    private void addressBack() {
+    public void addressBack() {
         ToastUtils.showShort("添加成功");
         this.finish();
+    }
+
+    @Override
+    public void error() {
+
     }
 }

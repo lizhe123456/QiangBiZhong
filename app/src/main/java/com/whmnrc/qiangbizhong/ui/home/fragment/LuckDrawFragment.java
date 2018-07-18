@@ -11,6 +11,7 @@ import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawBean;
 import com.whmnrc.qiangbizhong.presenter.home.AwardPresenter;
+import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 import com.whmnrc.qiangbizhong.ui.home.adapter.LuckDrawItemAdapter;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
@@ -29,7 +30,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/9.
  */
 
-public class LuckDrawFragment extends BaseFragment{
+public class LuckDrawFragment extends BaseFragment implements AwardPresenter.AwardCall{
 
 
     @BindView(R.id.iv_back)
@@ -66,7 +67,7 @@ public class LuckDrawFragment extends BaseFragment{
         rvGoods.setLayoutManager(gridLayoutManager);
         rvGoods.setAdapter(luckDrawItemAdapter);
 
-        awardPresenter.getAwardList(0,this::awardBack);
+        awardPresenter.getAwardList(0,this);
         tvTitle.setText("抽奖");
         ivBack.setVisibility(View.VISIBLE);
 
@@ -74,22 +75,24 @@ public class LuckDrawFragment extends BaseFragment{
             @Override
             public void onClick(View view, Object item, int position) {
                 LuckDrawBean.GoodsBean goodsBean = (LuckDrawBean.GoodsBean) item;
-                FlashSaleDetailsActivity.start(getContext(),goodsBean.getAwardId(),1);
+                AwardDetailActivity.start(getContext(),goodsBean.getAwardId());
             }
         });
+        bannerView.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        bannerView.setIndicatorGravity(BannerConfig.CENTER);
+        bannerView.setImageLoader(new GlideImageLoader());
+
+        bannerView.setBannerAnimation(Transformer.Default);
+        bannerView.isAutoPlay(true);
+        bannerView.setDelayTime(1500);
     }
 
 
     private void initBanner(List<String> list) {
-        if (bannerView != null)
-            bannerView.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-            bannerView.setIndicatorGravity(BannerConfig.CENTER);
-            bannerView.setImageLoader(new GlideImageLoader());
+        if (list != null) {
             bannerView.setImages(list);
-            bannerView.setBannerAnimation(Transformer.Default);
-            bannerView.isAutoPlay(true);
-            bannerView.setDelayTime(1500);
             bannerView.start();
+        }
     }
 
     @OnClick({R.id.iv_back})
@@ -101,6 +104,7 @@ public class LuckDrawFragment extends BaseFragment{
         }
     }
 
+    @Override
     public void awardBack(LuckDrawBean luckDrawBeans) {
         List<String> list = new ArrayList<>();
         for ( LuckDrawBean.BannerBean bannerBean:luckDrawBeans.getBanner()) {
@@ -111,5 +115,8 @@ public class LuckDrawFragment extends BaseFragment{
     }
 
 
+    @Override
+    public void error() {
 
+    }
 }

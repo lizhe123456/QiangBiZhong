@@ -8,26 +8,30 @@ package com.whmnrc.qiangbizhong.model.bean;
 public class LuckDrawGoodsBean {
 
     /**
-     * AwardRecordId : cd1e07eb-1940-4388-941e-4d7a6b5c9758
-     * GoodsAwardId : 7750a589-426e-4205-ad87-acafd98375b3
+     * AwardRecordId : 6b0ffb4a-5c6e-4f18-b207-1c5b0018b563
+     * GoodsAwardId : 5750a589-426e-4205-ad87-acafd98375b3
+     * AwardPeopleCount : 91
+     * Goods_Name : 法拉利豪车
      * UserId : 394298d1-a8ec-438d-8e73-ffa306a97b01
-     * OrderId : 0858be7d-5a81-4ede-a0b7-98f01e61329d
+     * OrderId : 3be1bcba-ad70-4189-8a52-b508f71164ad
      * Goods_Id : bac3e3e2-80f3-4455-8216-fe9558b2f0e1
-     * Goods_PriceId : 863dd59f-154c-49b4-bd5a-d9a1259e8470
-     * Status : 1
+     * Goods_PriceId : fac3e3e2-80f3-4455-8216-fe9558b2f0e2
+     * Status : 0
      * UserType : 0
-     * UserHeadImage : http://192.168.0.157:8011/Resource/HeadImage/default.jpg
-     * AwardTime : 2018-07-13 00:00:00
+     * UserHeadImage : /Resource/HeadImage/default.jpg
+     * AwardTime : 2018-07-18 14:50:00
      * Bond : 200
      * Price : 4000000
-     * GoodsPrice_Price : 6000
-     * GoodsPrice_VirtualPrice : 74000
-     * Product_ImgPath : http://www.eehsxui.cn/Resource/PhotoFile/2a908ea7-5a5f-4f3f-b6a7-ae7a17849e9e.png
+     * GoodsPrice_Price : 3000
+     * GoodsPrice_VirtualPrice : 6000000
+     * Product_ImgPath : http://testaml.whmnx.com/Resource/PhotoFile/2a908ea7-5a5f-4f3f-b6a7-ae7a17849e9e.png
      * UserNick : Freefer
      */
 
     private String AwardRecordId;
     private String GoodsAwardId;
+    private int AwardPeopleCount;
+    private String Goods_Name;
     private String UserId;
     private String OrderId;
     private String Goods_Id;
@@ -57,6 +61,22 @@ public class LuckDrawGoodsBean {
 
     public void setGoodsAwardId(String GoodsAwardId) {
         this.GoodsAwardId = GoodsAwardId;
+    }
+
+    public int getAwardPeopleCount() {
+        return AwardPeopleCount;
+    }
+
+    public void setAwardPeopleCount(int AwardPeopleCount) {
+        this.AwardPeopleCount = AwardPeopleCount;
+    }
+
+    public String getGoods_Name() {
+        return Goods_Name;
+    }
+
+    public void setGoods_Name(String Goods_Name) {
+        this.Goods_Name = Goods_Name;
     }
 
     public String getUserId() {

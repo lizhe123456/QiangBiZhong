@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawBean;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
@@ -48,7 +49,7 @@ public class AwardPresenter {
         });
     }
 
-    public interface AwardCall{
+    public interface AwardCall extends BaseCall{
 
         void awardBack(LuckDrawBean luckDrawBeans);
 

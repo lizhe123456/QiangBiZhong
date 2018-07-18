@@ -78,6 +78,7 @@ public abstract class BaseOrderFragment extends BaseFragment implements OrderPre
     public abstract String request();
 
     public void getData(String type, boolean isR){
+        showLoading("加载中..");
         orderPresenter.getOrderList(type+"",isR,this);
     }
 
@@ -113,4 +114,9 @@ public abstract class BaseOrderFragment extends BaseFragment implements OrderPre
         }
     }
 
+    @Override
+    public void error() {
+        refresh.finishLoadMore(false);
+        refresh.finishRefresh(false);
+    }
 }

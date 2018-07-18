@@ -10,17 +10,19 @@
     <string name="delete">删除</string>
     <string name="all_select">全选</string>
     <string name="tv_more">查看全部</string>
-    <string name="kill">限时秒杀</string>
+    <!--<string name="kill">限时秒杀</string>-->
+    <string name="kill">今日必抢</string>
     <string name="purchase">立即抢</string>
     <string name="open">展开全部</string>
     <string name="take_up">收起</string>
     <string name="get_code_tv">获取验证码</string>
-    <string name="rule">（1）每人每天必须支付了预付金才有抽奖资格 （2）每人每天必须支付了预付金才有抽奖资格 （3）每人每天必须支付了预付金才有抽奖资格</string>
+    <string name="rule">（1）每人每天必须支付了预付金才有抽奖资格 \n（2）每人每天必须支付了预付金才有抽奖资格 \n（3）每人每天必须支付了预付金才有抽奖资格</string>
     
     <!--api-->
     <!--<string name="server_address">http://192.168.1.157:8010</string>-->
     <string name="server_address">http://testaml.whmnx.com/Api</string>
     <!--注册-->
+
     <string name="register">/api/user/register</string>
     <!--修改密码-->
     <string name="updatePwd">/api/user/updatePwd</string>
@@ -68,7 +70,6 @@
     <!--微信支付-->
     <string name="wechatpay">/api/pay/wechatpay</string>
 
-    <!--我的订单-->
     <string name="myawardlist">/api/home/myawardlist</string>
     <!--我的抢购记录-->
     <string name="myrushgoodsrecord">/api/home/myrushgoodsrecord</string>
@@ -79,6 +80,7 @@
     <string name="awardInfo">/api/home/awardInfo</string>
     <!--抽奖列表-->
     <string name="awardlist">/api/home/awardlist</string>
+
     <!--查询充值记录信息-->
     <string name="recordquery">/api/home/recharge/recordquery</string>
     <!--中奖 支付尾款-->
@@ -90,6 +92,7 @@
     <!--放弃抢购-->
     <string name="abandon">/api/app/rushGoods/abandon</string>
 
-
+    <string name="getcode_again">重新获取</string>
+    <string name="timer_message">秒</string>
 
 </resources>

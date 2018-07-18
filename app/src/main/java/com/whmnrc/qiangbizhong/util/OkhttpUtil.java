@@ -93,36 +93,40 @@ public class OkhttpUtil {
     }
 
     public static  void post(String url, Map<String, String> params, final BeanCallback callback) {
-        if (getIsConnected()) return;
-        if (BuildConfig.DEBUG)
-            Log.e("请求参数=", url + JSON.toJSONString(params));
+        try {
+            if (getIsConnected()) return;
+            if (BuildConfig.DEBUG)
+                Log.e("请求参数=", url + JSON.toJSONString(params));
 
-        OkHttpUtils.post().url(url).params(params).build().execute(new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                callback.onFailure(id, e == null ? "" : e.toString());
-                ToastUtils.showShort(App.getContext().getResources().getString(R.string.app_name).concat("：网络异常，请检查网络设置"));
-                EventBus.getDefault().post(new LodingBean());
-            }
+            OkHttpUtils.post().url(url).params(params).build().execute(new StringCallback() {
+                @Override
+                public void onError(Call call, Exception e, int id) {
+                    callback.onFailure(id, e == null ? "" : e.toString());
+                    ToastUtils.showShort(App.getContext().getResources().getString(R.string.app_name).concat("：网络异常，请检查网络设置"));
+                    EventBus.getDefault().post(new LodingBean());
+                }
 
-            @Override
-            public void onResponse(String response, int id) {
-                if (callback != null) {
-                    if (!TextUtils.isEmpty(response)) {
-                        BaseResponse baseResponse = JSON.parseObject(response, BaseResponse.class);
-                        if (baseResponse.getStatus() == 1) {
-                            UserManage.getInstance().setServerTime(baseResponse.getServerTime());
-                            callback.onSuccess(baseResponse.getResult());
-                        } else {
-                            ToastUtils.showShort(baseResponse.getMessage());
+                @Override
+                public void onResponse(String response, int id) {
+                    if (BuildConfig.DEBUG)
+                        Log.e("返回结果=", response);
+                    if (callback != null) {
+                        if (!TextUtils.isEmpty(response)) {
+                            BaseResponse baseResponse = JSON.parseObject(response, BaseResponse.class);
+                            if (baseResponse.getStatus() == 1) {
+                                UserManage.getInstance().setServerTime(baseResponse.getServerTime());
+                                callback.onSuccess(baseResponse.getResult());
+                            } else {
+                                ToastUtils.showShort(baseResponse.getMessage());
+                            }
                         }
                     }
+                    EventBus.getDefault().post(new LodingBean());
                 }
-                EventBus.getDefault().post(new LodingBean());
-            }
-        });
-
-
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     //拼接完整url
@@ -207,7 +211,11 @@ public class OkhttpUtil {
                                         UserManage.getInstance().setServerTime(baseResponse.getServerTime());
                                         callback.onSuccess(baseResponse.getResult());
                                     } else {
-                                        ToastUtils.showShort(baseResponse.getMessage());
+                                        if (baseResponse.getMessage() != null) {
+                                            ToastUtils.showShort(baseResponse.getMessage());
+                                        }else {
+
+                                        }
                                     }
                                 }
                             }

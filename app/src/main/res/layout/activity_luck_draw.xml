@@ -22,10 +22,10 @@
            android:layout_width="0dp"
            android:layout_height="wrap_content"
            android:layout_weight="1"
-           android:drawableTop="@drawable/btn_home_page"
+           android:drawableTop="@drawable/btn_luck_draw"
            android:gravity="center"
            android:padding="@dimen/dm_3"
-           android:text="@string/home_page"
+           android:text="抽奖"
            android:textColor="@color/tv_navigation"
            android:textSize="12sp" />
 
@@ -34,10 +34,10 @@
            android:layout_width="0dp"
            android:layout_height="wrap_content"
            android:layout_weight="1"
-           android:drawableTop="@drawable/btn_yimei"
+           android:drawableTop="@drawable/btn_my_luck_draw"
            android:gravity="center"
            android:padding="@dimen/dm_3"
-           android:text="@string/yimei"
+           android:text="我的中奖"
            android:textColor="@color/tv_navigation"
            android:textSize="12sp" />
 
@@ -47,10 +47,10 @@
            android:layout_height="wrap_content"
            android:layout_weight="1"
            android:drawablePadding="@dimen/dm_2"
-           android:drawableTop="@drawable/btn_shoping"
+           android:drawableTop="@drawable/btn_luck_draw_rlue"
            android:gravity="center"
            android:padding="@dimen/dm_3"
-           android:text="@string/shopping"
+           android:text="抽奖规则"
            android:textColor="@color/tv_navigation"
            android:textSize="12sp"/>
 

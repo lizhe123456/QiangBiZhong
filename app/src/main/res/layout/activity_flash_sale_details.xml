@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dm_200" />
             <RelativeLayout
+                android:id="@+id/rl_js"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_flash_sale_details_bg">
@@ -141,6 +142,12 @@
                             android:layout_marginLeft="@dimen/dm_5"/>
                     </LinearLayout>
                 </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_goods_shang"
+                    android:layout_marginTop="@dimen/dm_5"
+                    android:layout_marginBottom="@dimen/dm_5"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dm_1"

@@ -120,4 +120,8 @@ public class AddressManageActivity extends BaseActivity implements AddressPresen
         addressPresenter.getaddressList(this);
     }
 
+    @Override
+    public void error() {
+
+    }
 }

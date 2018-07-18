@@ -49,7 +49,7 @@ public class UserPresenter {
     }
 
     //修改头像
-    public void updateHead(String path){
+    public void updateHead(String path, HeadCall headCall){
         Bitmap bitmap = ImageUtils.getBitmap(new File(path));
         String base64 = EncodeUtils.base64Encode2String(ImageUtils.bitmap2Bytes(bitmap, Bitmap.CompressFormat.JPEG));
         Map<String,String> map = new HashMap<>();
@@ -60,6 +60,9 @@ public class UserPresenter {
             public void onSuccess(String data) {
                 ToastUtils.showShort("上传成功");
                 UserManage.getInstance().getUserInfo(null);
+                if (headCall != null){
+                    headCall.headBack();
+                }
             }
 
             @Override
@@ -89,6 +92,10 @@ public class UserPresenter {
         });
     }
 
+    public interface HeadCall{
+
+        void headBack();
+    }
 
 
 }

@@ -25,6 +25,7 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawBean;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBean;
 import com.whmnrc.qiangbizhong.presenter.home.LuckDrawPresenter;
+import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 
 import java.util.ArrayList;
@@ -64,26 +65,26 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         adapter = new OpenLuckDrawAdapter(mContext);
         recyclerView.setAdapter(adapter);
         luckDrawPresenter = new LuckDrawPresenter(mContext);
-        luckDrawPresenter.awardlist2(0,this,true);
+        luckDrawPresenter.awardlist2(1,this,true);
         adapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-                LuckDrawBean.GoodsBean luckDrawBean = (LuckDrawBean.GoodsBean) item;
-//                FlashSaleDetailsActivity.start(mContext,luckDrawBean.getAwardId(),1);
+                LuckDrawGoodsBean luckDrawGoodsBean = (LuckDrawGoodsBean) item;
+                AwardDetailActivity.start(getContext(),luckDrawGoodsBean.getGoodsAwardId());
             }
         });
 
         refresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                luckDrawPresenter.awardlist2(0, WaitLuckDrawFragment.this,true);
+                luckDrawPresenter.awardlist2(1, WaitLuckDrawFragment.this,true);
             }
         });
 
         refresh.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                luckDrawPresenter.awardlist2(0, WaitLuckDrawFragment.this,false);
+                luckDrawPresenter.awardlist2(1, WaitLuckDrawFragment.this,false);
             }
         });
     }
@@ -107,6 +108,12 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         adapter.addMoreDataSet(luckDrawGoodsBean);
     }
 
+    @Override
+    public void error() {
+        refresh.finishRefresh(false);
+        refresh.finishLoadMore(false);
+    }
+
 
     class OpenLuckDrawAdapter extends BaseAdapter<LuckDrawGoodsBean> {
 
@@ -114,23 +121,32 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
 
         private OpenLuckDrawAdapter(Context context) {
             super(context);
-            width = ((ScreenUtils.getScreenWidth() - 45)/2);
+            width = ((ScreenUtils.getScreenWidth() - 45) / 2);
         }
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, LuckDrawGoodsBean item, int position) {
-            holder.setText(R.id.tv_time,item.getAwardTime()).setText(R.id.tv_name,item.getUserNick()).setGlieuImage(R.id.iv_img,item.getProduct_ImgPath());
+            holder.setText(R.id.tv_goods_name, item.getGoods_Name())
+                    .setText(R.id.tv_time, "距离开奖："+item.getAwardTime())
+                    .setText(R.id.tv_surplus, "已有"+item.getAwardPeopleCount()+"人抢购")
+                    .setGlieuImage(R.id.iv_img, item.getProduct_ImgPath());
 
             ImageView imageView = holder.getView(R.id.iv_img);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
             layoutParams.width = width;
             layoutParams.height = width;
             imageView.setLayoutParams(layoutParams);
+//            holder.setOnClickListener(R.id.ll_goods, new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+////                    AwardDetailActivity.start();
+//                }
+//            });
         }
 
         @Override
         protected int getItemViewLayoutId(int position, LuckDrawGoodsBean item) {
-            return R.layout.item_open_luch_wait;
+            return R.layout.item_open_luch_open;
         }
     }
 

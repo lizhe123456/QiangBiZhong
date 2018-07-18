@@ -5,6 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.HomeResult;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import java.util.HashMap;
@@ -38,14 +39,15 @@ public class HomePresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (homePageCall != null){
+                    homePageCall.error();
+                }
             }
         });
     }
 
-    public interface HomePageCall{
+    public interface HomePageCall extends BaseCall {
 
         void homePage(HomeResult homeResult);
-
     }
 }

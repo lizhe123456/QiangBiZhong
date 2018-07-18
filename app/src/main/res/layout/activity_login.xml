@@ -85,6 +85,7 @@
             <TextView
                 android:id="@+id/bt_get_code"
                 android:layout_width="wrap_content"
+                android:minWidth="@dimen/dm_120"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_get_code"
                 android:paddingTop="@dimen/dm_8"
@@ -92,6 +93,7 @@
                 android:paddingLeft="@dimen/dm_14"
                 android:paddingRight="@dimen/dm_14"
                 android:text="@string/get_code_tv"
+                android:gravity="center"
                 android:textColor="#2399FD"
                 android:textSize="16sp" />
 
@@ -104,7 +106,20 @@
             android:background="@color/divider_color" />
     </LinearLayout>
 
-
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="注册"
+        android:layout_marginLeft="@dimen/dm_22"
+        android:layout_marginRight="@dimen/dm_22"
+        android:paddingTop="@dimen/dm_12"
+        android:paddingBottom="@dimen/dm_12"
+        android:layout_marginTop="@dimen/dm_62"
+        android:background="@drawable/login_shap" />
 
     <TextView
         android:id="@+id/tv_login"
@@ -118,8 +133,9 @@
         android:layout_marginRight="@dimen/dm_22"
         android:paddingTop="@dimen/dm_12"
         android:paddingBottom="@dimen/dm_12"
-        android:layout_marginTop="@dimen/dm_62"
+        android:layout_marginTop="@dimen/dm_10"
         android:background="@drawable/login_shap" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -131,22 +147,11 @@
             android:layout_height="wrap_content"
             android:text="切换登录方式"
             android:layout_gravity="left"
-            android:textSize="@dimen/dm_13"
-            android:textColor="#A7ACB7"
+            android:textSize="@dimen/dm_19"
+            android:textColor="@color/colorAccent"
             android:layout_marginTop="@dimen/dm_16"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dm_38"/>
-        <TextView
-            android:id="@+id/tv_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="@dimen/dm_13"
-            android:textColor="@color/tv_999"
-            android:layout_marginTop="@dimen/dm_16"
-            android:layout_marginLeft="@dimen/dm_36"
-            android:text="注册"/>
-
     </RelativeLayout>
 
 

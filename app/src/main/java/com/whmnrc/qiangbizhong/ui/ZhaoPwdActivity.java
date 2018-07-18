@@ -3,6 +3,8 @@ package com.whmnrc.qiangbizhong.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +17,10 @@ import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
+import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +60,18 @@ public class ZhaoPwdActivity extends BaseActivity {
     TextView tvLogin;
     @BindView(R.id.et_pwd_2)
     EditText editText2;
+
+
+    private LoginPresenter loginPresenter;
+
+    //验证码重发倒计时
+    private int secondleft = 60;
+
+    private static final int TICK_TIME = 1;
+    private static final int SENDSUCCESSFUL = 2;
+    //The timer.
+    private Timer timer;
+
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ZhaoPwdActivity.class);
@@ -115,4 +133,14 @@ public class ZhaoPwdActivity extends BaseActivity {
                 break;
         }
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
 }

@@ -41,9 +41,9 @@ public abstract class BaseActivity extends AppCompatActivity{
         setContentView(setLayout());
         mUnbinder = ButterKnife.bind(this);
         mImmersionBar = ImmersionBar.with(this)
-                .statusBarColor(R.color.white)
+                .transparentStatusBar()
                 .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
-                .fitsSystemWindows(true)
+//                .fitsSystemWindows(true)
                 .flymeOSStatusBarFontColor(R.color.tv_000) ;
         mImmersionBar.init();   //所有子类都将继承这些相同的属性
         EventBus.getDefault().register(this);

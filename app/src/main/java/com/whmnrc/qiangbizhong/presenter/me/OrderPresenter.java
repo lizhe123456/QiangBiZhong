@@ -7,7 +7,9 @@ import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
+import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
@@ -46,7 +48,7 @@ public class OrderPresenter {
             @Override
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)){
-                    List<OrderListBean> orderListBeans = GsonUtil.changeGsonToList(data, OrderListBean.class);
+                    List<OrderListBean> orderListBeans = JSON.parseArray(data, OrderListBean.class);
                     if (orderCall != null){
                         if (isRefresh) {
                             orderCall.orderlistBack(orderListBeans);
@@ -59,7 +61,9 @@ public class OrderPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                LogUtils.e(errorMsg);
+                if (orderCall != null){
+                    orderCall.error();
+                }
             }
 
         });
@@ -67,15 +71,16 @@ public class OrderPresenter {
 
     public void submitOrder(String goodsId,String addressId,SubmitOrederCall submitOrederCall){
         Map<String,String> map = new HashMap<>();
-        map.put("goodsRushId",goodsId);
-        map.put("userId",UserManage.getInstance().getUserID());
-        map.put("addressId",addressId);
-        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.submitOrder),map, new OkhttpUtil.BeanCallback() {
+//        map.put("goodsRushId",goodsId);
+//        map.put("userId",UserManage.getInstance().getUserID());
+//        map.put("addressId",addressId);
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.submitOrder)+ "?goodsRushId="+goodsId+"&userId="+UserManage.getInstance().getUserID()+"&addressId="+addressId,map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
                 if (submitOrederCall != null){
                     submitOrederCall.submitOrederBack();
                 }
+                UserManage.getInstance().getUserInfo(null);
             }
 
             @Override
@@ -94,6 +99,25 @@ public class OrderPresenter {
             public void onSuccess(String data) {
                 if (cancelCall != null){
                     cancelCall.cancelS();
+                }
+                UserManage.getInstance().getUserInfo(null);
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+        });
+    }
+
+    public void payOrder(String awardId,PayBackS payBackS){
+        Map<String,String> map = new HashMap<>();
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.buy)+"?awardId="+awardId+"&userId="+UserManage.getInstance().getUserID(),map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                UserManage.getInstance().getUserInfo(null);
+                if (payBackS != null){
+                    payBackS.payS();
                 }
             }
 
@@ -122,22 +146,46 @@ public class OrderPresenter {
         });
     }
 
-    public interface OrderCall{
+    public void awardSubmitOrder(String awardId,String addressId,SubmitOrederCall submitOrederCall){
+        Map<String,String> map = new HashMap<>();
+        OkhttpUtil.get(context.getString(R.string.server_address)+context.getString(R.string.awardSubmitOrder) + "?awardId=" +awardId+"&userId="+UserManage.getInstance().getUserID()+"&addressId="+addressId,map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (submitOrederCall != null){
+                    submitOrederCall.submitOrederBack();
+                }
+                UserManage.getInstance().getUserInfo(null);
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+
+            }
+        });
+    }
+
+    public interface OrderCall extends BaseCall {
         void orderlistBack(List<OrderListBean> orderListBeans);
 
         void loadMore(List<OrderListBean> orderListBeans);
     }
 
-    public interface SubmitOrederCall{
+    public interface SubmitOrederCall extends BaseCall{
         void submitOrederBack();
     }
 
-    public interface CancelCall{
+    public interface CancelCall extends BaseCall{
         void cancelS();
     }
 
-    public interface CollectCall{
+    public interface CollectCall extends BaseCall{
 
         void collect();
+    }
+
+    public interface PayBackS extends BaseCall{
+
+        void payS();
+
     }
 }

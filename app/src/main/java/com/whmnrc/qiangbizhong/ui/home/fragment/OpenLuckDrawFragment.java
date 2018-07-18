@@ -23,6 +23,7 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBean;
 import com.whmnrc.qiangbizhong.presenter.home.LuckDrawPresenter;
+import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,26 +72,27 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(openLuckDrawAdapter);
         luckDrawPresenter = new LuckDrawPresenter(mContext);
-        luckDrawPresenter.awardlist2(1, this,true);
+        luckDrawPresenter.awardlist2(0, this,true);
 
         openLuckDrawAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-
+                LuckDrawGoodsBean luckDrawGoodsBean = (LuckDrawGoodsBean) item;
+                AwardDetailActivity.start(getContext(),luckDrawGoodsBean.getGoodsAwardId());
             }
         });
 
         refresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                luckDrawPresenter.awardlist2(1, OpenLuckDrawFragment.this,true);
+                luckDrawPresenter.awardlist2(0, OpenLuckDrawFragment.this,true);
             }
         });
 
         refresh.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                luckDrawPresenter.awardlist2(1, OpenLuckDrawFragment.this,false);
+                luckDrawPresenter.awardlist2(0, OpenLuckDrawFragment.this,false);
             }
         });
     }
@@ -113,6 +115,14 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         openLuckDrawAdapter.addMoreDataSet(luckDrawGoodsBean);
     }
 
+    @Override
+    public void error() {
+        refresh.finishRefresh(false);
+        refresh.finishLoadMore(false);
+    }
+
+
+
 
     class OpenLuckDrawAdapter extends BaseAdapter<LuckDrawGoodsBean> {
 
@@ -120,12 +130,12 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
 
         private OpenLuckDrawAdapter(Context context) {
             super(context);
-            width = ((ScreenUtils.getScreenWidth() - 45) / 2);
+            width = ((ScreenUtils.getScreenWidth() - 45)/2);
         }
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, LuckDrawGoodsBean item, int position) {
-            holder.setText(R.id.tv_goods_name, item.getAwardTime()).setText(R.id.tv_time, item.getAwardTime()).setText(R.id.tv_surplus, "").setGlieuImage(R.id.iv_img, item.getProduct_ImgPath());
+            holder.setText(R.id.tv_time,item.getAwardTime()).setText(R.id.tv_name,item.getUserNick()).setGlieuImage(R.id.iv_img,item.getProduct_ImgPath());
 
             ImageView imageView = holder.getView(R.id.iv_img);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
@@ -136,7 +146,7 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
 
         @Override
         protected int getItemViewLayoutId(int position, LuckDrawGoodsBean item) {
-            return R.layout.item_open_luch_open;
+            return R.layout.item_open_luch_wait;
         }
     }
 

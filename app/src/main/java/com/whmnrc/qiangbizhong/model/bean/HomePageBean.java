@@ -1,7 +1,6 @@
 package com.whmnrc.qiangbizhong.model.bean;
 
 import com.whmnrc.qiangbizhong.R;
-import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;

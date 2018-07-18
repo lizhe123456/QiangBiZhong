@@ -16,6 +16,7 @@
 
 package com.whmnrc.qiangbizhong.util;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -33,26 +34,41 @@ public class GsonUtil {
 
 
     public static String createGsonString(Object object) {
-        Gson gson = new Gson();
-        String gsonString = gson.toJson(object);
-        return gsonString;
+        try {
+            Gson gson = new Gson();
+            String gsonString = gson.toJson(object);
+            return gsonString;
+        } catch (Exception e) {
+            ToastUtils.showShort("数据解析失败");
+            return "";
+        }
     }
 
 
     public static <T> T changeGsonToBean(String gsonString, Class<T> cls) {
-        Gson gson = new Gson();
-        T t = gson.fromJson(gsonString, cls);
-        return t;
+        try {
+            Gson gson = new Gson();
+            T t = gson.fromJson(gsonString, cls);
+            return t;
+        } catch (Exception e) {
+            ToastUtils.showShort("数据解析失败");
+            return null;
+        }
     }
 
     public static <T> List<T> changeGsonToList(String gsonString, Class<T> cls) {
-        Gson gson = new Gson();
-        List<T> mList = new ArrayList<T>();
-        JsonArray array = new JsonParser().parse(gsonString).getAsJsonArray();
-        for (final JsonElement elem : array) {
-            mList.add(gson.fromJson(elem, cls));
+        try {
+            Gson gson = new Gson();
+            List<T> mList = new ArrayList<T>();
+            JsonArray array = new JsonParser().parse(gsonString).getAsJsonArray();
+            for (final JsonElement elem : array) {
+                mList.add(gson.fromJson(elem, cls));
+            }
+            return mList;
+        } catch (Exception e) {
+            ToastUtils.showShort("数据解析失败");
+            return new ArrayList<>();
         }
-        return mList;
     }
 
     public static List<Map<String, Object>> changeGsonToListMaps(String gsonString) {
@@ -90,7 +106,7 @@ public class GsonUtil {
         return gson.fromJson(json, objectType);
     }
 
-    public <T>String toJson(Class<T> clazz) {
+    public <T> String toJson(Class<T> clazz) {
         Gson gson = new Gson();
         Type objectType = type(BaseResponse.class, clazz);
         return gson.toJson(this, objectType);

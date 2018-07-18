@@ -183,26 +183,33 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     }
 
     protected final void bindClickListenerToItemView(final BaseViewHolder holder) {
-        if (null != mOnItemClickListener) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final int position = holder.getAdapterPosition() - getHeaderViewCount();
-                    mOnItemClickListener.onClick(view, mData.get(position), position);
-                }
-            });
+        try{
+            if (null != mOnItemClickListener) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final int position = holder.getAdapterPosition() - getHeaderViewCount();
+                        if (mData.size() > 0) {
+                            mOnItemClickListener.onClick(view, mData.get(position), position);
+                        }
+                    }
+                });
+            }
+
+            if (null != mOnItemLongClickListener) {
+                holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        final int position = holder.getAdapterPosition() - getHeaderViewCount();
+                        mOnItemLongClickListener.onLongClick(v, mData.get(position), position);
+                        return true;
+                    }
+                });
+            }
+        }catch (ArrayIndexOutOfBoundsException e){
+
         }
 
-        if (null != mOnItemLongClickListener) {
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    final int position = holder.getAdapterPosition() - getHeaderViewCount();
-                    mOnItemLongClickListener.onLongClick(v, mData.get(position), position);
-                    return true;
-                }
-            });
-        }
     }
 
     protected final void bindClickListenerToHeaderView(BaseViewHolder holder) {

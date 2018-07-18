@@ -109,6 +109,11 @@ public class SelectAddressActivity extends BaseActivity implements AddressPresen
 
     }
 
+    @Override
+    public void error() {
+
+    }
+
     class AddressAdapter extends BaseAdapter<AddressBean>{
 
         public AddressAdapter(Context context) {

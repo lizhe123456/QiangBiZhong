@@ -3,6 +3,7 @@ package com.whmnrc.qiangbizhong.ui.home.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Size;
@@ -44,7 +45,7 @@ import butterknife.OnClick;
  * 限时特价
  */
 
-public class FlashSaleActivity extends BaseActivity implements FlashSalePresenter.FlashSaleCall{
+public class FlashSaleActivity extends BaseActivity implements FlashSalePresenter.FlashSaleCall,FlashSalePresenter.FlashSaleTimeCall{
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -114,16 +115,18 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         rvNavigation.setLayoutManager(layoutManager);
         rvNavigation.setAdapter(timeAdapter);
         timeAdapter.setOnItemClickListener((view, item, position) -> {
-            timeAdapter.setSelect(position);
-            smoothMoveToPosition(rvNavigation,position);
-            flashSalePresenter.getFlashSale(strings.get(position),this,true);
+            if (mToPosition != position) {
+                mToPosition = position;
+                timeAdapter.setSelect(position);
+                flashSalePresenter.getFlashSale(strings.get(position), this, true);
+            }
         });
         flashSalePresenter = new FlashSalePresenter(this);
-        flashSalePresenter.goodsrushtimelist(this::onflashSale);
+        flashSalePresenter.goodsrushtimelist(this);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                flashSalePresenter.goodsrushtimelist(FlashSaleActivity.this::onflashSale);
+                flashSalePresenter.goodsrushtimelist(FlashSaleActivity.this);
             }
         });
 
@@ -135,20 +138,6 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         });
     }
 
-    private void onflashSale(List<String> list) {
-        strings = list;
-        List<FlashSaleBean.TimeBean> timeBeans = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            timeBeans.add(new FlashSaleBean.TimeBean(list.get(i),"开抢"));
-        }
-        timeAdapter.addFirstDataSet(timeBeans);
-        timeAdapter.setSelect(mToPosition);
-        if (list.size() > 0) {
-            flashSalePresenter.getFlashSale(strings.get(mToPosition), this,true);
-        }
-
-
-    }
 
     public void showEmpty() {
         if (vsEmpty.getParent() != null) {
@@ -162,32 +151,6 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         }
     }
 
-    private void smoothMoveToPosition(RecyclerView mRecyclerView, final int position) {
-        // 第一个可见位置
-        int firstItem = mRecyclerView.getChildLayoutPosition(mRecyclerView.getChildAt(0));
-        // 最后一个可见位置
-        int lastItem = mRecyclerView.getChildLayoutPosition(mRecyclerView.getChildAt(mRecyclerView.getChildCount() - 1));
-
-        if (position < firstItem) {
-            // 如果跳转位置在第一个可见位置之前，就smoothScrollToPosition可以直接跳转
-            mRecyclerView.smoothScrollToPosition(position);
-        } else if (position <= lastItem) {
-            // 跳转位置在第一个可见项之后，最后一个可见项之前
-            // smoothScrollToPosition根本不会动，此时调用smoothScrollBy来滑动到指定位置
-            int movePosition = position - firstItem;
-            if (movePosition >= 0 && movePosition < mRecyclerView.getChildCount()) {
-                int top = mRecyclerView.getChildAt(movePosition).getTop();
-                mRecyclerView.smoothScrollBy(0, top);
-            }
-        } else {
-            // 如果要跳转的位置在最后可见项之后，则先调用smoothScrollToPosition将要跳转的位置滚动到可见位置
-            // 再通过onScrollStateChanged控制再次调用smoothMoveToPosition，执行上一个判断中的方法
-            mRecyclerView.smoothScrollToPosition(position);
-            mToPosition = position;
-            mShouldScroll = true;
-        }
-        mToPosition = position;
-    }
 
 
     @OnClick({R.id.iv_back,R.id.tv_confirm})
@@ -243,6 +206,26 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         }
     }
 
+    @Override
+    public void error() {
+        refreshLayout.finishRefresh(false);
+        refreshLayout.finishLoadMore(false);
+    }
+
+    @Override
+    public void onFlashSaleTime(@NonNull List<String> list) {
+        strings = list;
+        List<FlashSaleBean.TimeBean> timeBeans = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            timeBeans.add(new FlashSaleBean.TimeBean(list.get(i),"开抢"));
+        }
+        if (timeBeans.size() > 0) {
+            flashSalePresenter.getFlashSale(strings.get(mToPosition), this,true);
+            timeAdapter.addFirstDataSet(timeBeans);
+            timeAdapter.setSelect(mToPosition);
+        }
+    }
+
 
     class TimeAdapter extends BaseAdapter<FlashSaleBean.TimeBean> {
         private int width;
@@ -282,11 +265,13 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         }
 
         private void setSelect(int position){
-            for (FlashSaleBean.TimeBean timeBean :getDataSource()) {
-                timeBean.setSelect(false);
+            if (getDataSource().size() > 0) {
+                for (FlashSaleBean.TimeBean timeBean : getDataSource()) {
+                    timeBean.setSelect(false);
+                }
+                getDataSource().get(position).setSelect(true);
+                notifyDataSetChanged();
             }
-            getDataSource().get(position).setSelect(true);
-            notifyDataSetChanged();
         }
     }
 

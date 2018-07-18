@@ -26,4 +26,5 @@ public class Order1Fragment extends BaseOrderFragment {
     public String request() {
         return "1";
     }
+
 }

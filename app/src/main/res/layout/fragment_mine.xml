@@ -26,7 +26,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dm_150"
-                android:background="@drawable/ic_mine_bg">
+                android:background="@drawable/ic_mine_bg"
+                android:paddingTop="@dimen/dm_20">
 
                 <ImageView
                     android:id="@+id/iv_scan"

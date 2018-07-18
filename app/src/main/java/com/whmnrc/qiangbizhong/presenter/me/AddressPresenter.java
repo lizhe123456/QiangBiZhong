@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.AddressBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
@@ -100,17 +101,19 @@ public class AddressPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (addManageCall != null){
+                    addManageCall.error();
+                }
             }
 
         });
     }
 
-    public interface AddressCall{
+    public interface AddressCall extends BaseCall {
         void addressBack();
     }
 
-    public interface AddManageCall{
+    public interface AddManageCall extends BaseCall{
         void getAddressList(List<AddressBean> list);
 
         void updateData();

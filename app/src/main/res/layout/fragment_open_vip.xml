@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="单价￥"
+                android:text="单价¥"
                 android:textColor="@color/tv_navigation"
                 android:textSize="13sp" />
 
@@ -170,7 +170,7 @@
         android:paddingBottom="@dimen/dm_12"
         android:paddingTop="@dimen/dm_15"
         android:maxLength="5"
-        android:hint="￥   请输入充值金额"
+        android:hint="￥   请输入充值数"
         android:textSize="15sp"
         android:textColor="@color/tv_navigation"
         android:background="@color/white"/>

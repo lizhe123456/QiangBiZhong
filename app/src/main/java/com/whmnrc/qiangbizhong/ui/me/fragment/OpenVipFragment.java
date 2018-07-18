@@ -13,6 +13,7 @@ import com.whmnrc.qiangbizhong.model.bean.RechargeBean;
 import com.whmnrc.qiangbizhong.pay.alipay.AliPayTools;
 import com.whmnrc.qiangbizhong.pay.listener.OnSuccessAndErrorListener;
 import com.whmnrc.qiangbizhong.presenter.me.RechargePresenter;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
 import butterknife.BindView;
@@ -70,7 +71,7 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
         tvMoeny.setText(rechargeBean.getGoodsPrice_Stock()+"");
         tvRmb.setText(rechargeBean.getPrice()+"");
         tvKegoumai.setText(rechargeBean.getCanPayCount()+"");
-        tvYue.setText(UserManage.getInstance().getLoginBean().getUserInfo_Money()+"");
+        tvYue.setText(StringUtil.wanString((int) UserManage.getInstance().getLoginBean().getUserInfo_Money()));
     }
 
     @Override
@@ -80,11 +81,13 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
             public void onSuccess(String s) {
                 UserManage.getInstance().getUserInfo(OpenVipFragment.this);
                 ToastUtils.showShort("充值成功");
+                rechargePresenter.rechargeQuery(1, OpenVipFragment.this);
             }
 
             @Override
             public void onError(String s) {
-
+                UserManage.getInstance().getUserInfo(OpenVipFragment.this);
+                rechargePresenter.rechargeQuery(1, OpenVipFragment.this);
                 ToastUtils.showShort("充值失败");
             }
         });
@@ -102,5 +105,10 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
     @Override
     public void userInfoBack(LoginBean loginBean) {
         tvYue.setText(loginBean.getUserInfo_Money()+"");
+    }
+
+    @Override
+    public void error() {
+
     }
 }

@@ -5,7 +5,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -17,8 +20,10 @@ import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
 import com.whmnrc.qiangbizhong.model.bean.HomeResult;
 import com.whmnrc.qiangbizhong.presenter.home.HomePresenter;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
+import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.FlashSaleActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.LuckDrawActivity;
+import com.whmnrc.qiangbizhong.ui.home.activity.RushRecordActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.UnveiledActivity;
 import com.whmnrc.qiangbizhong.ui.home.adapter.GoodsAdapter;
 import com.whmnrc.qiangbizhong.ui.home.adapter.KillAdapter;
@@ -34,14 +39,16 @@ import com.whmnrc.qiangbizhong.widget.SnapUpCountDownTimerView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Company 武汉麦诺软创
@@ -67,7 +74,22 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     SnapUpCountDownTimerView countDownTimerView;
     @BindView(R.id.refresh)
     SmartRefreshLayout refreshLayout;
-
+    @BindView(R.id.rl_jishi)
+    RelativeLayout rlJishi;
+    @BindView(R.id.rl_item2)
+    RelativeLayout rlItem2;
+    @BindView(R.id.rl_item3)
+    RelativeLayout rlItem3;
+    @BindView(R.id.rl_item4)
+    RelativeLayout rlItem4;
+    @BindView(R.id.v_item1)
+    View vItem1;
+    @BindView(R.id.v_item2)
+    View vItem2;
+    @BindView(R.id.v_item3)
+    View vItem3;
+    @BindView(R.id.v_item4)
+    View vItem4;
 
     private HomePageBean homePageBean;
     private HomePresenter homePresenter;
@@ -97,35 +119,61 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                 homePresenter.getHomepage();
             }
         });
+        //设置banner样式
+        bannerView.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        bannerView.setIndicatorGravity(BannerConfig.CENTER);
+        //设置图片加载器
+        bannerView.setImageLoader(new GlideImageLoader());
+        //设置banner动画效果
+        bannerView.setBannerAnimation(Transformer.Default);
+        //设置自动轮播，默认为true
+        bannerView.isAutoPlay(true);
+        //设置轮播时间
+        bannerView.setDelayTime(1500);
     }
 
     private void initGoods(List<HomeResult.GoodsTjBean> goodsBeans) {
-        GoodsAdapter goodsAdapter = new GoodsAdapter(mContext, 1);
-        rvList.setNestedScrollingEnabled(false);
-        rvList.setLayoutManager(new GridLayoutManager(mContext, 2));
-        rvList.setAdapter(goodsAdapter);
-        goodsAdapter.addFirstDataSet(goodsBeans);
+        if (goodsBeans.size() > 0) {
+            rlItem4.setVisibility(View.VISIBLE);
+            vItem4.setVisibility(View.VISIBLE);
+            GoodsAdapter goodsAdapter = new GoodsAdapter(mContext, 1);
+            rvList.setNestedScrollingEnabled(false);
+            rvList.setLayoutManager(new GridLayoutManager(mContext, 2));
+            rvList.setAdapter(goodsAdapter);
+            goodsAdapter.addFirstDataSet(goodsBeans);
+        } else {
+//            rlItem4.setVisibility(View.GONE);
+//            vItem4.setVisibility(View.GONE);
+        }
     }
 
     private void initNewUnveileds(List<HomeResult.GoodsNewAwardBean> newUnveileds) {
-        NewUnveiledsAdapter newUnveiledsAdapter = new NewUnveiledsAdapter(mContext);
-        rvNewUnveileds.setNestedScrollingEnabled(false);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvNewUnveileds.setLayoutManager(layoutManager);
-        rvNewUnveileds.setAdapter(newUnveiledsAdapter);
-        newUnveiledsAdapter.addFirstDataSet(newUnveileds);
-        newUnveiledsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(View view, Object item, int position) {
-                if (UserManage.getInstance().getLoginBean() != null) {
-//                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+        if (newUnveileds.size() > 0) {
+            rlItem2.setVisibility(View.VISIBLE);
+            vItem2.setVisibility(View.VISIBLE);
+            NewUnveiledsAdapter newUnveiledsAdapter = new NewUnveiledsAdapter(mContext);
+            rvNewUnveileds.setNestedScrollingEnabled(false);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            rvNewUnveileds.setLayoutManager(layoutManager);
+            rvNewUnveileds.setAdapter(newUnveiledsAdapter);
+            newUnveiledsAdapter.addFirstDataSet(newUnveileds);
+            newUnveiledsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+                @Override
+                public void onClick(View view, Object item, int position) {
+                    if (UserManage.getInstance().getLoginBean() != null) {
+                        HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+                        AwardDetailActivity.start(mContext, goodsNewAwardBean.getAwardId());
 //                    FlashSaleDetailsActivity.start(getContext(), goodsNewAwardBean.getGoods_ID(), 1);
-                }else {
-                    LoginActivity.start(getContext());
+                    } else {
+                        LoginActivity.start(getContext());
+                    }
                 }
-            }
-        });
+            });
+        } else {
+//            rlItem2.setVisibility(View.GONE);
+//            vItem2.setVisibility(View.GONE);
+        }
     }
 
     private void initMenu(List<HomePageBean.MenuBean> menuBeans) {
@@ -152,10 +200,10 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                             UnveiledActivity.start(getContext());
                             break;
                         case 4:
-
+                            RushRecordActivity.start(getContext());
                             break;
                     }
-                }else {
+                } else {
                     LoginActivity.start(getContext());
                 }
             }
@@ -163,47 +211,68 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     }
 
     private void initLuckDraw(List<HomeResult.GoodsNewAwardBean> luckDrawBeans) {
-        LuckDrawAdapter luckDrawAdapter = new LuckDrawAdapter(mContext);
-        rvLuckDraw.setNestedScrollingEnabled(false);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvLuckDraw.setLayoutManager(layoutManager);
-        rvLuckDraw.setAdapter(luckDrawAdapter);
-        luckDrawAdapter.addFirstDataSet(luckDrawBeans);
+        if (luckDrawBeans.size() > 0) {
+            rlItem3.setVisibility(View.VISIBLE);
+            vItem3.setVisibility(View.VISIBLE);
+            LuckDrawAdapter luckDrawAdapter = new LuckDrawAdapter(mContext);
+            rvLuckDraw.setNestedScrollingEnabled(false);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            rvLuckDraw.setLayoutManager(layoutManager);
+            rvLuckDraw.setAdapter(luckDrawAdapter);
+            luckDrawAdapter.addFirstDataSet(luckDrawBeans);
+            luckDrawAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+                @Override
+                public void onClick(View view, Object item, int position) {
+                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+                    AwardDetailActivity.start(mContext, goodsNewAwardBean.getAwardId());
+                }
+            });
+        } else {
+//            rlItem3.setVisibility(View.GONE);
+//            vItem3.setVisibility(View.GONE);
+        }
     }
 
     private void initKill(List<HomeResult.GoodsRushBean> secondKillBean) {
-        if (!TextUtils.isEmpty(UserManage.getInstance().getServerTime())) {
-            long current = System.currentTimeMillis();
-            long lend = current/(1000*3600*24)*(1000*3600*24) - TimeZone.getDefault().getRawOffset() + 24*60*60*1000;
-            String serverTime = UserManage.getInstance().getServerTime();
-            long now =  TimeUtils.string2Milliseconds(serverTime,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-            long time =  lend - now;
-            if (time > 0){
-                long day = time / (24 * 60 * 60 * 1000);
-                long hour = (time / (60 * 60 * 1000) - day * 24);
-                long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
-                long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                countDownTimerView.setTime((int) hour, (int) min, (int) ss);
-                countDownTimerView.start();
+        if (secondKillBean.size() > 0) {
+            rlJishi.setVisibility(View.VISIBLE);
+            vItem1.setVisibility(View.VISIBLE);
+            if (!TextUtils.isEmpty(UserManage.getInstance().getServerTime())) {
+                long current = System.currentTimeMillis();
+                long lend = current / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset() + 24 * 60 * 60 * 1000;
+                String serverTime = UserManage.getInstance().getServerTime();
+                long now = TimeUtils.string2Milliseconds(serverTime, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+                long time = lend - now;
+                if (time > 0) {
+                    long day = time / (24 * 60 * 60 * 1000);
+                    long hour = (time / (60 * 60 * 1000) - day * 24);
+                    long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
+                    long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+                    countDownTimerView.setTime((int) hour, (int) min, (int) ss);
+                    countDownTimerView.start();
+                }
             }
-        }
-        KillAdapter killAdapter = new KillAdapter(mContext, 0);
-        rvSecondKill.setNestedScrollingEnabled(false);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvSecondKill.setLayoutManager(layoutManager);
-        rvSecondKill.setAdapter(killAdapter);
-        killAdapter.addFirstDataSet(secondKillBean);
+            KillAdapter killAdapter = new KillAdapter(mContext, 0);
+            rvSecondKill.setNestedScrollingEnabled(false);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            rvSecondKill.setLayoutManager(layoutManager);
+            rvSecondKill.setAdapter(killAdapter);
+            killAdapter.addFirstDataSet(secondKillBean);
 
             killAdapter.setOnItemClickListener((view, item, position) -> {
                 if (UserManage.getInstance().getLoginBean() != null) {
                     HomeResult.GoodsRushBean goodsRushBean = (HomeResult.GoodsRushBean) item;
                     FlashSaleDetailsActivity.start(mContext, goodsRushBean.getRushId(), 1);
-                }else {
+                } else {
                     LoginActivity.start(getContext());
                 }
             });
+        } else {
+//            rlJishi.setVisibility(View.GONE);
+//            vItem1.setVisibility(View.GONE);
+        }
     }
 
     private void initBanner(List<HomeResult.BannerBean> list) {
@@ -211,20 +280,11 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         for (HomeResult.BannerBean bannerBean : list) {
             stringList.add(bannerBean.getBanner_Url());
         }
-        //设置banner样式
-        bannerView.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-        bannerView.setIndicatorGravity(BannerConfig.CENTER);
-        //设置图片加载器
-        bannerView.setImageLoader(new GlideImageLoader());
         //设置图片集合
-        bannerView.setImages(stringList);
-        //设置banner动画效果
-        bannerView.setBannerAnimation(Transformer.Default);
-        //设置自动轮播，默认为true
-        bannerView.isAutoPlay(true);
-        //设置轮播时间
-        bannerView.setDelayTime(1500);
-        bannerView.start();
+        if (bannerView != null) {
+            bannerView.setImages(stringList);
+            bannerView.start();
+        }
     }
 
 
@@ -234,25 +294,25 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
             case R.id.fl_meg:
                 break;
             case R.id.tv_more:
-                if (UserManage.getInstance().getLoginBean() == null){
+                if (UserManage.getInstance().getLoginBean() == null) {
                     LoginActivity.start(getContext());
-                }else {
+                } else {
                     FlashSaleActivity.start(mContext);
                 }
                 break;
             case R.id.tv_chouj_more:
-                if (UserManage.getInstance().getLoginBean() == null){
+                if (UserManage.getInstance().getLoginBean() == null) {
                     LoginActivity.start(getContext());
-                }else {
+                } else {
                     LuckDrawActivity.start(mContext);
                 }
                 break;
             case R.id.tv_for_you_more:
                 break;
             case R.id.tv_jiexiao_more:
-                if (UserManage.getInstance().getLoginBean() == null){
+                if (UserManage.getInstance().getLoginBean() == null) {
                     LoginActivity.start(getContext());
-                }else {
+                } else {
                     UnveiledActivity.start(mContext);
                 }
                 break;
@@ -270,10 +330,8 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (countDownTimerView != null) {
-            countDownTimerView.stop();
-        }
+    public void error() {
+        refreshLayout.finishRefresh(false);
     }
+
 }

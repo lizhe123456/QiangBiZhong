@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -37,7 +38,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/10.
  */
 
-public class UserInfoActivity extends BaseActivity {
+public class UserInfoActivity extends BaseActivity implements UserPresenter.HeadCall{
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -57,12 +58,13 @@ public class UserInfoActivity extends BaseActivity {
     TextView tvUpdatePass;
     @BindView(R.id.tv_login)
     TextView tvLogin;
-    @BindView(R.id.et_nickName)
-    EditText etNickName;
+//    @BindView(R.id.et_nickName)
+//    EditText etNickName;
 
     UserPresenter userPresenter;
 
     String nickName;
+    String head;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, UserInfoActivity.class);
@@ -84,7 +86,8 @@ public class UserInfoActivity extends BaseActivity {
     private void updateData(LoginBean loginBean) {
         tvUsername.setText(loginBean.getUserInfo_NickName());
         nickName = loginBean.getUserInfo_NickName();
-        GlideuUtil.loadImageView(this,loginBean.getUserInfo_HeadImg(),ivImg);
+        String head = loginBean.getUserInfo_HeadImg();
+        GlideuUtil.loadImageView(this,head,ivImg);
     }
 
     @Override
@@ -96,34 +99,34 @@ public class UserInfoActivity extends BaseActivity {
         GlideuUtil.loadImageView(this,loginBean.getUserInfo_HeadImg(),ivImg);
         tvUsername.setText(loginBean.getUserInfo_NickName());
         nickName = loginBean.getUserInfo_NickName();
-        etNickName.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().trim().equals("")) {
-                    tvUsername.setText(nickName);
-                    userPresenter.updateNickName(nickName);
-                }else {
-                    tvUsername.setText(s);
-                    userPresenter.updateNickName(s.toString());
-                }
-
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // 输入前的监听
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // 输入后的监听
-            }
-        });
+//        etNickName.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (s.toString().trim().equals("")) {
+//                    tvUsername.setText(nickName);
+//                    userPresenter.updateNickName(nickName);
+//                }else {
+//                    tvUsername.setText(s);
+//                    userPresenter.updateNickName(s.toString());
+//                }
+//
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                // 输入前的监听
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                // 输入后的监听
+//            }
+//        });
     }
 
 
-    @OnClick({R.id.iv_img,R.id.iv_back,R.id.tv_update_img, R.id.tv_update_pass, R.id.tv_login})
+    @OnClick({R.id.iv_img,R.id.iv_back,R.id.tv_update_img, R.id.tv_update_pass, R.id.tv_login,R.id.tv_update_name})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_img:
@@ -180,12 +183,15 @@ public class UserInfoActivity extends BaseActivity {
                         });
                 break;
             case R.id.tv_update_pass:
-                UpdatePassActivity.start(this);
+//                UpdatePassActivity.start(this);
                 break;
             case R.id.tv_login:
                 //退出登录
                 UserManage.getInstance().layout();
                 this.finish();
+                break;
+            case R.id.tv_update_name:
+                UpdatePassV2Activity.start(this,nickName == null ? "" : nickName);
                 break;
         }
     }
@@ -197,10 +203,10 @@ public class UserInfoActivity extends BaseActivity {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-                    String path = selectList.get(0).getCompressPath();
-                    GlideuUtil.loadImageView(this, path, ivImg);
+                    head = selectList.get(0).getCompressPath();
+//                    GlideuUtil.loadImageView(this, head, ivImg);
 //                    mPresenter.updateHeadImg(selectList.get(0).getPath());
-                    userPresenter.updateHead(path);
+                    userPresenter.updateHead(head,this);
                     break;
 
             }
@@ -208,4 +214,9 @@ public class UserInfoActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void headBack() {
+        if (!TextUtils.isEmpty(head))
+            GlideuUtil.loadImageView(this, head, ivImg);
+    }
 }

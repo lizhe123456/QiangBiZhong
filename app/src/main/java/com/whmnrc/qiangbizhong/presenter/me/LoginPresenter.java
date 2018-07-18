@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.app.App;
+import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.base.BaseResponse;
 import com.whmnrc.qiangbizhong.model.bean.LoginBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
@@ -128,15 +129,15 @@ public class LoginPresenter{
         });
     }
 
-    public interface LoginCall{
+    public interface LoginCall extends BaseCall {
         void loginBack(LoginBean loginBean);
     }
 
-    public interface RegisterCall{
+    public interface RegisterCall extends BaseCall{
         void registerBack();
     }
 
-    public interface UpdatePwdCall{
+    public interface UpdatePwdCall extends BaseCall{
         void updatePaw();
     }
 

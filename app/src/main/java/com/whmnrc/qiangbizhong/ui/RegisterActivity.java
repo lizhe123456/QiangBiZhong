@@ -3,6 +3,8 @@ package com.whmnrc.qiangbizhong.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +19,9 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
 import com.whmnrc.qiangbizhong.util.ToastUtil;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,16 +53,48 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
     EditText etPwd;
     @BindView(R.id.et_code)
     EditText etCode;
-    @BindView(R.id.bt_get_code)
-    TextView btGetCode;
     @BindView(R.id.et_phone_number)
     EditText etPhoneNumber;
     @BindView(R.id.tv_login)
     TextView tvLogin;
     @BindView(R.id.et_pwd_2)
     EditText editText2;
+    @BindView(R.id.bt_get_code)
+    TextView tvGetCode;
 
     private LoginPresenter loginPresenter;
+
+    //验证码重发倒计时
+    private int secondleft = 60;
+
+    private static final int TICK_TIME = 1;
+    private static final int SENDSUCCESSFUL = 2;
+    //The timer.
+    private Timer timer;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case TICK_TIME:
+                    String getCodeAgain = getString(R.string.getcode_again);
+                    String timerMessage = getString(R.string.timer_message);
+                    secondleft--;
+                    if (secondleft <= 0) {
+                        timer.cancel();
+                        tvGetCode.setEnabled(true);
+                        tvGetCode.setText(getCodeAgain);
+                    } else {
+                        tvGetCode.setText(secondleft + timerMessage);
+                    }
+                    break;
+                case SENDSUCCESSFUL:
+//                    etName.setEnabled(false);
+                    break;
+            }
+        }
+    };
+
 
     public static void start(Context context) {
         Intent starter = new Intent(context, RegisterActivity.class);
@@ -119,6 +156,11 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
                     ToastUtils.showShort("手机号为空");
                     return;
                 }
+                if (!RegexUtils.isMobileSimple(etPhoneNumber.getText())) {
+                    ToastUtils.showShort("手机号格式有误");
+                    return;
+                }
+                isStartTimer();
                 loginPresenter.sendsmscode(etPhoneNumber.getText().toString().trim());
                 break;
         }
@@ -127,5 +169,35 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
     @Override
     public void registerBack() {
         this.finish();
+    }
+
+    /**
+     * 倒计时
+     */
+    public void isStartTimer() {
+        tvGetCode.setEnabled(false);
+//        tvCode.setBackgroundResource(R.drawable.btn_getcode_shape_gray);
+        secondleft = 60;
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(TICK_TIME);
+            }
+        }, 1000, 1000);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
+    @Override
+    public void error() {
+
     }
 }

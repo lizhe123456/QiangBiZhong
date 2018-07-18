@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <include layout="@layout/layout_title" />
+
         <TextView
             android:id="@+id/tv_adress"
             android:layout_width="match_parent"
@@ -17,54 +19,55 @@
             android:layout_marginTop="@dimen/dm_10"
             android:background="@drawable/btn_effect"
             android:drawableRight="@drawable/ic_more"
+            android:ellipsize="end"
+            android:maxLength="12"
             android:padding="@dimen/dm_15"
             android:text="选择地址"
-            android:maxLength="12"
-            android:ellipsize="end"
             android:textColor="@color/tv_000" />
+
         <RelativeLayout
             android:id="@+id/rl_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dm_15"
+            android:layout_marginBottom="@dimen/dm_10"
             android:layout_marginTop="@dimen/dm_10"
             android:background="@color/white"
-            android:visibility="gone"
-            android:layout_marginBottom="@dimen/dm_10">
+            android:padding="@dimen/dm_15"
+            android:visibility="gone">
+
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/tv_191"
-                android:textSize="18sp"
-                android:text="哈哈哈"
                 android:layout_below="@+id/tv_isDefault"
-                />
+                android:text="哈哈哈"
+                android:textColor="@color/tv_191"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:textColor="@color/tv_191"
-                android:text="@string/search"
-                android:layout_toRightOf="@+id/tv_name"
                 android:layout_alignBottom="@+id/tv_name"
-                android:layout_marginLeft="@dimen/dm_15"/>
-
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_toRightOf="@+id/tv_name"
+                android:text="@string/search"
+                android:textColor="@color/tv_191"
+                android:textSize="13sp" />
 
 
             <TextView
                 android:id="@+id/tv_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/tv_navigation"
+                android:layout_below="@+id/tv_name"
+                android:layout_marginTop="@dimen/dm_5"
                 android:text="湖北省武汉市江岸区解放大道690号武汉国际广场
 C座7F 办公室"
-                android:layout_below="@+id/tv_name"
-                android:layout_marginTop="@dimen/dm_5" />
+                android:textColor="@color/tv_navigation"
+                android:textSize="15sp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,7 +90,7 @@ C座7F 办公室"
                 android:layout_marginLeft="@dimen/dm_15"
                 android:layout_toRightOf="@+id/iv_img"
                 android:textColor="@color/tv_191"
-                android:textSize="15sp" />
+                android:textSize="@dimen/dm_15" />
 
             <TextView
                 android:id="@+id/tv_price"
@@ -97,12 +100,13 @@ C座7F 办公室"
                 android:layout_marginLeft="@dimen/dm_15"
                 android:layout_toRightOf="@+id/iv_img"
                 android:textColor="@color/goods_price"
-                android:textSize="18sp" />
+                android:textSize="@dimen/dm_18" />
 
         </RelativeLayout>
 
 
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -48,7 +48,7 @@
                         android:id="@+id/tv_juli_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="距结束仅剩"
+                        android:text="距开奖仅剩"
                         android:textColor="@color/white"
                         android:textSize="@dimen/dm_10"
                         android:layout_gravity="center_horizontal"/>
@@ -141,6 +141,12 @@
                             android:layout_marginLeft="@dimen/dm_5"/>
                     </LinearLayout>
                 </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_goods_shang"
+                    android:layout_marginTop="@dimen/dm_5"
+                    android:layout_marginBottom="@dimen/dm_5"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dm_1"
@@ -245,7 +251,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/dm_18"
                 android:textColor="@color/white"
-                android:text="我要参与"
+                android:text="立即参与"
                 android:gravity="center"
                 android:background="@drawable/bg_color_btn"
                 android:layout_alignParentRight="true"/>

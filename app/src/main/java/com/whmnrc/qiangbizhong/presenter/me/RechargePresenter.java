@@ -5,10 +5,12 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.RechargeBean;
 import com.whmnrc.qiangbizhong.pay.alipay.AliPayTools;
 import com.whmnrc.qiangbizhong.pay.listener.OnSuccessAndErrorListener;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
+import com.whmnrc.qiangbizhong.util.ToastUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
 import java.util.HashMap;
@@ -47,7 +49,11 @@ public class RechargePresenter {
         OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.submitorder),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                pay(data,rechargeCall);
+                if (data != null) {
+                    pay(data, rechargeCall);
+                }else {
+                    ToastUtils.showShort("请确认支付宝是否安装");
+                }
             }
 
             @Override
@@ -95,7 +101,7 @@ public class RechargePresenter {
         });
     }
 
-    public interface RechargeCall{
+    public interface RechargeCall extends BaseCall {
 
         void rechargeBack();
 

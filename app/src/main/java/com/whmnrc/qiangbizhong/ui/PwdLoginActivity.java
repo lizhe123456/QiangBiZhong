@@ -133,4 +133,9 @@ public class PwdLoginActivity extends BaseActivity implements LoginPresenter.Log
         MainActivity.start(this);
         this.finish();
     }
+
+    @Override
+    public void error() {
+
+    }
 }

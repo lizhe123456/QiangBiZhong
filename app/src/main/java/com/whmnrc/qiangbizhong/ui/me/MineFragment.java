@@ -24,6 +24,7 @@ import com.whmnrc.qiangbizhong.ui.me.activity.UserInfoActivity;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OderMenuAdapter;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OptionAdapter;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.RoundedImageView;
 
@@ -79,9 +80,12 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
             tvUsername.setText(loginBean.getUserInfo_NickName());
             GlideuUtil.loadImageView(mContext,loginBean.getUserInfo_HeadImg(),ivHead);
             tvYudou.setText(loginBean.getUserInfo_Money()+"");
-            tvPurchaseRestrictions.setText("今日可购"+loginBean.getUserInfo_TotalMoney());
+            tvPurchaseRestrictions.setText("今日可购"+ StringUtil.wanString(loginBean.getUserInfo_TotalMoney()));
         }else {
             tvUsername.setText("请先登录");
+            GlideuUtil.loadImageView(mContext,"",ivHead);
+            tvYudou.setText(0+"");
+            tvPurchaseRestrictions.setText("今日可购"+ 0);
         }
         MineBean mineBean = new MineBean();
         mineBean.initMineBean();
@@ -105,7 +109,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                if (UserManage.getInstance().getLoginBean() == null) {
+                if (UserManage.getInstance().getLoginBean() != null) {
                     UserManage.getInstance().getUserInfo(MineFragment.this);
                 }else {
                     refreshLayout.finishRefresh(3000);

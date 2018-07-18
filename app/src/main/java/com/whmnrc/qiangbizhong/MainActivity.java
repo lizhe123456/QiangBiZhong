@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.blankj.utilcode.util.FragmentUtils;
+import com.gyf.barlibrary.ImmersionBar;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.home.HomeFragment;
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity {
 
     private Fragment showFragment;
     private int shopIndex = HOME;
+    private ImmersionBar mImmersionBar;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MainActivity.class);
@@ -58,6 +60,9 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void setData() {
+        mImmersionBar = ImmersionBar.with(this)
+                .transparentStatusBar();
+        mImmersionBar.init();   //所有子类都将继承这些相同的属性
         fragments = new ArrayList<>();
         fragments.add(HomeFragment.newInstance());
         fragments.add(YiMeiFragment.newInstance());
@@ -144,6 +149,14 @@ public class MainActivity extends BaseActivity {
 //                }
 
                 break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mImmersionBar != null){
+            mImmersionBar.destroy();
         }
     }
 }

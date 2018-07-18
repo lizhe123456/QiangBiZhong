@@ -3,7 +3,9 @@ package com.whmnrc.qiangbizhong.presenter.home;
 import android.content.Context;
 
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBean;
+import com.whmnrc.qiangbizhong.model.bean.MyLuckDrawBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
@@ -52,40 +54,51 @@ public class LuckDrawPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (luckDrawCall != null){
+                    luckDrawCall.error();
+                }
             }
         });
     }
 
     //我的奖品
-    public void awardlist(){
+    public void awardlist(MyLuckDrawCall myLuckDrawCall){
         Map<String,String> map = new HashMap<>();
         map.put("PageIndex",page+"");
         map.put("PageCount",size+"");
-        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.awardlist) + "?type=" + UserManage.getInstance().getUserID(), map, new OkhttpUtil.BeanCallback() {
+        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.myawardlist) + "?userId=" + UserManage.getInstance().getUserID(), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
+                List<MyLuckDrawBean> luckDrawBeans = GsonUtil.changeGsonToList(data,MyLuckDrawBean.class);
+                if (myLuckDrawCall != null){
+                    myLuckDrawCall.myLuckDraw(luckDrawBeans);
+                }
 
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (myLuckDrawCall != null){
+                    myLuckDrawCall.error();
+                }
             }
         });
     }
 
 
 
+    public interface MyLuckDrawCall extends BaseCall{
 
+        void myLuckDraw(List<MyLuckDrawBean> myLuckDrawBeans);
 
+    }
 
-
-    public interface LuckDrawCall{
+    public interface LuckDrawCall extends BaseCall {
 
         void luckDrawBack(List<LuckDrawGoodsBean> luckDrawGoodsBean);
 
         void loadMore(List<LuckDrawGoodsBean> luckDrawGoodsBean);
+
     }
 
 }

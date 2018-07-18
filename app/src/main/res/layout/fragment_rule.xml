@@ -21,45 +21,47 @@
         android:layout_height="wrap_content"
         android:text="@string/rule"
         android:textSize="13sp"
-        android:textColor="@color/tv_191"/>
+        android:textColor="@color/tv_191"
+        android:layout_marginTop="@dimen/dm_10"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dm_1"
-        android:background="@color/divider_color"/>
+        android:background="@color/divider_color"
+        android:layout_marginTop="@dimen/dm_10"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#4F5FFF"
-        android:text="活动规则"
-        android:textSize="15sp"
-        android:layout_marginTop="@dimen/dm_15"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rule"
-        android:textSize="13sp"
-        android:textColor="@color/tv_191"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_1"
-        android:background="@color/divider_color"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#4F5FFF"-->
+        <!--android:text="活动规则"-->
+        <!--android:textSize="15sp"-->
+        <!--android:layout_marginTop="@dimen/dm_15"/>-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/rule"-->
+        <!--android:textSize="13sp"-->
+        <!--android:textColor="@color/tv_191"/>-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dm_1"-->
+        <!--android:background="@color/divider_color"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#4F5FFF"
-        android:text="活动规则"
-        android:textSize="15sp"
-        android:layout_marginTop="@dimen/dm_15"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rule"
-        android:textSize="13sp"
-        android:textColor="@color/tv_191"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_1"
-        android:background="@color/divider_color"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#4F5FFF"-->
+        <!--android:text="活动规则"-->
+        <!--android:textSize="15sp"-->
+        <!--android:layout_marginTop="@dimen/dm_15"/>-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/rule"-->
+        <!--android:textSize="13sp"-->
+        <!--android:textColor="@color/tv_191"/>-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dm_1"-->
+        <!--android:background="@color/divider_color"/>-->
 </LinearLayout>

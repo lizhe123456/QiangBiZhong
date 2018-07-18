@@ -48,7 +48,7 @@
         android:id="@+id/tv_update_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dm_10"
+        android:paddingTop="@dimen/dm_15"
         android:paddingBottom="@dimen/dm_15"
         android:paddingLeft="@dimen/dm_15"
         android:paddingRight="@dimen/dm_15"
@@ -70,27 +70,31 @@
     </FrameLayout>
 
     <TextView
+        android:id="@+id/tv_update_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="修改昵称:"
         android:textColor="@color/tv_191"
-        android:paddingTop="@dimen/dm_20"
+        android:paddingTop="@dimen/dm_15"
         android:paddingLeft="@dimen/dm_15"
         android:textSize="15sp"
-        android:background="@color/white"/>
-    <EditText
-        android:id="@+id/et_nickName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dm_15"
         android:background="@color/white"
-        android:maxLength="8"
-        android:hint="请输入新的昵称"
-        android:textColor="@color/tv_191"
-        android:textColorHint="@color/tv_navigation"
-        android:paddingTop="@dimen/dm_10"
-        android:paddingBottom="@dimen/dm_10"
-        android:textSize="@dimen/dm_15" />
+        android:paddingRight="@dimen/dm_15"
+        android:drawableRight="@drawable/ic_more"
+        android:paddingBottom="@dimen/dm_10"/>
+    <!--<EditText-->
+        <!--android:id="@+id/et_nickName"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingLeft="@dimen/dm_15"-->
+        <!--android:background="@color/white"-->
+        <!--android:maxLength="8"-->
+        <!--android:hint="请输入新的昵称"-->
+        <!--android:textColor="@color/tv_191"-->
+        <!--android:textColorHint="@color/tv_navigation"-->
+        <!--android:paddingTop="@dimen/dm_10"-->
+        <!--android:paddingBottom="@dimen/dm_10"-->
+        <!--android:textSize="@dimen/dm_15" />-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

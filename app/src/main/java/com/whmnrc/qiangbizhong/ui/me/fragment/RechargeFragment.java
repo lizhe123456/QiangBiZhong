@@ -79,12 +79,14 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
             @Override
             public void onSuccess(String s) {
                 UserManage.getInstance().getUserInfo(RechargeFragment.this);
+                rechargePresenter.rechargeQuery(0, RechargeFragment.this);
                 ToastUtils.showShort("充值成功");
             }
 
             @Override
             public void onError(String s) {
-
+                UserManage.getInstance().getUserInfo(RechargeFragment.this);
+                rechargePresenter.rechargeQuery(0, RechargeFragment.this);
                 ToastUtils.showShort("充值失败");
             }
         });
@@ -102,6 +104,11 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
 
     @Override
     public void userInfoBack(LoginBean loginBean) {
+
+    }
+
+    @Override
+    public void error() {
 
     }
 }

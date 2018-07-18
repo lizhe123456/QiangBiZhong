@@ -75,5 +75,75 @@
         android:layout_below="@+id/iv_goods"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="@dimen/dm_15"/>
+    <RelativeLayout
+        android:id="@+id/rl_moeny"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_xian">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_goods_name"
+            android:layout_marginLeft="@dimen/dm_15"
+            android:layout_marginTop="@dimen/dm_5"
+            android:layout_toRightOf="@+id/iv_img"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="预约金："
+                android:textColor="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+            <TextView
+                android:id="@+id/tv_yu_moeny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="5000"
+                android:textColor="@color/goods_price"
+                android:textSize="@dimen/dm_15" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dm_5"
+                android:layout_marginLeft="@dimen/dm_5"
+                android:src="@drawable/ic_yudou" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_now_moeny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dm_15"
+            android:layout_marginTop="@dimen/dm_5"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="尾款："
+                android:textColor="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+            <TextView
+                android:id="@+id/tv_now_moeny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="5000"
+                android:textColor="@color/goods_price"
+                android:textSize="@dimen/dm_15" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dm_5"
+                android:layout_marginLeft="@dimen/dm_5"
+                android:src="@drawable/ic_yudou" />
+        </LinearLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

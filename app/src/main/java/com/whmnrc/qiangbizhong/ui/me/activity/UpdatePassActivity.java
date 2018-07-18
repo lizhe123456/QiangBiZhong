@@ -28,7 +28,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/12.
  */
 
-public class UpdatePassActivity extends BaseActivity {
+public class UpdatePassActivity extends BaseActivity implements LoginPresenter.UpdatePwdCall{
 
 
     @BindView(R.id.iv_back)
@@ -87,7 +87,7 @@ public class UpdatePassActivity extends BaseActivity {
                     ToastUtils.showShort("两次输入密码不一致");
                     return;
                 }
-                loginPresenter.updatePwd(etOldPass.getText().toString(),etNewPass.getText().toString(),this::updatePaw);
+                loginPresenter.updatePwd(etOldPass.getText().toString(),etNewPass.getText().toString(),this);
                 break;
             case R.id.tv_address:
                 ZhaoPwdActivity.start(this);
@@ -95,9 +95,14 @@ public class UpdatePassActivity extends BaseActivity {
         }
     }
 
-    private void updatePaw() {
+    public void updatePaw() {
         ToastUtils.showShort("修改成功，请重新登录");
         this.finish();
         LoginActivity.start(this);
+    }
+
+    @Override
+    public void error() {
+
     }
 }

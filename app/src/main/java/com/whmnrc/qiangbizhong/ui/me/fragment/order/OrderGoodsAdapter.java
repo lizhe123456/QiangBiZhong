@@ -14,8 +14,11 @@ import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 
 public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.DetailBean>{
 
-    public OrderGoodsAdapter(Context context) {
+    private int type;
+
+    public OrderGoodsAdapter(Context context,int type) {
         super(context);
+        this.type = type;
     }
 
     @Override
@@ -24,6 +27,17 @@ public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.DetailBean>{
                 .setText(R.id.tv_moeny,item.getOrderItem_Money()+"")
                 .setGlieuImage(R.id.iv_goods,item.getProduct_ImgPath())
                 .setText(R.id.tv_goods_num,"x"+item.getOrderItem_Number());
+        if (type == 0){
+            holder.setVisible(R.id.rl_moeny,false);
+        }else if (type == 1){
+            holder.setVisible(R.id.rl_moeny,true);
+            holder.setText(R.id.tv_yu_moeny,""+item.getBond()).setText(R.id.tv_now_moeny,""+ (item.getProduct_Price() - item.getBond()));
+        }else if (type == 2){
+            holder.setVisible(R.id.rl_moeny,true);
+            holder.setText(R.id.tv_yu_moeny,""+item.getBond()).setText(R.id.tv_now_moeny,""+ (item.getProduct_Price() - item.getBond()));
+        }else if (type == 3){
+            holder.setVisible(R.id.rl_moeny,false);
+        }
     }
 
     @Override

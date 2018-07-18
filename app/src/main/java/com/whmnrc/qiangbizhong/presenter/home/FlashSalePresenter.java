@@ -6,10 +6,13 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.KillGoodsBean;
+import com.whmnrc.qiangbizhong.model.bean.RushRecordBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.ToastUtil;
+import com.whmnrc.qiangbizhong.util.UserManage;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -57,7 +60,9 @@ public class FlashSalePresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (flashSaleCall != null) {
+                    flashSaleCall.error();
+                }
             }
 
         });
@@ -80,22 +85,62 @@ public class FlashSalePresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                flashSaleCall.error();
             }
 
         });
     }
 
-    public interface FlashSaleCall{
+
+    public void myRushGoodSrecord(boolean isR ,FlashSaleRecordCall flashSaleRecordCall){
+        Map<String,String> map = new HashMap<>();
+        if (isR){
+            page = 1;
+        }
+        map.put("PageIndex",page+"");
+        map.put("PageCount","10");
+        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.myrushgoodsrecord)+"?userId="+ UserManage.getInstance().getUserID(), map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                List<RushRecordBean> rushRecordBeans = GsonUtil.changeGsonToList(data,RushRecordBean.class);
+                if (flashSaleRecordCall != null){
+                    if (isR) {
+                        flashSaleRecordCall.onFlashSaleRecord(rushRecordBeans);
+                    }else {
+                        flashSaleRecordCall.loadMore(rushRecordBeans);
+                    }
+                    page++;
+                }
+
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (flashSaleRecordCall != null){
+                    flashSaleRecordCall.error();
+                }
+            }
+        });
+    }
+
+    public interface FlashSaleCall extends BaseCall{
 
         void onKillGoodsBack(KillGoodsBean killGoodsBeans);
 
         void loadMore(KillGoodsBean killGoodsBean);
     }
 
-    public interface FlashSaleTimeCall{
+    public interface FlashSaleTimeCall extends BaseCall {
 
         void onFlashSaleTime(List<String> list);
+
+    }
+
+    public interface FlashSaleRecordCall extends BaseCall{
+
+        void onFlashSaleRecord(List<RushRecordBean> rushRecordBeans);
+
+        void loadMore(List<RushRecordBean> rushRecordBeans);
 
     }
 
