@@ -85,7 +85,15 @@ public class OrderPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (code == 101 && errorMsg.equals("101")){
+                    if (submitOrederCall != null) {
+                        submitOrederCall.recharge();
+                    }
+                }else {
+                    if (submitOrederCall != null) {
+                        submitOrederCall.error();
+                    }
+                }
             }
         });
     }
@@ -123,7 +131,15 @@ public class OrderPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (code == 101 && errorMsg.equals("101")){
+                    if (payBackS != null) {
+                        payBackS.recharge();
+                    }
+                }else {
+                    if (payBackS != null) {
+                        payBackS.error();
+                    }
+                }
             }
         });
     }
@@ -159,7 +175,15 @@ public class OrderPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (code == 101 && errorMsg.equals("101")){
+                    if (submitOrederCall != null) {
+                        submitOrederCall.recharge();
+                    }
+                }else {
+                    if (submitOrederCall != null) {
+                        submitOrederCall.error();
+                    }
+                }
             }
         });
     }
@@ -172,6 +196,8 @@ public class OrderPresenter {
 
     public interface SubmitOrederCall extends BaseCall{
         void submitOrederBack();
+
+        void recharge();
     }
 
     public interface CancelCall extends BaseCall{
@@ -186,6 +212,8 @@ public class OrderPresenter {
     public interface PayBackS extends BaseCall{
 
         void payS();
+
+        void recharge();
 
     }
 }

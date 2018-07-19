@@ -72,13 +72,14 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(openLuckDrawAdapter);
         luckDrawPresenter = new LuckDrawPresenter(mContext);
+        showLoading("加载中..");
         luckDrawPresenter.awardlist2(0, this,true);
 
         openLuckDrawAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
                 LuckDrawGoodsBean luckDrawGoodsBean = (LuckDrawGoodsBean) item;
-                AwardDetailActivity.start(getContext(),luckDrawGoodsBean.getGoodsAwardId());
+                AwardDetailActivity.start(getContext(),luckDrawGoodsBean.getGoodsAwardId(),luckDrawGoodsBean.getUserId());
             }
         });
 
@@ -108,11 +109,13 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
             recyclerView.setVisibility(View.VISIBLE);
         }
         openLuckDrawAdapter.addFirstDataSet(luckDrawGoodsBeans);
+        refresh.finishRefresh(true);
     }
 
     @Override
     public void loadMore(List<LuckDrawGoodsBean> luckDrawGoodsBean) {
         openLuckDrawAdapter.addMoreDataSet(luckDrawGoodsBean);
+        refresh.finishLoadMore(true);
     }
 
     @Override

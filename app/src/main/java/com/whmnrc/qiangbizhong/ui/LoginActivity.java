@@ -53,6 +53,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.LoginC
         context.startActivity(starter);
     }
 
+
     //验证码重发倒计时
     private int secondleft = 60;
 

@@ -21,6 +21,7 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.RushRecordBean;
 import com.whmnrc.qiangbizhong.presenter.home.FlashSalePresenter;
+import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 
 import java.util.List;
 
@@ -67,20 +68,11 @@ public class RushRecordActivity extends BaseActivity implements FlashSalePresent
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(rushRecordAdapter);
         flashSalePresenter = new FlashSalePresenter(this);
+        showLoading("加载中..");
         flashSalePresenter.myRushGoodSrecord(true,RushRecordActivity.this);
-        refresh.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
-                flashSalePresenter.myRushGoodSrecord(true,RushRecordActivity.this);
-            }
-        });
+        refresh.setOnRefreshListener(refreshLayout -> flashSalePresenter.myRushGoodSrecord(true,RushRecordActivity.this));
 
-        refresh.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshLayout) {
-                flashSalePresenter.myRushGoodSrecord(false,RushRecordActivity.this);
-            }
-        });
+        refresh.setOnLoadMoreListener(refreshLayout -> flashSalePresenter.myRushGoodSrecord(false,RushRecordActivity.this));
 
     }
 
@@ -132,7 +124,7 @@ public class RushRecordActivity extends BaseActivity implements FlashSalePresent
     class RushRecordAdapter extends BaseAdapter<RushRecordBean>{
         private int width;
 
-        public RushRecordAdapter(Context context) {
+        private RushRecordAdapter(Context context) {
             super(context);
             width = ((ScreenUtils.getScreenWidth() - 45) / 2);
         }
@@ -151,7 +143,7 @@ public class RushRecordActivity extends BaseActivity implements FlashSalePresent
             holder.setOnClickListener(R.id.ll_goods, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    AwardDetailActivity.start();
+                    FlashSaleDetailsActivity.start(getContext(),item.getRushId(),0);
                 }
             });
         }

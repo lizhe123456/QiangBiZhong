@@ -58,8 +58,6 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.Head
     TextView tvUpdatePass;
     @BindView(R.id.tv_login)
     TextView tvLogin;
-//    @BindView(R.id.et_nickName)
-//    EditText etNickName;
 
     UserPresenter userPresenter;
 
@@ -84,7 +82,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.Head
     }
 
     private void updateData(LoginBean loginBean) {
-        tvUsername.setText(loginBean.getUserInfo_NickName());
+//        tvUsername.setText(loginBean.getUserInfo_NickName());
         nickName = loginBean.getUserInfo_NickName();
         String head = loginBean.getUserInfo_HeadImg();
         GlideuUtil.loadImageView(this,head,ivImg);
@@ -99,30 +97,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.Head
         GlideuUtil.loadImageView(this,loginBean.getUserInfo_HeadImg(),ivImg);
         tvUsername.setText(loginBean.getUserInfo_NickName());
         nickName = loginBean.getUserInfo_NickName();
-//        etNickName.addTextChangedListener(new TextWatcher() {
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (s.toString().trim().equals("")) {
-//                    tvUsername.setText(nickName);
-//                    userPresenter.updateNickName(nickName);
-//                }else {
-//                    tvUsername.setText(s);
-//                    userPresenter.updateNickName(s.toString());
-//                }
-//
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                // 输入前的监听
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                // 输入后的监听
-//            }
-//        });
+
     }
 
 
@@ -183,7 +158,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.Head
                         });
                 break;
             case R.id.tv_update_pass:
-//                UpdatePassActivity.start(this);
+                UpdatePassActivity.start(this);
                 break;
             case R.id.tv_login:
                 //退出登录
@@ -204,11 +179,13 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.Head
                 case PictureConfig.CHOOSE_REQUEST:
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     head = selectList.get(0).getCompressPath();
-//                    GlideuUtil.loadImageView(this, head, ivImg);
-//                    mPresenter.updateHeadImg(selectList.get(0).getPath());
                     userPresenter.updateHead(head,this);
                     break;
-
+            }
+        }else if (resultCode == 102){
+            if (requestCode == 101) {
+                String name = data.getStringExtra("name");
+                tvUsername.setText(name);
             }
         }
     }

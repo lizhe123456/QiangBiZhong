@@ -12,12 +12,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.whmnrc.qiangbizhong.MainActivity;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.ZhaoPwdActivity;
 import com.whmnrc.qiangbizhong.util.ToastUtil;
+import com.whmnrc.qiangbizhong.util.UserManage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,10 +85,11 @@ public class UpdatePassActivity extends BaseActivity implements LoginPresenter.U
                     ToastUtils.showShort("请确认密码");
                     return;
                 }
-                if (!etOldPass.getText().toString().equals(etOldPass.getText().toString())){
+                if (!etNewPass.getText().toString().equals(etNewPass2.getText().toString())){
                     ToastUtils.showShort("两次输入密码不一致");
                     return;
                 }
+                showLoading("修改中..");
                 loginPresenter.updatePwd(etOldPass.getText().toString(),etNewPass.getText().toString(),this);
                 break;
             case R.id.tv_address:
@@ -96,9 +99,9 @@ public class UpdatePassActivity extends BaseActivity implements LoginPresenter.U
     }
 
     public void updatePaw() {
-        ToastUtils.showShort("修改成功，请重新登录");
+        UserManage.getInstance().layout();
         this.finish();
-        LoginActivity.start(this);
+        MainActivity.start(this);
     }
 
     @Override

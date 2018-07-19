@@ -14,12 +14,15 @@
         android:layout_height="wrap_content"
         android:textColor="#4F5FFF"
         android:text="活动规则"
+        android:layout_marginLeft="@dimen/dm_15"
         android:textSize="15sp"
         android:layout_marginTop="@dimen/dm_15"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dm_15"
         android:text="@string/rule"
+        android:lineSpacingExtra="9dp"
         android:textSize="13sp"
         android:textColor="@color/tv_191"
         android:layout_marginTop="@dimen/dm_10"/>

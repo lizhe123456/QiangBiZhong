@@ -70,7 +70,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 });
             }else if (item.getOrder_CreateType() == 2){
                 //抽奖订单
-                holder.setText(R.id.order_state,"等待开奖");
+                holder.setText(R.id.order_state,"已预约");
                 holder.setText(R.id.tv_btn_2,"去查看");
                 holder.setText(R.id.tv_btn_3,"联系客服");
                 holder.setOnClickListener(R.id.tv_btn_2, v -> {

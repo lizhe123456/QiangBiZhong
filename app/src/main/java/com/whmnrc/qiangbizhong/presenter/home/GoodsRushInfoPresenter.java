@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.AwardBeanInfo;
@@ -38,24 +39,30 @@ public class GoodsRushInfoPresenter {
             OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.goodsrushinfo), map, new OkhttpUtil.BeanCallback() {
                 @Override
                 public void onSuccess(String data) {
-                    if (!TextUtils.isEmpty(data)) {
-                        GoodsRushinfoBean goodsRushinfoBean = JSON.parseObject(data, GoodsRushinfoBean.class);
-                        if (goodsInfoCall != null) {
-                            goodsInfoCall.goodsInfoBack(goodsRushinfoBean);
+                    try {
+                        if (!TextUtils.isEmpty(data)) {
+                            GoodsRushinfoBean goodsRushinfoBean = GsonUtil.changeGsonToBean(data, GoodsRushinfoBean.class);
+                            if (goodsInfoCall != null) {
+                                goodsInfoCall.goodsInfoBack(goodsRushinfoBean);
+                            }
                         }
+                    }catch (Exception e) {
+                        ToastUtils.showShort("数据解析失败");
                     }
                 }
 
                 @Override
                 public void onFailure(int code, String errorMsg) {
-
+                    if (goodsInfoCall != null){
+                        goodsInfoCall.error();
+                    }
                 }
 
             });
         }
     }
 
-    public void cayu(String goodId){
+    public void cayu(String goodId,CanYuCall canYuCall){
         Map<String,String> map = new HashMap<>();
         map.put("userId", UserManage.getInstance().getUserID());
         map.put("goodsRushId",goodId);
@@ -71,7 +78,15 @@ public class GoodsRushInfoPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (code == 101 && errorMsg.equals("101")){
+                    if (canYuCall != null) {
+                        canYuCall.canyuBack();
+                    }
+                }else {
+                    if (canYuCall != null) {
+                        canYuCall.error();
+                    }
+                }
             }
 
         });
@@ -81,6 +96,32 @@ public class GoodsRushInfoPresenter {
     public void awardInfo(String awardId,AwardCall awardCall){
         Map<String,String> map = new HashMap<>();
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.awardInfo) + "?awardId="+awardId +"&userId="+UserManage.getInstance().getUserID(),map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                try {
+                    AwardBeanInfo awardBeanInfo = GsonUtil.changeGsonToBean(data,AwardBeanInfo.class);
+                    if (awardCall != null){
+                        awardCall.awardBack(awardBeanInfo);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (awardCall != null){
+                    awardCall.error();
+                }
+            }
+        });
+    }
+
+    //抽奖详情
+    public void awardInfo(String userId,String awardId,AwardCall awardCall){
+        Map<String,String> map = new HashMap<>();
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.awardInfo) + "?awardId="+awardId +"&userId="+userId,map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
                 try {

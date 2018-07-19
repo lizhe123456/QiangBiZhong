@@ -3,6 +3,7 @@ package com.whmnrc.qiangbizhong.presenter.home;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawBean;
@@ -29,22 +30,32 @@ public class AwardPresenter {
         this.context = context;
     }
 
-    public void getAwardList(int type,AwardCall awardCall){
+    public void getAwardList(AwardCall awardCall, boolean isR){
         Map<String,String> map = new HashMap<>();
+        if (isR){
+            page = 1;
+        }
         map.put("PageIndex",page+"");
         map.put("PageCount",size+"");
-        OkhttpUtil.post(context.getString(R.string.server_address)+context.getString(R.string.awardlist)+"?type="+type,map, new OkhttpUtil.BeanCallback() {
+        OkhttpUtil.post(context.getString(R.string.server_address)+context.getString(R.string.awardlist),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                LuckDrawBean luckDrawBean = JSON.parseObject(data,LuckDrawBean.class);
+                LuckDrawBean luckDrawBean = GsonUtil.changeGsonToBean(data,LuckDrawBean.class);
                 if (awardCall != null){
-                    awardCall.awardBack(luckDrawBean);
+                    if (isR) {
+                        awardCall.awardBack(luckDrawBean);
+                    }else {
+                        awardCall.loadMore(luckDrawBean.getGoods());
+                    }
+                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (awardCall != null){
+                    awardCall.error();
+                }
             }
         });
     }
@@ -52,6 +63,8 @@ public class AwardPresenter {
     public interface AwardCall extends BaseCall{
 
         void awardBack(LuckDrawBean luckDrawBeans);
+
+        void loadMore(List<LuckDrawBean.GoodsBean> goodsBean);
 
     }
 

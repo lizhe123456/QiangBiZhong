@@ -1,9 +1,11 @@
 package com.whmnrc.qiangbizhong.ui.shop.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,10 +17,14 @@ import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.AddressBean;
 import com.whmnrc.qiangbizhong.model.bean.AwardBeanInfo;
 import com.whmnrc.qiangbizhong.model.bean.GoodsRushinfoBean;
+import com.whmnrc.qiangbizhong.presenter.me.AddressPresenter;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
+import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.Order4Fragment;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +36,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Created by lizhe on 2018/7/13.
  */
 
-public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter.SubmitOrederCall{
+public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter.SubmitOrederCall,AddressPresenter.AddManageCall{
 
 
     @BindView(R.id.iv_back)
@@ -53,11 +59,14 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
     TextView tvAddress;
     @BindView(R.id.rl_address)
     RelativeLayout rlAddress;
+    @BindView(R.id.tv_yuyue)
+    TextView tvYuyue;
 
     private GoodsRushinfoBean.RushGoodsInfoBean goodsRushinfoBean;
     private AwardBeanInfo.AwardGoodsInfoBean awardBeanInfo;
     private AddressBean addressBean;
     private OrderPresenter orderPresenter;
+    private AddressPresenter addressPresenter;
 
     public static void start(Activity context, GoodsRushinfoBean.RushGoodsInfoBean rushGoodsInfoBean) {
         Intent starter = new Intent(context, ConfirmOrderActivity.class);
@@ -82,17 +91,21 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
         awardBeanInfo = getIntent().getParcelableExtra("awardBeanInfo");
         if (goodsRushinfoBean != null) {
             GlideuUtil.loadImageView(this, goodsRushinfoBean.getGoods_ImaPath(), ivImg);
-
             tvPrice.setText(String.valueOf(goodsRushinfoBean.getGoodsPrice_Price()));
             tvGoodsName.setText(goodsRushinfoBean.getGoods_Name());
+            tvYuyue.setText(String.valueOf(goodsRushinfoBean.getBond()));
         }else {
             GlideuUtil.loadImageView(this, awardBeanInfo.getGoods_ImaPath(), ivImg);
             tvPrice.setText(String.valueOf(awardBeanInfo.getGoodsPrice_Price()));
             tvGoodsName.setText(awardBeanInfo.getGoods_Name());
+            tvYuyue.setText(String.valueOf(awardBeanInfo.getBond()));
         }
         orderPresenter = new OrderPresenter(this);
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("确认订单");
+        addressPresenter = new AddressPresenter(this);
+        addressPresenter.getaddressList(this);
+
     }
 
 
@@ -139,6 +152,7 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -166,5 +180,49 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
     public void submitOrederBack() {
         setResult(101);
         this.finish();
+    }
+
+    @Override
+    public void recharge() {
+        new SweetAlertDialog(this)
+                .setTitleText("提示")
+                .setContentText("余额不足,请充值！")
+                .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismiss();
+                    }
+                }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                sweetAlertDialog.dismiss();
+                AccountRechargeActivity.start(ConfirmOrderActivity.this,0);
+            }
+        }).show();
+    }
+
+    @Override
+    public void getAddressList(@NonNull List<AddressBean> list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getAddress_IsDefault() == 1){
+                addressBean = list.get(i);
+            }
+        }
+        if (addressBean != null) {
+            tvAddress.setText(addressBean.getProviceName() + addressBean.getCityName() + addressBean.getRegionName() + addressBean.getAddress_Detail());
+            tvPhone.setText(addressBean.getAddress_Mobile());
+            tvName.setText(addressBean.getAddress_Name());
+            tvAdress.setVisibility(View.GONE);
+            rlAddress.setVisibility(View.VISIBLE);
+        }else {
+            tvAdress.setVisibility(View.VISIBLE);
+            rlAddress.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public void updateData() {
+
     }
 }

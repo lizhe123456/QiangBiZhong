@@ -26,6 +26,7 @@
         android:paddingBottom="@dimen/dm_10"
         android:paddingTop="@dimen/dm_10"
         android:textColor="@color/tv_191"
+        android:inputType="textPassword"
         android:textColorHint="@color/tv_navigation"
         android:textSize="@dimen/dm_15"
         android:paddingLeft="@dimen/dm_15"/>
@@ -61,6 +62,7 @@
         android:maxLength="18"
         android:paddingBottom="@dimen/dm_10"
         android:paddingTop="@dimen/dm_10"
+        android:inputType="textPassword"
         android:textColor="@color/tv_191"
         android:textColorHint="@color/tv_navigation"
         android:textSize="@dimen/dm_15"
@@ -97,6 +99,7 @@
         android:maxLength="18"
         android:paddingBottom="@dimen/dm_10"
         android:paddingTop="@dimen/dm_10"
+        android:inputType="textPassword"
         android:textColor="@color/tv_191"
         android:textColorHint="@color/tv_navigation"
         android:textSize="@dimen/dm_15"

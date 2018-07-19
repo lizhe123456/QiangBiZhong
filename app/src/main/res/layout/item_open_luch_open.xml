@@ -7,7 +7,10 @@
     android:paddingLeft="@dimen/dm_10"
     android:paddingRight="@dimen/dm_10"
     android:paddingTop="@dimen/dm_15"
-    android:id="@+id/ll_goods">
+    android:layout_marginRight="@dimen/dm_5"
+    android:layout_marginLeft="@dimen/dm_5"
+    android:id="@+id/ll_goods"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/iv_img"

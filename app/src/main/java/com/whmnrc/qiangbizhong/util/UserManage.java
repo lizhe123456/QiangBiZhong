@@ -74,36 +74,41 @@ public class UserManage {
         try {
             loginBean = GsonUtil.changeGsonToBean(SPUtils.getInstance().getString("loginBean"), LoginBean.class);
         } catch (Exception e) {
-            return null;
+            return "";
         }
-        return loginBean.getUserInfo_ID() == null ? "" : loginBean.getUserInfo_ID();
+        if (loginBean != null) {
+            return loginBean.getUserInfo_ID() == null ? "" : loginBean.getUserInfo_ID();
+        }
+        return "";
     }
 
     public void getUserInfo(UserInfoCall userInfoCall) {
         LoginBean loginBean = getLoginBean();
-        Map<String, String> map = new HashMap<>();
-        map.put("LoginType", 0 + "");
-        map.put("Phone", loginBean.getUserInfo_Mobile());
-        map.put("Pwd", loginBean.getUserInfo_Pwd());
+        if (loginBean != null) {
+            Map<String, String> map = new HashMap<>();
+            map.put("LoginType", 0 + "");
+            map.put("Phone", loginBean.getUserInfo_Mobile());
+            map.put("Pwd", loginBean.getUserInfo_Pwd());
 
-        OkhttpUtil.post(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.login), map, new OkhttpUtil.BeanCallback() {
-            @Override
-            public void onSuccess(String st) {
-                if (!TextUtils.isEmpty(st)) {
-                    LoginBean response = GsonUtil.changeGsonToBean(st, LoginBean.class);
-                    if (userInfoCall != null) {
-                        userInfoCall.userInfoBack(response);
+            OkhttpUtil.post(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.login), map, new OkhttpUtil.BeanCallback() {
+                @Override
+                public void onSuccess(String st) {
+                    if (!TextUtils.isEmpty(st)) {
+                        LoginBean response = GsonUtil.changeGsonToBean(st, LoginBean.class);
+                        if (userInfoCall != null) {
+                            userInfoCall.userInfoBack(response);
+                        }
+                        updateLoginBena(response);
                     }
-                    updateLoginBena(response);
                 }
-            }
 
-            @Override
-            public void onFailure(int code, String errorMsg) {
+                @Override
+                public void onFailure(int code, String errorMsg) {
 
-            }
+                }
 
-        });
+            });
+        }
     }
 
 

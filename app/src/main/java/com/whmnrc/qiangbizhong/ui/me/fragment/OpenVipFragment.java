@@ -55,6 +55,20 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
 
     }
 
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            // 可视
+            if (rechargePresenter != null) {
+                rechargePresenter.rechargeQuery(1, this);
+            }
+        } else {
+            // 不可视
+        }
+    }
+
     @Override
     protected void initData() {
         rechargePresenter = new RechargePresenter(getContext());
@@ -70,8 +84,8 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
     public void rechargeData(RechargeBean rechargeBean) {
         tvMoeny.setText(rechargeBean.getGoodsPrice_Stock()+"");
         tvRmb.setText(rechargeBean.getPrice()+"");
-        tvKegoumai.setText(rechargeBean.getCanPayCount()+"");
-        tvYue.setText(StringUtil.wanString((int) UserManage.getInstance().getLoginBean().getUserInfo_Money()));
+        tvKegoumai.setText(StringUtil.wanString(rechargeBean.getCanPayCount()));
+        tvYue.setText(StringUtil.wanString(UserManage.getInstance().getLoginBean().getUserInfo_Money()));
     }
 
     @Override

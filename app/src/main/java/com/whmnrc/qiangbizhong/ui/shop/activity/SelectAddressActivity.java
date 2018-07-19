@@ -116,7 +116,7 @@ public class SelectAddressActivity extends BaseActivity implements AddressPresen
 
     class AddressAdapter extends BaseAdapter<AddressBean>{
 
-        public AddressAdapter(Context context) {
+        private AddressAdapter(Context context) {
             super(context);
         }
 

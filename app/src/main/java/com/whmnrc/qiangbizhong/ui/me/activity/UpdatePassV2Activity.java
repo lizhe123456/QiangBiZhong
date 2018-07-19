@@ -1,22 +1,17 @@
 package com.whmnrc.qiangbizhong.ui.me.activity;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.me.UserPresenter;
-import com.whmnrc.qiangbizhong.util.ToastUtil;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -32,13 +27,15 @@ public class UpdatePassV2Activity extends BaseActivity {
     TextView tvMenu;
     @BindView(R.id.et_nick_text)
     EditText etNickText;
-
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     UserPresenter userPresenter;
 
-    public static void start(Context context,String name) {
+
+    public static void start(Activity context, String name) {
         Intent starter = new Intent(context, UpdatePassV2Activity.class);
-        starter.putExtra("name",name);
-        context.startActivity(starter);
+        starter.putExtra("name", name);
+        context.startActivityForResult(starter,101);
     }
 
     @Override
@@ -49,6 +46,7 @@ public class UpdatePassV2Activity extends BaseActivity {
     @Override
     protected void setData() {
         tvMenu.setText("保存");
+        tvTitle.setText("修改昵称");
         userPresenter = new UserPresenter(this);
         String name = getIntent().getStringExtra("name");
         etNickText.setText(name);
@@ -64,13 +62,15 @@ public class UpdatePassV2Activity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.tv_menu:
-                if (TextUtils.isEmpty(etNickText.toString())){
+                if (TextUtils.isEmpty(etNickText.getText().toString())) {
                     ToastUtils.showShort("请输入昵称");
                     return;
                 }
-                userPresenter.updateNickName(etNickText.toString());
+                userPresenter.updateNickName(etNickText.getText().toString());
+                setResult(102,new Intent().putExtra("name",etNickText.getText().toString()));
                 this.finish();
                 break;
         }
     }
+
 }

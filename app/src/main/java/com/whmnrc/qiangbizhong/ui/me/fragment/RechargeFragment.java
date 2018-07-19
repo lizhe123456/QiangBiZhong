@@ -1,6 +1,7 @@
 package com.whmnrc.qiangbizhong.ui.me.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,10 +57,22 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            if (rechargePresenter != null) {
+                // 可视
+                rechargePresenter.rechargeQuery(0, this);
+            }
+        } else {
+            // 不可视
+        }
+    }
+
+    @Override
     protected void initData() {
         rechargePresenter = new RechargePresenter(getContext());
         rechargePresenter.rechargeQuery(0, this);
-
     }
 
     @Override
@@ -68,7 +81,7 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
     }
 
     @Override
-    public void rechargeData(RechargeBean rechargeBean) {
+    public void rechargeData(@NonNull RechargeBean rechargeBean) {
         tvMoeny.setText(rechargeBean.getGoodsPrice_Stock()+"");
         tvRmb.setText(rechargeBean.getPrice()+"");
     }

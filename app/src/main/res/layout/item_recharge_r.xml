@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dm_60"
+    android:background="@color/white"
+    android:layout_marginTop="@dimen/dm_10">
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dm_15"
+        android:textColor="@color/tv_191"
+        android:text="豆子充值"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dm_15"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dm_15"
+        android:gravity="right|center_vertical"
+        android:layout_centerVertical="true">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dm_12"
+            android:textColor="@color/tv_navigation"
+            android:text="豆子充值" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dm_18"
+            android:textColor="@color/goods_price"
+            android:text="豆子充值" />
+
+    </LinearLayout>
+</RelativeLayout>

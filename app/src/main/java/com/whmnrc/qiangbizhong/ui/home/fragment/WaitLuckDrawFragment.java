@@ -24,6 +24,7 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawBean;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBean;
+import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBeanV2;
 import com.whmnrc.qiangbizhong.presenter.home.LuckDrawPresenter;
 import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
@@ -40,7 +41,7 @@ import butterknife.Unbinder;
  * Created by lizhe on 2018/7/11.
  */
 
-public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresenter.LuckDrawCall{
+public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresenter.LuckDrawCall2{
 
 
     @BindView(R.id.recyclerView)
@@ -65,12 +66,13 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         adapter = new OpenLuckDrawAdapter(mContext);
         recyclerView.setAdapter(adapter);
         luckDrawPresenter = new LuckDrawPresenter(mContext);
+        showLoading("加载中..");
         luckDrawPresenter.awardlist2(1,this,true);
         adapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-                LuckDrawGoodsBean luckDrawGoodsBean = (LuckDrawGoodsBean) item;
-                AwardDetailActivity.start(getContext(),luckDrawGoodsBean.getGoodsAwardId());
+                LuckDrawGoodsBeanV2 luckDrawGoodsBean = (LuckDrawGoodsBeanV2) item;
+                AwardDetailActivity.start(getContext(),luckDrawGoodsBean.getAwardId());
             }
         });
 
@@ -90,7 +92,7 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
     }
 
     @Override
-    public void luckDrawBack(List<LuckDrawGoodsBean> luckDrawGoodsBeans) {
+    public void luckDrawBack(List<LuckDrawGoodsBeanV2> luckDrawGoodsBeans) {
         if (luckDrawGoodsBeans.size() == 0){
             showEmpty();
             recyclerView.setVisibility(View.GONE);
@@ -101,11 +103,13 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
             recyclerView.setVisibility(View.VISIBLE);
         }
         adapter.addFirstDataSet(luckDrawGoodsBeans);
+        refresh.finishRefresh(true);
     }
 
     @Override
-    public void loadMore(List<LuckDrawGoodsBean> luckDrawGoodsBean) {
+    public void loadMore(List<LuckDrawGoodsBeanV2> luckDrawGoodsBean) {
         adapter.addMoreDataSet(luckDrawGoodsBean);
+        refresh.finishLoadMore(true);
     }
 
     @Override
@@ -115,7 +119,7 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
     }
 
 
-    class OpenLuckDrawAdapter extends BaseAdapter<LuckDrawGoodsBean> {
+    class OpenLuckDrawAdapter extends BaseAdapter<LuckDrawGoodsBeanV2> {
 
         private int width;
 
@@ -125,27 +129,21 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         }
 
         @Override
-        protected void bindDataToItemView(BaseViewHolder holder, LuckDrawGoodsBean item, int position) {
+        protected void bindDataToItemView(BaseViewHolder holder, LuckDrawGoodsBeanV2 item, int position) {
             holder.setText(R.id.tv_goods_name, item.getGoods_Name())
                     .setText(R.id.tv_time, "距离开奖："+item.getAwardTime())
                     .setText(R.id.tv_surplus, "已有"+item.getAwardPeopleCount()+"人抢购")
-                    .setGlieuImage(R.id.iv_img, item.getProduct_ImgPath());
+                    .setGlieuImage(R.id.iv_img, item.getGoods_ImaPath());
 
             ImageView imageView = holder.getView(R.id.iv_img);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
             layoutParams.width = width;
             layoutParams.height = width;
             imageView.setLayoutParams(layoutParams);
-//            holder.setOnClickListener(R.id.ll_goods, new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-////                    AwardDetailActivity.start();
-//                }
-//            });
         }
 
         @Override
-        protected int getItemViewLayoutId(int position, LuckDrawGoodsBean item) {
+        protected int getItemViewLayoutId(int position, LuckDrawGoodsBeanV2 item) {
             return R.layout.item_open_luch_open;
         }
     }

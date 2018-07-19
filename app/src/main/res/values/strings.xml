@@ -63,6 +63,7 @@
 
 
     <string name="rechargequery">/api/home/recharge/query</string>
+
     <!--最新揭晓-->
     <string name="awardlist2">/api/home/awardlist2</string>
     <!--支付宝支付-->

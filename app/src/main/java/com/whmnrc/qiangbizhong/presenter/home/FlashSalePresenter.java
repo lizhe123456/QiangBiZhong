@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
+import com.whmnrc.qiangbizhong.model.bean.FlashSaleBean;
 import com.whmnrc.qiangbizhong.model.bean.KillGoodsBean;
 import com.whmnrc.qiangbizhong.model.bean.RushRecordBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
@@ -75,7 +76,7 @@ public class FlashSalePresenter {
             @Override
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)) {
-                    List<String> list =  GsonUtil.changeGsonToList(data,String.class);
+                    List<FlashSaleBean.TimeBean> list =  GsonUtil.changeGsonToList(data, FlashSaleBean.TimeBean.class);
                     if (flashSaleCall != null){
                         flashSaleCall.onFlashSaleTime(list);
 
@@ -132,7 +133,7 @@ public class FlashSalePresenter {
 
     public interface FlashSaleTimeCall extends BaseCall {
 
-        void onFlashSaleTime(List<String> list);
+        void onFlashSaleTime(List<FlashSaleBean.TimeBean> list);
 
     }
 

@@ -21,7 +21,7 @@ public class GoodsRushinfoBean implements Parcelable {
      */
 
     private RushGoodsInfoBean RushGoodsInfo;
-    private RecordBean Record;
+//    private Object Record;
     private int Participate;
     private List<RushGoodsBannerBean> RushGoodsBanner;
 
@@ -62,13 +62,13 @@ public class GoodsRushinfoBean implements Parcelable {
         this.RushGoodsInfo = RushGoodsInfo;
     }
 
-    public RecordBean getRecord() {
-        return Record;
-    }
-
-    public void setRecord(RecordBean Record) {
-        this.Record = Record;
-    }
+//    public RecordBean getRecord() {
+//        return (RecordBean) Record;
+//    }
+//
+//    public void setRecord(Object Record) {
+//        this.Record = Record;
+//    }
 
     public int getParticipate() {
         return Participate;

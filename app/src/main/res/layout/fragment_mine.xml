@@ -35,7 +35,7 @@
                     android:layout_height="@dimen/dm_30"
                     android:layout_marginLeft="@dimen/dm_42"
                     android:layout_marginTop="@dimen/dm_31"
-                    android:src="@drawable/ic_scan" />
+                    android:src="@drawable/ic_scan"/>
 
                 <com.whmnrc.qiangbizhong.widget.RoundedImageView
                     android:id="@+id/iv_head"
@@ -55,6 +55,7 @@
                     android:background="@drawable/ic_bg"
                     android:drawableRight="@drawable/ic_yudou"
                     android:gravity="center"
+                    android:textSize="@dimen/dm_12"
                     android:paddingBottom="@dimen/dm_3"
                     android:paddingLeft="@dimen/dm_8"
                     android:paddingRight="@dimen/dm_17"
@@ -68,9 +69,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_head"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/dm_7"
+                    android:layout_marginTop="@dimen/dm_5"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/dm_14" />
 
                 <TextView
                     android:id="@+id/tv_yudou"
@@ -78,9 +79,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_username"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/dm_7"
+                    android:layout_marginTop="@dimen/dm_5"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/dm_14" />
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView

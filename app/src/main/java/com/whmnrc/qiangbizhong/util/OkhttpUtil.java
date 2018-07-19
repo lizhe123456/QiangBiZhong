@@ -210,6 +210,10 @@ public class OkhttpUtil {
                                     if (baseResponse.getStatus() == 1) {
                                         UserManage.getInstance().setServerTime(baseResponse.getServerTime());
                                         callback.onSuccess(baseResponse.getResult());
+                                    }else if (baseResponse.getStatus() == 101){
+                                        ToastUtils.showShort(baseResponse.getMessage());
+                                        //充值
+                                        callback.onFailure(101,"101");
                                     } else {
                                         if (baseResponse.getMessage() != null) {
                                             ToastUtils.showShort(baseResponse.getMessage());

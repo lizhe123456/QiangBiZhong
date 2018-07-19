@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
     private ImmersionBar mImmersionBar;
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, MainActivity.class);
+        Intent starter = new Intent(context, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(starter);
     }
 

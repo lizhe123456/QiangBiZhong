@@ -2,6 +2,7 @@ package com.whmnrc.qiangbizhong.ui.me.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -12,12 +13,12 @@ import android.widget.TextView;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-import com.whmnrc.qiangbizhong.ui.me.fragment.AgentRechargeFragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.OpenVipFragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.RechargeFragment;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -36,6 +37,8 @@ public class AccountRechargeActivity extends BaseActivity {
     TabLayout tlTitle;
     @BindView(R.id.vp_content)
     ViewPager vpContent;
+    @BindView(R.id.tv_menu)
+    TextView tvMenu;
     private SparseArray<Fragment> fragments;
     private SparseArray<String> titles;
 
@@ -46,9 +49,9 @@ public class AccountRechargeActivity extends BaseActivity {
         return R.layout.activity_account_recharge;
     }
 
-    public static void start(Context context,int page) {
+    public static void start(Context context, int page) {
         Intent starter = new Intent(context, AccountRechargeActivity.class);
-        starter.putExtra("page",page);
+        starter.putExtra("page", page);
         context.startActivity(starter);
     }
 
@@ -60,16 +63,25 @@ public class AccountRechargeActivity extends BaseActivity {
         titles = new SparseArray<>();
         fragments.append(0, OpenVipFragment.newInstance());
         fragments.append(1, RechargeFragment.newInstance());
-        titles.append(0,"会员充值");
-        titles.append(1,"普通充值");
-        page = getIntent().getIntExtra("page",0);
-        ViewPagerUtil.initViewPage(vpContent,tlTitle,this,fragments,titles,60,page);
+        titles.append(0, "会员充值");
+        titles.append(1, "普通充值");
+        page = getIntent().getIntExtra("page", 0);
+        ViewPagerUtil.initViewPage(vpContent, tlTitle, this, fragments, titles, 60, page);
+        tvMenu.setText("缴费记录");
+        tvMenu.setVisibility(View.VISIBLE);
 
     }
 
-    @OnClick(R.id.iv_back)
-    public void onViewClicked() {
-        this.finish();
+    @OnClick({R.id.iv_back,R.id.tv_menu})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.tv_menu:
+                RechargeRActivity.start(this);
+                break;
+            case R.id.iv_back:
+                this.finish();
+                break;
+        }
     }
 
 

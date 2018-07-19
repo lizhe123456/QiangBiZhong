@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.ui.me;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -213,6 +214,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
 
     @Override
     public void userInfoBack(LoginBean loginBean) {
+        this.loginBean = loginBean;
         update();
         refreshLayout.finishRefresh(true);
     }

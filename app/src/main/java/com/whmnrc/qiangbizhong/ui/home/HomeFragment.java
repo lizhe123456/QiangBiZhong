@@ -1,13 +1,12 @@
 package com.whmnrc.qiangbizhong.ui.home;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -132,7 +131,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         bannerView.setDelayTime(1500);
     }
 
-    private void initGoods(List<HomeResult.GoodsTjBean> goodsBeans) {
+    private void initGoods(@Nullable List<HomeResult.GoodsTjBean> goodsBeans) {
         if (goodsBeans.size() > 0) {
             rlItem4.setVisibility(View.VISIBLE);
             vItem4.setVisibility(View.VISIBLE);
@@ -147,7 +146,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         }
     }
 
-    private void initNewUnveileds(List<HomeResult.GoodsNewAwardBean> newUnveileds) {
+    private void initNewUnveileds(@Nullable List<HomeResult.GoodsNewAwardBean> newUnveileds) {
         if (newUnveileds.size() > 0) {
             rlItem2.setVisibility(View.VISIBLE);
             vItem2.setVisibility(View.VISIBLE);
@@ -176,7 +175,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         }
     }
 
-    private void initMenu(List<HomePageBean.MenuBean> menuBeans) {
+    private void initMenu(@Nullable List<HomePageBean.MenuBean> menuBeans) {
         MenuAdapter menuAdapter = new MenuAdapter(mContext, 0);
         rvMenu.setNestedScrollingEnabled(false);
         rvMenu.setLayoutManager(new GridLayoutManager(mContext, 5));
@@ -210,7 +209,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         });
     }
 
-    private void initLuckDraw(List<HomeResult.GoodsNewAwardBean> luckDrawBeans) {
+    private void initLuckDraw(@Nullable List<HomeResult.GoodsNewAwardBean> luckDrawBeans) {
         if (luckDrawBeans.size() > 0) {
             rlItem3.setVisibility(View.VISIBLE);
             vItem3.setVisibility(View.VISIBLE);
@@ -224,8 +223,13 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
             luckDrawAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
                 @Override
                 public void onClick(View view, Object item, int position) {
-                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
-                    AwardDetailActivity.start(mContext, goodsNewAwardBean.getAwardId());
+                    if (UserManage.getInstance().getLoginBean() != null) {
+                        HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+                        AwardDetailActivity.start(mContext, goodsNewAwardBean.getAwardId());
+//                    FlashSaleDetailsActivity.start(getContext(), goodsNewAwardBean.getGoods_ID(), 1);
+                    } else {
+                        LoginActivity.start(getContext());
+                    }
                 }
             });
         } else {
@@ -234,7 +238,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         }
     }
 
-    private void initKill(List<HomeResult.GoodsRushBean> secondKillBean) {
+    private void initKill(@Nullable List<HomeResult.GoodsRushBean> secondKillBean) {
         if (secondKillBean.size() > 0) {
             rlJishi.setVisibility(View.VISIBLE);
             vItem1.setVisibility(View.VISIBLE);
@@ -275,7 +279,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         }
     }
 
-    private void initBanner(List<HomeResult.BannerBean> list) {
+    private void initBanner(@Nullable List<HomeResult.BannerBean> list) {
         List<String> stringList = new ArrayList<>();
         for (HomeResult.BannerBean bannerBean : list) {
             stringList.add(bannerBean.getBanner_Url());
@@ -320,7 +324,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     }
 
     @Override
-    public void homePage(HomeResult homeResult) {
+    public void homePage(@Nullable HomeResult homeResult) {
         initBanner(homeResult.getBanner());
         initKill(homeResult.getGoodsRush());
         initLuckDraw(homeResult.getGoodsNewAward());

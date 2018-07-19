@@ -7,13 +7,16 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.RechargeBean;
+import com.whmnrc.qiangbizhong.model.bean.RechargeRrecordBean;
 import com.whmnrc.qiangbizhong.pay.alipay.AliPayTools;
 import com.whmnrc.qiangbizhong.pay.listener.OnSuccessAndErrorListener;
+import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.ToastUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,13 +27,13 @@ import java.util.Map;
 
 public class RechargePresenter {
 
-    Context context;
+    private Context context;
+
+    private int page;
 
     public RechargePresenter(Context context) {
         this.context = context;
     }
-
-
 
 
     public void submitorder(String monery,String orderType,String agentshopId,String agentShopDiscountId,RechargeCall rechargeCall){
@@ -83,6 +86,36 @@ public class RechargePresenter {
         });
     }
 
+    public void recordquery(RechargeRCall rechargeRCall,boolean isR){
+        Map<String,String> map = new HashMap<>();
+        if (isR){
+            page = 1;
+        }
+        map.put("PageIndex",page+"");
+        map.put("PageCount","10");
+        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.recordquery)+"?userId="+UserManage.getInstance().getUserID(), map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                List<RechargeRrecordBean> rechargeBean = GsonUtil.changeGsonToList(data,RechargeRrecordBean.class);
+                if (rechargeRCall != null){
+                    if (isR) {
+                        rechargeRCall.rechargeBack(rechargeBean);
+                    }else {
+                        rechargeRCall.loadMore(rechargeBean);
+                    }
+                    page++;
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (rechargeRCall != null) {
+                    rechargeRCall.error();
+                }
+            }
+        });
+    }
+
     public void pay(String orerId,RechargeCall rechargeCall){
         Map<String,String> map = new HashMap<>();
         map.put("orderNo",orerId);
@@ -108,6 +141,13 @@ public class RechargePresenter {
         void rechargeData(RechargeBean rechargeBean);
 
         void payS(String data);
+    }
+
+    public interface RechargeRCall extends BaseCall {
+
+        void rechargeBack(List<RechargeRrecordBean> rechargeRrecordBeans);
+
+        void loadMore(List<RechargeRrecordBean> rechargeRrecordBeans);
     }
 
 

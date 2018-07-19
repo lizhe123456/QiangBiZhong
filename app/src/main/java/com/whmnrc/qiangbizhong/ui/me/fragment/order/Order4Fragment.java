@@ -3,6 +3,7 @@ package com.whmnrc.qiangbizhong.ui.me.fragment.order;
 
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
+import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -105,5 +106,24 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
     @Override
     public void payS() {
         refresh.autoRefresh();
+    }
+
+    @Override
+    public void recharge() {
+        new SweetAlertDialog(mContext)
+                .setTitleText("提示")
+                .setContentText("余额不足,请充值！")
+                .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismiss();
+                    }
+                }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                sweetAlertDialog.dismiss();
+                AccountRechargeActivity.start(mContext,0);
+            }
+        }).show();
     }
 }

@@ -1,23 +1,31 @@
 package com.whmnrc.qiangbizhong.ui.home.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.LogUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.app.Constants;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.AwardBeanInfo;
 import com.whmnrc.qiangbizhong.presenter.home.GoodsRushInfoPresenter;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ConfirmOrderActivity;
-import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.fragment.GoodsDetailsFragment;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
@@ -28,10 +36,13 @@ import com.whmnrc.qiangbizhong.widget.WrapContentHeightViewPager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -39,7 +50,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/16.
  */
 
-public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPresenter.AwardCall{
+public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPresenter.AwardCall {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -81,9 +92,10 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
     ImageView ivCustomerService;
     @BindView(R.id.rl_canyu)
     RelativeLayout rlCanYu;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout refresh;
 
     private GoodsRushInfoPresenter goodsRushInfoPresenter;
-    private SparseArray<Fragment> fragments;
     private SparseArray<String> strings;
     private AwardBeanInfo awardBeanInfo;
 
@@ -94,14 +106,15 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
         context.startActivity(starter);
     }
 
-    public static void start(Context context,String goodsId,String userId) {
+    public static void start(Context context, String goodsId, String userId) {
         Intent starter = new Intent(context, AwardDetailActivity.class);
-        starter.putExtra("goodsId",goodsId);
-        starter.putExtra("userId",userId);
+        starter.putExtra("goodsId", goodsId);
+        starter.putExtra("userId", userId);
         context.startActivity(starter);
     }
 
     private String goodsId;
+    private String userId;
 
     @Override
     protected int setLayout() {
@@ -113,19 +126,17 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
         tvTitle.setText("抽奖详情");
         ivBack.setVisibility(View.VISIBLE);
         goodsId = getIntent().getStringExtra("goodsId");
+        userId = getIntent().getStringExtra("userId");
         showLoading("加载中..");
         goodsRushInfoPresenter = new GoodsRushInfoPresenter(this);
-        goodsRushInfoPresenter.awardInfo(goodsId,this);
+        re();
         strings = new SparseArray<>();
         strings.append(0, "商品详情");
         strings.append(1, "商品参数");
 
-        countDownTimerView.setJiShiWanCheng(new SnapUpCountDownTimerView.JiShiWanCheng() {
-            @Override
-            public void jsS() {
-                if (goodsId != null) {
-                    goodsRushInfoPresenter.awardInfo(goodsId, AwardDetailActivity.this);
-                }
+        countDownTimerView.setJiShiWanCheng(() -> {
+            if (goodsId != null) {
+                re();
             }
         });
 
@@ -141,66 +152,93 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
         bannerView.isAutoPlay(true);
         //设置轮播时间
         bannerView.setDelayTime(1500);
+
+        refresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                re();
+            }
+        });
+    }
+
+
+    public void re() {
+        if (TextUtils.isEmpty(userId)) {
+            goodsRushInfoPresenter.awardInfo(goodsId, AwardDetailActivity.this);
+        } else {
+            goodsRushInfoPresenter.awardInfo(userId, goodsId, AwardDetailActivity.this);
+        }
     }
 
     @Override
     public void awardBack(AwardBeanInfo awardBeanInfo) {
         this.awardBeanInfo = awardBeanInfo;
         updateData(awardBeanInfo);
+        refresh.finishRefresh(true);
     }
 
-    public boolean isFrist;
+    private boolean isFrist;
+    private long lend;
+    private long now;
 
-    private void updateData(AwardBeanInfo awardBeanInfo) {
-        String end = awardBeanInfo.getAwardGoodsInfo().getAwardTime();
-        long lend = TimeUtils.string2Milliseconds(end,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-        String serverTime = UserManage.getInstance().getServerTime();
-        long now =  TimeUtils.string2Milliseconds(serverTime,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-        long time =  lend - now;
-        if (time > 0) {
-            long day = time / (24 * 60 * 60 * 1000);
-            long hour = (time / (60 * 60 * 1000) - day * 24);
-            long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
-            long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-            countDownTimerView.setTime((int) hour, (int) min, (int) ss);
-            countDownTimerView.start();
-        }else {
-            rlCanYu.setVisibility(View.GONE);
-        }
-
-        if (!isFrist) {
-            isFrist = true;
-            initBanner(awardBeanInfo.getAwardGoodsBanner());
-
-            tvGoodsName.setText(awardBeanInfo.getAwardGoodsInfo().getGoods_Name());
-            tvMoeny.setText(String.valueOf(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price()));
-            tvOldMoeny.setText("原价：" + String.valueOf(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_VirtualPrice()));
-            tvOldMoeny.getPaint().setAntiAlias(true);//抗锯齿
-            tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
-            tvScep.setText(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_SpecName() == null ? "" : awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_SpecName() + "   " + awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_AttrName());
-            tvCanyuNum.setText("已有" + awardBeanInfo.getAwardGoodsInfo().getAwardPeopleCount() + "人参加");
-            tvYuPrice.setText("中奖后再付：" + String.valueOf(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price() - awardBeanInfo.getAwardGoodsInfo().getBond()));
-            tvPrice.setText(String.valueOf(awardBeanInfo.getAwardGoodsInfo().getBond()));
-            fragments = new SparseArray();
-            fragments.append(0, GoodsDetailsFragment.newInstance(Constants.INFO_ADDRESS + "?goodsId=" + awardBeanInfo.getAwardGoodsInfo().getGoods_ID() + "&showType=0"));
-            fragments.append(1, GoodsDetailsFragment.newInstance(Constants.INFO_ADDRESS + "?goodsId=" + awardBeanInfo.getAwardGoodsInfo().getGoods_ID() + "&showType=1"));
-            ViewPagerUtil.initViewPage(vpContent, tabLayout, this, fragments, strings, 100, 0);
-        }
-
-        if (awardBeanInfo.getParticipate() == 1){
-            if (time > 0){
-                tvCanyu.setText("等待开奖");
-            }else {
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
+    private void updateData(@NonNull AwardBeanInfo awardBeanInfo) {
+        try {
+            lend = TimeUtils.string2Milliseconds(awardBeanInfo.getAwardGoodsInfo().getAwardTime(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+            now = TimeUtils.string2Milliseconds(UserManage.getInstance().getServerTime(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+            long time = lend - now;
+            if (time > 0) {
+                long day = time / (24 * 60 * 60 * 1000);
+                long hour = (time / (60 * 60 * 1000) - day * 24);
+                long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
+                long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+                countDownTimerView.setTime((int) hour, (int) min, (int) ss);
+                countDownTimerView.start();
+            } else {
                 rlCanYu.setVisibility(View.GONE);
             }
-        }else if (awardBeanInfo.getParticipate() == 0){
-            if (time > 0){
-                tvCanyu.setText("立即参与");
-            }else {
+
+            if (!isFrist) {
+                isFrist = true;
+                initBanner(awardBeanInfo.getAwardGoodsBanner());
+                SparseArray<Fragment> fragments = new SparseArray<>();
+                fragments.append(0, GoodsDetailsFragment.newInstance(Constants.INFO_ADDRESS + "?goodsId=" + awardBeanInfo.getAwardGoodsInfo().getGoods_ID() + "&showType=0"));
+                fragments.append(1, GoodsDetailsFragment.newInstance(Constants.INFO_ADDRESS + "?goodsId=" + awardBeanInfo.getAwardGoodsInfo().getGoods_ID() + "&showType=1"));
+                ViewPagerUtil.initViewPage(vpContent, tabLayout, this, fragments, strings, 100, 0);
+                tvYuPrice.setText("中奖后再付：" + String.valueOf(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price() - awardBeanInfo.getAwardGoodsInfo().getBond()));
+                tvPrice.setText(String.valueOf(awardBeanInfo.getAwardGoodsInfo().getBond()));
+            }
+            try {
+                tvGoodsName.setText(awardBeanInfo.getAwardGoodsInfo().getGoods_Name());
+                tvMoeny.setText(String.valueOf(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price()));
+                tvOldMoeny.setText("原价：" + String.valueOf(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_VirtualPrice()));
+                tvOldMoeny.getPaint().setAntiAlias(true);//抗锯齿
+                tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
+                tvScep.setText(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_SpecName() == null ? "" : awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_SpecName() + "   " + awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_AttrName());
+                tvCanyuNum.setText("已有" + awardBeanInfo.getAwardGoodsInfo().getAwardPeopleCount() + "人参加");
+
+            } catch (NullPointerException e) {
+
+            }
+
+            if (awardBeanInfo.getParticipate() == 1) {
+                if (time > 0) {
+                    tvCanyu.setText("已预约");
+                } else {
+                    rlCanYu.setVisibility(View.GONE);
+                }
+            } else if (awardBeanInfo.getParticipate() == 0) {
+                if (time > 0) {
+                    tvCanyu.setText("立即参与");
+                } else {
+                    rlCanYu.setVisibility(View.GONE);
+                }
+            } else if (awardBeanInfo.getParticipate() == 2) {
                 rlCanYu.setVisibility(View.GONE);
             }
-        }else if (awardBeanInfo.getParticipate() == 2){
-            rlCanYu.setVisibility(View.GONE);
+
+        } catch (Exception e) {
+            LogUtils.e(e);
         }
 
     }
@@ -212,10 +250,18 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
         }
 
         //设置图片集合
-        bannerView.setImages(awardGoodsBanner);
+        bannerView.setImages(list);
         bannerView.start();
     }
 
+    @Override
+    protected void onDestroy() {
+        if (countDownTimerView != null) {
+            countDownTimerView.stop();
+            countDownTimerView.setJiShiWanCheng(null);
+        }
+        super.onDestroy();
+    }
 
     @OnClick({R.id.iv_back, R.id.tv_canyu, R.id.iv_customer_service})
     public void onViewClicked(View view) {
@@ -224,20 +270,11 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
                 this.finish();
                 break;
             case R.id.tv_canyu:
-                String end = awardBeanInfo.getAwardGoodsInfo().getAwardTime();
-                long lend = TimeUtils.string2Milliseconds(end,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-                String serverTime = UserManage.getInstance().getServerTime();
-                long now =  TimeUtils.string2Milliseconds(serverTime,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-                long time =  lend - now;
-                if (awardBeanInfo.getParticipate() == 1){
-                }else if (awardBeanInfo.getParticipate() == 0){
-                    if (time > 0){
-                        ConfirmOrderActivity.start(this,awardBeanInfo.getAwardGoodsInfo());
-                    }else {
-
+                long time = lend - now;
+                if (awardBeanInfo.getParticipate() == 0) {
+                    if (time > 0) {
+                        ConfirmOrderActivity.start(this, awardBeanInfo.getAwardGoodsInfo());
                     }
-                }else if (awardBeanInfo.getParticipate() == 2){
-
                 }
                 break;
             case R.id.iv_customer_service:
@@ -249,11 +286,11 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 101){
+        if (resultCode == 101) {
             if (requestCode == 102) {
                 if (goodsRushInfoPresenter != null) {
                     if (goodsId != null) {
-                        goodsRushInfoPresenter.awardInfo(goodsId, AwardDetailActivity.this);
+                        re();
                     }
                 }
             }
@@ -262,6 +299,8 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
 
     @Override
     public void error() {
-
+        refresh.finishRefresh(false);
     }
+
+
 }
