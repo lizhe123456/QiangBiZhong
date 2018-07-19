@@ -132,47 +132,35 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     }
 
     private void initGoods(@Nullable List<HomeResult.GoodsTjBean> goodsBeans) {
-        if (goodsBeans.size() > 0) {
-            rlItem4.setVisibility(View.VISIBLE);
-            vItem4.setVisibility(View.VISIBLE);
-            GoodsAdapter goodsAdapter = new GoodsAdapter(mContext, 1);
-            rvList.setNestedScrollingEnabled(false);
-            rvList.setLayoutManager(new GridLayoutManager(mContext, 2));
-            rvList.setAdapter(goodsAdapter);
-            goodsAdapter.addFirstDataSet(goodsBeans);
-        } else {
-//            rlItem4.setVisibility(View.GONE);
-//            vItem4.setVisibility(View.GONE);
-        }
+
+
+        GoodsAdapter goodsAdapter = new GoodsAdapter(mContext, 1);
+        rvList.setNestedScrollingEnabled(false);
+        rvList.setLayoutManager(new GridLayoutManager(mContext, 2));
+        rvList.setAdapter(goodsAdapter);
+        goodsAdapter.addFirstDataSet(goodsBeans);
+
     }
 
     private void initNewUnveileds(@Nullable List<HomeResult.GoodsNewAwardBean> newUnveileds) {
-        if (newUnveileds.size() > 0) {
-            rlItem2.setVisibility(View.VISIBLE);
-            vItem2.setVisibility(View.VISIBLE);
-            NewUnveiledsAdapter newUnveiledsAdapter = new NewUnveiledsAdapter(mContext);
-            rvNewUnveileds.setNestedScrollingEnabled(false);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            rvNewUnveileds.setLayoutManager(layoutManager);
-            rvNewUnveileds.setAdapter(newUnveiledsAdapter);
-            newUnveiledsAdapter.addFirstDataSet(newUnveileds);
-            newUnveiledsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
-                @Override
-                public void onClick(View view, Object item, int position) {
-                    if (UserManage.getInstance().getLoginBean() != null) {
-                        HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
-                        AwardDetailActivity.start(mContext, goodsNewAwardBean.getAwardId());
-//                    FlashSaleDetailsActivity.start(getContext(), goodsNewAwardBean.getGoods_ID(), 1);
-                    } else {
-                        LoginActivity.start(getContext());
-                    }
+        NewUnveiledsAdapter newUnveiledsAdapter = new NewUnveiledsAdapter(mContext);
+        rvNewUnveileds.setNestedScrollingEnabled(false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvNewUnveileds.setLayoutManager(layoutManager);
+        rvNewUnveileds.setAdapter(newUnveiledsAdapter);
+        newUnveiledsAdapter.addFirstDataSet(newUnveileds);
+        newUnveiledsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Object item, int position) {
+                if (UserManage.getInstance().getLoginBean() != null) {
+                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+                    AwardDetailActivity.start(mContext, goodsNewAwardBean.getAwardId());
+                } else {
+                    LoginActivity.start(getContext());
                 }
-            });
-        } else {
-//            rlItem2.setVisibility(View.GONE);
-//            vItem2.setVisibility(View.GONE);
-        }
+            }
+        });
     }
 
     private void initMenu(@Nullable List<HomePageBean.MenuBean> menuBeans) {
@@ -210,73 +198,59 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     }
 
     private void initLuckDraw(@Nullable List<HomeResult.GoodsNewAwardBean> luckDrawBeans) {
-        if (luckDrawBeans.size() > 0) {
-            rlItem3.setVisibility(View.VISIBLE);
-            vItem3.setVisibility(View.VISIBLE);
-            LuckDrawAdapter luckDrawAdapter = new LuckDrawAdapter(mContext);
-            rvLuckDraw.setNestedScrollingEnabled(false);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            rvLuckDraw.setLayoutManager(layoutManager);
-            rvLuckDraw.setAdapter(luckDrawAdapter);
-            luckDrawAdapter.addFirstDataSet(luckDrawBeans);
-            luckDrawAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
-                @Override
-                public void onClick(View view, Object item, int position) {
-                    if (UserManage.getInstance().getLoginBean() != null) {
-                        HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
-                        AwardDetailActivity.start(mContext, goodsNewAwardBean.getAwardId());
-//                    FlashSaleDetailsActivity.start(getContext(), goodsNewAwardBean.getGoods_ID(), 1);
-                    } else {
-                        LoginActivity.start(getContext());
-                    }
-                }
-            });
-        } else {
-//            rlItem3.setVisibility(View.GONE);
-//            vItem3.setVisibility(View.GONE);
-        }
-    }
-
-    private void initKill(@Nullable List<HomeResult.GoodsRushBean> secondKillBean) {
-        if (secondKillBean.size() > 0) {
-            rlJishi.setVisibility(View.VISIBLE);
-            vItem1.setVisibility(View.VISIBLE);
-            if (!TextUtils.isEmpty(UserManage.getInstance().getServerTime())) {
-                long current = System.currentTimeMillis();
-                long lend = current / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset() + 24 * 60 * 60 * 1000;
-                String serverTime = UserManage.getInstance().getServerTime();
-                long now = TimeUtils.string2Milliseconds(serverTime, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-                long time = lend - now;
-                if (time > 0) {
-                    long day = time / (24 * 60 * 60 * 1000);
-                    long hour = (time / (60 * 60 * 1000) - day * 24);
-                    long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
-                    long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                    countDownTimerView.setTime((int) hour, (int) min, (int) ss);
-                    countDownTimerView.start();
-                }
-            }
-            KillAdapter killAdapter = new KillAdapter(mContext, 0);
-            rvSecondKill.setNestedScrollingEnabled(false);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            rvSecondKill.setLayoutManager(layoutManager);
-            rvSecondKill.setAdapter(killAdapter);
-            killAdapter.addFirstDataSet(secondKillBean);
-
-            killAdapter.setOnItemClickListener((view, item, position) -> {
+        LuckDrawAdapter luckDrawAdapter = new LuckDrawAdapter(mContext);
+        rvLuckDraw.setNestedScrollingEnabled(false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvLuckDraw.setLayoutManager(layoutManager);
+        rvLuckDraw.setAdapter(luckDrawAdapter);
+        luckDrawAdapter.addFirstDataSet(luckDrawBeans);
+        luckDrawAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Object item, int position) {
                 if (UserManage.getInstance().getLoginBean() != null) {
-                    HomeResult.GoodsRushBean goodsRushBean = (HomeResult.GoodsRushBean) item;
-                    FlashSaleDetailsActivity.start(mContext, goodsRushBean.getRushId(), 1);
+                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+                    AwardDetailActivity.start(mContext, goodsNewAwardBean.getAwardId());
                 } else {
                     LoginActivity.start(getContext());
                 }
-            });
-        } else {
-//            rlJishi.setVisibility(View.GONE);
-//            vItem1.setVisibility(View.GONE);
+            }
+        });
+
+    }
+
+    private void initKill(@Nullable List<HomeResult.GoodsRushBean> secondKillBean) {
+        if (!TextUtils.isEmpty(UserManage.getInstance().getServerTime())) {
+            long current = System.currentTimeMillis();
+            long lend = current / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset() + 24 * 60 * 60 * 1000;
+            String serverTime = UserManage.getInstance().getServerTime();
+            long now = TimeUtils.string2Milliseconds(serverTime, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+            long time = lend - now;
+            if (time > 0) {
+                long day = time / (24 * 60 * 60 * 1000);
+                long hour = (time / (60 * 60 * 1000) - day * 24);
+                long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
+                long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+                countDownTimerView.setTime((int) hour, (int) min, (int) ss);
+                countDownTimerView.start();
+            }
         }
+        KillAdapter killAdapter = new KillAdapter(mContext, 0);
+        rvSecondKill.setNestedScrollingEnabled(false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvSecondKill.setLayoutManager(layoutManager);
+        rvSecondKill.setAdapter(killAdapter);
+        killAdapter.addFirstDataSet(secondKillBean);
+
+        killAdapter.setOnItemClickListener((view, item, position) -> {
+            if (UserManage.getInstance().getLoginBean() != null) {
+                HomeResult.GoodsRushBean goodsRushBean = (HomeResult.GoodsRushBean) item;
+                FlashSaleDetailsActivity.start(mContext, goodsRushBean.getRushId(), 1);
+            } else {
+                LoginActivity.start(getContext());
+            }
+        });
     }
 
     private void initBanner(@Nullable List<HomeResult.BannerBean> list) {

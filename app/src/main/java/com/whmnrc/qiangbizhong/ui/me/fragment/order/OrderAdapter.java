@@ -51,7 +51,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 //商城商品订单
             }else if (item.getOrder_CreateType() == 1){
                 //抢购订单
-                holder.setText(R.id.order_state,"已支付");
+                holder.setText(R.id.order_state,"已预约");
                 holder.setText(R.id.tv_btn_2,"去抢购");
                 holder.setOnClickListener(R.id.tv_btn_2, new View.OnClickListener() {
                     @Override
