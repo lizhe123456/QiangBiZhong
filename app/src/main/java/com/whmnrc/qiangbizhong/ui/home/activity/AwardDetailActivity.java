@@ -25,7 +25,9 @@ import com.whmnrc.qiangbizhong.app.Constants;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.AwardBeanInfo;
 import com.whmnrc.qiangbizhong.presenter.home.GoodsRushInfoPresenter;
+import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ConfirmOrderActivity;
+import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.fragment.GoodsDetailsFragment;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
@@ -44,6 +46,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Company 武汉麦诺软创
@@ -175,6 +178,25 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
         this.awardBeanInfo = awardBeanInfo;
         updateData(awardBeanInfo);
         refresh.finishRefresh(true);
+    }
+
+    @Override
+    public void canyuBack() {
+        new SweetAlertDialog(this)
+                .setTitleText("提示")
+                .setContentText("余额不足,请充值！")
+                .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismiss();
+                    }
+                }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                sweetAlertDialog.dismiss();
+                AccountRechargeActivity.start(AwardDetailActivity.this,0);
+            }
+        }).show();
     }
 
     private boolean isFrist;

@@ -111,8 +111,14 @@ public class GoodsRushInfoPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (awardCall != null){
-                    awardCall.error();
+                if (code == 101 && errorMsg.equals("101")){
+                    if (awardCall != null) {
+                        awardCall.canyuBack();
+                    }
+                }else {
+                    if (awardCall != null) {
+                        awardCall.error();
+                    }
                 }
             }
         });
@@ -137,7 +143,15 @@ public class GoodsRushInfoPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-
+                if (code == 101 && errorMsg.equals("101")){
+                    if (awardCall != null) {
+                        awardCall.canyuBack();
+                    }
+                }else {
+                    if (awardCall != null) {
+                        awardCall.error();
+                    }
+                }
             }
         });
     }
@@ -160,6 +174,8 @@ public class GoodsRushInfoPresenter {
     public interface AwardCall extends BaseCall{
 
         void awardBack(AwardBeanInfo awardBeanInfo);
+
+        void canyuBack();
     }
 
 
