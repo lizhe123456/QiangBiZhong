@@ -126,6 +126,7 @@ public class OkhttpUtil {
             });
         }catch (Exception e){
             e.printStackTrace();
+            EventBus.getDefault().post(new LodingBean());
         }
     }
 
@@ -172,6 +173,7 @@ public class OkhttpUtil {
                     });
         } catch (Exception e) {
             e.printStackTrace();
+            EventBus.getDefault().post(new LodingBean());
         }
 
 
@@ -228,6 +230,7 @@ public class OkhttpUtil {
                     });
         } catch (Exception e) {
             e.printStackTrace();
+            EventBus.getDefault().post(new LodingBean());
         }
     }
 

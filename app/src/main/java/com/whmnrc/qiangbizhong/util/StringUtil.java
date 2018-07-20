@@ -31,13 +31,11 @@ public class StringUtil {
             nf.setRoundingMode(RoundingMode.DOWN);
             return nf.format(d) + "万";
         }else {
-            nf.setMaximumFractionDigits(2);
-            // 如果不需要四舍五入，可以使用RoundingMode.DOWN
-            nf.setRoundingMode(RoundingMode.DOWN);
-            return s+"";
+//            nf.setMaximumFractionDigits(2);
+//            // 如果不需要四舍五入，可以使用RoundingMode.DOWN
+//            nf.setRoundingMode(RoundingMode.DOWN);
+            return ((int)(s))+"";
         }
     }
-
-
 
 }

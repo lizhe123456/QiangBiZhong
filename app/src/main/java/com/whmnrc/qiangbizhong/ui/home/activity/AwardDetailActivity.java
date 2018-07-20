@@ -29,6 +29,7 @@ import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ConfirmOrderActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.fragment.GoodsDetailsFragment;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
@@ -214,7 +215,7 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
                 long hour = (time / (60 * 60 * 1000) - day * 24);
                 long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
                 long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                countDownTimerView.setTime((int) hour, (int) min, (int) ss);
+                countDownTimerView.setTime((int) ((int) hour + (day * 24)), (int) min, (int) ss);
                 countDownTimerView.start();
             } else {
                 rlCanYu.setVisibility(View.GONE);
@@ -227,8 +228,9 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
                 fragments.append(0, GoodsDetailsFragment.newInstance(Constants.INFO_ADDRESS + "?goodsId=" + awardBeanInfo.getAwardGoodsInfo().getGoods_ID() + "&showType=0"));
                 fragments.append(1, GoodsDetailsFragment.newInstance(Constants.INFO_ADDRESS + "?goodsId=" + awardBeanInfo.getAwardGoodsInfo().getGoods_ID() + "&showType=1"));
                 ViewPagerUtil.initViewPage(vpContent, tabLayout, this, fragments, strings, 100, 0);
-                tvYuPrice.setText("中奖后再付：" + String.valueOf(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price() - awardBeanInfo.getAwardGoodsInfo().getBond()));
-                tvPrice.setText(String.valueOf(awardBeanInfo.getAwardGoodsInfo().getBond()));
+
+                tvYuPrice.setText("中奖后再付：" + StringUtil.wanString(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price() - awardBeanInfo.getAwardGoodsInfo().getBond()));
+                tvPrice.setText(StringUtil.wanString(awardBeanInfo.getAwardGoodsInfo().getBond()));
             }
             try {
                 tvGoodsName.setText(awardBeanInfo.getAwardGoodsInfo().getGoods_Name());

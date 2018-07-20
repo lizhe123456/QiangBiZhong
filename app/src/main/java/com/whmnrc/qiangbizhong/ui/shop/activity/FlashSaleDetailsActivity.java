@@ -27,6 +27,7 @@ import com.whmnrc.qiangbizhong.model.bean.GoodsRushinfoBean;
 import com.whmnrc.qiangbizhong.presenter.home.GoodsRushInfoPresenter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.fragment.GoodsDetailsFragment;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
@@ -228,8 +229,8 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
             tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
             tvScep.setText(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_SpecName() == null ? "" : goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_SpecName() + "   " + goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_AttrName());
             tvCanYuNum.setText("已有" + goodsRushinfoBean.getRushGoodsInfo().getRushNumber() + "人参加");
-            tvYuPrice.setText(String.valueOf(goodsRushinfoBean.getRushGoodsInfo().getBond()));
-            tvZaiPrice.setText("中奖后再付：" + String.valueOf(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_Price() - goodsRushinfoBean.getRushGoodsInfo().getBond()));
+            tvYuPrice.setText(StringUtil.wanString(goodsRushinfoBean.getRushGoodsInfo().getBond()));
+            tvZaiPrice.setText("中奖后再付：" + StringUtil.wanString(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_Price() - goodsRushinfoBean.getRushGoodsInfo().getBond()));
             initData(goodsRushinfoBean);
         } catch (NullPointerException e) {
 
@@ -276,7 +277,7 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                 long hour = (startTime / (60 * 60 * 1000) - day * 24);
                 long min = ((startTime / (60 * 1000)) - day * 24 * 60 - hour * 60);
                 long ss = (startTime / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                countDownTimerView1.setTime((int) hour, (int) min, (int) ss);
+                countDownTimerView1.setTime((int) ((int) hour + (day * 24)), (int) min, (int) ss);
                 countDownTimerView1.start();
                 countDownTimerView1.setVisibility(View.VISIBLE);
                 countDownTimerView.setVisibility(View.GONE);
@@ -287,7 +288,7 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                     long hour = (time / (60 * 60 * 1000) - day * 24);
                     long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
                     long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                    countDownTimerView.setTime((int) hour, (int) min, (int) ss);
+                    countDownTimerView.setTime((int) ((int) hour + (day * 24)), (int) min, (int) ss);
                     countDownTimerView.start();
                     tvJuLiTime.setText("距结束仅剩");
                     countDownTimerView.start();

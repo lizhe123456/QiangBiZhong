@@ -110,7 +110,7 @@ public class SnapUpCountDownTimerView extends LinearLayout {
 
     public void setTime(int hour, int min, int sec) {
 
-        if (hour >= 60 || min >= 60 || sec >= 60 || hour < 0 || min < 0
+        if (min >= 60 || sec >= 60 || hour < 0 || min < 0
                 || sec < 0) {
             throw new RuntimeException("时间格式错误,请检查你的代码");
         }
