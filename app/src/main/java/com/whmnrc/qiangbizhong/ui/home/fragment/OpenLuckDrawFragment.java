@@ -2,6 +2,7 @@ package com.whmnrc.qiangbizhong.ui.home.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -98,7 +99,7 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         });
     }
     @Override
-    public void luckDrawBack(List<LuckDrawGoodsBean> luckDrawGoodsBeans) {
+    public void luckDrawBack(@NonNull List<LuckDrawGoodsBean> luckDrawGoodsBeans) {
         if (luckDrawGoodsBeans.size() == 0){
             showEmpty();
             recyclerView.setVisibility(View.GONE);
@@ -113,7 +114,7 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
     }
 
     @Override
-    public void loadMore(List<LuckDrawGoodsBean> luckDrawGoodsBean) {
+    public void loadMore(@NonNull List<LuckDrawGoodsBean> luckDrawGoodsBean) {
         openLuckDrawAdapter.addMoreDataSet(luckDrawGoodsBean);
         refresh.finishLoadMore(true);
     }

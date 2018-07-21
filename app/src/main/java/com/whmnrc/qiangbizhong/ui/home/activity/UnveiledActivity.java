@@ -66,7 +66,7 @@ public class UnveiledActivity extends BaseActivity {
         strings.append(1,"等待开奖");
         fragments.append(0,new OpenLuckDrawFragment());
         fragments.append(1,new WaitLuckDrawFragment());
-        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,strings,120,0);
+        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,strings,60,0);
         tvTitle.setText("最新揭晓");
         ivBack.setVisibility(View.VISIBLE);
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dm_15"
+    android:paddingLeft="@dimen/dm_15"
+    android:paddingRight="@dimen/dm_15"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dm_15"
+        android:textColor="@color/title_color"
+        android:text="【皮肤】【瑞月雅水光针2ml】美莱肤质，提亮肤色" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_5"
+        android:layout_below="@+id/tv_title">
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/tv_navigation"
+            android:textSize="@dimen/dm_12"
+            android:text="已领取"
+            />
+        <TextView
+            android:id="@+id/tv_ly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/goods_price"
+            android:textSize="@dimen/dm_12"
+            android:text="1"
+            android:layout_marginLeft="@dimen/dm_15"
+            />
+        <TextView
+            android:id="@+id/tv_zs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/tv_navigation"
+            android:textSize="@dimen/dm_12"
+            android:text="/2个"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tv_navigation"
+        android:textSize="@dimen/dm_12"
+        android:text="2018.06.08 14:31:23"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dm_5"
+        android:layout_below="@+id/tv_title" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:background="@color/divider_color"
+        android:layout_below="@+id/tv_time"
+        android:layout_marginTop="@dimen/dm_15"/>
+</RelativeLayout>

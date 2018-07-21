@@ -31,6 +31,7 @@ import com.whmnrc.qiangbizhong.ui.home.adapter.MenuAdapter;
 import com.whmnrc.qiangbizhong.ui.home.adapter.NewUnveiledsAdapter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
+import com.whmnrc.qiangbizhong.ui.shop.activity.SearchGoodsActivity;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
@@ -231,8 +232,10 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                 long hour = (time / (60 * 60 * 1000) - day * 24);
                 long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
                 long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                countDownTimerView.setTime((int) hour, (int) min, (int) ss);
-                countDownTimerView.start();
+                if (countDownTimerView != null) {
+                    countDownTimerView.setTime((int) hour, (int) min, (int) ss);
+                    countDownTimerView.start();
+                }
             }
         }
         KillAdapter killAdapter = new KillAdapter(mContext, 0);
@@ -266,7 +269,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     }
 
 
-    @OnClick({R.id.fl_meg, R.id.tv_more, R.id.tv_chouj_more, R.id.tv_jiexiao_more, R.id.tv_for_you_more})
+    @OnClick({R.id.fl_meg, R.id.tv_more, R.id.tv_chouj_more, R.id.tv_jiexiao_more, R.id.tv_for_you_more,R.id.iv_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fl_meg:
@@ -294,7 +297,18 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                     UnveiledActivity.start(mContext);
                 }
                 break;
+            case R.id.iv_search:
+                SearchGoodsActivity.start(mContext);
+                break;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (countDownTimerView != null) {
+            countDownTimerView.stop();
+        }
+        super.onDestroy();
     }
 
     @Override

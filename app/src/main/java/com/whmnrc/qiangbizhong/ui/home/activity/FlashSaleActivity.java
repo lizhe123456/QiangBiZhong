@@ -71,6 +71,8 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
     ViewStub vsEmpty;
     @BindView(R.id.rl_layout)
     RelativeLayout relativeLayout;
+    @BindView(R.id.rl_all)
+    RelativeLayout rlAll;
 
     private TimeAdapter timeAdapter;
 
@@ -115,7 +117,11 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         flashSalePresenter.goodsrushtimelist(this);
         refreshLayout.setOnRefreshListener(refreshLayout -> flashSalePresenter.goodsrushtimelist(FlashSaleActivity.this));
 
-        refreshLayout.setOnLoadMoreListener(refreshLayout -> flashSalePresenter.getFlashSale(strings.get(mToPosition).getTime(), FlashSaleActivity.this,false));
+        refreshLayout.setOnLoadMoreListener(refreshLayout ->{
+            if (strings != null) {
+                flashSalePresenter.getFlashSale(strings.get(mToPosition).getTime(), FlashSaleActivity.this, false);
+            }
+        });
     }
 
 
@@ -125,7 +131,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
             ImageView imageView = view.findViewById(R.id.iv_empty);
             TextView textView = view.findViewById(R.id.tv_text);
             imageView.setImageResource(R.drawable.ic_empty_order);
-            textView.setText("暂无更多订单~");
+            textView.setText("暂无更多数据~");
             vsEmpty.setVisibility(View.VISIBLE);
             rvGoods.setVisibility(View.GONE);
         }
@@ -140,7 +146,9 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
                 this.finish();
                 break;
             case R.id.tv_confirm:
-                FlashSaleDetailsActivity.start(this,killGoodsBeans.getHotGoods().getRushId(),0);
+                if (killGoodsBeans != null) {
+                    FlashSaleDetailsActivity.start(this, killGoodsBeans.getHotGoods().getRushId(), 0);
+                }
                 break;
         }
 
@@ -157,6 +165,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
     public void loadMore(KillGoodsBean killGoodsBean) {
         initKill(killGoodsBeans);
         refreshLayout.finishLoadMore(true);
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -167,6 +176,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         if (killGoodsBeans.getHotGoods() == null && killGoodsBeans.getGoods().size() == 0){
             showEmpty();
             rvGoods.setVisibility(View.GONE);
+            rlAll.setVisibility(View.GONE);
         }else {
             goodsAdapter.addFirstDataSet(killGoodsBeans.getGoods());
             if (killGoodsBeans.getHotGoods() != null) {
@@ -193,6 +203,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
                 vsEmpty.setVisibility(View.GONE);
             }
             rvGoods.setVisibility(View.VISIBLE);
+            rlAll.setVisibility(View.VISIBLE);
         }
     }
 
@@ -216,7 +227,17 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
             timeAdapter.addFirstDataSet(list);
             timeAdapter.setSelect(mToPosition);
             rvGoods.smoothScrollToPosition(mToPosition);
+            if (vsEmpty.getParent() == null) {
+                vsEmpty.setVisibility(View.GONE);
+            }
+            rvGoods.setVisibility(View.VISIBLE);
+            rlAll.setVisibility(View.VISIBLE);
+        }else {
+            showEmpty();
+            rvGoods.setVisibility(View.GONE);
+            rlAll.setVisibility(View.GONE);
         }
+        refreshLayout.finishRefresh(true);
     }
 
 

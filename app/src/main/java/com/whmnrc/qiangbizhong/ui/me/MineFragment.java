@@ -21,6 +21,8 @@ import com.whmnrc.qiangbizhong.model.bean.MineBean;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AddressManageActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.CouponActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.GiveActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.UserInfoActivity;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OderMenuAdapter;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OptionAdapter;
@@ -135,10 +137,11 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                 switch (position){
                     case 0:
                         //赠送记录
-
+                        GiveActivity.start(mContext);
                         break;
                     case 1:
                         //我的抵用券
+                        CouponActivity.start(mContext);
                         break;
                     case 2:
                         //成为会员

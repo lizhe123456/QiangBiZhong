@@ -13,6 +13,7 @@ import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
 import com.whmnrc.qiangbizhong.model.bean.ShopBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiBean;
 import com.whmnrc.qiangbizhong.ui.home.adapter.MenuAdapter;
+import com.whmnrc.qiangbizhong.ui.shop.activity.SearchGoodsActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.adpter.YiMeiGoodsAdapter;
 import com.youth.banner.Banner;
 import java.util.List;
@@ -92,6 +93,7 @@ public class ShopFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_search:
+                SearchGoodsActivity.start(mContext);
                 break;
             case R.id.fl_open:
                 if (isOpen){

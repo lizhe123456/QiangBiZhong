@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dm_120"
+    android:background="@drawable/ic_coupon_list_bg"
+    android:layout_margin="@dimen/dm_15">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dm_15">
+        <View
+            android:layout_width="@dimen/dm_50"
+            android:layout_height="@dimen/dm_2"
+            android:background="@color/divider_color"
+            android:layout_marginRight="@dimen/dm_10"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dm_12"
+            android:text="使用期限 2018.06.06-2018.06.15"/>
+
+        <View
+            android:layout_width="@dimen/dm_50"
+            android:layout_height="@dimen/dm_2"
+            android:background="@color/divider_color"
+            android:layout_marginLeft="@dimen/dm_10"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dm_18"
+        android:text="抽奖抵用券"
+        android:layout_marginLeft="@dimen/dm_15"
+        android:layout_marginTop="@dimen/dm_25"/>
+
+    <TextView
+        android:id="@+id/tv_limit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#90D5FB"
+        android:textSize="@dimen/dm_12"
+        android:text="仅限于[限时抽奖]活动专属"
+        android:layout_marginLeft="@dimen/dm_15"
+        android:layout_marginTop="@dimen/dm_8"/>
+</LinearLayout>

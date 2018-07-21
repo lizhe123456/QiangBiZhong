@@ -86,7 +86,9 @@ public class FlashSalePresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                flashSaleCall.error();
+                if (flashSaleCall != null) {
+                    flashSaleCall.error();
+                }
             }
 
         });
