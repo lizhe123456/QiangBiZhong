@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A0000000">
+
+
+    <LinearLayout
+        android:id="@+id/realContentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="150dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="95dp"
+                android:background="@android:color/white"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="130dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="-10dp"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="26"
+                    android:textColor="@color/goods_price"
+                    android:textSize="@dimen/dm_25" />
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_stock"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@id/tv_price"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:text="库存60574"-->
+                    <!--android:textColor="#666666" />-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_price"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="1"
+                    android:text="选择 尺码 颜色"
+                    android:textColor="#666666" />
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginLeft="10dp">
+                <com.whmnrc.qiangbizhong.widget.RoundedImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="@dimen/dm_100"
+                    android:layout_height="@dimen/dm_100"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius="@dimen/dm_5"/>
+
+            </FrameLayout>
+        </FrameLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="规格"
+                    android:textColor="#666666"
+                    android:textSize="16sp"/>
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:flexWrap="wrap"
+                    app:showDivider="middle">
+
+
+
+
+
+
+
+                </com.google.android.flexbox.FlexboxLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+</RelativeLayout>

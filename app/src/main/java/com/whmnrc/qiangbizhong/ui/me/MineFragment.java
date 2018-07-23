@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.test.mock.MockContext;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,10 @@ import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AddressManageActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.CouponActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.GiveActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.MyCollectionActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.MyShopActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.OpinionBackActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.ReleaseGoodsActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.UserInfoActivity;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OderMenuAdapter;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OptionAdapter;
@@ -149,12 +154,15 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                         break;
                     case 3:
                         //我是代理商
+                        MyShopActivity.start(mContext);
                         break;
                     case 4:
                         //商品发布
+                        ReleaseGoodsActivity.start(mContext);
                         break;
                     case 5:
                         //我的收藏
+                        MyCollectionActivity.start(mContext);
                         break;
                     case 6:
                         //收货信息
@@ -162,6 +170,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                         break;
                     case 7:
                         //意见反馈
+                        OpinionBackActivity.start(mContext);
                         break;
                     case 8:
                         //设置

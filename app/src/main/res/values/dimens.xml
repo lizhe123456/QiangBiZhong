@@ -66,4 +66,11 @@
     <dimen name="dm_65">65dp</dimen>
     <dimen name="dm_120">120dp</dimen>
     <dimen name="dm_69">69dp</dimen>
+    <dimen name="dm_115">115dp</dimen>
+    <dimen name="dm_134">134dp</dimen>
+    <dimen name="dm_63">63dp</dimen>
+    <dimen name="dm_80">80dp</dimen>
+    <dimen name="dm_372">372dp</dimen>
+    <dimen name="dm_375">375dp</dimen>
+    <dimen name="dm_290">290dp</dimen>
 </resources>
