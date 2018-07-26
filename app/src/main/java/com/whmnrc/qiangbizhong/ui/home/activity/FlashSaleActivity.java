@@ -181,11 +181,10 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
             goodsAdapter.addFirstDataSet(killGoodsBeans.getGoods());
             if (killGoodsBeans.getHotGoods() != null) {
                 tvGoodsName.setText(killGoodsBeans.getHotGoods().getGoods_Name());
-                tvDesc.setText(killGoodsBeans.getHotGoods().getGoods_Name());
-                tvPurchasedNum.setText("已抢购" + String.valueOf(killGoodsBeans.getHotGoods().getBond()) + "件");
+                tvPurchasedNum.setText("仅剩"+killGoodsBeans.getHotGoods().getGoodsPrice_Stock()+"件");
                 tvPrice.setText(String.valueOf(killGoodsBeans.getHotGoods().getGoodsPrice_Price()));
-                tvOldPrice.setText(String.valueOf(killGoodsBeans.getHotGoods().getGoodsPrice_Price()));
-                tvSurplus.setText("仅剩" + String.valueOf(killGoodsBeans.getHotGoods().getRushNumber()) + "件");
+                tvOldPrice.setText(String.valueOf(killGoodsBeans.getHotGoods().getGoodsPrice_VirtualPrice()));
+                tvSurplus.setText("已抢" + String.valueOf(killGoodsBeans.getHotGoods().getRushNumber()) + "件");
                 GlideuUtil.loadImageView(this, killGoodsBeans.getHotGoods().getGoods_ImaPath(), ivImg);
                 if (killGoodsBeans.getHotGoods().getIsEnd() == 0){
                     tvConfirm.setText("立即预约");
@@ -295,11 +294,10 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, KillGoodsBean.GoodsBean item, int position) {
             holder.setText(R.id.tv_goods_name,item.getGoods_Name())
-                    .setText(R.id.tv_desc, "")
-                    .setText(R.id.tv_purchased_num, "已抢购0件")
+                    .setText(R.id.tv_purchased_num, "仅剩"+item.getGoodsPrice_Stock()+"件")
                     .setText(R.id.tv_price,String.valueOf(item.getGoodsPrice_Price()))
                     .setText(R.id.tv_old_price,String.valueOf(item.getGoodsPrice_VirtualPrice()))
-                    .setText(R.id.tv_surplus, "仅剩"+item.getRushNumber()+"件")
+                    .setText(R.id.tv_surplus, "已抢"+item.getRushNumber()+"件")
                     .setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
             if (item.getIsEnd() == 0){
                 holder.setText(R.id.tv_confirm, "立即预约");

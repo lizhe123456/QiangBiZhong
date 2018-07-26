@@ -35,6 +35,7 @@
                 android:background="@drawable/bg_search">
 
                 <EditText
+                    android:id="@+id/et_keyword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -42,9 +43,12 @@
                     android:background="@null"
                     android:textColor="@color/tv_6E6E6E"
                     android:textSize="12sp"
+                    android:maxLength="20"
                     android:hint="@string/search"
                     android:textColorHint="@color/tv_6E6E6E"
                     android:inputType="text"
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true"
                     android:maxLines="1"/>
             </FrameLayout>
         </LinearLayout>

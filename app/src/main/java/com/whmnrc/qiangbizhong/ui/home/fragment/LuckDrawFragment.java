@@ -69,6 +69,14 @@ public class LuckDrawFragment extends BaseFragment implements AwardPresenter.Awa
     private LuckDrawItemAdapter luckDrawItemAdapter;
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (awardPresenter != null){
+            awardPresenter.getAwardList(this,true);
+        }
+    }
+
+    @Override
     protected int setLayout() {
         return R.layout.fragment_luck_draw;
     }

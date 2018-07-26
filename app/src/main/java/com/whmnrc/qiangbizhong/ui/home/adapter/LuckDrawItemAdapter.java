@@ -63,7 +63,7 @@ public class LuckDrawItemAdapter extends BaseAdapter<LuckDrawBean.GoodsBean> {
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
             int mm = calendar.get(Calendar.MINUTE);
 
-            date2 = month +"月"+day+"日 "+hour+":"+mm;
+            date2 = month +"月"+day+"日 "+hour+":"+ (mm < 10 ? "0"+mm : mm);
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (java.text.ParseException e) {

@@ -99,6 +99,12 @@ public class AddressManageActivity extends BaseActivity implements AddressPresen
 
     @Override
     public void getAddressList(List<AddressBean> list) {
+        if (list.size() == 0){
+            showEmpty();
+        }else {
+            vsEmpty.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getAddress_IsDefault() == 1){
                 AddressBean addressBean = list.remove(i);
@@ -124,4 +130,17 @@ public class AddressManageActivity extends BaseActivity implements AddressPresen
     public void error() {
 
     }
+
+    public void showEmpty() {
+        if (vsEmpty.getParent() != null) {
+            View view = vsEmpty.inflate();
+            ImageView imageView = view.findViewById(R.id.iv_empty);
+            TextView textView = view.findViewById(R.id.tv_text);
+            imageView.setImageResource(R.drawable.ic_empty_address);
+            textView.setText("暂无收货地址~");
+        }
+        vsEmpty.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+    }
+
 }

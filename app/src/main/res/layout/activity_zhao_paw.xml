@@ -86,6 +86,8 @@
                 android:id="@+id/bt_get_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="@dimen/dm_110"
+                android:gravity="center"
                 android:background="@drawable/bg_get_code"
                 android:paddingTop="@dimen/dm_8"
                 android:paddingBottom="@dimen/dm_8"

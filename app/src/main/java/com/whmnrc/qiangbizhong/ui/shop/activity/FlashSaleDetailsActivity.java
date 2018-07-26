@@ -25,13 +25,16 @@ import com.whmnrc.qiangbizhong.app.Constants;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.GoodsRushinfoBean;
 import com.whmnrc.qiangbizhong.presenter.home.GoodsRushInfoPresenter;
+import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.fragment.GoodsDetailsFragment;
 import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
+import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
+import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
 import com.whmnrc.qiangbizhong.widget.SnapUpCountDownTimerView;
 import com.whmnrc.qiangbizhong.widget.WrapContentHeightViewPager;
 import com.youth.banner.Banner;
@@ -52,7 +55,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Created by lizhe on 2018/7/11.
  */
 
-public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushInfoPresenter.GoodsInfoCall,GoodsRushInfoPresenter.CanYuCall {
+public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushInfoPresenter.GoodsInfoCall,GoodsRushInfoPresenter.CanYuCall, OrderPresenter.PayPassCall{
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
@@ -133,7 +136,6 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
         countDownTimerView.setJiShiWanCheng(new SnapUpCountDownTimerView.JiShiWanCheng() {
             @Override
             public void jsS() {
-//                goodsRushInfoPresenter.getGoodsInfo(goodsId, FlashSaleDetailsActivity.this);
                 rlJs.setBackgroundResource(R.drawable.ic_flash_sale_details_bg);
                 rlCanYu.setVisibility(View.GONE);
             }
@@ -143,7 +145,6 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
             @Override
             public void jsS() {
                 goodsRushInfoPresenter.getGoodsInfo(goodsId, FlashSaleDetailsActivity.this);
-//                rlCanYu.setVisibility(View.VISIBLE);
             }
         });
         //设置banner样式
@@ -192,8 +193,16 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                                 .setContentText("确定要支付吗" + (goodsRushinfoBean.getGoodsPrice_Price() - goodsRushinfoBean.getBond()) + "？")
                                 .setCancelButton("取消", Dialog::dismiss).setConfirmButton("确认", sweetAlertDialog -> {
                             sweetAlertDialog.dismiss();
-                            showLoading("抢购中..");
-                            goodsRushInfoPresenter.cayu(goodsRushinfoBean.getRushId(),this);
+
+                            showLoading("支付中..");
+                            PayDialogUtil.payDialogShow(FlashSaleDetailsActivity.this, new AlertEditTextDialog.ConfirmListenter(){
+                                @Override
+                                public void comfrim(String content) {
+                                    goodsRushInfoPresenter.yzPass(content,FlashSaleDetailsActivity.this);
+
+                                }
+                            });
+
                         }).show();
                     }
                 }
@@ -385,5 +394,11 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                 AccountRechargeActivity.start(FlashSaleDetailsActivity.this,0);
             }
         }).show();
+    }
+
+    @Override
+    public void payPassBack() {
+        showLoading("抢购中..");
+        goodsRushInfoPresenter.cayu(goodsRushinfoBean.getRushId(),FlashSaleDetailsActivity.this);
     }
 }

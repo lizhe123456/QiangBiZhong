@@ -9,13 +9,14 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiBean;
+import com.whmnrc.qiangbizhong.model.bean.YiMeiIndexBean;
 
 /**
  * Company 武汉麦诺软创
  * Created by lizhe on 2018/7/7.
  */
 
-public class YiMeiGoodsAdapter extends BaseAdapter<YiMeiBean.GoodsList>{
+public class YiMeiGoodsAdapter extends BaseAdapter<YiMeiIndexBean.MedicalListBean>{
 
 
     public YiMeiGoodsAdapter(Context context) {
@@ -24,35 +25,35 @@ public class YiMeiGoodsAdapter extends BaseAdapter<YiMeiBean.GoodsList>{
     }
 
     @Override
-    protected void bindDataToItemView(BaseViewHolder holder, YiMeiBean.GoodsList item, int position) {
-        holder.setGlieuImage(R.id.iv_img,item.getUrl());
+    protected void bindDataToItemView(BaseViewHolder holder, YiMeiIndexBean.MedicalListBean item, int position) {
+        holder.setGlieuImage(R.id.iv_img,item.getPlate().getImage_url());
         RecyclerView rvGoods = holder.getView(R.id.rv_goods);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvGoods.setLayoutManager(linearLayoutManager);
         GoodsAdapter goodsAdapter = new GoodsAdapter(getContext());
         rvGoods.setAdapter(goodsAdapter);
-        goodsAdapter.addFirstDataSet(item.getGoodsBeans());
+        goodsAdapter.addFirstDataSet(item.getGoods());
     }
 
     @Override
-    protected int getItemViewLayoutId(int position, YiMeiBean.GoodsList item) {
+    protected int getItemViewLayoutId(int position, YiMeiIndexBean.MedicalListBean item) {
         return R.layout.item_yimei_goods_list;
     }
 
-    public class GoodsAdapter extends BaseAdapter<HomePageBean.GoodsBean>{
+    public class GoodsAdapter extends BaseAdapter<YiMeiIndexBean.MedicalListBean.GoodsBean>{
 
-        public GoodsAdapter(Context context) {
+        private GoodsAdapter(Context context) {
             super(context);
         }
 
         @Override
-        protected void bindDataToItemView(BaseViewHolder holder, HomePageBean.GoodsBean item, int position) {
-            holder.setText(R.id.tv_goods_name,item.getName()).setText(R.id.tv_moeny,item.getMoney()).setGlieuImage(R.id.iv_img,item.getUrl());
+        protected void bindDataToItemView(BaseViewHolder holder, YiMeiIndexBean.MedicalListBean.GoodsBean item, int position) {
+            holder.setText(R.id.tv_goods_name,item.getGoods_Name()).setText(R.id.tv_moeny,String.valueOf(item.getGoodsPrice_Price())).setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
         }
 
         @Override
-        protected int getItemViewLayoutId(int position, HomePageBean.GoodsBean item) {
+        protected int getItemViewLayoutId(int position, YiMeiIndexBean.MedicalListBean.GoodsBean item) {
             return R.layout.item_yimei_goods_list_item_goods;
         }
     }

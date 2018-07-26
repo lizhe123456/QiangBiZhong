@@ -107,6 +107,14 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (homePresenter != null) {
+            homePresenter.getHomepage();
+        }
+    }
+
+    @Override
     protected void initData() {
         homePresenter = new HomePresenter(getContext(), this);
         homePresenter.getHomepage();

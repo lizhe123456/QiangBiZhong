@@ -23,6 +23,8 @@ import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.Order4Fragment;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
+import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
+import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
 
 import java.util.List;
 
@@ -36,7 +38,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Created by lizhe on 2018/7/13.
  */
 
-public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter.SubmitOrederCall,AddressPresenter.AddManageCall{
+public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter.SubmitOrederCall,AddressPresenter.AddManageCall,OrderPresenter.PayPassCall{
 
 
     @BindView(R.id.iv_back)
@@ -134,16 +136,14 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         sweetAlertDialog.dismiss();
-                        if (addressBean != null) {
-                            showLoading("提交中..");
-                            if (goodsRushinfoBean != null) {
-                                orderPresenter.submitOrder(goodsRushinfoBean.getRushId(), addressBean.getAddress_ID(), ConfirmOrderActivity.this);
-                            }else if (awardBeanInfo != null){
-                                orderPresenter.awardSubmitOrder(awardBeanInfo.getAwardId(), addressBean.getAddress_ID(), ConfirmOrderActivity.this);
+                        PayDialogUtil.payDialogShow(ConfirmOrderActivity.this, new AlertEditTextDialog.ConfirmListenter(){
+
+                            @Override
+                            public void comfrim(String content) {
+                                showLoading("支付中..");
+                                orderPresenter.yzPass(content,ConfirmOrderActivity.this);
                             }
-                        } else {
-                            ToastUtils.showShort("请选择地址");
-                        }
+                        });
                     }
                 }).show();
 
@@ -224,5 +224,19 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
     @Override
     public void updateData() {
 
+    }
+
+    @Override
+    public void payPassBack() {
+        if (addressBean != null) {
+            showLoading("提交中..");
+            if (goodsRushinfoBean != null) {
+                orderPresenter.submitOrder(goodsRushinfoBean.getRushId(), addressBean.getAddress_ID(), ConfirmOrderActivity.this);
+            }else if (awardBeanInfo != null){
+                orderPresenter.awardSubmitOrder(awardBeanInfo.getAwardId(), addressBean.getAddress_ID(), ConfirmOrderActivity.this);
+            }
+        } else {
+            ToastUtils.showShort("请选择地址");
+        }
     }
 }

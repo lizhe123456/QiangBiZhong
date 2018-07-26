@@ -25,4 +25,5 @@
     <color name="tv_title_color">#4F5FFF</color>
     <color name="slide_line">#DDDDDD</color>
     <color name="tv_777">#777777</color>
+    <color name="alertdialog_line">#c6c6c6</color>
 </resources>

@@ -68,12 +68,11 @@
             android:layout_marginLeft="@dimen/dm_15"
             android:layout_marginRight="@dimen/dm_15"/>
     </FrameLayout>
-
     <TextView
-        android:id="@+id/tv_update_name"
+        android:id="@+id/tv_update_pay_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="修改昵称:"
+        android:text="设置支付密码"
         android:textColor="@color/tv_191"
         android:paddingTop="@dimen/dm_15"
         android:paddingLeft="@dimen/dm_15"
@@ -81,7 +80,32 @@
         android:background="@color/white"
         android:paddingRight="@dimen/dm_15"
         android:drawableRight="@drawable/ic_more"
-        android:paddingBottom="@dimen/dm_10"/>
+        android:paddingBottom="@dimen/dm_15"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_1"
+            android:background="@color/divider_color"
+            android:layout_marginLeft="@dimen/dm_15"
+            android:layout_marginRight="@dimen/dm_15"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_update_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改昵称"
+        android:textColor="@color/tv_191"
+        android:paddingTop="@dimen/dm_15"
+        android:paddingLeft="@dimen/dm_15"
+        android:textSize="15sp"
+        android:background="@color/white"
+        android:paddingRight="@dimen/dm_15"
+        android:drawableRight="@drawable/ic_more"
+        android:paddingBottom="@dimen/dm_15"/>
     <!--<EditText-->
         <!--android:id="@+id/et_nickName"-->
         <!--android:layout_width="match_parent"-->

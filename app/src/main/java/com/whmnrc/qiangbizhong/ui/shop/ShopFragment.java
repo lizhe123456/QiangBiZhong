@@ -85,7 +85,7 @@ public class ShopFragment extends BaseFragment {
         YiMeiGoodsAdapter yiMeiGoodsAdapter = new YiMeiGoodsAdapter(getContext());
         rvGoods.setLayoutManager(new LinearLayoutManager(getContext()));
         rvGoods.setAdapter(yiMeiGoodsAdapter);
-        yiMeiGoodsAdapter.addFirstDataSet(goodsLists);
+//        yiMeiGoodsAdapter.addFirstDataSet(goodsLists);
     }
 
 

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.whmnrc.qiangbizhong.app.Constants;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.AwardBeanInfo;
 import com.whmnrc.qiangbizhong.presenter.home.GoodsRushInfoPresenter;
+import com.whmnrc.qiangbizhong.ui.home.adapter.UserInfoAdapter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ConfirmOrderActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
@@ -96,12 +99,16 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
     ImageView ivCustomerService;
     @BindView(R.id.rl_canyu)
     RelativeLayout rlCanYu;
+    @BindView(R.id.rv_user_list)
+    RecyclerView rvUserList;
     @BindView(R.id.refresh)
     SmartRefreshLayout refresh;
 
     private GoodsRushInfoPresenter goodsRushInfoPresenter;
     private SparseArray<String> strings;
     private AwardBeanInfo awardBeanInfo;
+
+    private UserInfoAdapter userInfoAdapter;
 
 
     public static void start(Context context, String goodsId) {
@@ -163,6 +170,9 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
                 re();
             }
         });
+        userInfoAdapter = new UserInfoAdapter(this);
+        rvUserList.setAdapter(userInfoAdapter);
+        rvUserList.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
@@ -260,7 +270,7 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
             } else if (awardBeanInfo.getParticipate() == 2) {
                 rlCanYu.setVisibility(View.GONE);
             }
-
+            userInfoAdapter.addFirstDataSet(awardBeanInfo.getUsersRecord());
         } catch (Exception e) {
             LogUtils.e(e);
         }
@@ -287,7 +297,7 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
         super.onDestroy();
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_canyu, R.id.iv_customer_service})
+    @OnClick({R.id.iv_back, R.id.tv_canyu, R.id.iv_customer_service,R.id.tv_cat_more})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -302,7 +312,9 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
                 }
                 break;
             case R.id.iv_customer_service:
-
+                break;
+            case R.id.tv_cat_more:
+                UserListActivity.start(this,awardBeanInfo.getAwardGoodsInfo().getAwardId());
                 break;
         }
     }

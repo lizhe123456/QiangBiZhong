@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
@@ -186,6 +187,33 @@ public class OrderPresenter {
                 }
             }
         });
+    }
+
+    //验证密码
+    public void yzPass(String pwd, PayPassCall payPassCall){
+        Map<String, String> map = new HashMap<>();
+        map.put("userId",UserManage.getInstance().getUserID());
+        map.put("pwd", EncryptUtils.encryptMD5ToString(pwd));
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.validatePay), map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (payPassCall != null){
+                    payPassCall.payPassBack();
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (payPassCall != null){
+                    payPassCall.error();
+                }
+            }
+        });
+    }
+
+    public interface PayPassCall extends BaseCall{
+
+        void payPassBack();
     }
 
     public interface OrderCall extends BaseCall {

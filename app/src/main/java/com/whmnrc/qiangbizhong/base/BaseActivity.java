@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.base.adapter.BaseLiveData;
 import com.whmnrc.qiangbizhong.model.bean.LodingBean;
 import com.whmnrc.qiangbizhong.widget.LoadingDialog;
 
@@ -29,7 +30,9 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     private ImmersionBar mImmersionBar;
 
-    private LoadingDialog loadingDialog;
+    protected LoadingDialog loadingDialog;
+
+    private BaseLiveData baseLiveData;
 
     //统一初始化加载框
     private void initLoading() {
@@ -62,6 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity{
             loadingDialog.show();
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void unLoading(LodingBean lodingBean) {
         if (loadingDialog.isShowing()) {

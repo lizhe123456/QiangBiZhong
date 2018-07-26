@@ -1,13 +1,22 @@
 package com.whmnrc.qiangbizhong;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.blankj.utilcode.util.FragmentUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.gyf.barlibrary.ImmersionBar;
+import com.luck.picture.lib.permissions.RxPermissions;
+import com.pgyersdk.crash.PgyCrashManager;
+import com.pgyersdk.update.DownloadFileListener;
+import com.pgyersdk.update.PgyUpdateManager;
+import com.pgyersdk.update.UpdateManagerListener;
+import com.pgyersdk.update.javabean.AppBean;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.home.HomeFragment;
@@ -72,6 +81,7 @@ public class MainActivity extends BaseActivity {
         FragmentUtils.add(getSupportFragmentManager(),fragments,R.id.fl_content,HOME);
         showFragment = fragments.get(HOME);
         switchBtn(HOME);
+        bugongyin();
     }
 
 
@@ -150,6 +160,63 @@ public class MainActivity extends BaseActivity {
 
                 break;
         }
+    }
+
+    private void bugongyin(){
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE)
+                .subscribe(granted ->
+                    new PgyUpdateManager.Builder()
+                            .setForced(true)                //设置是否强制更新,非自定义回调更新接口此方法有用
+                            .setUserCanRetry(false)         //失败后是否提示重新下载，非自定义下载 apk 回调此方法有用
+                            .setDeleteHistroyApk(true)     // 检查更新前是否删除本地历史 Apk
+                            .setUpdateManagerListener(new UpdateManagerListener() {
+                                @Override
+                                public void onNoUpdateAvailable() {
+                                    //没有更新是回调此方法
+                                    LogUtils.d("pgyer", "there is no new version");
+                                }
+
+                                @Override
+                                public void onUpdateAvailable(AppBean appBean) {
+                                    //没有更新是回调此方法
+                                    LogUtils.d("pgyer", "there is new version can update"
+                                            + "new versionCode is " + appBean.getVersionCode());
+
+                                    //调用以下方法，DownloadFileListener 才有效；如果完全使用自己的下载方法，不需要设置DownloadFileListener
+                                    PgyUpdateManager.downLoadApk(appBean.getDownloadURL());
+                                }
+
+                                @Override
+                                public void checkUpdateFailed(Exception e) {
+                                    //更新检测失败回调
+                                    LogUtils.e("pgyer", "check update failed ", e);
+
+                                }
+                            })
+                            //注意 ：下载方法调用 PgyUpdateManager.downLoadApk(appBean.getDownloadURL()); 此回调才有效
+                            .setDownloadFileListener(new DownloadFileListener() {   // 使用蒲公英提供的下载方法，这个接口才有效。
+                                @Override
+                                public void downloadFailed() {
+                                    //下载失败
+                                    LogUtils.e("pgyer", "download apk failed");
+                                }
+
+                                @Override
+                                public void downloadSuccessful(Uri uri) {
+                                    LogUtils.e("pgyer", "download apk failed");
+                                    PgyUpdateManager.installApk(uri);  // 使用蒲公英提供的安装方法提示用户 安装apk
+
+                                }
+
+                                @Override
+                                public void onProgressUpdate(Integer... integers) {
+                                    LogUtils.e("pgyer", "update download apk progress" + integers);
+                                }
+                            })
+                            .register()
+                );
     }
 
     @Override

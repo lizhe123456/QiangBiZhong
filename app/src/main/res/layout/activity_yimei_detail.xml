@@ -34,15 +34,23 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/tv_191"
                 android:textSize="@dimen/dm_15"
-                android:layout_marginTop="@dimen/dm_65"/>
+                android:layout_marginTop="@dimen/dm_65"
+                android:text="武汉美基元医疗美容机构"/>
 
             <TextView
                 android:id="@+id/tv_collection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:background="@drawable/bg_collection"
+                android:paddingTop="@dimen/dm_3"
+                android:paddingBottom="@dimen/dm_4"
+                android:paddingLeft="@dimen/dm_10"
+                android:paddingRight="@dimen/dm_10"
                 android:textSize="@dimen/dm_12"
-                android:layout_marginTop="@dimen/dm_15"/>
+                android:layout_marginTop="@dimen/dm_15"
+                android:text="收藏"
+                />
 
             <View
                 android:layout_width="match_parent"
@@ -57,9 +65,39 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/dm_30"
+                android:layout_marginLeft="@dimen/dm_50"
+                android:layout_marginRight="@dimen/dm_50"
                 android:paddingTop="@dimen/dm_30">
-
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/ic_logo1"
+                    android:drawablePadding="@dimen/dm_5"
+                    android:text="医疗许可证"
+                    android:textSize="@dimen/dm_15"
+                    android:textColor="@color/tv_191" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/ic_logo2"
+                    android:drawablePadding="@dimen/dm_5"
+                    android:text="品牌认证"
+                    android:textSize="@dimen/dm_15"
+                    android:textColor="@color/tv_191"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:drawableTop="@drawable/ic_logo3"
+                    android:drawablePadding="@dimen/dm_5"
+                    android:text="荣誉展示"
+                    android:textSize="@dimen/dm_15"
+                    android:textColor="@color/tv_191"/>
             </LinearLayout>
 
             <View

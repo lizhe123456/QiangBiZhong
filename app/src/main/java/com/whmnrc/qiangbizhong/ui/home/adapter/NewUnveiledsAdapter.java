@@ -5,6 +5,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +20,10 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
 import com.whmnrc.qiangbizhong.model.bean.HomeResult;
+import com.whmnrc.qiangbizhong.ui.LoginActivity;
+import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 import com.whmnrc.qiangbizhong.util.DateUtil;
+import com.whmnrc.qiangbizhong.util.UserManage;
 
 /**
  * Company 武汉麦诺软创
@@ -55,6 +59,18 @@ public class NewUnveiledsAdapter extends BaseAdapter<HomeResult.GoodsNewAwardBea
         layoutParams.width = width;
         layoutParams.height = width;
         imageView.setLayoutParams(layoutParams);
+
+        holder.setOnClickListener(R.id.tv_purchase, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (UserManage.getInstance().getLoginBean() != null) {
+                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+                    AwardDetailActivity.start(getContext(), goodsNewAwardBean.getAwardId());
+                } else {
+                    LoginActivity.start(getContext());
+                }
+            }
+        });
     }
 
     @Override

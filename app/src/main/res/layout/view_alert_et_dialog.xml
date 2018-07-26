@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lLayout_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_et_alert_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/dm_15"
+        android:layout_marginBottom="@dimen/dm_15"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dm_15" />
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_fund_zf_pwd"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/dm_10"
+            android:text="设置支付密码"
+            android:layout_marginRight="@dimen/dm_15"
+            android:layout_height="@dimen/dm_30" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:background="@color/divider_color"/>
+
+    <TextView
+        android:id="@+id/txt_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dm_14"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/et_pay_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_20"
+        android:layout_marginLeft="@dimen/dm_30"
+        android:layout_marginRight="@dimen/dm_30"
+        android:paddingTop="@dimen/dm_24"
+        android:paddingBottom="@dimen/dm_24"
+        android:background="@drawable/shape_et_alert"
+        android:hint="请输入支付密码"
+        android:inputType="numberPassword"
+        android:maxLength="6"
+        android:padding="@dimen/dm_10"
+        android:textSize="@dimen/dm_14"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:layout_marginTop="@dimen/dm_25"
+        android:background="@color/alertdialog_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_neg"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dm_42"
+            android:layout_weight="1"
+            android:background="@drawable/alertdialog_left_selector"
+            android:gravity="center"
+            android:textColor="@color/tv_999"
+            android:textSize="@dimen/dm_14"/>
+
+        <ImageView
+            android:id="@+id/img_line"
+            android:layout_width="@dimen/dm_1"
+            android:layout_height="@dimen/dm_42"
+            android:background="@color/divider_color"/>
+
+        <Button
+            android:id="@+id/btn_pos"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dm_42"
+            android:layout_weight="1"
+            android:background="@drawable/alertdialog_right_selector"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/dm_14"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -18,12 +18,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/iv_goods_img"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dm_375" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dm_48">
-
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
             </RelativeLayout>
@@ -31,32 +34,80 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:padding="@dimen/dm_15">
                 <TextView
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/tv_191"
-                    android:textSize="@dimen/dm_16"/>
+                    android:textSize="@dimen/dm_16"
+                    android:text="【水光针】欣菲聆水光针2ml（补水·美白·嫩肤）还你娇嫩肌肤 ..."/>
                 <TextView
+                    android:id="@+id/tv_old_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/dm_10"
-                    android:textColor="@color/tv_navigation"/>
+                    android:textColor="@color/tv_navigation"
+                    android:text="原价850"
+                    android:layout_marginBottom="@dimen/dm_2"
+                    android:layout_marginTop="@dimen/dm_20"
+                    android:layout_marginLeft="@dimen/dm_20"
+                    android:layout_alignBottom="@+id/ll_now_moeny1"
+                    android:layout_toRightOf="@+id/ll_now_moeny1"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_now_moeny1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dm_5"
+                    android:layout_below="@+id/tv_title">
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/goods_price"
+                        android:textSize="@dimen/dm_18"
+                        android:text="580"
+                        android:layout_gravity="bottom"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/ic_yudou"
+                        android:layout_marginBottom="@dimen/dm_5"
+                        android:layout_marginLeft="@dimen/dm_5"/>
+                </LinearLayout>
+
+
                 <TextView
+                    android:id="@+id/tv_loction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:text="武汉市"
+                    android:textColor="@color/tv_191"
+                    android:textSize="@dimen/dm_13" />
+
+                <TextView
+                    android:id="@+id/tv_yuyue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/tv_191"
-                    android:textSize="@dimen/dm_13"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/tv_191"
-                    android:textSize="@dimen/dm_13"/>
+                    android:textSize="@dimen/dm_13"
+                    android:text="已预约：101"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dm_10"
+                    android:layout_below="@+id/tv_old_price"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/rl_sort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@drawable/btn_effect"
                 android:layout_marginTop="@dimen/dm_10"
                 android:layout_marginBottom="@dimen/dm_10">
                 <com.whmnrc.qiangbizhong.widget.RoundedImageView
@@ -105,8 +156,8 @@
                     android:background="@drawable/bg_collection"
                     android:textSize="@dimen/dm_12"
                     android:textColor="@color/white"
-                    android:text="sada"
-                    android:paddingTop="@dimen/dm_1"
+                    android:text="收藏"
+                    android:paddingTop="@dimen/dm_3"
                     android:paddingBottom="@dimen/dm_4"
                     android:paddingLeft="@dimen/dm_10"
                     android:paddingRight="@dimen/dm_10"
@@ -115,9 +166,10 @@
                     android:layout_marginTop="@dimen/dm_20"/>
             </RelativeLayout>
             <TextView
+                android:id="@+id/tv_comment_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="看看大家怎么说（27"
+                android:text="看看大家怎么说（27）"
                 android:textColor="@color/tv_191"
                 android:textSize="@dimen/dm_13"
                 android:padding="@dimen/dm_15"

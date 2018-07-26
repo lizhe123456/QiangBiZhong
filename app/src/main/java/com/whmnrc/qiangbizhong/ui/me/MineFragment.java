@@ -87,7 +87,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
         if (loginBean != null){
             tvUsername.setText(loginBean.getUserInfo_NickName());
             GlideuUtil.loadImageView(mContext,loginBean.getUserInfo_HeadImg(),ivHead);
-            tvYudou.setText(loginBean.getUserInfo_Money()+"");
+            tvYudou.setText(((int) loginBean.getUserInfo_Money())+"");
             tvPurchaseRestrictions.setText("今日可购"+ StringUtil.wanString(loginBean.getUserInfo_TotalMoney()));
         }else {
             tvUsername.setText("请先登录");

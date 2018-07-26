@@ -43,7 +43,7 @@ public class GoodsDetailsFragment extends BaseFragment {
         // 设置可以支持缩放
         wvView.getSettings().setSupportZoom(true);
         // 设置出现缩放工具
-        wvView.getSettings().setBuiltInZoomControls(true);
+        wvView.getSettings().setBuiltInZoomControls(false);
         //扩大比例的缩放
         wvView.getSettings().setUseWideViewPort(true);
         //自适应屏幕

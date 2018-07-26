@@ -61,6 +61,8 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
     EditText editText2;
     @BindView(R.id.bt_get_code)
     TextView tvGetCode;
+    @BindView(R.id.iv_select)
+    ImageView ivSelect;
 
     private LoginPresenter loginPresenter;
 
@@ -71,6 +73,8 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
     private static final int SENDSUCCESSFUL = 2;
     //The timer.
     private Timer timer;
+
+    private boolean isSelect;
 
     private Handler handler = new Handler() {
         @Override
@@ -111,10 +115,12 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("注册");
         loginPresenter = new LoginPresenter(this);
+        ivSelect.setImageResource(R.drawable.ic_select);
+        isSelect = true;
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_login,R.id.bt_get_code})
+    @OnClick({R.id.iv_back, R.id.tv_login,R.id.bt_get_code,R.id.tv_xieyi,R.id.iv_select})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -148,8 +154,12 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
                     ToastUtils.showShort("两次输入不一致");
                     return;
                 }
-                showLoading("注册中..");
-                loginPresenter.register(etPhoneNumber.getText().toString().trim(),etPwd.getText().toString().trim(),etCode.getText().toString().trim(),this);
+                if (isSelect){
+                    showLoading("注册中..");
+                    loginPresenter.register(etPhoneNumber.getText().toString().trim(),etPwd.getText().toString().trim(),etCode.getText().toString().trim(),this);
+                }else {
+                    ToastUtils.showShort("请阅读并同意用户使用协议");
+                }
                 break;
             case R.id.bt_get_code:
                 if (TextUtils.isEmpty(etPhoneNumber.getText().toString().trim())){
@@ -162,6 +172,18 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
                 }
                 isStartTimer();
                 loginPresenter.sendsmscode(etPhoneNumber.getText().toString().trim());
+                break;
+            case R.id.tv_xieyi:
+                UserXieYiActivity.start(this);
+                break;
+            case R.id.iv_select:
+                if (isSelect){
+                    ivSelect.setImageResource(R.drawable.ic_selece_no);
+                    isSelect = false;
+                }else {
+                    ivSelect.setImageResource(R.drawable.ic_select);
+                    isSelect = true;
+                }
                 break;
         }
     }
@@ -176,7 +198,6 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
      */
     public void isStartTimer() {
         tvGetCode.setEnabled(false);
-//        tvCode.setBackgroundResource(R.drawable.btn_getcode_shape_gray);
         secondleft = 60;
         timer = new Timer();
         timer.schedule(new TimerTask() {

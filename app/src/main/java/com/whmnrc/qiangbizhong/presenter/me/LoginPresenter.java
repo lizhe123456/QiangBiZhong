@@ -124,7 +124,56 @@ public class LoginPresenter{
 
             @Override
             public void onFailure(int code, String errorMsg) {
+                if (updatePwdCall != null){
+                    updatePwdCall.error();
+                }
+            }
+        });
+    }
 
+    public void updatePayPass(String pwd, String code, UpdatePwdCall updatePwdCall){
+        Map<String,String> map = new HashMap<>();
+        map.put("UserId",UserManage.getInstance().getUserID());
+        map.put("Phone",UserManage.getInstance().getLoginBean().getUserInfo_Mobile());
+        map.put("PayPwd",EncryptUtils.encryptMD5ToString(pwd));
+        map.put("Code",code);
+        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.updatePayPwd), map, new OkhttpUtil.BeanCallback(){
+
+            @Override
+            public void onSuccess(String data) {
+                if (updatePwdCall != null){
+                    updatePwdCall.updatePaw();
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (updatePwdCall != null){
+                    updatePwdCall.error();
+                }
+            }
+        });
+
+    }
+
+    public void retrievePwd(String phone, String pwd, String code, ZhaoPassCall zhaoPassCall){
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        map.put("pwd", pwd);
+        map.put("code", code);
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.retrievePwd), map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (zhaoPassCall != null){
+                    zhaoPassCall.zhaoPassBack();
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (zhaoPassCall != null){
+                    zhaoPassCall.error();
+                }
             }
         });
     }
@@ -139,6 +188,10 @@ public class LoginPresenter{
 
     public interface UpdatePwdCall extends BaseCall{
         void updatePaw();
+    }
+
+    public interface ZhaoPassCall extends BaseCall{
+        void zhaoPassBack();
     }
 
 }

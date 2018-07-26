@@ -217,6 +217,56 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dm_10" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dm_15"
+                    android:background="@color/white">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dm_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_vertical" />
+
+                        <TextView
+                            android:id="@+id/tv_award"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/tv_191"
+                            android:textSize="@dimen/dm_12"
+                            android:text="快抢夺宝 人满开奖"
+                            android:layout_marginLeft="@dimen/dm_10"/>
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/tv_cat_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/tv_191"
+                        android:textSize="@dimen/dm_12"
+                        android:text="查看更多>>"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_user_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingTop="@dimen/dm_10"
+                    android:paddingBottom="@dimen/dm_10"
+                    android:background="@color/white"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_10"/>
 
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tab_layout"
@@ -295,22 +345,15 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/dm_18" />
 
-            <View
-                android:id="@+id/v_divider"
-                android:layout_width="@dimen/dm_1"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/dm_10"
-                android:layout_marginLeft="@dimen/dm_110"
-                android:layout_marginTop="@dimen/dm_10"
-                android:background="@color/divider_color" />
-
             <ImageView
                 android:id="@+id/iv_customer_service"
                 android:layout_width="@dimen/dm_34"
                 android:layout_height="@dimen/dm_34"
                 android:layout_marginLeft="@dimen/dm_15"
                 android:layout_marginTop="@dimen/dm_10"
-                android:layout_toRightOf="@+id/v_divider"
+                android:layout_toLeftOf="@+id/tv_canyu"
+                android:layout_marginRight="@dimen/dm_15"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ic_customer_service" />
         </RelativeLayout>
 

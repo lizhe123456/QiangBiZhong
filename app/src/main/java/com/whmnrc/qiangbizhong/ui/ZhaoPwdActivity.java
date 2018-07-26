@@ -2,7 +2,6 @@ package com.whmnrc.qiangbizhong.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -12,18 +11,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
-
 import java.util.Timer;
 import java.util.TimerTask;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -31,7 +26,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/9.
  */
 
-public class ZhaoPwdActivity extends BaseActivity {
+public class ZhaoPwdActivity extends BaseActivity implements LoginPresenter.ZhaoPassCall{
 
 
     @BindView(R.id.iv_back)
@@ -72,6 +67,29 @@ public class ZhaoPwdActivity extends BaseActivity {
     //The timer.
     private Timer timer;
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case TICK_TIME:
+                    String getCodeAgain = getString(R.string.getcode_again);
+                    String timerMessage = getString(R.string.timer_message);
+                    secondleft--;
+                    if (secondleft <= 0) {
+                        timer.cancel();
+                        btGetCode.setEnabled(true);
+                        btGetCode.setText(getCodeAgain);
+                    } else {
+                        btGetCode.setText(secondleft + timerMessage);
+                    }
+                    break;
+                case SENDSUCCESSFUL:
+//                    etName.setEnabled(false);
+                    break;
+            }
+        }
+    };
+
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ZhaoPwdActivity.class);
@@ -87,6 +105,7 @@ public class ZhaoPwdActivity extends BaseActivity {
     protected void setData() {
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("找回密码");
+        loginPresenter = new LoginPresenter(this);
     }
 
 
@@ -101,6 +120,12 @@ public class ZhaoPwdActivity extends BaseActivity {
                     ToastUtils.showShort("手机号为空");
                     return;
                 }
+                if (!RegexUtils.isMobileSimple(etPhoneNumber.getText())) {
+                    ToastUtils.showShort("手机号格式有误");
+                    return;
+                }
+                isStartTimer();
+                loginPresenter.sendsmscode(etPhoneNumber.getText().toString().trim());
                 break;
             case R.id.tv_login:
                 //注册
@@ -126,14 +151,32 @@ public class ZhaoPwdActivity extends BaseActivity {
                     ToastUtils.showShort("密码不能小于6位");
                     return;
                 }
-                if (editText2.getText().toString().trim().equals(etPwd.getText().toString().trim())){
+                if (!editText2.getText().toString().trim().equals(etPwd.getText().toString().trim())){
                     ToastUtils.showShort("两次输入不一致");
                     return;
                 }
+                showLoading("提交中..");
+                loginPresenter.retrievePwd(etPhoneNumber.getText().toString().trim(),etPwd.getText().toString().trim(),etCode.getText().toString().trim(),this);
                 break;
         }
     }
 
+    /**
+     * 倒计时
+     */
+    public void isStartTimer() {
+        btGetCode.setEnabled(false);
+//        tvCode.setBackgroundResource(R.drawable.btn_getcode_shape_gray);
+        secondleft = 60;
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(TICK_TIME);
+            }
+        }, 1000, 1000);
+    }
 
     @Override
     protected void onDestroy() {
@@ -143,4 +186,14 @@ public class ZhaoPwdActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void error() {
+
+    }
+
+    @Override
+    public void zhaoPassBack() {
+        ToastUtils.showShort("修改成功");
+        this.finish();
+    }
 }

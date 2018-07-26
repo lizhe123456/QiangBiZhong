@@ -101,7 +101,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.Head
     }
 
 
-    @OnClick({R.id.iv_img,R.id.iv_back,R.id.tv_update_img, R.id.tv_update_pass, R.id.tv_login,R.id.tv_update_name})
+    @OnClick({R.id.iv_img,R.id.iv_back,R.id.tv_update_img, R.id.tv_update_pass, R.id.tv_login,R.id.tv_update_name,R.id.tv_update_pay_pass})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_img:
@@ -167,6 +167,9 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.Head
                 break;
             case R.id.tv_update_name:
                 UpdatePassV2Activity.start(this,nickName == null ? "" : nickName);
+                break;
+            case R.id.tv_update_pay_pass:
+                UpdatePayPwdActivity.start(this);
                 break;
         }
     }

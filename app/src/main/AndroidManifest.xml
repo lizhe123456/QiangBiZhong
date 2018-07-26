@@ -3,13 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.whmnrc.qiangbizhong">
 
-    <!-- if you want to load images from the internet -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- if you want to load images from a file OR from the internet -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA"/>
+    <!--允许程序访问WiFi网络信息-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--允许程序读写手机状态和身份-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-sdk
         android:minSdkVersion="19"
@@ -24,7 +36,13 @@
         tools:replace="android:icon, android:theme,android:allowBackup,android:label,android:supportsRtl"
         android:name=".app.App"
         android:allowBackup="true">
-
+        <meta-data android:name="com.amap.api.v2.apikey"
+            android:value="bfa933345c9f9bb89ae89facedcab4e8">
+        </meta-data>
+        <meta-data
+            android:name="PGYER_APPID"
+            android:value="1fba0d0890282300433c8af6ae4fbdfe">
+        </meta-data>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.whmnrc.qiangbizhong.fileProvider"
@@ -119,6 +137,15 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.shopping.activity.EvaluateActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.me.activity.UpdatePayPwdActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.yimei.activity.YiMeiGoodsListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.home.activity.UserListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.UserXieYiActivity"
+            android:screenOrientation="portrait"/>
+        <service android:name="com.amap.api.location.APSService"/>
     </application>
 
 </manifest>

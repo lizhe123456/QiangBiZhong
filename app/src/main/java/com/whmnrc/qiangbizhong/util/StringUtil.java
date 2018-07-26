@@ -38,4 +38,12 @@ public class StringUtil {
         }
     }
 
+    public static String kmString(double d){
+        double s = (double) ((double) d / 1000);
+        NumberFormat nf = NumberFormat.getNumberInstance();
+        nf.setMaximumFractionDigits(2);
+        nf.setRoundingMode(RoundingMode.DOWN);
+        return nf.format(s)+"km";
+    }
+
 }

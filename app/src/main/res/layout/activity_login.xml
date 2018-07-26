@@ -85,7 +85,8 @@
             <TextView
                 android:id="@+id/bt_get_code"
                 android:layout_width="wrap_content"
-                android:minWidth="@dimen/dm_120"
+                android:minWidth="@dimen/dm_110"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_get_code"
                 android:paddingTop="@dimen/dm_8"
@@ -93,7 +94,6 @@
                 android:paddingLeft="@dimen/dm_14"
                 android:paddingRight="@dimen/dm_14"
                 android:text="@string/get_code_tv"
-                android:gravity="center"
                 android:textColor="#2399FD"
                 android:textSize="16sp" />
 

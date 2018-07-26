@@ -2,8 +2,12 @@ package com.whmnrc.qiangbizhong.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.blankj.utilcode.util.Utils;
+import com.pgyersdk.crash.PgyCrashManager;
+import com.pgyersdk.crash.PgyerCrashObservable;
+import com.pgyersdk.crash.PgyerObserver;
 
 
 /**
@@ -20,7 +24,13 @@ public class App extends Application {
         super.onCreate();
         context = this;
         Utils.init(context);
+//        PgyCrashManager.register();
+    }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public static Context getContext() {

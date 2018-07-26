@@ -4,7 +4,10 @@ package com.whmnrc.qiangbizhong.ui.me.fragment.order;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
+import com.whmnrc.qiangbizhong.ui.shop.activity.ConfirmOrderActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
+import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
+import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -13,8 +16,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Created by lizhe on 2018/7/11.
  */
 
-public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.CancelCall, OrderPresenter.CollectCall, OrderPresenter.PayBackS {
+public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.CancelCall, OrderPresenter.CollectCall, OrderPresenter.PayBackS, OrderPresenter.PayPassCall {
 
+    private OrderListBean orderListBean;
 
     @Override
     public void setClick() {
@@ -68,6 +72,7 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
 
             @Override
             public void payClick(OrderListBean item) {
+                orderListBean = item;
                 new SweetAlertDialog(mContext)
                         .setTitleText("提示")
                         .setContentText("确定要支付吗？")
@@ -80,8 +85,15 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         sweetAlertDialog.dismiss();
-                        showLoading("支付中..");
-                        orderPresenter.payOrder(item.getAward().getGoodsAwardId(),Order4Fragment.this);
+                        PayDialogUtil.payDialogShow(mContext, new AlertEditTextDialog.ConfirmListenter(){
+
+                            @Override
+                            public void comfrim(String content) {
+                                showLoading("支付中..");
+                                orderPresenter.yzPass(content,Order4Fragment.this);
+                            }
+                        });
+
                     }
                 }).show();
             }
@@ -125,5 +137,12 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
                 AccountRechargeActivity.start(mContext,0);
             }
         }).show();
+    }
+
+    @Override
+    public void payPassBack() {
+        if (orderListBean != null) {
+            orderPresenter.payOrder(orderListBean.getAward().getGoodsAwardId(), Order4Fragment.this);
+        }
     }
 }

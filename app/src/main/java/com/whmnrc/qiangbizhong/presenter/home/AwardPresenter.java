@@ -8,6 +8,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawBean;
 import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBean;
+import com.whmnrc.qiangbizhong.model.bean.UserInfoBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 
@@ -60,12 +61,49 @@ public class AwardPresenter {
         });
     }
 
+    public void awardrecorduserlist(boolean isR,String awardId,UserCall userCall){
+        Map<String, String> map = new HashMap<>();
+        if (isR){
+            page = 1;
+        }
+        map.put("PageIndex",page+"");
+        map.put("PageCount",size+"");
+        OkhttpUtil.post(context.getString(R.string.server_address)+context.getString(R.string.awardrecorduserlist)+"?awardId="+awardId,map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                List<UserInfoBean> userInfoBeans = GsonUtil.changeGsonToList(data,UserInfoBean.class);
+                if (userCall != null){
+                    if (isR) {
+                        userCall.awardUserBack(userInfoBeans);
+                    }else {
+                        userCall.loadMore(userInfoBeans);
+                    }
+                    page++;
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (userCall != null){
+                    userCall.error();
+                }
+            }
+        });
+    }
+
     public interface AwardCall extends BaseCall{
 
         void awardBack(LuckDrawBean luckDrawBeans);
 
         void loadMore(List<LuckDrawBean.GoodsBean> goodsBean);
 
+    }
+
+    public interface UserCall extends BaseCall{
+
+        void awardUserBack(List<UserInfoBean> list);
+
+        void loadMore(List<UserInfoBean> list);
     }
 
 }

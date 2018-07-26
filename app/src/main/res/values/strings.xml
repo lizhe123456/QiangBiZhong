@@ -64,6 +64,8 @@
 
     <string name="rechargequery">/api/home/recharge/query</string>
 
+    <string name="awardrecorduserlist">/api/home/awardrecorduserlist</string>
+
     <!--最新揭晓-->
     <string name="awardlist2">/api/home/awardlist2</string>
     <!--支付宝支付-->
@@ -75,13 +77,10 @@
     <!--我的抢购记录-->
     <string name="myrushgoodsrecord">/api/home/myrushgoodsrecord</string>
 
-
-
     <!--抽奖详情-->
     <string name="awardInfo">/api/home/awardInfo</string>
     <!--抽奖列表-->
     <string name="awardlist">/api/home/awardlist</string>
-
     <!--查询充值记录信息-->
     <string name="recordquery">/api/home/recharge/recordquery</string>
     <!--中奖 支付尾款-->
@@ -92,6 +91,26 @@
     <string name="collectgoods">/api/app/confirm/collectgoods</string>
     <!--放弃抢购-->
     <string name="abandon">/api/app/rushGoods/abandon</string>
+    <!--修改支付密码-->
+    <string name="updatePayPwd">/api/user/updatePayPwd</string>
+    <!--验证支付密码-->
+    <string name="validatePay">/api/user/validatePay</string>
+    <!--找回密码-->
+    <string name="retrievePwd">/api/user/retrievePwd</string>
+    <!--医美首页-->
+    <string name="medicalIndex">/api/home/medicalIndex</string>
+    <!--医美商品列表-->
+    <string name="medicalsearchlist">/api/home/medicalsearchlist</string>
+    <!--医美商品详情-->
+    <string name="getmedicaldetail">/api/home/getmedicaldetail</string>
+    <!--医美店铺详情-->
+    <string name="getmedicalstorelist">/api/home/getmedicalstorelist</string>
+    <!--商品评价列表-->
+    <string name="getcommentlist">/api/home/getcommentlist</string>
+    <!--添加收藏-->
+    <string name="addcollection">/api/home/addcollection</string>
+
+
 
     <string name="getcode_again">重新获取</string>
     <string name="timer_message">秒</string>

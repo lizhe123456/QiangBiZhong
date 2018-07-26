@@ -150,7 +150,7 @@ public class AddressBean implements Parcelable {
     }
 
     public String getProviceName() {
-        return ProviceName;
+        return ProviceName == null ? "" : ProviceName;
     }
 
     public void setProviceName(String ProviceName) {
@@ -158,7 +158,7 @@ public class AddressBean implements Parcelable {
     }
 
     public String getCityName() {
-        return CityName;
+        return CityName == null ? "" : CityName;
     }
 
     public void setCityName(String CityName) {
@@ -166,7 +166,7 @@ public class AddressBean implements Parcelable {
     }
 
     public String getRegionName() {
-        return RegionName;
+        return RegionName == null ? "" : RegionName;
     }
 
     public void setRegionName(String RegionName) {

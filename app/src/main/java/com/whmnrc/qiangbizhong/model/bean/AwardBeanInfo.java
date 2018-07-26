@@ -24,6 +24,15 @@ public class AwardBeanInfo implements Parcelable {
 //    private Object Record;
     private int Participate;
     private List<AwardGoodsBanner> AwardGoodsBanner;
+    private List<UserInfoBean> UsersRecord;
+
+    public List<UserInfoBean> getUsersRecord() {
+        return UsersRecord;
+    }
+
+    public void setUsersRecord(List<UserInfoBean> usersRecord) {
+        UsersRecord = usersRecord;
+    }
 
     protected AwardBeanInfo(Parcel in) {
         Participate = in.readInt();

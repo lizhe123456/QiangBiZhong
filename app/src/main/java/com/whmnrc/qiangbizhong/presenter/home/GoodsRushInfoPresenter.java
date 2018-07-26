@@ -5,11 +5,13 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.AwardBeanInfo;
 import com.whmnrc.qiangbizhong.model.bean.GoodsRushinfoBean;
+import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
@@ -151,6 +153,28 @@ public class GoodsRushInfoPresenter {
                     if (awardCall != null) {
                         awardCall.error();
                     }
+                }
+            }
+        });
+    }
+
+    //验证密码
+    public void yzPass(String pwd, OrderPresenter.PayPassCall payPassCall){
+        Map<String, String> map = new HashMap<>();
+        map.put("userId",UserManage.getInstance().getUserID());
+        map.put("pwd", EncryptUtils.encryptMD5ToString(pwd));
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.validatePay), map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (payPassCall != null){
+                    payPassCall.payPassBack();
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (payPassCall != null){
+                    payPassCall.error();
                 }
             }
         });

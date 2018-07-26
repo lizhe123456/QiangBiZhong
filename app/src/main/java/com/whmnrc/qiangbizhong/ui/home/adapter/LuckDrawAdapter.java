@@ -48,7 +48,14 @@ public class LuckDrawAdapter extends BaseAdapter<HomeResult.GoodsNewAwardBean> {
         span.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.goods_price)), 3, str.length()-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(span);
         ProgressBar progressBar = holder.getView(R.id.progressBarHorizontal);
-        progressBar.setProgress(item.getAwardPeopleCount()%item.getNeedCount());
+        progressBar.setMax(100);
+        if (item.getAwardPeopleCount() == 0){
+            progressBar.setSecondaryProgress(0);
+            progressBar.setProgress(0);
+        }else {
+            progressBar.setSecondaryProgress((int) (((double)item.getAwardPeopleCount() / (double) item.getNeedCount()) * 100));
+            progressBar.setProgress((int) (((double) item.getAwardPeopleCount() / (double) item.getNeedCount()) * 100));
+        }
         LinearLayout.LayoutParams layoutParams1 = (LinearLayout.LayoutParams) progressBar.getLayoutParams();
         layoutParams1.width = width;
         progressBar.setLayoutParams(layoutParams1);
