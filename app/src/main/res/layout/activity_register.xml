@@ -197,7 +197,17 @@
             android:textSize="@dimen/dm_15"
             android:textColor="@color/colorAccent"
             android:text="《用户使用协议》"/>
+
     </LinearLayout>
+    <TextView
+        android:id="@+id/tv_cz_xieyi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dm_15"
+        android:paddingLeft="@dimen/dm_60"
+        android:layout_marginTop="@dimen/dm_5"
+        android:textColor="@color/colorAccent"
+        android:text="《充值协议》"/>
     <TextView
         android:id="@+id/tv_login"
         android:layout_width="match_parent"

@@ -20,6 +20,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.LoginBean;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
+import com.whmnrc.qiangbizhong.util.PwdCheckUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
 import butterknife.BindView;
@@ -66,7 +67,7 @@ public class PwdLoginActivity extends BaseActivity implements LoginPresenter.Log
     private LoginPresenter loginPresenter;
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, PwdLoginActivity.class);
+        Intent starter = new Intent(context, LoginActivity.class);
         context.startActivity(starter);
     }
 
@@ -82,11 +83,12 @@ public class PwdLoginActivity extends BaseActivity implements LoginPresenter.Log
         loginPresenter = new LoginPresenter(this);
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_login, R.id.tv_swich, R.id.tv_zhao_pwd,R.id.isshow})
+    @OnClick({R.id.iv_back, R.id.tv_login, R.id.tv_swich, R.id.tv_zhao_pwd,R.id.isshow,R.id.tv_register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 this.finish();
+
                 break;
             case R.id.tv_login:
                 if (TextUtils.isEmpty(etPhoneNumber.getText().toString().trim())) {
@@ -103,11 +105,12 @@ public class PwdLoginActivity extends BaseActivity implements LoginPresenter.Log
                     ToastUtils.showShort("密码不能为空");
                     return;
                 }
+
                 showLoading("登录中..");
                 loginPresenter.login(etPhoneNumber.getText().toString().trim(),etCode.getText().toString().trim(),"",0,this);
                 break;
             case R.id.tv_swich:
-                this.finish();
+                PwdLoginActivity.start(this);
                 break;
             case R.id.tv_zhao_pwd:
                 ZhaoPwdActivity.start(this);
@@ -124,6 +127,9 @@ public class PwdLoginActivity extends BaseActivity implements LoginPresenter.Log
                     etCode.setSelection(etCode.getText().toString().length());
                 }
                 break;
+            case R.id.tv_register:
+                RegisterActivity.start(this);
+                break;
         }
     }
 
@@ -131,7 +137,6 @@ public class PwdLoginActivity extends BaseActivity implements LoginPresenter.Log
     public void loginBack(LoginBean loginBean) {
         UserManage.getInstance().updateLoginBena(loginBean);
         MainActivity.start(this);
-        this.finish();
     }
 
     @Override

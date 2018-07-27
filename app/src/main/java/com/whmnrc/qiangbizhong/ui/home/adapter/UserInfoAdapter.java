@@ -24,7 +24,7 @@ public class UserInfoAdapter extends BaseAdapter<UserInfoBean> {
                     .setText(R.id.tv_time,item.getCreateDate())
                     .setGlieuImage(R.id.iv_head,item.getUserHeadImage());
 
-            if (item.getOrder_State() == 8){
+            if (item.getStatus() == 1){
                 holder.setVisible(R.id.iv_img_zj,true);
             }else {
                 holder.setVisible(R.id.iv_img_zj,false);

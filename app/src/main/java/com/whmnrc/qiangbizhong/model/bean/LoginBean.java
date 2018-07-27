@@ -3,6 +3,7 @@ package com.whmnrc.qiangbizhong.model.bean;
 /**
  * Company 武汉麦诺软创
  * Created by lizhe on 2018/7/10.
+ * 0普通 1代理商 2商家 3平台
  */
 
 public class LoginBean {

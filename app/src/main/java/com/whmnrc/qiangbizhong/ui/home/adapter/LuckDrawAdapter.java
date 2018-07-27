@@ -41,12 +41,11 @@ public class LuckDrawAdapter extends BaseAdapter<HomeResult.GoodsNewAwardBean> {
                 .setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
 
         TextView textView = holder.getView(R.id.tv_surplus);
-        String str = "剩余：" + (item.getNeedCount() - item.getAwardPeopleCount());
+        String str = ""+(item.getNeedCount() - item.getAwardPeopleCount());
         textView.setText(str);
-        Spannable span = new SpannableString(textView.getText());
-        span.setSpan(new AbsoluteSizeSpan(ConvertUtils.px2dp(13)), 3, str.length()-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        span.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.goods_price)), 3, str.length()-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.setText(span);
+//        span.setSpan(new AbsoluteSizeSpan(ConvertUtils.px2dp(13)), 3, str.length()-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        span.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.goods_price)), 3, str.length()-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         ProgressBar progressBar = holder.getView(R.id.progressBarHorizontal);
         progressBar.setMax(100);
         if (item.getAwardPeopleCount() == 0){

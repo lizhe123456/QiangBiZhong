@@ -63,12 +63,12 @@
             android:textSize="18sp"
             android:textColor="@color/goods_price"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dm_24"
+            android:layout_height="@dimen/dm_15"
             android:layout_gravity="bottom"
-            android:src="@drawable/ic_yudou"
-            android:layout_marginBottom="@dimen/dm_5"
-            android:layout_marginLeft="@dimen/dm_5"/>
+            android:layout_marginBottom="@dimen/dm_2"
+            android:layout_marginLeft="@dimen/dm_5"
+            android:src="@drawable/ic_yudou" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_now_moeny"
@@ -86,12 +86,12 @@
             android:textSize="10sp"
             android:textColor="@color/tv_989898"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dm_24"
+            android:layout_height="@dimen/dm_15"
             android:layout_gravity="bottom"
-            android:src="@drawable/ic_yudou"
             android:layout_marginBottom="@dimen/dm_2"
-            android:layout_marginLeft="@dimen/dm_5"/>
+            android:layout_marginLeft="@dimen/dm_5"
+            android:src="@drawable/ic_yudou" />
     </LinearLayout>
 
 

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tool="http://schemas.android.com/tools"
 
     android:background="@color/bg_f5f5f5"
     android:orientation="vertical">
@@ -136,10 +137,9 @@
                                 android:textSize="18sp" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:layout_marginBottom="@dimen/dm_5"
+                                android:layout_width="@dimen/dm_24"
+                                android:layout_height="@dimen/dm_15"
+                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/dm_5"
                                 android:src="@drawable/ic_yudou" />
                         </LinearLayout>
@@ -162,15 +162,26 @@
                                 android:textSize="12sp" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
-                                android:layout_marginBottom="@dimen/dm_2"
+                                android:layout_width="@dimen/dm_24"
+                                android:layout_height="@dimen/dm_15"
+                                android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/dm_5"
                                 android:src="@drawable/ic_yudou" />
                         </LinearLayout>
                     </LinearLayout>
-
+                    <TextView
+                        android:id="@+id/tv_goods_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/tv_navigation"
+                        android:textSize="@dimen/dm_12"
+                        android:layout_marginTop="@dimen/dm_5"
+                        android:layout_marginBottom="@dimen/dm_5"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dm_1"
+                        android:layout_marginTop="@dimen/dm_10"
+                        android:background="@color/divider_color" />
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -184,10 +195,6 @@
                         android:layout_marginTop="@dimen/dm_10"
                         android:background="@color/divider_color" />
                 </LinearLayout>
-                <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/dm_1"-->
-                <!--android:background="@color/divider_color"/>-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -310,18 +317,30 @@
                 android:textColor="@color/tv_191"
                 android:textSize="@dimen/dm_13" />
 
-            <TextView
-                android:id="@+id/tv_yu_price"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_below="@+id/tv_yuyue"
                 android:layout_marginLeft="@dimen/dm_15"
-                android:drawablePadding="@dimen/dm_3"
-                android:drawableRight="@drawable/ic_yudou"
-                android:gravity="bottom"
-                android:text="中奖后再付：340"
-                android:textColor="@color/tv_navigation"
-                android:textSize="@dimen/dm_10" />
+                android:gravity="bottom">
+                <TextView
+                    android:id="@+id/tv_yu_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="中奖后再付：340"
+                    android:textColor="@color/tv_navigation"
+                    android:textSize="@dimen/dm_10" />
+                <ImageView
+                    android:layout_width="@dimen/dm_24"
+                    android:layout_height="@dimen/dm_15"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dm_5"
+                    android:src="@drawable/ic_yudou" />
+            </LinearLayout>
+
+
+
 
             <TextView
                 android:id="@+id/tv_price"

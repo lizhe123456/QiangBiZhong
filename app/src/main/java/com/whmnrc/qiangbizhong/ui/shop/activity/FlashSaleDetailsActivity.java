@@ -33,6 +33,7 @@ import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
+import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
 import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
 import com.whmnrc.qiangbizhong.widget.SnapUpCountDownTimerView;
@@ -69,6 +70,8 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
     Banner bannerView;
     @BindView(R.id.tv_goods_name)
     TextView tvGoodsName;
+    @BindView(R.id.tv_goods_desc)
+    TextView tvGoodsDesc;
     @BindView(R.id.tv_moeny)
     TextView tvMoeny;
     @BindView(R.id.tv_old_moeny)
@@ -170,7 +173,7 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_canyu})
+    @OnClick({R.id.iv_back, R.id.tv_canyu, R.id.iv_customer_service})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -199,13 +202,16 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                                 @Override
                                 public void comfrim(String content) {
                                     goodsRushInfoPresenter.yzPass(content,FlashSaleDetailsActivity.this);
-
                                 }
                             });
 
                         }).show();
                     }
                 }
+                break;
+            case R.id.iv_customer_service:
+                CustomerServiceDialog customerServiceDialog = new CustomerServiceDialog(this, R.style.AlertDialogStyle);
+                customerServiceDialog.show();
                 break;
         }
     }
@@ -232,8 +238,9 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                 ViewPagerUtil.initViewPage(viewPager, tabLayout, this, fragments, strings, 100, 0);
             }
             tvGoodsName.setText(goodsRushinfoBean.getRushGoodsInfo().getGoods_Name());
-            tvMoeny.setText("" + String.valueOf(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_Price()));
-            tvOldMoeny.setText("原价：" + String.valueOf(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_VirtualPrice()));
+            tvGoodsDesc.setText(goodsRushinfoBean.getRushGoodsInfo().getGoods_Describe());
+            tvMoeny.setText("现价："+StringUtil.weiString1(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_Price()));
+            tvOldMoeny.setText("原价：" + StringUtil.weiString1(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_VirtualPrice()));
             tvOldMoeny.getPaint().setAntiAlias(true);//抗锯齿
             tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
             tvScep.setText(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_SpecName() == null ? "" : goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_SpecName() + "   " + goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_AttrName());
@@ -249,12 +256,6 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
 
     @SuppressLint("SimpleDateFormat")
     public int btnStatu() {
-//        String start = goodsRushinfoBean.getRushStartTime();
-//        String end = goodsRushinfoBean.getRushEndTime();
-//        long lstart = TimeUtils.string2Milliseconds(start, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-//        long lend = TimeUtils.string2Milliseconds(end, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-//        String serverTime = UserManage.getInstance().getServerTime();
-//        long now = TimeUtils.string2Milliseconds(serverTime, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         if (lstart <= now) {
             //再活动时间内
             if (now <= lend) {

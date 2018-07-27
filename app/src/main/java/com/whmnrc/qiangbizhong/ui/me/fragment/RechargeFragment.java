@@ -18,6 +18,7 @@ import com.whmnrc.qiangbizhong.pay.alipay.AliPayTools;
 import com.whmnrc.qiangbizhong.pay.listener.OnSuccessAndErrorListener;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
 import com.whmnrc.qiangbizhong.presenter.me.RechargePresenter;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
 import butterknife.BindView;
@@ -41,6 +42,9 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
     EditText etRecharge;
     @BindView(R.id.btn_confirm)
     TextView btnConfirm;
+    @BindView(R.id.tv_kegoumai)
+    TextView textView;
+
 
     RechargePresenter rechargePresenter;
 
@@ -84,6 +88,7 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
     public void rechargeData(@NonNull RechargeBean rechargeBean) {
         tvMoeny.setText(rechargeBean.getGoodsPrice_Stock()+"");
         tvRmb.setText(rechargeBean.getPrice()+"");
+        textView.setText(StringUtil.wanString(rechargeBean.getCanPayCount()));
     }
 
     @Override

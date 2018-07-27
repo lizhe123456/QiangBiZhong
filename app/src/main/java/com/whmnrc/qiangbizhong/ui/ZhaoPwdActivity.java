@@ -16,6 +16,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
+import com.whmnrc.qiangbizhong.util.PwdCheckUtil;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import butterknife.BindView;
@@ -149,6 +151,11 @@ public class ZhaoPwdActivity extends BaseActivity implements LoginPresenter.Zhao
                 }
                 if (etPwd.getText().toString().trim().length() < 6){
                     ToastUtils.showShort("密码不能小于6位");
+                    return;
+                }
+
+                if (!PwdCheckUtil.isLetterDigit(etPwd.getText().toString().trim())){
+                    ToastUtils.showShort("至少包含大小写字母及数字");
                     return;
                 }
                 if (!editText2.getText().toString().trim().equals(etPwd.getText().toString().trim())){

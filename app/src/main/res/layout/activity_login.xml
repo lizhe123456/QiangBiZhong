@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:text="切换登录方式"
             android:layout_gravity="left"
-            android:textSize="@dimen/dm_19"
+            android:textSize="@dimen/dm_13"
             android:textColor="@color/colorAccent"
             android:layout_marginTop="@dimen/dm_16"
             android:layout_alignParentRight="true"

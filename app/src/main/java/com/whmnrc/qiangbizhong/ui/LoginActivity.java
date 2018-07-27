@@ -49,7 +49,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.LoginC
     private LoginPresenter loginPresenter;
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, LoginActivity.class);
+        Intent starter = new Intent(context, PwdLoginActivity.class);
         context.startActivity(starter);
     }
 
@@ -101,7 +101,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.LoginC
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_swich:
-                PwdLoginActivity.start(this);
+                this.finish();
                 break;
             case R.id.iv_back:
                 this.finish();
@@ -172,7 +172,6 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.LoginC
     public void loginBack(LoginBean loginBean) {
         UserManage.getInstance().updateLoginBena(loginBean);
         MainActivity.start(this);
-        this.finish();
     }
 
     @Override

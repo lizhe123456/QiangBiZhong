@@ -93,8 +93,20 @@
             android:layout_height="@dimen/dm_1"
             android:background="@color/divider_color" />
     </LinearLayout>
-
-
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="注册"
+        android:layout_marginLeft="@dimen/dm_38"
+        android:layout_marginRight="@dimen/dm_38"
+        android:paddingTop="@dimen/dm_12"
+        android:paddingBottom="@dimen/dm_12"
+        android:layout_marginTop="@dimen/dm_62"
+        android:background="@drawable/login_shap" />
     <TextView
         android:id="@+id/tv_login"
         android:layout_width="match_parent"
@@ -107,7 +119,7 @@
         android:layout_marginRight="@dimen/dm_38"
         android:paddingTop="@dimen/dm_12"
         android:paddingBottom="@dimen/dm_12"
-        android:layout_marginTop="@dimen/dm_74"
+        android:layout_marginTop="@dimen/dm_10"
         android:background="@drawable/login_shap" />
     <RelativeLayout
         android:layout_width="match_parent"
@@ -120,7 +132,7 @@
             android:text="切换登录方式"
             android:layout_gravity="left"
             android:textSize="@dimen/dm_13"
-            android:textColor="#A7ACB7"
+            android:textColor="@color/colorAccent"
             android:layout_marginTop="@dimen/dm_16"
             android:layout_marginLeft="@dimen/dm_38"/>
         <TextView
@@ -131,7 +143,7 @@
             android:layout_alignParentRight="true"
             android:textSize="@dimen/dm_13"
             android:layout_marginRight="@dimen/dm_38"
-            android:textColor="#A7ACB7"
+            android:textColor="@color/colorAccent"
             android:layout_marginTop="@dimen/dm_16"/>
 
     </RelativeLayout>

@@ -18,6 +18,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
+import com.whmnrc.qiangbizhong.util.PwdCheckUtil;
 import com.whmnrc.qiangbizhong.util.ToastUtil;
 
 import java.util.Timer;
@@ -115,12 +116,12 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("注册");
         loginPresenter = new LoginPresenter(this);
-        ivSelect.setImageResource(R.drawable.ic_select);
-        isSelect = true;
+        ivSelect.setImageResource(R.drawable.ic_selece_no);
+        isSelect = false;
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_login,R.id.bt_get_code,R.id.tv_xieyi,R.id.iv_select})
+    @OnClick({R.id.iv_back, R.id.tv_login,R.id.bt_get_code,R.id.tv_xieyi,R.id.iv_select,R.id.tv_cz_xieyi})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -150,6 +151,12 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
                     ToastUtils.showShort("密码不能小于6位");
                     return;
                 }
+
+                if (!PwdCheckUtil.isLetterDigit(etPwd.getText().toString().trim())){
+                    ToastUtils.showShort("至少包含大小写字母及数字");
+                    return;
+                }
+
                 if (!editText2.getText().toString().trim().equals(etPwd.getText().toString().trim())){
                     ToastUtils.showShort("两次输入不一致");
                     return;
@@ -174,7 +181,10 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
                 loginPresenter.sendsmscode(etPhoneNumber.getText().toString().trim());
                 break;
             case R.id.tv_xieyi:
-                UserXieYiActivity.start(this);
+                UserXieYiActivity.start(this,"http://testaml.whmnx.com/Protocol/Index");
+                break;
+            case R.id.tv_cz_xieyi:
+                UserXieYiActivity.start(this,"http://testaml.whmnx.com/Protocol/Recharge");
                 break;
             case R.id.iv_select:
                 if (isSelect){

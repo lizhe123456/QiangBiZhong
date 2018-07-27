@@ -1,12 +1,14 @@
 package com.whmnrc.qiangbizhong.ui.me.fragment.order;
 
 
+import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ConfirmOrderActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
+import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -23,6 +25,13 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
     @Override
     public void setClick() {
         mAdapter.setOnOrderListener(new OnOrderListenerAdapter() {
+
+            @Override
+            public void customerServicePhoneClick(OrderListBean item) {
+                CustomerServiceDialog customerServiceDialog = new CustomerServiceDialog(mContext, R.style.AlertDialogStyle);
+                customerServiceDialog.show();
+            }
+
             @Override
             public void toQiangGou(OrderListBean item) {
                 FlashSaleDetailsActivity.start(getContext(), item.getRushRecord().getRushId(), 0);

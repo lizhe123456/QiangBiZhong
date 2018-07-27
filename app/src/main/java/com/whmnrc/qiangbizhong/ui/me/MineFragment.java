@@ -1,15 +1,11 @@
 package com.whmnrc.qiangbizhong.ui.me;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.test.mock.MockContext;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.gyf.barlibrary.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -35,7 +31,6 @@ import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.RoundedImageView;
-
 import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -96,7 +91,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
             tvPurchaseRestrictions.setText("今日可购"+ 0);
         }
         MineBean mineBean = new MineBean();
-        mineBean.initMineBean();
+        mineBean.initMineBean(0);
         initMenu(mineBean.getMenuBeans());
         initOption(mineBean.getItemBeans());
         initMenu(mineBean.getMenuBeans());
@@ -149,16 +144,39 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                         CouponActivity.start(mContext);
                         break;
                     case 2:
-                        //成为会员
-                        AccountRechargeActivity.start(getContext(),1);
+                        if (loginBean.getUserType() == 0){
+                            //我要入驻
+
+                        }else{
+                            //发布商品
+//                            MyShopActivity.start(mContext);
+                            AccountRechargeActivity.start(getContext(),1);
+                        }
+
                         break;
                     case 3:
-                        //我是代理商
-                        MyShopActivity.start(mContext);
+                        if (loginBean.getUserType() == 0){
+                            //成为会员
+                            AccountRechargeActivity.start(getContext(),1);
+                        }else if (loginBean.getUserType() == 1){
+                            MyShopActivity.start(mContext);
+                        }else if (loginBean.getUserType() == 2){
+
+                        }
+
                         break;
                     case 4:
-                        //商品发布
-                        ReleaseGoodsActivity.start(mContext);
+                        if (loginBean.getUserType() == 0){
+                            //普通用户
+                            AccountRechargeActivity.start(getContext(),0);
+                        }else if (loginBean.getUserType() == 1){
+                            //商家
+                            ReleaseGoodsActivity.start(mContext);
+                        }else if (loginBean.getUserType() == 2){
+                            //代理商
+
+                        }
+
                         break;
                     case 5:
                         //我的收藏

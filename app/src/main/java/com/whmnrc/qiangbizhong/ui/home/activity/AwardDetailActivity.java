@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.LogUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -30,25 +28,22 @@ import com.whmnrc.qiangbizhong.presenter.home.GoodsRushInfoPresenter;
 import com.whmnrc.qiangbizhong.ui.home.adapter.UserInfoAdapter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ConfirmOrderActivity;
-import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.fragment.GoodsDetailsFragment;
 import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
+import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
 import com.whmnrc.qiangbizhong.widget.SnapUpCountDownTimerView;
 import com.whmnrc.qiangbizhong.widget.WrapContentHeightViewPager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -103,6 +98,8 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
     RecyclerView rvUserList;
     @BindView(R.id.refresh)
     SmartRefreshLayout refresh;
+    @BindView(R.id.tv_goods_desc)
+    TextView tvGoodsDesc;
 
     private GoodsRushInfoPresenter goodsRushInfoPresenter;
     private SparseArray<String> strings;
@@ -244,8 +241,9 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
             }
             try {
                 tvGoodsName.setText(awardBeanInfo.getAwardGoodsInfo().getGoods_Name());
-                tvMoeny.setText(String.valueOf(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price()));
-                tvOldMoeny.setText("原价：" + String.valueOf(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_VirtualPrice()));
+                tvGoodsDesc.setText(awardBeanInfo.getAwardGoodsInfo().getGoods_Describe());
+                tvMoeny.setText("现价："+StringUtil.weiString1(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price()));
+                tvOldMoeny.setText("原价：" + StringUtil.weiString1(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_VirtualPrice()));
                 tvOldMoeny.getPaint().setAntiAlias(true);//抗锯齿
                 tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
                 tvScep.setText(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_SpecName() == null ? "" : awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_SpecName() + "   " + awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_AttrName());
@@ -312,6 +310,8 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
                 }
                 break;
             case R.id.iv_customer_service:
+                CustomerServiceDialog customerServiceDialog = new CustomerServiceDialog(this, R.style.AlertDialogStyle);
+                customerServiceDialog.show();
                 break;
             case R.id.tv_cat_more:
                 UserListActivity.start(this,awardBeanInfo.getAwardGoodsInfo().getAwardId());

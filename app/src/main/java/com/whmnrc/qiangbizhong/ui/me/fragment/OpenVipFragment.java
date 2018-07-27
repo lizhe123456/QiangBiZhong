@@ -39,6 +39,8 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
     TextView tvKegoumai;
     @BindView(R.id.et_recharge)
     EditText etRecharge;
+    @BindView(R.id.tv_kegou)
+    TextView tvKegou;
 
     RechargePresenter rechargePresenter;
 
@@ -86,6 +88,7 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
         tvRmb.setText(rechargeBean.getPrice()+"");
         tvKegoumai.setText(StringUtil.wanString(rechargeBean.getCanPayCount()));
         tvYue.setText(StringUtil.wanString((int)UserManage.getInstance().getLoginBean().getUserInfo_Money()));
+        tvKegou.setText(StringUtil.wanString(rechargeBean.getGoodsPrice_PayMaxCount()));
     }
 
     @Override

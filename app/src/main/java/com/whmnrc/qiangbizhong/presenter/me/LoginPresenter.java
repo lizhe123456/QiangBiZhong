@@ -159,7 +159,7 @@ public class LoginPresenter{
     public void retrievePwd(String phone, String pwd, String code, ZhaoPassCall zhaoPassCall){
         Map<String, String> map = new HashMap<>();
         map.put("phone", phone);
-        map.put("pwd", pwd);
+        map.put("pwd", EncryptUtils.encryptMD5ToString(pwd));
         map.put("code", code);
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.retrievePwd), map, new OkhttpUtil.BeanCallback() {
             @Override

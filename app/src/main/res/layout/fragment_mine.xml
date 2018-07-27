@@ -45,23 +45,34 @@
                     android:layout_marginTop="@dimen/dm_20"
                     android:scaleType="centerCrop"
                     app:riv_oval="true" />
-
-                <TextView
-                    android:id="@+id/tv_purchase_restrictions"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/dm_34"
-                    android:background="@drawable/ic_bg"
-                    android:drawableRight="@drawable/ic_yudou"
-                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:textSize="@dimen/dm_12"
                     android:paddingBottom="@dimen/dm_3"
                     android:paddingLeft="@dimen/dm_8"
                     android:paddingRight="@dimen/dm_17"
                     android:paddingTop="@dimen/dm_3"
-                    android:text="今日可够0"
-                    android:textColor="@color/white" />
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dm_34"
+                    android:background="@drawable/ic_bg"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/tv_purchase_restrictions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="今日可够0"
+                        android:layout_marginLeft="@dimen/dm_10"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dm_12"/>
+                    <ImageView
+                        android:layout_width="@dimen/dm_20"
+                        android:layout_height="@dimen/dm_12"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dm_5"
+                        android:src="@drawable/ic_yudou" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_username"
@@ -72,16 +83,28 @@
                     android:layout_marginTop="@dimen/dm_5"
                     android:textColor="@color/white"
                     android:textSize="@dimen/dm_14" />
-
-                <TextView
-                    android:id="@+id/tv_yudou"
+                <LinearLayout
+                    android:id="@+id/ll_now_moeny"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_username"
-                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/dm_5"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/dm_14" />
+                    android:layout_below="@+id/tv_username"
+                    android:layout_centerHorizontal="true">
+                    <TextView
+                        android:id="@+id/tv_yudou"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dm_14" />
+                    <ImageView
+                        android:layout_width="@dimen/dm_24"
+                        android:layout_height="@dimen/dm_13"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dm_5"
+                        android:src="@drawable/ic_yudou" />
+                </LinearLayout>
+
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView

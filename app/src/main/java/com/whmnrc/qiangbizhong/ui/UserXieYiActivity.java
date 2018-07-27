@@ -3,20 +3,16 @@ package com.whmnrc.qiangbizhong.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -34,8 +30,9 @@ public class UserXieYiActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView tvTitle;
 
-    public static void start(Context context) {
+    public static void start(Context context,String url) {
         Intent starter = new Intent(context, UserXieYiActivity.class);
+        starter.putExtra("url",url);
         context.startActivity(starter);
     }
 
@@ -46,22 +43,33 @@ public class UserXieYiActivity extends BaseActivity {
 
     @Override
     protected void setData() {
+        String url = getIntent().getStringExtra("url");
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("用户协议");
         //支持javascript
         wvContent.getSettings().setJavaScriptEnabled(true);
+        //支持屏幕缩放
+        wvContent.getSettings().setBuiltInZoomControls(true);
+        wvContent.getSettings().setDisplayZoomControls(false);
         // 设置可以支持缩放
         wvContent.getSettings().setSupportZoom(true);
-        // 设置出现缩放工具
-        wvContent.getSettings().setBuiltInZoomControls(false);
-        //扩大比例的缩放
         wvContent.getSettings().setUseWideViewPort(true);
-        //自适应屏幕
-        wvContent.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        wvContent.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         wvContent.getSettings().setLoadWithOverviewMode(true);
 
-        wvContent.loadUrl("http://testaml.whmnx.com/Protocol");
+//        wvContent.loadUrl("http://testaml.whmnx.com/Protocol");
+//        wvContent.loadUrl("http://192.168.1.157:8011/Protocol");
+        wvContent.loadUrl(url);
+
         wvContent.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);//防止调用系统自带的浏览器打开网页
+                return true;
+            }
+
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);

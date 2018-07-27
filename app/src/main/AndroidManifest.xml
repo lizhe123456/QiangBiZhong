@@ -145,6 +145,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.UserXieYiActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.shop.activity.ShopEnterActivity"
+            android:screenOrientation="portrait"
+            />
         <service android:name="com.amap.api.location.APSService"/>
     </application>
 

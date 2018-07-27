@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tv_navigation"
+        android:textSize="@dimen/dm_13"
+        android:text="结算账号信息"
+        android:padding="@dimen/dm_15" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dm_15"
+        android:paddingRight="@dimen/dm_15"
+        android:paddingBottom="@dimen/dm_10"
+        android:paddingTop="@dimen/dm_10">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="银行账号"
+            android:textSize="@dimen/dm_15"
+            android:textColor="@color/tv_navigation"/>
+
+        <TextView
+            android:id="@+id/tv_dian_ming"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dm_15"
+            android:textColor="@color/tv_191"
+            android:hint="请填写银行账号"
+            android:textColorHint="@color/tv_navigation"
+            android:background="@color/white"
+            android:layout_marginLeft="@dimen/dm_15"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:background="@color/divider_color"
+        android:layout_marginLeft="@dimen/dm_15"
+        android:layout_marginRight="@dimen/dm_15"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dm_15"
+        android:paddingRight="@dimen/dm_15"
+        android:paddingBottom="@dimen/dm_10"
+        android:paddingTop="@dimen/dm_10">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="银行账号"
+            android:textSize="@dimen/dm_15"
+            android:textColor="@color/tv_navigation"/>
+
+        <TextView
+            android:id="@+id/tv_band_hao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dm_15"
+            android:textColor="@color/tv_191"
+            android:hint="请填写银行账号"
+            android:textColorHint="@color/tv_navigation"
+            android:background="@color/white"
+            android:layout_marginLeft="@dimen/dm_15"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:background="@color/divider_color"
+        android:layout_marginLeft="@dimen/dm_15"
+        android:layout_marginRight="@dimen/dm_15"/>
+
+</LinearLayout>
