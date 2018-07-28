@@ -21,12 +21,12 @@ public class RechargeBean {
     private int TotalMoney;
     private int TodayPayCount;
 
-    public int getGoodsPrice_PayMaxCount() {
+    public int getTodayPayCount() {
         return TodayPayCount;
     }
 
-    public void setGoodsPrice_PayMaxCount(int goodsPrice_PayMaxCount) {
-        TodayPayCount = goodsPrice_PayMaxCount;
+    public void setTodayPayCount(int todayPayCount) {
+        TodayPayCount = todayPayCount;
     }
 
     public int getGoodsPrice_Stock() {

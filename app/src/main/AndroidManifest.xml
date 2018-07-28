@@ -23,6 +23,9 @@
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
+
+
+
     <uses-sdk
         android:minSdkVersion="19"
         android:targetSdkVersion="27"
@@ -43,6 +46,12 @@
             android:name="PGYER_APPID"
             android:value="1fba0d0890282300433c8af6ae4fbdfe">
         </meta-data>
+
+        <provider
+            android:name="com.pgyersdk.PgyerProvider"
+            android:authorities="${applicationId}.com.pgyer.provider"
+            android:exported="false"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.whmnrc.qiangbizhong.fileProvider"
@@ -146,8 +155,11 @@
         <activity android:name=".ui.UserXieYiActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.shop.activity.ShopEnterActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.shop.activity.ShopConfirmOrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.StatusActivity"
+            android:screenOrientation="portrait"/>
         <service android:name="com.amap.api.location.APSService"/>
     </application>
 

@@ -24,7 +24,8 @@ public class App extends Application {
         super.onCreate();
         context = this;
         Utils.init(context);
-//        PgyCrashManager.register();
+        PgyCrashManager.register();
+        CrashHandler.getInstance().init(this);
     }
 
     @Override

@@ -1,16 +1,12 @@
 package com.whmnrc.qiangbizhong.util;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.asm.Type;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.google.gson.Gson;
 import com.whmnrc.qiangbizhong.BuildConfig;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.app.App;
@@ -18,10 +14,7 @@ import com.whmnrc.qiangbizhong.base.BaseResponse;
 import com.whmnrc.qiangbizhong.model.bean.LodingBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
 import org.greenrobot.eventbus.EventBus;
-
-import java.lang.reflect.Method;
 import java.util.Map;
 
 import okhttp3.Call;

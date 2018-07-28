@@ -18,8 +18,11 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
+import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
+import com.whmnrc.qiangbizhong.model.bean.HomeResult;
 import com.whmnrc.qiangbizhong.model.bean.MyLuckDrawBean;
 import com.whmnrc.qiangbizhong.presenter.home.LuckDrawPresenter;
+import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 import com.whmnrc.qiangbizhong.ui.home.adapter.MyLuckDrawAdapter;
 
 import java.util.List;
@@ -82,6 +85,7 @@ public class MyLuckDrawFragment extends BaseFragment implements LuckDrawPresente
         myLuckDrawAdapter = new MyLuckDrawAdapter(mContext);
         rvList.setLayoutManager(new LinearLayoutManager(mContext));
         rvList.setAdapter(myLuckDrawAdapter);
+        rvList.setNestedScrollingEnabled(false);
 
         refresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -94,6 +98,14 @@ public class MyLuckDrawFragment extends BaseFragment implements LuckDrawPresente
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 luckDrawPresenter.awardlist(MyLuckDrawFragment.this,false);
+            }
+        });
+
+        myLuckDrawAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Object item, int position) {
+                MyLuckDrawBean goodsNewAwardBean = (MyLuckDrawBean) item;
+                AwardDetailActivity.start(mContext, goodsNewAwardBean.getGoodsAwardId());
             }
         });
     }

@@ -35,7 +35,7 @@
                 android:id="@+id/et_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="19dp"
+                android:layout_marginLeft="@dimen/dm_19"
                 android:background="@color/transparency"
                 android:hint="输入手机号"
                 android:inputType="phone"
@@ -57,7 +57,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dm_7">
 
 
             <ImageView
@@ -120,7 +121,7 @@
                 android:id="@+id/et_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="19dp"
+                android:layout_marginLeft="@dimen/dm_19"
                 android:background="@color/transparency"
                 android:hint="输入密码"
                 android:inputType="textPassword"

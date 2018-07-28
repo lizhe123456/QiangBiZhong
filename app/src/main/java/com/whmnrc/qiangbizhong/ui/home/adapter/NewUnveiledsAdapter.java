@@ -30,7 +30,7 @@ import com.whmnrc.qiangbizhong.util.UserManage;
  * Created by lizhe on 2018/7/7.
  */
 
-public class NewUnveiledsAdapter extends BaseAdapter<HomeResult.GoodsNewAwardBean> {
+public class NewUnveiledsAdapter extends BaseAdapter<HomeResult.GoodsOpenedAwardBean> {
 
     private int width;
 
@@ -40,7 +40,7 @@ public class NewUnveiledsAdapter extends BaseAdapter<HomeResult.GoodsNewAwardBea
     }
 
     @Override
-    protected void bindDataToItemView(BaseViewHolder holder, HomeResult.GoodsNewAwardBean item, int position) {
+    protected void bindDataToItemView(BaseViewHolder holder, HomeResult.GoodsOpenedAwardBean item, int position) {
 
         holder.setText(R.id.tv_goods_name,item.getGoods_Name())
                 .setText(R.id.tv_time,"距离开奖:" + DateUtil.getDate(item.getAwardTime()))
@@ -64,7 +64,7 @@ public class NewUnveiledsAdapter extends BaseAdapter<HomeResult.GoodsNewAwardBea
             @Override
             public void onClick(View v) {
                 if (UserManage.getInstance().getLoginBean() != null) {
-                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+                    HomeResult.GoodsOpenedAwardBean goodsNewAwardBean = (HomeResult.GoodsOpenedAwardBean) item;
                     AwardDetailActivity.start(getContext(), goodsNewAwardBean.getAwardId());
                 } else {
                     LoginActivity.start(getContext());
@@ -74,7 +74,7 @@ public class NewUnveiledsAdapter extends BaseAdapter<HomeResult.GoodsNewAwardBea
     }
 
     @Override
-    protected int getItemViewLayoutId(int position, HomeResult.GoodsNewAwardBean item) {
+    protected int getItemViewLayoutId(int position, HomeResult.GoodsOpenedAwardBean item) {
         return R.layout.item_home_new_unveileds;
     }
 }

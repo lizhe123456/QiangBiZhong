@@ -55,8 +55,6 @@ public class ZhaoPwdActivity extends BaseActivity implements LoginPresenter.Zhao
     EditText etPhoneNumber;
     @BindView(R.id.tv_login)
     TextView tvLogin;
-    @BindView(R.id.et_pwd_2)
-    EditText editText2;
 
 
     private LoginPresenter loginPresenter;
@@ -156,10 +154,6 @@ public class ZhaoPwdActivity extends BaseActivity implements LoginPresenter.Zhao
 
                 if (!PwdCheckUtil.isLetterDigit(etPwd.getText().toString().trim())){
                     ToastUtils.showShort("至少包含大小写字母及数字");
-                    return;
-                }
-                if (!editText2.getText().toString().trim().equals(etPwd.getText().toString().trim())){
-                    ToastUtils.showShort("两次输入不一致");
                     return;
                 }
                 showLoading("提交中..");

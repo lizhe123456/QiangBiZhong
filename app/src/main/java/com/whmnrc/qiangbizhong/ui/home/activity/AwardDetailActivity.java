@@ -217,15 +217,17 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
             lend = TimeUtils.string2Milliseconds(awardBeanInfo.getAwardGoodsInfo().getAwardTime(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
             now = TimeUtils.string2Milliseconds(UserManage.getInstance().getServerTime(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
             long time = lend - now;
-            if (time > 0) {
-                long day = time / (24 * 60 * 60 * 1000);
-                long hour = (time / (60 * 60 * 1000) - day * 24);
-                long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
-                long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                countDownTimerView.setTime((int) ((int) hour + (day * 24)), (int) min, (int) ss);
-                countDownTimerView.start();
-            } else {
-                rlCanYu.setVisibility(View.GONE);
+            if (awardBeanInfo.getParticipate() != 2) {
+                if (time > 0) {
+                    long day = time / (24 * 60 * 60 * 1000);
+                    long hour = (time / (60 * 60 * 1000) - day * 24);
+                    long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
+                    long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+                    countDownTimerView.setTime((int) ((int) hour + (day * 24)), (int) min, (int) ss);
+                    countDownTimerView.start();
+                } else {
+                    rlCanYu.setVisibility(View.GONE);
+                }
             }
 
             if (!isFrist) {

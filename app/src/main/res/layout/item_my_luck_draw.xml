@@ -52,11 +52,11 @@
                 android:textSize="18sp" />
 
             <ImageView
-                android:layout_width="@dimen/dm_24"
-                android:layout_height="@dimen/dm_15"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/dm_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dm_5"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dm_5"
                 android:src="@drawable/ic_yudou" />
         </LinearLayout>
 
@@ -81,11 +81,11 @@
                 android:textSize="@dimen/dm_12" />
 
             <ImageView
-                android:layout_width="@dimen/dm_24"
-                android:layout_height="@dimen/dm_15"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/dm_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dm_5"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dm_3"
                 android:src="@drawable/ic_yudou" />
         </LinearLayout>
 
@@ -109,11 +109,11 @@
                 android:textSize="@dimen/dm_12" />
 
             <ImageView
-                android:layout_width="@dimen/dm_24"
-                android:layout_height="@dimen/dm_15"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/dm_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dm_5"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/dm_3"
                 android:src="@drawable/ic_yudou" />
         </LinearLayout>
     </RelativeLayout>

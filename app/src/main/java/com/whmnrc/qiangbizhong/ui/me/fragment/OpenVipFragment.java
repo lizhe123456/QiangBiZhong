@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
@@ -15,10 +14,8 @@ import com.whmnrc.qiangbizhong.pay.listener.OnSuccessAndErrorListener;
 import com.whmnrc.qiangbizhong.presenter.me.RechargePresenter;
 import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Company 武汉麦诺软创
@@ -54,9 +51,7 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
     @Override
     protected int setLayout() {
         return R.layout.fragment_open_vip;
-
     }
-
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -88,7 +83,7 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
         tvRmb.setText(rechargeBean.getPrice()+"");
         tvKegoumai.setText(StringUtil.wanString(rechargeBean.getCanPayCount()));
         tvYue.setText(StringUtil.wanString((int)UserManage.getInstance().getLoginBean().getUserInfo_Money()));
-        tvKegou.setText(StringUtil.wanString(rechargeBean.getGoodsPrice_PayMaxCount()));
+        tvKegou.setText(StringUtil.wanString(rechargeBean.getTodayPayCount()));
     }
 
     @Override
@@ -117,7 +112,6 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
             rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"1","","",this);
         }
     }
-
 
     @Override
     public void userInfoBack(LoginBean loginBean) {

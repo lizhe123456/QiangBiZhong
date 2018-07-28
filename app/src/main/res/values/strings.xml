@@ -108,7 +108,7 @@
     <!--商品评价列表-->
     <string name="getcommentlist">/api/home/getcommentlist</string>
     <!--添加收藏-->
-    <string name="addcollection">/api/home/addcollection</string>
+    <string name="addcollection">/api/app/addcollection</string>
 
 
 

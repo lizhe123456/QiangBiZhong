@@ -2,6 +2,7 @@ package com.whmnrc.qiangbizhong.ui.shopping.adpter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
@@ -23,6 +24,12 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarBean> {
     protected void bindDataToItemView(BaseViewHolder holder, ShopCarBean item, int position) {
         holder.setText(R.id.tv_name,"");
         RecyclerView rvGoods = holder.getView(R.id.rv_goods);
+        holder.setOnClickListener(R.id.tv_name, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
@@ -31,14 +38,27 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarBean> {
         return R.layout.item_shop_car;
     }
 
-    public class GoodsAdapter extends BaseAdapter<ShopCarBean.GoodsBean>{
+    public static class GoodsAdapter extends BaseAdapter<ShopCarBean.GoodsBean>{
+
+        private boolean isEdit;
 
         public GoodsAdapter(Context context) {
             super(context);
         }
 
+        public void setEdit(boolean edit) {
+            isEdit = edit;
+        }
+
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, ShopCarBean.GoodsBean item, int position) {
+            if (isEdit){
+                //编辑
+                holder.setVisible(R.id.ll_edit,true);
+            }else {
+                //商品
+                holder.setVisible(R.id.rl_layout,false);
+            }
 
         }
 

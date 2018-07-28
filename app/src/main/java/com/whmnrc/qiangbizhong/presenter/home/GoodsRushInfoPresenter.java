@@ -71,6 +71,7 @@ public class GoodsRushInfoPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.rushbuy),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
+                UserManage.getInstance().getUserInfo(null);
                 context.finish();
                 MyOrderActivity.start(context,4);
                 if (!TextUtils.isEmpty(data)){

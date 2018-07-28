@@ -53,7 +53,7 @@ public class LuckDrawItemAdapter extends BaseAdapter<LuckDrawBean.GoodsBean> {
                 long hour = (time / (60 * 60 * 1000) - day * 24);
                 long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
                 long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-                date1 = (hour < 10 ? "0" + hour : hour) +":"+ (min < 10 ? "0" + min : min) + ":"+ (ss < 10 ? "0" + ss : ss);
+                date1 = ((int) ((int) hour + (day * 24)) < 10 ? "0" + (int) ((int) hour + (day * 24)) : (int) ((int) hour + (day * 24))) +":"+ (min < 10 ? "0" + min : min) + ":"+ (ss < 10 ? "0" + ss : ss);
             }
             Date date = format.parse(dateStr);
             Calendar calendar = Calendar.getInstance();

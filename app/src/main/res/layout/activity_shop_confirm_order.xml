@@ -1,6 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_f5f5f5">
     <include layout="@layout/layout_title"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/id_select_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/dm_15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收货地址"
+                    android:textColor="@color/tv_000"
+                    android:textSize="@dimen/dm_14" />
+
+                <TextView
+                    android:id="@+id/tv_address_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:drawablePadding="@dimen/dm_3"
+                    android:drawableRight="@drawable/ic_more"
+                    android:text="请添加收货地址"
+                    android:textColor="@color/tv_navigation"
+                    android:textSize="@dimen/dm_14" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dm_10"
+                android:background="@color/white"
+                android:padding="@dimen/dm_15"
+                android:visibility="gone">
+                <ImageView
+                    android:id="@+id/iv_img1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_location"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_isDefault"
+                    android:text="哈哈哈"
+                    android:textColor="@color/tv_191"
+                    android:textSize="18sp"
+                    android:layout_toRightOf="@+id/iv_img1"
+                    android:layout_marginLeft="@dimen/dm_5"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_name"
+                    android:layout_marginLeft="@dimen/dm_15"
+                    android:layout_toRightOf="@+id/tv_name"
+                    android:text="@string/search"
+                    android:textColor="@color/tv_191"
+                    android:textSize="13sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_marginTop="@dimen/dm_5"
+                    android:text="湖北省武汉市江岸区解放大道690号武汉国际广场
+C座7F 办公室"
+                    android:layout_toRightOf="@+id/iv_img1"
+                    android:layout_marginLeft="@dimen/dm_5"
+                    android:textColor="@color/tv_navigation"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_10" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_shop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:background="@color/divider_color"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_49"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_49"
+            android:orientation="vertical"
+            android:gravity="right|center_vertical"
+            android:layout_toLeftOf="@+id/tv_tijiao">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tv_191"
+                android:textSize="@dimen/dm_13"
+                android:text="合计："
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dm_15"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:orientation="horizontal"
+                android:layout_toRightOf="@+id/tv_title"
+                android:layout_centerVertical="true">
+
+                <TextView
+                    android:id="@+id/tv_yuyue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/goods_price"
+                    android:text="5000000"
+                    android:textSize="@dimen/dm_13" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/dm_2"
+                    android:layout_marginLeft="@dimen/dm_5"
+                    android:src="@drawable/ic_yudou" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_tijiao"
+            android:layout_width="@dimen/dm_105"
+            android:layout_height="@dimen/dm_49"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorAccent"
+            android:padding="@dimen/dm_10"
+            android:gravity="center"
+            android:text="提交订单"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dm_18" />
+    </RelativeLayout>
+
 </LinearLayout>

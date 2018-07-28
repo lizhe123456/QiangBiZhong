@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <include layout="@layout/layout_title" />
 
@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title_back"
-        android:orientation="vertical"
         android:layout_marginTop="@dimen/dm_20"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/dm_37"
         android:paddingRight="@dimen/dm_37"
         android:paddingTop="@dimen/dm_10">
@@ -76,23 +76,23 @@
                 android:hint="输入验证码"
                 android:inputType="number"
                 android:maxLength="6"
+                android:paddingBottom="@dimen/dm_22"
+                android:paddingTop="@dimen/dm_22"
                 android:textColor="@color/text_color"
                 android:textColorHint="#999999"
-                android:textSize="16sp"
-                android:paddingBottom="@dimen/dm_22"
-                android:paddingTop="@dimen/dm_22"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/bt_get_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="@dimen/dm_110"
-                android:gravity="center"
                 android:background="@drawable/bg_get_code"
-                android:paddingTop="@dimen/dm_8"
+                android:gravity="center"
+                android:minWidth="@dimen/dm_110"
                 android:paddingBottom="@dimen/dm_8"
                 android:paddingLeft="@dimen/dm_14"
                 android:paddingRight="@dimen/dm_14"
+                android:paddingTop="@dimen/dm_8"
                 android:text="@string/get_code_tv"
                 android:textColor="#2399FD"
                 android:textSize="16sp" />
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="19dp"
                 android:background="@color/transparency"
-                android:hint="输入密码"
+                android:hint="输入新密码"
                 android:inputType="textPassword"
                 android:maxLength="11"
                 android:paddingBottom="@dimen/dm_22"
@@ -138,55 +138,22 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
             android:background="#dddddd" />
-        <LinearLayout
+
+
+        <TextView
+            android:id="@+id/tv_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/dm_7">
+            android:layout_marginLeft="@dimen/dm_15"
+            android:layout_marginRight="@dimen/dm_15"
+            android:layout_marginTop="@dimen/dm_74"
+            android:background="@drawable/login_shap"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dm_12"
+            android:paddingTop="@dimen/dm_12"
+            android:text="找回密码"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_password" />
-
-            <EditText
-                android:id="@+id/et_pwd_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="19dp"
-                android:background="@color/transparency"
-                android:hint="确认密码"
-                android:inputType="textPassword"
-                android:maxLength="11"
-                android:paddingBottom="@dimen/dm_22"
-                android:paddingTop="@dimen/dm_22"
-                android:textColor="@color/text_color"
-                android:textColorHint="#999999"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dm_1"
-            android:background="#dddddd" />
     </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/tv_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:text="找回密码"
-        android:layout_marginLeft="@dimen/dm_15"
-        android:layout_marginRight="@dimen/dm_15"
-        android:paddingTop="@dimen/dm_12"
-        android:paddingBottom="@dimen/dm_12"
-        android:layout_marginTop="@dimen/dm_74"
-        android:background="@drawable/login_shap" />
-
 </LinearLayout>

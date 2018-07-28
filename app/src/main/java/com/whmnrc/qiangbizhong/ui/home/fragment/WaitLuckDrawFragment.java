@@ -1,6 +1,7 @@
 package com.whmnrc.qiangbizhong.ui.home.fragment;
 
 import android.content.Context;
+import android.net.ParseException;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
@@ -29,8 +30,12 @@ import com.whmnrc.qiangbizhong.model.bean.LuckDrawGoodsBeanV2;
 import com.whmnrc.qiangbizhong.presenter.home.LuckDrawPresenter;
 import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
+import com.whmnrc.qiangbizhong.util.UserManage;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -131,8 +136,27 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, LuckDrawGoodsBeanV2 item, int position) {
+
+            String date1 = "";
+            String end = item.getAwardTime();
+            long lend = com.whmnrc.qiangbizhong.util.TimeUtils.string2Milliseconds(end, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+            String serverTime = UserManage.getInstance().getServerTime();
+            long now = com.whmnrc.qiangbizhong.util.TimeUtils.string2Milliseconds(serverTime, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+            long time = lend - now;
+            try {
+                if (time > 0) {
+                    long day = time / (24 * 60 * 60 * 1000);
+                    long hour = (time / (60 * 60 * 1000) - day * 24);
+                    long min = ((time / (60 * 1000)) - day * 24 * 60 - hour * 60);
+                    long ss = (time / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+                    date1 = (hour < 10 ? "0" + hour : hour) +":"+ (min < 10 ? "0" + min : min) + ":"+ (ss < 10 ? "0" + ss : ss);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             holder.setText(R.id.tv_goods_name, item.getGoods_Name())
-                    .setText(R.id.tv_time, "距离开奖："+item.getAwardTime())
+                    .setText(R.id.tv_time, "距离开奖："+date1)
                     .setText(R.id.tv_surplus, "已有"+item.getAwardPeopleCount()+"人抢购")
                     .setGlieuImage(R.id.iv_img, item.getGoods_ImaPath());
 

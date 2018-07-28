@@ -81,13 +81,13 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         hasFetchData = false;
         isViewPrepared = false;
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
         EventBus.getDefault().unregister(this);
+        super.onDestroyView();
     }
 
     protected void showLoading(String msg) {

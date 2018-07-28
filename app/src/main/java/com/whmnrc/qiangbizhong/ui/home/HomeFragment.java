@@ -151,7 +151,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
 
     }
 
-    private void initNewUnveileds(@Nullable List<HomeResult.GoodsNewAwardBean> newUnveileds) {
+    private void initNewUnveileds(@Nullable List<HomeResult.GoodsOpenedAwardBean> newUnveileds) {
         NewUnveiledsAdapter newUnveiledsAdapter = new NewUnveiledsAdapter(mContext);
         rvNewUnveileds.setNestedScrollingEnabled(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
@@ -163,7 +163,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
             @Override
             public void onClick(View view, Object item, int position) {
                 if (UserManage.getInstance().getLoginBean() != null) {
-                    HomeResult.GoodsNewAwardBean goodsNewAwardBean = (HomeResult.GoodsNewAwardBean) item;
+                    HomeResult.GoodsOpenedAwardBean goodsNewAwardBean = (HomeResult.GoodsOpenedAwardBean) item;
                     AwardDetailActivity.start(mContext, goodsNewAwardBean.getAwardId());
                 } else {
                     LoginActivity.start(getContext());
@@ -325,7 +325,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         initKill(homeResult.getGoodsRush());
         initLuckDraw(homeResult.getGoodsNewAward());
         initGoods(homeResult.getGoodsTj());
-        initNewUnveileds(homeResult.getGoodsNewAward());
+        initNewUnveileds(homeResult.getGoodsOpenedAward());
         refreshLayout.finishRefresh(true);
     }
 

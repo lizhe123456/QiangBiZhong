@@ -96,10 +96,10 @@ public class PwdLoginActivity extends BaseActivity implements LoginPresenter.Log
                     return;
                 }
 
-                if (!RegexUtils.isMobileSimple(etPhoneNumber.getText())) {
-                    ToastUtils.showShort("手机号格式有误");
-                    return;
-                }
+//                if (!RegexUtils.isMobileSimple(etPhoneNumber.getText())) {
+//                    ToastUtils.showShort("手机号格式有误");
+//                    return;
+//                }
 
                 if (TextUtils.isEmpty(etCode.getText().toString().trim())){
                     ToastUtils.showShort("密码不能为空");
@@ -121,10 +121,13 @@ public class PwdLoginActivity extends BaseActivity implements LoginPresenter.Log
                     isshow = true;
                     etCode.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);// 输入为密码且可见
                     etCode.setSelection(etCode.getText().toString().length());
+                    ivShow.setImageResource(R.drawable.ic_gson);
+
                 }else {
                     isshow = false;
                     etCode.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);// 设置文本类密码（默认不可见），这两个属性必须同时设置
                     etCode.setSelection(etCode.getText().toString().length());
+                    ivShow.setImageResource(R.drawable.ic_cat_no);
                 }
                 break;
             case R.id.tv_register:

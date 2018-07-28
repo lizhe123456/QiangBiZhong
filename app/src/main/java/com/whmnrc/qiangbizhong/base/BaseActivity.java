@@ -75,7 +75,6 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (mUnbinder !=  null) {
             mUnbinder.unbind();
         }
@@ -83,6 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity{
             mImmersionBar.destroy();
         }
         EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
 

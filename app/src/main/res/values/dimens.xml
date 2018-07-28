@@ -75,4 +75,8 @@
     <dimen name="dm_290">290dp</dimen>
     <dimen name="dm_24">24dp</dimen>
     <dimen name="dm_52">52dp</dimen>
+    <dimen name="dm_135">135dp</dimen>
+    <dimen name="dm_225">225dp</dimen>
+    <dimen name="dm_245">245dp</dimen>
+    <dimen name="dm_44">44dp</dimen>
 </resources>

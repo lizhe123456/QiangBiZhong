@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -41,13 +39,10 @@ import com.whmnrc.qiangbizhong.widget.WrapContentHeightViewPager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -314,7 +309,7 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                     tvCanYu.setBackgroundResource(R.drawable.ic_rectangle);
                     rlJs.setBackgroundResource(R.drawable.ic_award_title);
                 } else if (btnStatu() == 2) {
-                    tvCanYu.setText("未开始");
+                    tvCanYu.setText("已预约");
                     rlJs.setBackgroundResource(R.drawable.ic_flash_sale_details_bg);
                 } else if (btnStatu() == 3) {
                     rlJs.setBackgroundResource(R.drawable.ic_flash_sale_details_bg);
