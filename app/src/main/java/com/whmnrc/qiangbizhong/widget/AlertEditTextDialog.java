@@ -98,6 +98,15 @@ public class AlertEditTextDialog {
         return this;
     }
 
+    public AlertEditTextDialog setTvFundZfPwd(boolean flag) {
+        if (flag) {
+            tv_fund_zf_pwd.setVisibility(View.VISIBLE);
+        } else {
+            tv_fund_zf_pwd.setVisibility(View.GONE);
+        }
+        return this;
+    }
+
     public AlertEditTextDialog setMinTitle(String title) {
         showTitle = true;
         if ("".equals(title)) {
@@ -156,6 +165,27 @@ public class AlertEditTextDialog {
                     return;
                 }
 
+                KeyboardUtils.hideSoftInput(v);
+                confirmListenter.comfrim(payPwd);
+                dialog.dismiss();
+                KeyboardUtils.hideSoftInput(btn_pos);
+            }
+        });
+        return this;
+    }
+
+    public AlertEditTextDialog setPositive1Button(String text, final ConfirmListenter confirmListenter) {
+        showPosBtn = true;
+        if ("".equals(text)) {
+            btn_pos.setText("确定");
+        } else {
+            btn_pos.setText(text);
+        }
+        btn_pos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String payPwd = mEtPayPwd.getText().toString().trim();
                 KeyboardUtils.hideSoftInput(v);
                 confirmListenter.comfrim(payPwd);
                 dialog.dismiss();

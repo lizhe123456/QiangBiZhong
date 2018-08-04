@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
@@ -217,6 +218,7 @@ public class AddAddressActivity extends BaseActivity implements AddressPresenter
             case R.id.tv_item1:
             case R.id.tt_item2:
             case R.id.tv_item3:
+                KeyboardUtils.hideSoftInput(this);
                 mOptionsPickerView.show();
                 break;
             case R.id.iv_back:

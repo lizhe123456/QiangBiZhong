@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.ui.me.fragment.order;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -54,7 +55,7 @@ public abstract class BaseOrderFragment extends BaseFragment implements OrderPre
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new OrderAdapter(getContext());
+        mAdapter = new OrderAdapter(this);
         recyclerView.setAdapter(mAdapter);
         setClick();
         getData(request(),true);
@@ -118,5 +119,15 @@ public abstract class BaseOrderFragment extends BaseFragment implements OrderPre
     public void error() {
         refresh.finishLoadMore(false);
         refresh.finishRefresh(false);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101){
+            if (resultCode == 102){
+                refresh.autoRefresh();
+            }
+        }
     }
 }

@@ -21,6 +21,10 @@ public interface OnOrderListener {
     //申请售后
     void applyCustomerServiceClick(OrderListBean item);
 
+    void refund(OrderListBean item);
+
+    void qxRefund(OrderListBean item);
+
     //付款
     void payClick(OrderListBean item);
 

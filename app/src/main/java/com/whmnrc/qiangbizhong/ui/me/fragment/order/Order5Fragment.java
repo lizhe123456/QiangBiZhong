@@ -1,9 +1,12 @@
 package com.whmnrc.qiangbizhong.ui.me.fragment.order;
 
 
+import android.content.Intent;
+
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
+import com.whmnrc.qiangbizhong.ui.shopping.activity.EvaluateActivity;
 import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -45,7 +48,23 @@ public class Order5Fragment extends BaseOrderFragment implements OrderPresenter.
                 CustomerServiceDialog customerServiceDialog = new CustomerServiceDialog(mContext, R.style.AlertDialogStyle);
                 customerServiceDialog.show();
             }
+
+            @Override
+            public void evaluate(OrderListBean item) {
+                EvaluateActivity.start(Order5Fragment.this,item);
+            }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101){
+            if (resultCode == 102){
+                refresh.autoRefresh();
+            }
+        }
+
     }
 
     @Override

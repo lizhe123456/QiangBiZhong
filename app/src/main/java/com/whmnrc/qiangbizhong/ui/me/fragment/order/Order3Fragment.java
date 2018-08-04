@@ -44,6 +44,7 @@ public class Order3Fragment extends BaseOrderFragment implements OrderPresenter.
                 CustomerServiceDialog customerServiceDialog = new CustomerServiceDialog(mContext, R.style.AlertDialogStyle);
                 customerServiceDialog.show();
             }
+
         });
     }
 

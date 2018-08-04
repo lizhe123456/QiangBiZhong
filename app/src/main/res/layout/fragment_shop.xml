@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <include layout="@layout/layout_title"/>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_60"
+        app:srlTextSizeTitle="@dimen/dm_14"
+        app:srlTextSizeTime="@dimen/dm_14"
+        app:srlAccentColor="@color/tv_191"/>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,8 +28,7 @@
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_150"
-                android:layout_marginTop="@dimen/dm_64" />
+                android:layout_height="@dimen/dm_150"/>
             <include layout="@layout/layout_search" />
             <View
                 android:layout_width="match_parent"
@@ -75,6 +86,12 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_60"
+            app:srlTextSizeTitle="@dimen/dm_14"
+            app:srlTextSizeTime="@dimen/dm_14"
+            app:srlAccentColor="@color/tv_191"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <include layout="@layout/layout_title"/>
-</RelativeLayout>
+</LinearLayout>

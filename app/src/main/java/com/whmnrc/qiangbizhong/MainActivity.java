@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.FragmentUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.gyf.barlibrary.ImmersionBar;
@@ -23,10 +25,14 @@ import com.whmnrc.qiangbizhong.ui.me.MineFragment;
 import com.whmnrc.qiangbizhong.ui.shop.ShopFragment;
 import com.whmnrc.qiangbizhong.ui.shopping.ShopCarFragment;
 import com.whmnrc.qiangbizhong.ui.yimei.YiMeiFragment;
+import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -46,18 +52,24 @@ public class MainActivity extends BaseActivity {
     TextView tvMine;
 
     private List<Fragment> fragments;
-    private final int HOME = 0;
-    private final int YIMEI = 1;
-    private final int SHOP = 2;
-    private final int SHOPCAR = 3;
-    private final int ME = 4;
+    private static final int HOME = 0;
+    private static final int YIMEI = 1;
+    private static final int SHOP = 2;
+    private static final int SHOPCAR = 3;
+    private static final int ME = 4;
 
     private Fragment showFragment;
-    private int shopIndex = HOME;
+    private static int shopIndex = HOME;
     private ImmersionBar mImmersionBar;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(starter);
+    }
+
+    public static void start(Context context,int type) {
+        Intent starter = new Intent(context, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        shopIndex = SHOPCAR;
         context.startActivity(starter);
     }
 
@@ -77,9 +89,9 @@ public class MainActivity extends BaseActivity {
         fragments.add(ShopFragment.newInstance());
         fragments.add(ShopCarFragment.newInstance());
         fragments.add(MineFragment.newInstance());
-        FragmentUtils.add(getSupportFragmentManager(),fragments,R.id.fl_content,HOME);
-        showFragment = fragments.get(HOME);
-        switchBtn(HOME);
+        FragmentUtils.add(getSupportFragmentManager(),fragments,R.id.fl_content,shopIndex);
+        showFragment = fragments.get(shopIndex);
+        switchBtn(shopIndex);
         bugongyin();
     }
 

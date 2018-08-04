@@ -3,18 +3,15 @@ package com.whmnrc.qiangbizhong.ui.yimei.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -24,21 +21,14 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsBean;
-import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsDetailBean;
 import com.whmnrc.qiangbizhong.presenter.yimei.YiMeiPresenter;
 import com.whmnrc.qiangbizhong.ui.yimei.adpter.YiMeiSearchAdapter;
-
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -128,8 +118,8 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mYiMeiSearchAdapter);
 
-        refresh.setOnRefreshListener(refreshLayout -> yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString().trim(), type, latitude, longitude, this));
-        refresh.setOnLoadMoreListener(refreshLayout -> yiMeiPresenter.medicalsearchlist(false, etKeyword.getText().toString().trim(), type, latitude, longitude, this));
+        refresh.setOnRefreshListener(refreshLayout -> yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString(), type, latitude, longitude, this));
+        refresh.setOnLoadMoreListener(refreshLayout -> yiMeiPresenter.medicalsearchlist(false, etKeyword.getText().toString(), type, latitude, longitude, this));
 
         etKeyword.setOnEditorActionListener(this);
         initLocation();
@@ -187,7 +177,6 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
     }
 
     private void req(int i) {
-        showLoading("加载中..");
         tvItem1.setTextColor(getResources().getColor(R.color.tv_191));
         tvItem2.setTextColor(getResources().getColor(R.color.tv_191));
         tvItem3.setTextColor(getResources().getColor(R.color.tv_191));
@@ -197,24 +186,23 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
         switch (i) {
             case 1:
                 type = 0;
-                yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString().trim(), type, latitude, longitude, this);
                 viewItem1.setVisibility(View.VISIBLE);
                 tvItem1.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
             case 2:
                 type = 1;
-                yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString().trim(), type, latitude, longitude, this);
                 viewItem2.setVisibility(View.VISIBLE);
                 tvItem2.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
             case 3:
                 type = 2;
-                yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString().trim(), type, latitude, longitude, this);
                 viewItem3.setVisibility(View.VISIBLE);
                 tvItem3.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
         }
 
+        showLoading("加载中..");
+        yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString(), type, latitude, longitude, this);
 
     }
 
@@ -255,7 +243,7 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             // 当按了搜索之后关闭软键盘
             showLoading("加载中..");
-            yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString().trim(), 1, latitude, longitude, this);
+            yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString().trim(), type, latitude, longitude, this);
             KeyboardUtils.hideSoftInput(this);
             return true;
         }

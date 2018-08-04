@@ -46,7 +46,7 @@ public class ViewPagerUtil {
         tabLayout.setTabsFromPagerAdapter(mAdapter);//给Tabs设置适配器
         reduceMarginsInTabs(tabLayout, marginOffset);
         viewPager.setCurrentItem(page);
-        viewPager.setOffscreenPageLimit(1);
+        viewPager.setOffscreenPageLimit(2);
     }
 
     private static void reduceMarginsInTabs(TabLayout tabLayout, int marginOffset) {

@@ -1,12 +1,17 @@
 package com.whmnrc.qiangbizhong.ui.me.fragment.order;
 
 
+import android.text.InputType;
+import android.view.View;
+
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ConfirmOrderActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
+import com.whmnrc.qiangbizhong.ui.shopping.activity.EvaluateActivity;
+import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
 import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
@@ -18,7 +23,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Created by lizhe on 2018/7/11.
  */
 
-public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.CancelCall, OrderPresenter.CollectCall, OrderPresenter.PayBackS, OrderPresenter.PayPassCall {
+public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.CancelCall, OrderPresenter.CollectCall, OrderPresenter.PayBackS, OrderPresenter.PayPassCall, OrderPresenter.OrderUpdateCall {
 
     private OrderListBean orderListBean;
 
@@ -106,6 +111,46 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
                     }
                 }).show();
             }
+
+            @Override
+            public void qxRefund(OrderListBean item) {
+                new AlertDialog(getContext()).builder()
+                        .setTitle("提示")
+                        .setMsg("确认要取消吗？")
+                        .setPositiveButton("确认", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                orderPresenter.cannerrefund(item.getOrder_ID(),Order4Fragment.this);
+                            }
+                        }).show();
+
+            }
+
+            @Override
+            public void refund(OrderListBean item) {
+                new AlertEditTextDialog(mContext).builder().setTitle("是否确认申请退款")
+                        .setTvFundZfPwd(false)
+                        .setEidtMsg("请输入退款原因")
+                        .setInputType(InputType.TYPE_CLASS_TEXT)
+                        .setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        })
+                        .setPositive1Button("确认", new AlertEditTextDialog.ConfirmListenter() {
+                            @Override
+                            public void comfrim(String content) {
+                                orderPresenter.submitrefund(item.getOrder_ID(),content,Order4Fragment.this);
+                            }
+                        }).show();
+
+            }
+
+            @Override
+            public void evaluate(OrderListBean item) {
+                EvaluateActivity.start(Order4Fragment.this,item);
+            }
         });
     }
 
@@ -153,5 +198,10 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
         if (orderListBean != null) {
             orderPresenter.payOrder(orderListBean.getAward().getGoodsAwardId(), Order4Fragment.this);
         }
+    }
+
+    @Override
+    public void updateData() {
+        refresh.autoRefresh();
     }
 }

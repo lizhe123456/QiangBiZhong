@@ -1,11 +1,13 @@
 package com.whmnrc.qiangbizhong.ui.me.fragment.order;
 
 import android.content.Context;
+import android.view.View;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
+import com.whmnrc.qiangbizhong.ui.shop.activity.ShopDetailsActivity;
 
 /**
  * Company 武汉麦诺软创
@@ -28,6 +30,12 @@ public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.DetailBean>{
                 .setGlieuImage(R.id.iv_goods,item.getProduct_ImgPath())
                 .setText(R.id.tv_goods_num,"x"+item.getOrderItem_Number());
         if (type == 0){
+            holder.setOnClickListener(R.id.iv_goods, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ShopDetailsActivity.start(getContext(),item.getProduct_ID());
+                }
+            });
             holder.setVisible(R.id.rl_moeny,false);
         }else if (type == 1){
             holder.setVisible(R.id.rl_moeny,true);

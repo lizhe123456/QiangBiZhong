@@ -160,6 +160,12 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.StatusActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.shop.activity.ShopsListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.me.activity.OrderDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.PhotoCatActivity"
+            android:screenOrientation="portrait"/>
         <service android:name="com.amap.api.location.APSService"/>
     </application>
 

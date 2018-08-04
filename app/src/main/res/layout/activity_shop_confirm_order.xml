@@ -99,7 +99,9 @@ C座7F 办公室"
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_shop"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="false"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
@@ -118,18 +120,19 @@ C座7F 办公室"
             android:gravity="right|center_vertical"
             android:layout_toLeftOf="@+id/tv_tijiao">
             <TextView
-                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/tv_191"
                 android:textSize="@dimen/dm_13"
                 android:text="合计："
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dm_15"/>
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"
                 android:orientation="horizontal"
                 android:layout_toRightOf="@+id/tv_title"
                 android:layout_centerVertical="true">

@@ -47,7 +47,7 @@ public class StringUtil {
     }
 
     public static String weiString1(double d){
-        java.text.DecimalFormat myformat = new java.text.DecimalFormat("0.0");
+        java.text.DecimalFormat myformat = new java.text.DecimalFormat("0.00");
         String str = myformat.format(d);
         return str;
     }

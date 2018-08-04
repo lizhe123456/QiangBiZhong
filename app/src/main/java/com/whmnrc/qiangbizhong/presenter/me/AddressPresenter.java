@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class AddressPresenter {
 
-    Context context;
+    private Context context;
 
     public AddressPresenter(Context context) {
         this.context = context;
@@ -87,8 +87,7 @@ public class AddressPresenter {
     //添加地址
     public void getaddressList(AddManageCall addManageCall){
         Map<String,String> map = new HashMap<>();
-        map.put("userId", UserManage.getInstance().getUserID());
-        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.getaddresslist),map, new OkhttpUtil.BeanCallback() {
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.getaddresslist) + "?userId="+UserManage.getInstance().getUserID(),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)) {

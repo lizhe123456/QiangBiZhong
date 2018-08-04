@@ -81,5 +81,10 @@ public class CustomerServiceDialog extends Dialog {
 
     }
 
+    public static void showDialog(Context context){
+        CustomerServiceDialog customerServiceDialog = new CustomerServiceDialog(context, R.style.AlertDialogStyle);
+        customerServiceDialog.show();
+    }
+
 
 }

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+    buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.whmnrc.qiangbizhong"
         minSdkVersion 19
@@ -93,5 +94,4 @@ dependencies {
     implementation files('libs/pgyer_sdk_3.0.0.jar')
     implementation 'com.android.support:multidex:1.0.1'
     implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
-
 }

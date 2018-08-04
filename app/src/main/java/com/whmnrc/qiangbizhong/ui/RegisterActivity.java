@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -58,10 +59,10 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
     EditText etPhoneNumber;
     @BindView(R.id.tv_login)
     TextView tvLogin;
-    @BindView(R.id.et_pwd_2)
-    EditText editText2;
     @BindView(R.id.bt_get_code)
     TextView tvGetCode;
+    @BindView(R.id.isshow)
+    ImageView ivShow;
     @BindView(R.id.iv_select)
     ImageView ivSelect;
 
@@ -76,6 +77,8 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
     private Timer timer;
 
     private boolean isSelect;
+    boolean isshow;
+
 
     private Handler handler = new Handler() {
         @Override
@@ -121,7 +124,7 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_login,R.id.bt_get_code,R.id.tv_xieyi,R.id.iv_select,R.id.tv_cz_xieyi})
+    @OnClick({R.id.iv_back, R.id.tv_login,R.id.bt_get_code,R.id.tv_xieyi,R.id.iv_select,R.id.tv_cz_xieyi,R.id.isshow})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -156,11 +159,6 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
                     ToastUtils.showShort("至少包含大小写字母及数字");
                     return;
                 }
-
-                if (!editText2.getText().toString().trim().equals(etPwd.getText().toString().trim())){
-                    ToastUtils.showShort("两次输入不一致");
-                    return;
-                }
                 if (isSelect){
                     showLoading("注册中..");
                     loginPresenter.register(etPhoneNumber.getText().toString().trim(),etPwd.getText().toString().trim(),etCode.getText().toString().trim(),this);
@@ -193,6 +191,21 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
                 }else {
                     ivSelect.setImageResource(R.drawable.ic_select);
                     isSelect = true;
+                }
+                break;
+
+            case R.id.isshow:
+                if (!isshow){
+                    isshow = true;
+                    etPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);// 输入为密码且可见
+                    etPwd.setSelection(etPwd.getText().toString().length());
+                    ivShow.setImageResource(R.drawable.ic_gson);
+
+                }else {
+                    isshow = false;
+                    etPwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);// 设置文本类密码（默认不可见），这两个属性必须同时设置
+                    etPwd.setSelection(etPwd.getText().toString().length());
+                    ivShow.setImageResource(R.drawable.ic_cat_no);
                 }
                 break;
         }

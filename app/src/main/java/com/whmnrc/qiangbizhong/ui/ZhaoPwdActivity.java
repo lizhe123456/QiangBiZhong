@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -17,7 +18,6 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
 import com.whmnrc.qiangbizhong.util.PwdCheckUtil;
-
 import java.util.Timer;
 import java.util.TimerTask;
 import butterknife.BindView;
@@ -55,6 +55,10 @@ public class ZhaoPwdActivity extends BaseActivity implements LoginPresenter.Zhao
     EditText etPhoneNumber;
     @BindView(R.id.tv_login)
     TextView tvLogin;
+    @BindView(R.id.isshow)
+    ImageView ivShow;
+
+    boolean isshow;
 
 
     private LoginPresenter loginPresenter;
@@ -109,7 +113,7 @@ public class ZhaoPwdActivity extends BaseActivity implements LoginPresenter.Zhao
     }
 
 
-    @OnClick({R.id.iv_back, R.id.bt_get_code, R.id.tv_login})
+    @OnClick({R.id.iv_back, R.id.bt_get_code, R.id.tv_login,R.id.isshow})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -158,6 +162,20 @@ public class ZhaoPwdActivity extends BaseActivity implements LoginPresenter.Zhao
                 }
                 showLoading("提交中..");
                 loginPresenter.retrievePwd(etPhoneNumber.getText().toString().trim(),etPwd.getText().toString().trim(),etCode.getText().toString().trim(),this);
+                break;
+            case R.id.isshow:
+                if (!isshow){
+                    isshow = true;
+                    etPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);// 输入为密码且可见
+                    etPwd.setSelection(etPwd.getText().toString().length());
+                    ivShow.setImageResource(R.drawable.ic_gson);
+
+                }else {
+                    isshow = false;
+                    etPwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);// 设置文本类密码（默认不可见），这两个属性必须同时设置
+                    etPwd.setSelection(etPwd.getText().toString().length());
+                    ivShow.setImageResource(R.drawable.ic_cat_no);
+                }
                 break;
         }
     }

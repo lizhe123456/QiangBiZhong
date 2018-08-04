@@ -108,7 +108,63 @@
     <!--商品评价列表-->
     <string name="getcommentlist">/api/home/getcommentlist</string>
     <!--添加收藏-->
-    <string name="addcollection">/api/app/addcollection</string>
+    <string name="addcollection">/api/collection/addcollection</string>
+    <!--取消收藏-->
+    <string name="cannercollection">/api/collection/cannercollection</string>
+    <!--收藏列表-->
+    <string name="getcollectionlist">/api/collection/getcollectionlist</string>
+    <!--批量收藏-->
+    <string name="addcollectionlist">/api/collection/addcollectionlist</string>
+    <!--批量取消收藏-->
+    <string name="cannercollectionlist">/api/collection/cannercollectionlist</string>
+
+
+    <!--商城-->
+
+    <!--商城首页-->
+    <string name="getshoppingindex">/api/home/getshoppingindex</string>
+    <!--商城商品列表-->
+    <string name="goodssearchlist">/api/home/goodssearchlist</string>
+    <!--商城商品详情-->
+    <string name="getgoodsdetail">/api/home/getgoodsdetail</string>
+    <!--返回商品规格属性-->
+    <string name="getgoodsspecattr">/api/home/getgoodsspecattr</string>
+    <!--提交商品评论-->
+    <string name="submitcommentinfo">/api/app/submitcommentinfo</string>
+    <!--提交商城订单-->
+    <string name="submitshoppingorder">/api/app/submitshoppingorder</string>
+    <!--确认订单数据-->
+    <string name="confirmorder">/api/app/confirmorder</string>
+    <!--提交申请退款-->
+    <string name="submitrefund">/api/app/submitrefund</string>
+    <!--返回商城商铺详情-->
+    <string name="getshoppingstoredetail">/api/home/getshoppingstoredetail</string>
+    <!--取消退款-->
+    <string name="cannerrefund">/api/app/cannerrefund</string>
+
+
+
+
+    <!--购物车-->
+
+    <!--添加到购物车-->
+    <string name="addcar">/api/buycar/addcar</string>
+    <!--购物车删除-->
+    <string name="deletecars">/api/buycar/deletecars</string>
+    <!--修改购物车信息-->
+    <string name="updatecar">/api/buycar/updatecar</string>
+    <!--修改购物车商品数量-->
+    <string name="updatecarnum">/api/buycar/updatecarnum</string>
+    <!--购物车列表-->
+    <string name="getcarlist">/api/buycar/getcarlist</string>
+    <!--上传图片-->
+    <string name="uploadfile">/api/file/upload/uploadfile</string>
+
+    <string name="orderdetail">/api/home/orderdetail</string>
+
+
+
+
 
 
 

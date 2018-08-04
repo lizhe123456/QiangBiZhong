@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseLiveData;
@@ -28,7 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     private Unbinder mUnbinder;
 
-    private ImmersionBar mImmersionBar;
+    protected ImmersionBar mImmersionBar;
 
     protected LoadingDialog loadingDialog;
 
@@ -82,6 +83,9 @@ public abstract class BaseActivity extends AppCompatActivity{
             mImmersionBar.destroy();
         }
         EventBus.getDefault().unregister(this);
+        if ( KeyboardUtils.isSoftInputVisible(this)){
+            KeyboardUtils.hideSoftInput(this);
+        }
         super.onDestroy();
     }
 

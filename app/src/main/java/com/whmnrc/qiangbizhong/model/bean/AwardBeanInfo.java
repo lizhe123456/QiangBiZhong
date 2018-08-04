@@ -58,14 +58,6 @@ public class AwardBeanInfo implements Parcelable {
         this.AwardGoodsInfo = AwardGoodsInfo;
     }
 
-//    public Object getRecord() {
-//        return Record;
-//    }
-//
-//    public void setRecord(Object Record) {
-//        this.Record = Record;
-//    }
-
     public int getParticipate() {
         return Participate;
     }

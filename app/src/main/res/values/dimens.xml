@@ -79,4 +79,10 @@
     <dimen name="dm_225">225dp</dimen>
     <dimen name="dm_245">245dp</dimen>
     <dimen name="dm_44">44dp</dimen>
+    <dimen name="dm_158">158dp</dimen>
+    <dimen name="dm_95">95dp</dimen>
+    <dimen name="dm_75">75dp</dimen>
+    <dimen name="dm_85">85dp</dimen>
+    <dimen name="dm_87">87dp</dimen>
+    <dimen name="dm_130">130dp</dimen>
 </resources>

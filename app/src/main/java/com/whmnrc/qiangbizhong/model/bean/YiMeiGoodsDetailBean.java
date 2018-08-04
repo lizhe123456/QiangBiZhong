@@ -22,7 +22,7 @@ public class YiMeiGoodsDetailBean {
     private GoodsPriceBean GoodsPrice;
     private StoreInfoBean StoreInfo;
     private int EvaluateCount;
-    private List<?> Evaluate;
+    private List<CommentBean> Evaluate;
 
     public GoodsBean getGoods() {
         return Goods;
@@ -56,11 +56,11 @@ public class YiMeiGoodsDetailBean {
         this.EvaluateCount = EvaluateCount;
     }
 
-    public List<?> getEvaluate() {
+    public List<CommentBean> getEvaluate() {
         return Evaluate;
     }
 
-    public void setEvaluate(List<?> Evaluate) {
+    public void setEvaluate(List<CommentBean> Evaluate) {
         this.Evaluate = Evaluate;
     }
 

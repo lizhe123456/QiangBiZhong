@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dm_10"
+    android:layout_marginRight="@dimen/dm_10"
+    android:layout_marginTop="@dimen/dm_10"
+    android:padding="@dimen/dm_1"
+    android:background="@drawable/bg_ccc">
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"/>
+    <LinearLayout
+        android:id="@+id/ll_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dm_13"
+        android:layout_marginLeft="@dimen/dm_10"
+        android:layout_marginRight="@dimen/dm_10">
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dm_17"
+            android:textColor="@color/goods_price"
+            android:text="500"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_5"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/dm_4"
+            android:src="@drawable/ic_yudou" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_goods_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dm_10"
+        android:layout_marginBottom="@dimen/dm_10"
+        android:layout_marginRight="@dimen/dm_10"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="@dimen/dm_16"
+        android:textColor="@color/tv_191"
+        android:layout_marginTop="@dimen/dm_14"/>
+
+</LinearLayout>

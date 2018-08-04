@@ -10,7 +10,10 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
+import com.whmnrc.qiangbizhong.model.bean.OrderdetailBean;
+import com.whmnrc.qiangbizhong.model.bean.ShopCarBean;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
+import com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
@@ -211,6 +214,116 @@ public class OrderPresenter {
         });
     }
 
+    public void submitshoppingorder(ShopConfirmOrderActivity.Parameter parameter, SubmitOrederCall submitShoppingOrderCall){
+        OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.submitshoppingorder), GsonUtil.createGsonString(parameter), new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (submitShoppingOrderCall != null){
+                    submitShoppingOrderCall.submitOrederBack();
+                }
+                if (TextUtils.isEmpty(data)){
+
+                }else {
+                    ToastUtils.showShort(data);
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (submitShoppingOrderCall != null){
+                    submitShoppingOrderCall.error();
+                }
+
+                if (code == 101 && errorMsg.equals("101")){
+                    if (submitShoppingOrderCall != null) {
+                        submitShoppingOrderCall.recharge();
+                    }
+                }else {
+                    if (submitShoppingOrderCall != null) {
+                        submitShoppingOrderCall.error();
+                    }
+                }
+            }
+        });
+
+    }
+
+    public void submitrefund(String orderId,String refundremark,OrderUpdateCall orderUpdateCall){
+        Map<String,String> map = new HashMap<>();
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.submitrefund) +
+                "?userId=" + UserManage.getInstance().getUserID() + "&orderId=" + orderId + "&refundremark=" + refundremark, map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (orderUpdateCall != null) {
+                    if (TextUtils.isEmpty(data)) {
+                        orderUpdateCall.updateData();
+                        ToastUtils.showShort("提交成功");
+                    } else {
+                        ToastUtils.showShort(data);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (orderUpdateCall != null) {
+                    orderUpdateCall.error();
+                }
+            }
+        });
+    }
+
+    public void cannerrefund(String orderId,OrderUpdateCall orderUpdateCall){
+        Map<String,String> map = new HashMap<>();
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.cannerrefund) +
+                "?userId=" + UserManage.getInstance().getUserID() + "&orderId=" + orderId, map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (orderUpdateCall != null) {
+                    if (TextUtils.isEmpty(data)) {
+                        orderUpdateCall.updateData();
+                        ToastUtils.showShort("取消成功");
+                    } else {
+                        ToastUtils.showShort(data);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (orderUpdateCall != null) {
+                    orderUpdateCall.error();
+                }
+            }
+        });
+    }
+
+    public void orderdetail(String orderId,OrderDetailCall orderUpdateCall){
+        Map<String,String> map = new HashMap<>();
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.orderdetail) +
+                "?orderId=" + orderId, map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                OrderdetailBean orderdetailBean = GsonUtil.changeGsonToBean(data,OrderdetailBean.class);
+                if (orderUpdateCall != null) {
+                    orderUpdateCall.orderDetail(orderdetailBean);
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (orderUpdateCall != null) {
+                    orderUpdateCall.error();
+                }
+            }
+        });
+    }
+
+    public interface OrderDetailCall extends BaseCall{
+        void orderDetail(OrderdetailBean orderdetailBean);
+    }
+
+
     public interface PayPassCall extends BaseCall{
 
         void payPassBack();
@@ -220,6 +333,11 @@ public class OrderPresenter {
         void orderlistBack(List<OrderListBean> orderListBeans);
 
         void loadMore(List<OrderListBean> orderListBeans);
+    }
+
+    public interface OrderUpdateCall extends BaseCall {
+
+        void updateData();
     }
 
     public interface SubmitOrederCall extends BaseCall{
@@ -242,6 +360,12 @@ public class OrderPresenter {
         void payS();
 
         void recharge();
+
+    }
+
+    public interface SubmitShoppingOrderCall extends BaseCall{
+
+        void submitShoppingOrderBack();
 
     }
 }

@@ -139,7 +139,7 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, LuckDrawGoodsBean item, int position) {
-            holder.setText(R.id.tv_time,item.getAwardTime()).setText(R.id.tv_name,item.getUserNick()).setGlieuImage(R.id.iv_img,item.getProduct_ImgPath());
+            holder.setText(R.id.tv_time,item.getAwardTime()).setText(R.id.tv_name,item.getUserInfo_Mobile()).setGlieuImage(R.id.iv_img,item.getProduct_ImgPath());
 
             ImageView imageView = holder.getView(R.id.iv_img);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();

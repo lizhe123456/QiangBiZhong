@@ -109,8 +109,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/dm_7">
+            android:orientation="horizontal">
+
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -119,19 +119,24 @@
 
             <EditText
                 android:id="@+id/et_pwd"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="19dp"
+                android:layout_marginLeft="@dimen/dm_19"
+                android:layout_weight="1"
                 android:background="@color/transparency"
-                android:hint="输入新密码"
+                android:hint="输入密码"
                 android:inputType="textPassword"
-                android:maxLength="11"
-                android:paddingBottom="@dimen/dm_22"
-                android:paddingTop="@dimen/dm_22"
+                android:maxLength="12"
                 android:textColor="@color/text_color"
                 android:textColorHint="#999999"
-                android:textSize="16sp" />
-
+                android:textSize="16sp"
+                android:paddingBottom="@dimen/dm_22"
+                android:paddingTop="@dimen/dm_22"/>
+            <ImageView
+                android:id="@+id/isshow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cat_no" />
         </LinearLayout>
 
         <View

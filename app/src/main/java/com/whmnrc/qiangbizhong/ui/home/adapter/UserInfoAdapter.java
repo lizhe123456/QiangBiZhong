@@ -20,7 +20,7 @@ public class UserInfoAdapter extends BaseAdapter<UserInfoBean> {
 
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, UserInfoBean item, int position) {
-            holder.setText(R.id.tv_name,item.getUserNick())
+            holder.setText(R.id.tv_name,item.getUserInfo_Mobile())
                     .setText(R.id.tv_time,item.getCreateDate())
                     .setGlieuImage(R.id.iv_head,item.getUserHeadImage());
 

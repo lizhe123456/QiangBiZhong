@@ -179,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="今日可够"
+                android:text="今日可购"
                 android:textColor="@color/tv_navigation"
                 android:textSize="13sp" />
 

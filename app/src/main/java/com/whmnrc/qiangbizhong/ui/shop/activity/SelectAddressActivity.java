@@ -134,7 +134,7 @@ public class SelectAddressActivity extends BaseActivity implements AddressPresen
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, AddressBean item, int position) {
-            if (position == 0){
+            if (item.getAddress_IsDefault() == 1){
                 holder.setVisible(R.id.tv_isDefault,true);
             }else{
                 holder.setVisible(R.id.tv_isDefault,false);

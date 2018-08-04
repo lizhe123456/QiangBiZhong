@@ -32,6 +32,7 @@ import com.whmnrc.qiangbizhong.ui.home.adapter.NewUnveiledsAdapter;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.SearchGoodsActivity;
+import com.whmnrc.qiangbizhong.ui.shop.activity.ShopDetailsActivity;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
@@ -148,6 +149,17 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         rvList.setLayoutManager(new GridLayoutManager(mContext, 2));
         rvList.setAdapter(goodsAdapter);
         goodsAdapter.addFirstDataSet(goodsBeans);
+        goodsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Object item, int position) {
+                if (UserManage.getInstance().getLoginBean() != null) {
+                    HomeResult.GoodsTjBean goodsNewAwardBean = (HomeResult.GoodsTjBean) item;
+                    ShopDetailsActivity.start(mContext, goodsNewAwardBean.getGoods_ID());
+                } else {
+                    LoginActivity.start(getContext());
+                }
+            }
+        });
 
     }
 
@@ -297,6 +309,11 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                 }
                 break;
             case R.id.tv_for_you_more:
+                if (UserManage.getInstance().getLoginBean() == null) {
+                    LoginActivity.start(getContext());
+                } else {
+                    SearchGoodsActivity.start(mContext,"");
+                }
                 break;
             case R.id.tv_jiexiao_more:
                 if (UserManage.getInstance().getLoginBean() == null) {
@@ -306,7 +323,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                 }
                 break;
             case R.id.iv_search:
-                SearchGoodsActivity.start(mContext);
+                SearchGoodsActivity.start(mContext,"");
                 break;
         }
     }

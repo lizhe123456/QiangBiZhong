@@ -53,10 +53,6 @@ public class UserManage {
         SPUtils.getInstance().remove("loginBean");
     }
 
-    public static UserManage getUserManage() {
-        return userManage;
-    }
-
     public static void setUserManage(UserManage userManage) {
         UserManage.userManage = userManage;
     }

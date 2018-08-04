@@ -46,6 +46,15 @@ public class LuckDrawGoodsBean {
     private int GoodsPrice_VirtualPrice;
     private String Product_ImgPath;
     private String UserNick;
+    private String UserInfo_Mobile;
+
+    public String getUserInfo_Mobile() {
+        return UserInfo_Mobile;
+    }
+
+    public void setUserInfo_Mobile(String userInfo_Mobile) {
+        UserInfo_Mobile = userInfo_Mobile;
+    }
 
     public String getAwardRecordId() {
         return AwardRecordId;

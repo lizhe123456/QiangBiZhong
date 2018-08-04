@@ -13,6 +13,7 @@ public class PayDialogUtil {
     public static void payDialogShow(Context context, AlertEditTextDialog.ConfirmListenter confirmListenter){
         new AlertEditTextDialog(context).builder()
                 .setMinTitle("设置支付密码")
+                .setTvFundZfPwd(true)
                 .setTitle("支付密码")
                 .setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD)
                 .setEidtMsg("请输入支付密码")

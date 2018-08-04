@@ -30,6 +30,16 @@ public class OnOrderListenerAdapter implements OnOrderListener {
     }
 
     @Override
+    public void refund(OrderListBean item) {
+
+    }
+
+    @Override
+    public void qxRefund(OrderListBean item) {
+
+    }
+
+    @Override
     public void payClick(OrderListBean item) {
 
     }

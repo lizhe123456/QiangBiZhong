@@ -1,6 +1,6 @@
 package com.whmnrc.qiangbizhong.model.bean;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -10,146 +10,210 @@ import java.util.List;
 
 public class ShopCarBean {
 
-    private String name;
-    private List<GoodsBean> goodsBeans;
 
-    private List<ShopCarBean> list;
+    /**
+     * StoreId : 43956e13-8dd6-476b-b6e4-02a73be238c4
+     * StoreName : 艾美链
+     * Goods : [{"BuyCar_ID":"275d16b7-849f-47e9-8eb3-e4b4380e8b42","Goods_ID":"4d0123ef-51df-4acd-8700-6e1cfe41dc72","GoodsPrice_ID":"120a2890-2fec-4226-8bed-f0f0c55f599a","UserInfo_ID":"bda06fce-e199-47a9-9a45-6ee3c4fae39c","BuyCar_Num":1,"BuyCar_CreateDate":"2018-07-28 00:00:00","GoodsPrice_Price":800,"Goods_Name":"宝马2018款 320Li时尚版","GoodsPrice_AttrName":"红色","GoodsPrice_SpecName":"宝马2018款 320Li时尚版","Goods_ImaPath":"http://192.168.1.157:8011/Resource/PhotoFile/e2664899-5aa9-4d4b-8f2b-2fb6270299ad.png","StoreId":"43956e13-8dd6-476b-b6e4-02a73be238c4","StoreName":"艾美链"}]
+     */
 
-    public List<ShopCarBean> getList() {
-        return list;
+    private String StoreId;
+    private String StoreName;
+    private List<GoodsBean> Goods;
+    private boolean isSelect;
+    private boolean allSelect;
+    private String etDsec = "";
+
+    public String getEtDsec() {
+        return etDsec;
     }
 
-    public void initShopCar(){
-        List<ShopCarBean> shopCarBeans = new ArrayList<>();
-        List<GoodsBean> goodsBeans = new ArrayList<>();
-        List<String> stringList = new ArrayList<>();
-        stringList.add("黑色");
-        stringList.add("绿色");
-        stringList.add("紫色");
-        stringList.add("红色");
-        goodsBeans.add(new GoodsBean("",20,0,"红色",stringList,"人字拖",500));
-        goodsBeans.add(new GoodsBean("",20,0,"红色",stringList,"黄金人字拖",1500));
-        shopCarBeans.add(new ShopCarBean("李哲的店",goodsBeans));
-        List<GoodsBean> goodsBeans1 = new ArrayList<>();
-        List<String> stringList2 = new ArrayList<>();
-        stringList.add("黑色");
-        stringList.add("绿色");
-        stringList.add("紫色");
-        stringList.add("红色");
-        goodsBeans.add(new GoodsBean("",20,0,"红色",stringList2,"人字拖",500));
-        goodsBeans.add(new GoodsBean("",20,0,"红色",stringList2,"黄金人字拖",1500));
-        goodsBeans.add(new GoodsBean("",20,0,"红色",stringList2,"白金人字拖",2000));
-        goodsBeans.add(new GoodsBean("",20,0,"红色",stringList2,"镶砖人字拖",3000));
-        shopCarBeans.add(new ShopCarBean("李哲的2号店",goodsBeans1));
-        List<GoodsBean> goodsBeans2 = new ArrayList<>();
-        List<String> stringList3 = new ArrayList<>();
-        stringList.add("黑色");
-        stringList.add("绿色");
-        stringList.add("紫色");
-        stringList.add("土豪金");
-        goodsBeans.add(new GoodsBean("",20,0,"红色",stringList3,"镶砖人字拖",3000));
-        shopCarBeans.add(new ShopCarBean("李哲的3号店",goodsBeans2));
-        this.list = shopCarBeans;
+    public void setEtDsec(String etDsec) {
+        this.etDsec = etDsec;
     }
 
-    public ShopCarBean(String name, List<GoodsBean> goodsBeans) {
-        this.name = name;
-        this.goodsBeans = goodsBeans;
+    public boolean isAllSelect() {
+        return allSelect;
     }
 
-    public ShopCarBean() {
+    public void setAllSelect(boolean allSelect) {
+        this.allSelect = allSelect;
     }
 
-    public String getName() {
-        return name;
+    public boolean isSelect() {
+        return isSelect;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSelect(boolean select) {
+        isSelect = select;
     }
 
-    public List<GoodsBean> getGoodsBeans() {
-        return goodsBeans;
+    public String getStoreId() {
+        return StoreId;
     }
 
-    public void setGoodsBeans(List<GoodsBean> goodsBeans) {
-        this.goodsBeans = goodsBeans;
+    public void setStoreId(String StoreId) {
+        this.StoreId = StoreId;
     }
 
-    public class GoodsBean{
-        String url;
-        int goodsNum;
-        int isCollection;
-        String specifications;
-        List<String> specificationsList;
-        String goodsName;
-        int price;
-
-        public GoodsBean(String url, int goodsNum, int isCollection, String specifications, List<String> specificationsList, String goodsName, int price) {
-            this.url = url;
-            this.goodsNum = goodsNum;
-            this.isCollection = isCollection;
-            this.specifications = specifications;
-            this.specificationsList = specificationsList;
-            this.goodsName = goodsName;
-            this.price = price;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public int getGoodsNum() {
-            return goodsNum;
-        }
-
-        public void setGoodsNum(int goodsNum) {
-            this.goodsNum = goodsNum;
-        }
-
-        public int getIsCollection() {
-            return isCollection;
-        }
-
-        public void setIsCollection(int isCollection) {
-            this.isCollection = isCollection;
-        }
-
-        public String getSpecifications() {
-            return specifications;
-        }
-
-        public void setSpecifications(String specifications) {
-            this.specifications = specifications;
-        }
-
-        public List<String> getSpecificationsList() {
-            return specificationsList;
-        }
-
-        public void setSpecificationsList(List<String> specificationsList) {
-            this.specificationsList = specificationsList;
-        }
-
-        public String getGoodsName() {
-            return goodsName;
-        }
-
-        public void setGoodsName(String goodsName) {
-            this.goodsName = goodsName;
-        }
-
-        public int getPrice() {
-            return price;
-        }
-
-        public void setPrice(int price) {
-            this.price = price;
-        }
+    public String getStoreName() {
+        return StoreName;
     }
 
+    public void setStoreName(String StoreName) {
+        this.StoreName = StoreName;
+    }
+
+    public List<GoodsBean> getGoods() {
+        return Goods;
+    }
+
+    public void setGoods(List<GoodsBean> Goods) {
+        this.Goods = Goods;
+    }
+
+    public static class GoodsBean {
+        /**
+         * BuyCar_ID : 275d16b7-849f-47e9-8eb3-e4b4380e8b42
+         * Goods_ID : 4d0123ef-51df-4acd-8700-6e1cfe41dc72
+         * GoodsPrice_ID : 120a2890-2fec-4226-8bed-f0f0c55f599a
+         * UserInfo_ID : bda06fce-e199-47a9-9a45-6ee3c4fae39c
+         * BuyCar_Num : 1
+         * BuyCar_CreateDate : 2018-07-28 00:00:00
+         * GoodsPrice_Price : 800
+         * Goods_Name : 宝马2018款 320Li时尚版
+         * GoodsPrice_AttrName : 红色
+         * GoodsPrice_SpecName : 宝马2018款 320Li时尚版
+         * Goods_ImaPath : http://192.168.1.157:8011/Resource/PhotoFile/e2664899-5aa9-4d4b-8f2b-2fb6270299ad.png
+         * StoreId : 43956e13-8dd6-476b-b6e4-02a73be238c4
+         * StoreName : 艾美链
+         */
+
+        private String BuyCar_ID;
+        private String Goods_ID;
+        private String GoodsPrice_ID;
+        private String UserInfo_ID;
+        private int BuyCar_Num;
+        private String BuyCar_CreateDate;
+        private int GoodsPrice_Price;
+        private String Goods_Name;
+        private String GoodsPrice_AttrName;
+        private String GoodsPrice_SpecName;
+        private String Goods_ImaPath;
+        private String StoreId;
+        private String StoreName;
+        private boolean isSelect;
+
+        public boolean isSelect() {
+            return isSelect;
+        }
+
+        public void setSelect(boolean select) {
+            isSelect = select;
+        }
+
+        public String getBuyCar_ID() {
+            return BuyCar_ID;
+        }
+
+        public void setBuyCar_ID(String BuyCar_ID) {
+            this.BuyCar_ID = BuyCar_ID;
+        }
+
+        public String getGoods_ID() {
+            return Goods_ID;
+        }
+
+        public void setGoods_ID(String Goods_ID) {
+            this.Goods_ID = Goods_ID;
+        }
+
+        public String getGoodsPrice_ID() {
+            return GoodsPrice_ID;
+        }
+
+        public void setGoodsPrice_ID(String GoodsPrice_ID) {
+            this.GoodsPrice_ID = GoodsPrice_ID;
+        }
+
+        public String getUserInfo_ID() {
+            return UserInfo_ID;
+        }
+
+        public void setUserInfo_ID(String UserInfo_ID) {
+            this.UserInfo_ID = UserInfo_ID;
+        }
+
+        public int getBuyCar_Num() {
+            return BuyCar_Num;
+        }
+
+        public void setBuyCar_Num(int BuyCar_Num) {
+            this.BuyCar_Num = BuyCar_Num;
+        }
+
+        public String getBuyCar_CreateDate() {
+            return BuyCar_CreateDate;
+        }
+
+        public void setBuyCar_CreateDate(String BuyCar_CreateDate) {
+            this.BuyCar_CreateDate = BuyCar_CreateDate;
+        }
+
+        public int getGoodsPrice_Price() {
+            return GoodsPrice_Price;
+        }
+
+        public void setGoodsPrice_Price(int GoodsPrice_Price) {
+            this.GoodsPrice_Price = GoodsPrice_Price;
+        }
+
+        public String getGoods_Name() {
+            return Goods_Name;
+        }
+
+        public void setGoods_Name(String Goods_Name) {
+            this.Goods_Name = Goods_Name;
+        }
+
+        public String getGoodsPrice_AttrName() {
+            return GoodsPrice_AttrName;
+        }
+
+        public void setGoodsPrice_AttrName(String GoodsPrice_AttrName) {
+            this.GoodsPrice_AttrName = GoodsPrice_AttrName;
+        }
+
+        public String getGoodsPrice_SpecName() {
+            return GoodsPrice_SpecName;
+        }
+
+        public void setGoodsPrice_SpecName(String GoodsPrice_SpecName) {
+            this.GoodsPrice_SpecName = GoodsPrice_SpecName;
+        }
+
+        public String getGoods_ImaPath() {
+            return Goods_ImaPath;
+        }
+
+        public void setGoods_ImaPath(String Goods_ImaPath) {
+            this.Goods_ImaPath = Goods_ImaPath;
+        }
+
+        public String getStoreId() {
+            return StoreId;
+        }
+
+        public void setStoreId(String StoreId) {
+            this.StoreId = StoreId;
+        }
+
+        public String getStoreName() {
+            return StoreName;
+        }
+
+        public void setStoreName(String StoreName) {
+            this.StoreName = StoreName;
+        }
+    }
 }

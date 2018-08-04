@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dm_38"
         android:layout_below="@+id/ll_all_title"
-        android:layout_marginTop="@dimen/dm_10"
         android:background="@color/white"
         app:tabIndicatorColor="@color/tv_title_color"
         app:tabIndicatorHeight="@dimen/dm_2"
@@ -22,7 +21,48 @@
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_marginTop="@dimen/dm_10"
         android:overScrollMode="never" />
+    <LinearLayout
+        android:id="@+id/ll_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_1"
+            android:background="@color/divider_color"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_49"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="5.5"
+                android:textColor="@color/tv_191"
+                android:textSize="@dimen/dm_15"
+                android:background="@color/white"
+                android:text="全选"
+                android:drawableLeft="@drawable/ic_selece_no"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/dm_10"
+                android:layout_marginLeft="@dimen/dm_15"/>
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/dm_15"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_color_btn"
+                android:gravity="center"
+                android:text="删除"/>
+
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

@@ -6,21 +6,33 @@
     android:layout_marginLeft="@dimen/dm_10"
     android:layout_marginRight="@dimen/dm_10"
     android:background="@drawable/bg_fillet">
-    <TextView
-        android:id="@+id/tv_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#19191E"
-        android:textSize="15sp"
         android:paddingRight="@dimen/dm_5"
         android:paddingLeft="@dimen/dm_5"
-        android:paddingTop="@dimen/dm_10"
-        android:paddingBottom="@dimen/dm_10"
-        android:drawableLeft="@drawable/ic_selece_no"
-        android:drawableRight="@drawable/ic_more"
-        android:drawablePadding="@dimen/dm_10"
-        android:gravity="center_vertical"
-        android:text="sa1das541d635as"/>
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/iv_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_selece_no"
+            android:paddingTop="@dimen/dm_10"
+            android:paddingBottom="@dimen/dm_10"
+            android:paddingRight="@dimen/dm_10"/>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#19191E"
+            android:textSize="15sp"
+            android:drawableRight="@drawable/ic_more"
+            android:paddingTop="@dimen/dm_10"
+            android:paddingBottom="@dimen/dm_10"
+            android:gravity="center_vertical"
+            android:text="sa1das541d635as"/>
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dm_1"
