@@ -188,7 +188,7 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
                 sweetAlertDialog.dismiss();
-                AccountRechargeActivity.start(mContext,0);
+                AccountRechargeActivity.start(mContext,1);
             }
         }).show();
     }

@@ -196,7 +196,7 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
                 sweetAlertDialog.dismiss();
-                AccountRechargeActivity.start(ConfirmOrderActivity.this,0);
+                AccountRechargeActivity.start(ConfirmOrderActivity.this,1);
             }
         }).show();
     }

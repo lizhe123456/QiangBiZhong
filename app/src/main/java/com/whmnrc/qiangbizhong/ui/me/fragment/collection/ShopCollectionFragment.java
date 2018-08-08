@@ -22,9 +22,11 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.CollectionBean;
 import com.whmnrc.qiangbizhong.presenter.me.CollectionPresenter;
+import com.whmnrc.qiangbizhong.ui.me.activity.CollIsAll;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyCollectionActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopsListActivity;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -233,6 +235,23 @@ public class ShopCollectionFragment extends BaseFragment implements CollectionPr
                         item.setSelect(true);
                         holder.setImageResource(R.id.iv_select, R.drawable.ic_select);
                     }
+
+//                    boolean flag = false;
+//
+//                    for (CollectionBean item :getDataSource()) {
+//                        if (item.isSelect()){
+//                            flag = true;
+//                        }else {
+//                            flag = false;
+//                            break;
+//                        }
+//                    }
+//
+//                    if (flag){
+//                        EventBus.getDefault().post(new CollIsAll(2));
+//                    }else {
+//                        EventBus.getDefault().post(new CollIsAll(3));
+//                    }
                 }
             });
         }

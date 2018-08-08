@@ -1,5 +1,7 @@
 package com.whmnrc.qiangbizhong.ui.me.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -9,10 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
+import com.whmnrc.qiangbizhong.presenter.shop.GoodsPresenter;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.goods.AllGoodsFragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.goods.ShoppingGoodsFragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.goods.UndercarriageFragment;
+import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
+import com.whmnrc.qiangbizhong.widget.AlertDialog;
+
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -22,7 +30,7 @@ import butterknife.OnClick;
  * 商品管理
  */
 
-public class GoodsManageActivity extends BaseActivity {
+public class GoodsManageActivity extends BaseActivity implements GoodsPresenter.GoodsGoupCall {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -35,6 +43,15 @@ public class GoodsManageActivity extends BaseActivity {
     @BindView(R.id.vp_content)
     ViewPager vpContent;
 
+    private int page;
+    private GoodsPresenter goodsPresenter;
+
+    public static void start(Context context,int page) {
+        Intent starter = new Intent(context, GoodsManageActivity.class);
+        starter.putExtra("page",page);
+        context.startActivity(starter);
+    }
+
     @Override
     protected int setLayout() {
         return R.layout.activity_goods_manage;
@@ -44,16 +61,21 @@ public class GoodsManageActivity extends BaseActivity {
     protected void setData() {
         tvTitle.setText("商品管理");
         tvMenu.setVisibility(View.VISIBLE);
+        ivBack.setVisibility(View.VISIBLE);
         tvMenu.setText("全部下架");
+        goodsPresenter = new GoodsPresenter(this);
         SparseArray<Fragment> fragments = new SparseArray<>();
         SparseArray<String> title = new SparseArray<>();
         title.append(0,"所有商品");
         title.append(1,"上架商品");
         title.append(2,"下架商品");
-        fragments.append(0, AllGoodsFragment.newInstance());
-        fragments.append(1, ShoppingGoodsFragment.newInstance());
-        fragments.append(2, UndercarriageFragment.newInstance());
-        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,title,20,0);
+        title.append(3,"已售空");
+        fragments.append(0, AllGoodsFragment.newInstance("all"));
+        fragments.append(1, AllGoodsFragment.newInstance("1"));
+        fragments.append(2, AllGoodsFragment.newInstance("0"));
+        fragments.append(3, AllGoodsFragment.newInstance("2"));
+        page = getIntent().getIntExtra("page",0);
+        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,title,20,page);
     }
 
 
@@ -65,7 +87,35 @@ public class GoodsManageActivity extends BaseActivity {
                 break;
             case R.id.tv_menu:
                 //全部下架
+                new AlertDialog(this).setMsg("本次商品确定下架吗？")
+                        .setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        }).setPositiveButton("确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (UserManage.getInstance().getLoginBean().getStoreInfo() != null) {
+                            goodsPresenter.setstoregoodsgoup(UserManage.getInstance().getLoginBean().getStoreInfo().getId(), 0, GoodsManageActivity.this);
+                        }
+                    }
+                });
                 break;
         }
+    }
+
+    @Override
+    public void error() {
+
+    }
+
+    @Override
+    public void goodsgoup() {
+        EventBus.getDefault().post(new Update());
+    }
+
+    public class Update{
+
     }
 }

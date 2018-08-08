@@ -1,7 +1,5 @@
 package com.whmnrc.qiangbizhong.ui.me.fragment.order;
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,19 +39,26 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, OrderListBean item, int position) {
         int num = 0;
+        int moeny = 0;
         for (OrderListBean.DetailBean orderListBean : item.getDetail()) {
             num += orderListBean.getOrderItem_Number();
+            moeny += orderListBean.getSpecAttr_Price() * orderListBean.getOrderItem_Number();
         }
         holder.setText(R.id.tv_num,"共有"+num+"件商品");
 //        holder.setVisible(R.id.tv_btn_2,false);
 //        holder.setVisible(R.id.tv_btn_3,false);
+        holder.setText(R.id.tv_moeny,moeny+"");
         if (item.getOrder_CreateType() == 0){
-            holder.setText(R.id.tv_order_num,item.getStoreInfo().getStoreName()).setOnClickListener(R.id.tv_order_num, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ShopsListActivity.start(getContext(),item.getStoreInfo().getId());
-                }
-            });
+            if (item.getStoreInfo() != null) {
+                holder.setText(R.id.tv_order_num, item.getStoreInfo().getStoreName() == null ? "" : item.getStoreInfo().getStoreName()).setOnClickListener(R.id.tv_order_num, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ShopsListActivity.start(getContext(), item.getStoreInfo().getId());
+                    }
+                });
+            }else {
+                holder.setText(R.id.tv_order_num, "");
+            }
         }else if (item.getOrder_CreateType() == 1){
             holder.setText(R.id.tv_order_num,"抢购订单");
         }else if (item.getOrder_CreateType() == 2){

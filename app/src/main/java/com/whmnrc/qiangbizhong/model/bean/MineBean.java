@@ -34,7 +34,7 @@ public class MineBean {
     public void initMineBean(int type){
         List<MenuBean> menuBeans= new ArrayList<>();
         List<ItemBean> itemBeans = new ArrayList<>();
-        if (type == 1) {
+        if (type != 0) {
             itemBeans.add(new ItemBean(R.drawable.ic_item1, "赠送记录"));
             itemBeans.add(new ItemBean(R.drawable.ic_item2, "我的抵用券"));
             itemBeans.add(new ItemBean(R.drawable.ic_item4, "成为会员"));
@@ -62,18 +62,19 @@ public class MineBean {
         list.add(new HomePageBean.MenuBean(R.drawable.ic_wait_evaluate,"待评价"));
         list.add(new HomePageBean.MenuBean(R.drawable.ic_wait_evaluate,"已完成"));
         menuBeans.add(new MenuBean("我的订单","全部订单",list));
-        if (type == 1){
+        if (type != 0){
             List<HomePageBean.MenuBean> list1 = new ArrayList<>();
-            list1.add(new HomePageBean.MenuBean(R.drawable.ic_to_examine,"审核中"));
-            list1.add(new HomePageBean.MenuBean(R.drawable.ic_on_sale,"在出售"));
-            list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_sold,"已出售"));
+//            list1.add(new HomePageBean.MenuBean(R.drawable.ic_to_examine,"审核中"));
+            list1.add(new HomePageBean.MenuBean(R.drawable.ic_on_sale,"已上架"));
             list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_down,"已下架"));
+//            list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_sold,"已出售"));
+            list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_sold,"已售空"));
             menuBeans.add(new MenuBean("商品管理","所有商品",list1));
             List<HomePageBean.MenuBean> list2 = new ArrayList<>();
-            list2.add(new HomePageBean.MenuBean(R.drawable.ic_pending_payment,"待付款"));
-            list2.add(new HomePageBean.MenuBean(R.drawable.ic_in_the_transaction,"交易中"));
-            list2.add(new HomePageBean.MenuBean(R.drawable.ic_successful_trade,"交易成功"));
-            list2.add(new HomePageBean.MenuBean(R.drawable.ic_transaction_cancellation,"交易取消"));
+            list2.add(new HomePageBean.MenuBean(R.drawable.ic_pending_payment,"已支付"));
+            list2.add(new HomePageBean.MenuBean(R.drawable.ic_in_the_transaction,"待收货"));
+            list2.add(new HomePageBean.MenuBean(R.drawable.ic_successful_trade,"已完成"));
+            list2.add(new HomePageBean.MenuBean(R.drawable.ic_transaction_cancellation,"待退款"));
             menuBeans.add(new MenuBean("商家管理","全部订单",list2));
         }
         this.menuBeans = menuBeans;

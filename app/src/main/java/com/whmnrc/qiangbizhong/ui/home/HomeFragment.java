@@ -196,7 +196,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                 if (UserManage.getInstance().getLoginBean() != null) {
                     switch (position) {
                         case 0:
-                            AccountRechargeActivity.start(getContext(), 0);
+                            AccountRechargeActivity.start(getContext(), 1);
                             break;
                         case 1:
                             LuckDrawActivity.start(getContext());

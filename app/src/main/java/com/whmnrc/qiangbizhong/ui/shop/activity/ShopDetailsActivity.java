@@ -3,9 +3,7 @@ package com.whmnrc.qiangbizhong.ui.shop.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,10 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.SizeUtils;
-import com.gyf.barlibrary.ImmersionBar;
 import com.whmnrc.qiangbizhong.MainActivity;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.app.Constants;
@@ -44,10 +39,8 @@ import com.whmnrc.qiangbizhong.widget.WrapContentHeightViewPager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -146,7 +139,7 @@ public class ShopDetailsActivity extends BaseActivity implements ShopPresenter.S
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bannerView.getLayoutParams();
 
-        layoutParams.height = ScreenUtils.getScreenWidth();
+        layoutParams.height = ScreenUtils.getScreenWidth()/375*200;
 
         bannerView.setLayoutParams(layoutParams);
 

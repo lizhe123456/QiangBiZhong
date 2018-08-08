@@ -232,7 +232,7 @@ public class ShopConfirmOrderActivity extends BaseActivity implements AddressPre
                 }).setPositiveButton("确认", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AccountRechargeActivity.start(ShopConfirmOrderActivity.this,0);
+                AccountRechargeActivity.start(ShopConfirmOrderActivity.this,1);
             }
         }).show();
     }

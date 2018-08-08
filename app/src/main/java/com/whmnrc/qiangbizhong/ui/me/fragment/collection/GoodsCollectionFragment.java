@@ -27,10 +27,12 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.CollectionBean;
 import com.whmnrc.qiangbizhong.presenter.me.CollectionPresenter;
+import com.whmnrc.qiangbizhong.ui.me.activity.CollIsAll;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyCollectionActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopDetailsActivity;
 import com.whmnrc.qiangbizhong.util.StringUtil;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -117,6 +119,8 @@ public class GoodsCollectionFragment extends BaseFragment implements
         goodsCollectionAdapter.addMoreDataSet(collectionBeans);
         refresh.finishLoadMore(true);
     }
+
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void mycoll(MyCollectionActivity.EventCollectionBean eventCollectionBean){
@@ -243,6 +247,23 @@ public class GoodsCollectionFragment extends BaseFragment implements
                         item.setSelect(true);
                         holder.setImageResource(R.id.iv_select,R.drawable.ic_select);
                     }
+
+//                    boolean flag = false;
+//
+//                    for (CollectionBean item : getDataSource()) {
+//                        if (item.isSelect()){
+//                            flag = true;
+//                        }else {
+//                            flag = false;
+//                            break;
+//                        }
+//                    }
+//
+//                    if (flag){
+//                        EventBus.getDefault().post(new CollIsAll(0));
+//                    }else {
+//                        EventBus.getDefault().post(new CollIsAll(1));
+//                    }
                 }
             });
         }

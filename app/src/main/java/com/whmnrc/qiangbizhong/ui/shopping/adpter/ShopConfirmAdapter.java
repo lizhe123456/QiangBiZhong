@@ -33,10 +33,13 @@ public class ShopConfirmAdapter extends BaseAdapter<ShopCarBean> {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         goodsAdapter.addFirstDataSet(item.getGoods());
         int num = 0;
+        int count = 0;
         for (ShopCarBean.GoodsBean goodsBean :item.getGoods()) {
             num += goodsBean.getGoodsPrice_Price() * goodsBean.getBuyCar_Num();
+            count += goodsBean.getBuyCar_Num();
         }
-        holder.setText(R.id.tv_price,StringUtil.weiString1(num)).setText(R.id.tv_num,"共有"+item.getGoods().size()+"件商品");
+
+        holder.setText(R.id.tv_price,StringUtil.weiString1(num)).setText(R.id.tv_num,"共有"+count+"件商品");
 
         EditText editText = holder.getView(R.id.et_desc);
         editText.addTextChangedListener(new TextWatcher() {

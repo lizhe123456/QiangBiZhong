@@ -29,6 +29,7 @@ import com.whmnrc.qiangbizhong.presenter.shop.ImagePresenter;
 import com.whmnrc.qiangbizhong.ui.shop.adapter.ImageAdapter;
 import com.whmnrc.qiangbizhong.ui.shopping.activity.param.EvaluateParam;
 import com.whmnrc.qiangbizhong.ui.shopping.activity.param.ImgCall;
+import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.ImageUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import java.util.ArrayList;
@@ -63,13 +64,13 @@ public class EvaluateActivity extends BaseActivity implements ImagePresenter.Ima
 
     public static void start(Fragment context, OrderListBean orderListBean) {
         Intent starter = new Intent(context.getContext(), EvaluateActivity.class);
-        starter.putExtra("orderListBean", JSON.toJSONString(orderListBean));
+        starter.putExtra("orderListBean", GsonUtil.createGsonString(orderListBean));
         context.startActivityForResult(starter,101);
     }
 
     public static void start(Activity context, OrderListBean orderListBean) {
         Intent starter = new Intent(context, EvaluateActivity.class);
-        starter.putExtra("orderListBean", JSON.toJSONString(orderListBean));
+        starter.putExtra("orderListBean", GsonUtil.createGsonString(orderListBean));
         context.startActivityForResult(starter,101);
     }
 
@@ -84,7 +85,7 @@ public class EvaluateActivity extends BaseActivity implements ImagePresenter.Ima
         tvTitle.setText("发表评价");
         tvMenu.setText("发表");
         tvMenu.setVisibility(View.VISIBLE);
-        orderListBean = JSON.parseObject(getIntent().getStringExtra("orderListBean"),OrderListBean.class);
+        orderListBean = GsonUtil.changeGsonToBean(getIntent().getStringExtra("orderListBean"),OrderListBean.class);
         imagePresenter = new ImagePresenter(this);
         mEvaluatePresenter = new EvaluatePresenter(this);
         rvCommentList.setLayoutManager(new LinearLayoutManager(this));

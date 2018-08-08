@@ -69,7 +69,11 @@ public class MainActivity extends BaseActivity {
 
     public static void start(Context context,int type) {
         Intent starter = new Intent(context, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        shopIndex = SHOPCAR;
+        if (type == 1) {
+            shopIndex = SHOPCAR;
+        }else if (type == 2){
+            shopIndex = ME;
+        }
         context.startActivity(starter);
     }
 
@@ -192,36 +196,32 @@ public class MainActivity extends BaseActivity {
                                 @Override
                                 public void onUpdateAvailable(AppBean appBean) {
                                     //有更新回调此方法
-                                    LogUtils.d("pgyer", "there is new version can update"
-                                            + "new versionCode is " + appBean.getVersionCode());
-                                    //调用以下方法，DownloadFileListener 才有效；
-                                    //如果完全使用自己的下载方法，不需要设置DownloadFileListener
-                                    PgyUpdateManager.downLoadApk(appBean.getDownloadURL());
+                                    Uri uri = Uri.parse("https://www.pgyer.com/s8cD");
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                    startActivity(intent);
                                 }
 
                                 @Override
                                 public void checkUpdateFailed(Exception e) {
                                     //更新检测失败回调
-                                    LogUtils.e("pgyer", "check update failed ", e);
+
                                 }
                             })
                             .setDownloadFileListener(new DownloadFileListener() {
                                 @Override
                                 public void downloadFailed() {
                                     //下载失败
-                                    LogUtils.e("pgyer", "download apk failed");
                                 }
 
                                 @Override
                                 public void downloadSuccessful(Uri uri) {
-                                    LogUtils.e("pgyer", "download apk failed");
                                     // 使用蒲公英提供的安装方法提示用户 安装apk
-                                    PgyUpdateManager.installApk(uri);
+
                                 }
 
                                 @Override
                                 public void onProgressUpdate(Integer... integers) {
-                                    LogUtils.e("pgyer", "update download apk progress" + integers);
+
                                 }})
                             .register();
                 });

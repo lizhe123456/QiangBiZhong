@@ -40,6 +40,44 @@ public class ImagePresenter {
         });
     }
 
+    //上传图片文件流
+    public void uploadfilepublic(List<String> list,ImageCall imageCall){
+        OkhttpUtil.uploadImages(context.getString(R.string.server_address) + context.getString(R.string.uploadfilepublic), list, new OkhttpUtil.ImageCallback() {
+            @Override
+            public void onSuccess(List<String> data) {
+                if (imageCall != null){
+                    imageCall.img(data);
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (imageCall != null){
+                    imageCall.error();
+                }
+            }
+        });
+    }
+
+    //上传图片文件流
+    public void goodscontext(List<String> list,ImageCall imageCall){
+        OkhttpUtil.uploadImages(context.getString(R.string.server_address) + context.getString(R.string.goodscontext), list, new OkhttpUtil.ImageCallback() {
+            @Override
+            public void onSuccess(List<String> data) {
+                if (imageCall != null){
+                    imageCall.img(data);
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (imageCall != null){
+                    imageCall.error();
+                }
+            }
+        });
+    }
+
 
     public interface ImageCall extends BaseCall{
         void img(List<String> list);

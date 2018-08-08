@@ -1,11 +1,14 @@
 package com.whmnrc.qiangbizhong.ui.shop.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Bitmap;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -125,6 +128,11 @@ public class ShopEnterActivity extends BaseActivity {
 
     private boolean isSelect = false;
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, ShopEnterActivity.class);
+        context.startActivity(starter);
+    }
+
     @Override
     protected int setLayout() {
         return R.layout.activity_shop_enter;
@@ -134,6 +142,40 @@ public class ShopEnterActivity extends BaseActivity {
     protected void setData() {
         tvTitle.setText("我要入驻");
         ivBack.setVisibility(View.VISIBLE);
+        //支持javascript
+        wvContent.getSettings().setJavaScriptEnabled(true);
+        //支持屏幕缩放
+        wvContent.getSettings().setBuiltInZoomControls(true);
+        wvContent.getSettings().setDisplayZoomControls(false);
+        // 设置可以支持缩放
+        wvContent.getSettings().setSupportZoom(true);
+        wvContent.getSettings().setUseWideViewPort(true);
+        wvContent.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        wvContent.getSettings().setLoadWithOverviewMode(true);
+        wvContent.loadUrl("http://192.168.1.157:8011/Protocol/Admission");
+
+        wvContent.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);//防止调用系统自带的浏览器打开网页
+                return true;
+            }
+
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                if (loadingDialog.isShowing()) {
+                    loadingDialog.cancel();
+                }
+            }
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                showLoading("加载中..");
+            }
+        });
     }
 
     @OnClick({R.id.iv_back, R.id.iv_select, R.id.tv_confirm, R.id.iv_camera1, R.id.iv_camera2, R.id.iv_camera3})
@@ -145,9 +187,11 @@ public class ShopEnterActivity extends BaseActivity {
             case R.id.iv_select:
                 if (isSelect){
                     isSelect = false;
+                    ivSelect.setImageResource(R.drawable.ic_selece_no);
                     tvConfirm.setBackgroundColor(getResources().getColor(R.color.divider_color));
                 }else {
                     isSelect = true;
+                    ivSelect.setImageResource(R.drawable.ic_select);
                     tvConfirm.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 }
                 break;

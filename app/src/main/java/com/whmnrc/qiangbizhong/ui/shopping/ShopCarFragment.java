@@ -163,18 +163,7 @@ public class ShopCarFragment extends BaseFragment implements ShopCarPresenter.Ca
 
             @Override
             public void sonSelect(int position) {
-                boolean isSelect = false;
-                //子item选择
-                for (ShopCarBean.GoodsBean goodsBean :shopCarAdapter.getDataSource().get(position).getGoods()) {
-                    if (goodsBean.isSelect()){
-                        isSelect = true;
-                    }else {
-                        isSelect = false;
-                        break;
-                    }
-                }
-
-                shopCarAdapter.setSelect(position,isSelect);
+                shopCarAdapter.setSelect(position,true);
             }
 
             @Override
@@ -309,15 +298,18 @@ public class ShopCarFragment extends BaseFragment implements ShopCarPresenter.Ca
     }
 
     public void buy(){
-        List<ShopCarBean> shopCarBeans = shopCarAdapter.getDataSource();
-        int num = 0;
-        for (ShopCarBean shopCarBean :shopCarBeans) {
-            for (int i = 0; i < shopCarBean.getGoods().size(); i++) {
-                if (shopCarBean.getGoods().get(i).isSelect()){
-                    num += shopCarBean.getGoods().get(i).getGoodsPrice_Price() * shopCarBean.getGoods().get(i).getBuyCar_Num();
-                }else {
-                    shopCarBean.getGoods().remove(i);
+        List<ShopCarBean> shopCarBeans = new ArrayList<>();
+        for (ShopCarBean shopCarBean :shopCarAdapter.getDataSource()) {
+            if (shopCarBean.isSelect()){
+                ShopCarBean shopCarBean1 = shopCarBean;
+                List<ShopCarBean.GoodsBean> list = new ArrayList<>();
+                for (ShopCarBean.GoodsBean goodsBean : shopCarBean1.getGoods()) {
+                    if (goodsBean.isSelect()){
+                        list.add(goodsBean);
+                    }
+                    shopCarBean1.setGoods(list);
                 }
+                shopCarBeans.add(shopCarBean1);
             }
         }
         if (zS > 0) {

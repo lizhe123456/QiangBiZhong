@@ -387,7 +387,7 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
                 sweetAlertDialog.dismiss();
-                AccountRechargeActivity.start(FlashSaleDetailsActivity.this,0);
+                AccountRechargeActivity.start(FlashSaleDetailsActivity.this,1);
             }
         }).show();
     }

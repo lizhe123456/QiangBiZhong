@@ -52,4 +52,10 @@ public class StringUtil {
         return str;
     }
 
+    public static String weiString1(String d){
+        java.text.DecimalFormat myformat = new java.text.DecimalFormat("0.00");
+        String str = myformat.format(d);
+        return str;
+    }
+
 }

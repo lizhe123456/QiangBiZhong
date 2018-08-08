@@ -3,7 +3,6 @@ package com.whmnrc.qiangbizhong.ui.me.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -12,17 +11,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.ui.me.fragment.collection.GoodsCollectionFragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.collection.ShopCollectionFragment;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
-
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -122,6 +120,37 @@ public class MyCollectionActivity extends BaseActivity {
         });
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void isAll(CollIsAll collIsAll){
+//        if (page == 0){
+//            if (collIsAll.isAll() == 0){
+//                isAll1 = false;
+//                Drawable nav_up=getResources().getDrawable(R.drawable.ic_selece_no);
+//                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+//                tvAll.setCompoundDrawables(nav_up, null, null, null);
+//            }else {
+//                isAll1 = true;
+//                Drawable nav_up=getResources().getDrawable(R.drawable.ic_select);
+//                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+//                tvAll.setCompoundDrawables(nav_up, null, null, null);
+//            }
+//        }else if (page == 1){
+//            if (collIsAll.isAll() == 2){
+//                isAll2 = false;
+//                Drawable nav_up = getResources().getDrawable(R.drawable.ic_selece_no);
+//                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+//                tvAll.setCompoundDrawables(nav_up, null, null, null);
+//            }else {
+//                isAll2 = true;
+//                Drawable nav_up = getResources().getDrawable(R.drawable.ic_select);
+//                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+//                tvAll.setCompoundDrawables(nav_up, null, null, null);
+//            }
+//        }
+
+
+    }
+
     @OnClick({R.id.iv_back, R.id.tv_menu,R.id.tv_all, R.id.tv_delete})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -142,18 +171,18 @@ public class MyCollectionActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.tv_all:
-                if (isAll1){
-                    isAll1 = false;
-                    Drawable nav_up=getResources().getDrawable(R.drawable.ic_selece_no);
-                    nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
-                    tvAll.setCompoundDrawables(nav_up, null, null, null);
-                }else {
-                    isAll1 = true;
-                    Drawable nav_up=getResources().getDrawable(R.drawable.ic_select);
-                    nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
-                    tvAll.setCompoundDrawables(nav_up, null, null, null);
-                }
                 if (vpContent.getCurrentItem() == 0) {
+                    if (isAll1){
+                        isAll1 = false;
+                        Drawable nav_up=getResources().getDrawable(R.drawable.ic_selece_no);
+                        nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                        tvAll.setCompoundDrawables(nav_up, null, null, null);
+                    }else {
+                        isAll1 = true;
+                        Drawable nav_up=getResources().getDrawable(R.drawable.ic_select);
+                        nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                        tvAll.setCompoundDrawables(nav_up, null, null, null);
+                    }
                     EventBus.getDefault().post(new EventCollectionBean(2));
                 }else {
                     if (isAll2){

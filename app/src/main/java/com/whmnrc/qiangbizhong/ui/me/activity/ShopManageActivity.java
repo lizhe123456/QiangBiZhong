@@ -1,10 +1,13 @@
 package com.whmnrc.qiangbizhong.ui.me.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +39,14 @@ public class ShopManageActivity extends BaseActivity {
     @BindView(R.id.vp_content)
     ViewPager vpContent;
 
+    private int page;
+
+    public static void start(Context context, int page) {
+        Intent starter = new Intent(context, ShopManageActivity.class);
+        starter.putExtra("page",page);
+        context.startActivity(starter);
+    }
+
     @Override
     protected int setLayout() {
         return R.layout.activity_shop_manage;
@@ -43,6 +54,8 @@ public class ShopManageActivity extends BaseActivity {
 
     @Override
     protected void setData() {
+        tvTitle.setText("商家管理");
+        ivBack.setVisibility(View.VISIBLE);
         SparseArray<Fragment> fragments = new SparseArray<>();
         SparseArray<String> titles = new SparseArray<>();
         titles.append(0,"交易中");
@@ -53,7 +66,8 @@ public class ShopManageActivity extends BaseActivity {
         fragments.append(1, ShopOrder2Fragment.newInstance());
         fragments.append(2, ShopOrder3Fragment.newInstance());
         fragments.append(3, ShopOrder4Fragment.newInstance());
-        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,titles,20,0);
+        page = getIntent().getIntExtra("page",0);
+        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,titles,20,page);
     }
 
 

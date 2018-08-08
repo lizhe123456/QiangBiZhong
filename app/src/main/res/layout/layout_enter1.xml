@@ -35,16 +35,22 @@
                 android:hint="请输入手机号码"
                 android:textColor="@color/tv_191"
                 android:textColorHint="@color/tv_navigation"
+                android:maxLength="11"
                 android:textSize="@dimen/dm_15" />
 
         </LinearLayout>
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:layout_marginRight="@dimen/dm_15"
-            android:background="@color/divider_color" />
+            android:background="@color/white">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:background="@color/divider_color"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,12 +82,17 @@
 
         </LinearLayout>
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:layout_marginRight="@dimen/dm_15"
-            android:background="@color/divider_color" />
+            android:background="@color/white">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:background="@color/divider_color"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,13 +124,17 @@
 
         </LinearLayout>
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:layout_marginRight="@dimen/dm_15"
-            android:background="@color/divider_color" />
-
+            android:background="@color/white">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:background="@color/divider_color"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"/>
+        </FrameLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -184,12 +199,17 @@
 
         </LinearLayout>
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:layout_marginRight="@dimen/dm_15"
-            android:background="@color/divider_color" />
+            android:background="@color/white">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:background="@color/divider_color"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -221,12 +241,17 @@
 
         </LinearLayout>
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:layout_marginRight="@dimen/dm_15"
-            android:background="@color/divider_color" />
+            android:background="@color/white">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:background="@color/divider_color"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -258,12 +283,17 @@
 
         </LinearLayout>
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:layout_marginRight="@dimen/dm_15"
-            android:background="@color/divider_color" />
+            android:background="@color/white">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:background="@color/divider_color"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -290,6 +320,7 @@
                 android:background="@color/white"
                 android:hint="请填写详细地址，不少于5个字"
                 android:textColor="@color/tv_191"
+                android:maxLength="20"
                 android:textColorHint="@color/tv_navigation"
                 android:textSize="@dimen/dm_15" />
 
@@ -395,7 +426,7 @@
                 android:layout_width="@dimen/dm_225"
                 android:layout_height="@dimen/dm_135"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_idcrad_img" />
+                android:src="@drawable/ic_idcrad_img"/>
 
             <ImageView
                 android:id="@+id/iv_camera3"

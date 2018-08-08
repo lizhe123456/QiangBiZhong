@@ -23,10 +23,11 @@ import com.whmnrc.qiangbizhong.ui.me.activity.GiveActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyCollectionActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyShopActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.OpinionBackActivity;
-import com.whmnrc.qiangbizhong.ui.me.activity.ReleaseGoodsActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.UserInfoActivity;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OderMenuAdapter;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OptionAdapter;
+import com.whmnrc.qiangbizhong.ui.me.goods.ReleaseGoodsActivity;
+import com.whmnrc.qiangbizhong.ui.shop.shopenter.ShopEnter1Activity;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
@@ -79,22 +80,24 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
 
     public void update(){
         loginBean = UserManage.getInstance().getLoginBean();
+        MineBean mineBean = new MineBean();
         if (loginBean != null){
             tvUsername.setText(loginBean.getUserInfo_NickName());
             GlideuUtil.loadImageView(mContext,loginBean.getUserInfo_HeadImg(),ivHead);
             tvYudou.setText(((int) loginBean.getUserInfo_Money())+"");
             tvPurchaseRestrictions.setText("今日可购"+ StringUtil.wanString(loginBean.getUserInfo_TotalMoney()));
+            mineBean.initMineBean(loginBean.getUserType());
         }else {
             tvUsername.setText("请先登录");
             GlideuUtil.loadImageView(mContext,"",ivHead);
             tvYudou.setText(0+"");
             tvPurchaseRestrictions.setText("今日可购"+ 0);
+            mineBean.initMineBean(0);
         }
-        MineBean mineBean = new MineBean();
-        mineBean.initMineBean(0);
+
+
         initMenu(mineBean.getMenuBeans());
         initOption(mineBean.getItemBeans());
-        initMenu(mineBean.getMenuBeans());
     }
 
     @Override
@@ -146,11 +149,11 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                     case 2:
                         if (loginBean.getUserType() == 0){
                             //我要入驻
-
+                            ShopEnter1Activity.start(mContext);
                         }else{
                             //发布商品
 //                            MyShopActivity.start(mContext);
-                            AccountRechargeActivity.start(getContext(),1);
+                            AccountRechargeActivity.start(getContext(),2);
                         }
 
                         break;
@@ -168,15 +171,11 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                     case 4:
                         if (loginBean.getUserType() == 0){
                             //普通用户
-                            AccountRechargeActivity.start(getContext(),0);
-                        }else if (loginBean.getUserType() == 1){
+                            AccountRechargeActivity.start(getContext(),2);
+                        }else{
                             //商家
                             ReleaseGoodsActivity.start(mContext);
-                        }else if (loginBean.getUserType() == 2){
-                            //代理商
-
                         }
-
                         break;
                     case 5:
                         //我的收藏
@@ -220,6 +219,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_scan:
+
                 break;
             case R.id.iv_head:
                 if (loginBean == null){

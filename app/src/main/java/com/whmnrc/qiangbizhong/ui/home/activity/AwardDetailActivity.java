@@ -202,7 +202,7 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
                 sweetAlertDialog.dismiss();
-                AccountRechargeActivity.start(AwardDetailActivity.this,0);
+                AccountRechargeActivity.start(AwardDetailActivity.this,1);
             }
         }).show();
     }

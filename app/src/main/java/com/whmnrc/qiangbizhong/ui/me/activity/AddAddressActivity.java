@@ -175,10 +175,12 @@ public class AddAddressActivity extends BaseActivity implements AddressPresenter
                 tvItem1.setText(options1Items.get(options1));
                 ttItem2.setText(options2Items.get(options1).get(options2));
                 tvItem3.setText(options3Items.get(options1).get(options2).get(options3));
+
                 item1Id = jsonBean.get(options1).getAreaId();
                 item2Id = jsonBean.get(options1).getCities().get(options2).getAreaId();
                 item3Id = jsonBean.get(options1).getCities().get(options2).getCounties().get(options3).getAreaId();
-//                LogUtils.e(item1Id,item2Id,item3Id);
+
+                //LogUtils.e(item1Id,item2Id,item3Id);
             }
         })
                 .setTitleText("城市选择")
@@ -252,12 +254,13 @@ public class AddAddressActivity extends BaseActivity implements AddressPresenter
                 }
                 params.put("Address_Mobile",etPhone.getText().toString());
 
-                if (TextUtils.isEmpty(item1Id) && TextUtils.isEmpty(item2Id) && TextUtils.isEmpty(item3Id)){
+                if (TextUtils.isEmpty(item1Id) & TextUtils.isEmpty(item2Id) & TextUtils.isEmpty(item3Id)){
                     ToastUtils.showShort("请选择城市");
                     return;
                 }
-                params.put("Address_Region",item3Id);
-                params.put("Address_City",item2Id );
+
+                params.put("Address_Region", item3Id);
+                params.put("Address_City",item2Id);
                 params.put("Address_Provice", item1Id);
 
                 if (TextUtils.isEmpty(etAddress.getText().toString())){

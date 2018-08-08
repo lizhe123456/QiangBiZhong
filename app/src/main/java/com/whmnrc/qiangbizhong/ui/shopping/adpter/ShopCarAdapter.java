@@ -1,12 +1,9 @@
 package com.whmnrc.qiangbizhong.ui.shopping.adpter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.blankj.utilcode.util.StringUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
@@ -15,8 +12,6 @@ import com.whmnrc.qiangbizhong.presenter.shopcar.ShopCarPresenter;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopsListActivity;
 import com.whmnrc.qiangbizhong.util.StringUtil;
-import com.whmnrc.qiangbizhong.widget.SelectParamPopupWindow;
-
 import java.util.ArrayList;
 import java.util.List;
 

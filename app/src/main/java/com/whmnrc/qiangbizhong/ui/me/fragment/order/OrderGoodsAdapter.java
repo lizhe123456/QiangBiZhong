@@ -26,7 +26,7 @@ public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.DetailBean>{
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, OrderListBean.DetailBean item, int position) {
         holder.setText(R.id.tv_goods_desc,item.getProduct_Name()).setText(R.id.tv_desc,item.getSpec_Name() +"  " + item.getSpecAttr_Name())
-                .setText(R.id.tv_moeny,item.getOrderItem_Money()+"")
+                .setText(R.id.tv_moeny,item.getSpecAttr_Price()+"")
                 .setGlieuImage(R.id.iv_goods,item.getProduct_ImgPath())
                 .setText(R.id.tv_goods_num,"x"+item.getOrderItem_Number());
         if (type == 0){

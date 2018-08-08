@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_edit_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_effect"
+    android:paddingRight="@dimen/dm_15"
+    android:paddingLeft="@dimen/dm_15"
+    android:paddingTop="@dimen/dm_10"
+    android:paddingBottom="@dimen/dm_10"
+    android:textSize="@dimen/dm_15"
+    android:text="编辑商品信息"
+    android:textColor="@color/tv_191"
+    android:drawableRight="@drawable/ic_more"
+    android:layout_marginBottom="@dimen/dm_10"/>

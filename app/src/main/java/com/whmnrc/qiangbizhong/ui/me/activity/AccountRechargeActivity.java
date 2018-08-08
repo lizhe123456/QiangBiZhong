@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
+import com.whmnrc.qiangbizhong.ui.me.fragment.AgentRechargeFragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.OpenVipFragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.RechargeFragment;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
@@ -61,8 +62,14 @@ public class AccountRechargeActivity extends BaseActivity {
         ivBack.setVisibility(View.VISIBLE);
         fragments = new SparseArray<>();
         titles = new SparseArray<>();
+//        fragments.append(0, AgentRechargeFragment.newInstance());
+//        fragments.append(1, OpenVipFragment.newInstance());
+//        fragments.append(2, RechargeFragment.newInstance());
         fragments.append(0, OpenVipFragment.newInstance());
         fragments.append(1, RechargeFragment.newInstance());
+//        titles.append(1, "会员充值");
+//        titles.append(0, "代理商充值");
+//        titles.append(2, "普通充值");
         titles.append(0, "会员充值");
         titles.append(1, "普通充值");
         page = getIntent().getIntExtra("page", 0);

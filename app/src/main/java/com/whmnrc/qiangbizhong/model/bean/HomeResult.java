@@ -653,25 +653,32 @@ public class HomeResult {
     }
 
     public static class GoodsTjBean {
+
         /**
-         * Goods_ID : 1a2fbb6e-863b-45de-917c-cd76056fcadc
-         * Goods_Name : 豆子
-         * Goods_BrandName : 爱美连
-         * Goods_Describe : 1
-         * Goods_ImaPath : http://www.eehsxui.cn/Resource/PhotoFile/5dd4a181-4428-43d6-b072-ab0176953cf8.jpg
+         * Goods_ID : 40ce8944-6441-405d-bb98-c8cc835a8bac
+         * Goods_Name : IPhone
+         * Goods_BrandName : Apple
+         * Goods_Describe : 苹果手机
+         * Goods_ImaPath : http://192.168.1.157:8011/Resource/PhotoFile/fcd07f96-22a0-4311-81b4-bfb64a053490.png
          * Goods_Content : null
          * Goods_LookCount : 0
-         * Goods_MonthCount : 0
-         * Goods_Sort : 100
+         * Goods_MonthCount : 19
+         * Goods_Sort : 1
          * Goods_IsOn : true
          * Goods_IsBuy : true
-         * Goods_Type : 2e3369cf-5b44-4b96-9633-aa36a8137a34
+         * Goods_Type : 94dfa9cc-3d03-4524-af07-8e401a24875d
          * Goods_LimitCount : 1
-         * StoreId : 43956e13-8dd6-476b-b6e4-02a73be238c4
+         * StoreId : f9641e98-a561-46f9-8cb9-aa9c43daabb0
          * Goods_Parameter : null
          * Goods_ShopType : 0
-         * TypeName : 服饰
-         * StoreName : 爱美莲
+         * TypeName : 手机数码
+         * StoreName : 测试不要删除谢谢
+         * StoreStatus : 1
+         * Goods_PriceMin : 4500
+         * Goods_PriceMax : 8000
+         * Address : 湖北省武汉市洪山区珞喻路237号
+         * Latitude : 30.549420
+         * Longitude : 114.265550
          */
 
         private String Goods_ID;
@@ -692,6 +699,12 @@ public class HomeResult {
         private int Goods_ShopType;
         private String TypeName;
         private String StoreName;
+        private int StoreStatus;
+        private int Goods_PriceMin;
+        private int Goods_PriceMax;
+        private String Address;
+        private String Latitude;
+        private String Longitude;
 
         public String getGoods_ID() {
             return Goods_ID;
@@ -835,6 +848,54 @@ public class HomeResult {
 
         public void setStoreName(String StoreName) {
             this.StoreName = StoreName;
+        }
+
+        public int getStoreStatus() {
+            return StoreStatus;
+        }
+
+        public void setStoreStatus(int StoreStatus) {
+            this.StoreStatus = StoreStatus;
+        }
+
+        public int getGoods_PriceMin() {
+            return Goods_PriceMin;
+        }
+
+        public void setGoods_PriceMin(int Goods_PriceMin) {
+            this.Goods_PriceMin = Goods_PriceMin;
+        }
+
+        public int getGoods_PriceMax() {
+            return Goods_PriceMax;
+        }
+
+        public void setGoods_PriceMax(int Goods_PriceMax) {
+            this.Goods_PriceMax = Goods_PriceMax;
+        }
+
+        public String getAddress() {
+            return Address;
+        }
+
+        public void setAddress(String Address) {
+            this.Address = Address;
+        }
+
+        public String getLatitude() {
+            return Latitude;
+        }
+
+        public void setLatitude(String Latitude) {
+            this.Latitude = Latitude;
+        }
+
+        public String getLongitude() {
+            return Longitude;
+        }
+
+        public void setLongitude(String Longitude) {
+            this.Longitude = Longitude;
         }
     }
 

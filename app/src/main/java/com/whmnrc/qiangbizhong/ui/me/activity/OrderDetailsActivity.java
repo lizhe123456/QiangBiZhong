@@ -63,6 +63,8 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
     TextView tvBtn;
     @BindView(R.id.ll_btn_1)
     LinearLayout llBtn_1;
+    @BindView(R.id.tv_moeny)
+    TextView tvMoeny;
 
     private OrderPresenter orderPresenter;
     private String orderId;
@@ -135,17 +137,23 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
     public void orderDetail(OrderdetailBean orderdetailBean) {
         this.orderdetailBean = orderdetailBean;
         orderGoodsAdapter = new OrderGoodsAdapter(this,orderdetailBean.getOrder_CreateType());
+
         rvGoodsList.setAdapter(orderGoodsAdapter);
         orderGoodsAdapter.addFirstDataSet(orderdetailBean.getDetail());
         tvItem0.setText(orderdetailBean.getOrder_No());
         tvItem1.setText(orderdetailBean.getOrder_PayNo());
         tvOrderNum2.setText(orderdetailBean.getOrder_CreateTime());
         tvOrderNum3.setText(orderdetailBean.getOrder_WaybillNumber() == null ? "" : orderdetailBean.getOrder_WaybillNumber());
+
+
         int num = 0;
+        int moeny = 0;
         for (OrderListBean.DetailBean detailBean :orderdetailBean.getDetail()) {
             num += detailBean.getOrderItem_Number();
+            moeny += detailBean.getSpecAttr_Price() * detailBean.getOrderItem_Number();
         }
 
+        tvMoeny.setText(moeny+"");
         tvNum.setText("共"+num+"件商品");
         tvOrderNum.setText(orderdetailBean.getStoreName());
         if (orderdetailBean.getOrder_State() == -5){
@@ -234,7 +242,7 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
                 @Override
                 public void onClick(View v) {
                     OrderListBean orderListBean = new OrderListBean();
-                    orderdetailBean.setDetail(orderdetailBean.getDetail());
+                    orderListBean.setDetail(orderdetailBean.getDetail());
                     EvaluateActivity.start(OrderDetailsActivity.this,orderListBean);
                 }
             });
@@ -245,7 +253,7 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
             llBtn_1.setVisibility(View.GONE);
         }else if (orderdetailBean.getOrder_State() == 5){
             //已退款
-            tvOrderNum.setText("您的订单已退款");
+            orderState.setText("您的订单已退款");
             llBtn_1.setVisibility(View.GONE);
         }else if (orderdetailBean.getOrder_State() == 6){
             //6抢购成功

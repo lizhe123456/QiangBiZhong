@@ -19,8 +19,8 @@
     <string name="rule">（1）每人每天必须支付了预付金才有抽奖资格 \n（2）每人每天必须支付了预付金才有抽奖资格 \n（3）每人每天必须支付了预付金才有抽奖资格</string>
     
     <!--api-->
-    <!--<string name="server_address">http://192.168.1.157:8010</string>-->
-    <string name="server_address">http://testaml.whmnx.com/Api</string>
+    <string name="server_address">http://192.168.1.157:8010</string>
+    <!--<string name="server_address">http://testaml.whmnx.com/Api</string>-->
     <!--注册-->
 
     <string name="register">/api/user/register</string>
@@ -160,12 +160,42 @@
     <!--上传图片-->
     <string name="uploadfile">/api/file/upload/uploadfile</string>
 
+    <string name="uploadfilepublic">/api/file/upload/uploadfilepublic</string>
+    <!--商品长图-->
+    <string name="goodscontext">/api/file/upload/uploadfile/goods/context</string>
+
     <string name="orderdetail">/api/home/orderdetail</string>
+    <!--商家入驻-->
+    <string name="submitadmission">/api/storemanager/submitadmission</string>
+    <!--提交商品信息-->
+    <string name="submitgoods">/api/storemanager/submitgoods</string>
+
+    <string name="updategoodsinfo">/api/storemanager/updategoodsinfo</string>
+    <!--商品类型下拉列表 商城0 医美1-->
+    <string name="getgoodstypelist">/api/storemanager/getgoodstypelist</string>
 
 
+    <string name="getgoodslist">/api/storemanager/getgoodslist</string>
 
+    <string name="addgoodsbanner">/api/storemanager/addgoodsbanner</string>
 
+    <string name="getgoodsbanner">/api/storemanager/getgoodsbanner</string>
 
+    <string name="getgoodsspeclist">/api/storemanager/getgoodsspeclist</string>
+    <!--修改规格-->
+    <string name="updategoodsspec">/api/storemanager/updategoodsspec</string>
+    <!--新增规格-->
+    <string name="addgoodsspec">/api/storemanager/addgoodsspec</string>
+    <!--删除规格-->
+    <string name="deletegoodsspec">/api/storemanager/deletegoodsspec</string>
+    <!--上 下 架店铺单个商品-->
+    <string name="setgoodsgoup">/api/storemanager/setgoodsgoup</string>
+    <!--上 下 架店铺所有商品-->
+    <string name="setstoregoodsgoup">/api/storemanager/setstoregoodsgoup</string>
+
+    <string name="agentshopquery">/api/home/agentshop/query</string>
+
+    <string name="getshardcode">/api/home/getshardcode</string>
 
 
     <string name="getcode_again">重新获取</string>

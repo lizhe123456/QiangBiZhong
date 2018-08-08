@@ -30,7 +30,7 @@ public class GoodsAdapter extends BaseAdapter<HomeResult.GoodsTjBean>{
 
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, HomeResult.GoodsTjBean item, int position) {
-        holder.setText(R.id.tv_moeny,item.getGoods_Sort()+"").setText(R.id.tv_goods_name,item.getGoods_Name()).setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
+        holder.setText(R.id.tv_moeny,item.getGoods_PriceMin()+"").setText(R.id.tv_goods_name,item.getGoods_Name()).setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
         ImageView imageView = holder.getView(R.id.iv_img);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
         layoutParams.width = width;
