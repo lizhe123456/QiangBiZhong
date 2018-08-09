@@ -8,6 +8,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.EditBannerBean;
 import com.whmnrc.qiangbizhong.model.bean.GoodsManageBean;
+import com.whmnrc.qiangbizhong.model.parameter.BannerParam;
 import com.whmnrc.qiangbizhong.model.parameter.GoodsParam;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
@@ -32,8 +33,8 @@ public class GoodsPresenter {
     }
 
 
-    public void releaseGoods(GoodsParam goodsParam, ReleaseGoodsCall releaseGoodsCall){
-        OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.submitgoods), GsonUtil.createGsonString(goodsParam), new OkhttpUtil.BeanCallback() {
+    public void releaseGoods(GoodsParam goodsParam,int type, ReleaseGoodsCall releaseGoodsCall){
+        OkhttpUtil.postString(context.getString(R.string.server_address) + (type == 0 ?  context.getString(R.string.submitgoods) : context.getString(R.string.updategoodsinfo)), GsonUtil.createGsonString(goodsParam), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
                 if (releaseGoodsCall != null){
@@ -124,8 +125,7 @@ public class GoodsPresenter {
                 });
     }
 
-    public void addgoodsbanner(List<String> imgs,AddGoodsBannerCall addGoodsBannerCall){
-        Map<String,String> map = new HashMap<>();
+    public void addgoodsbanner(List<BannerParam> imgs, AddGoodsBannerCall addGoodsBannerCall){
         OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.addgoodsbanner) ,GsonUtil.createGsonString(imgs), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
@@ -143,6 +143,7 @@ public class GoodsPresenter {
             }
         });
     }
+
 
     //上架商品
     public void setgoodsgoup(String goodsId,int type,GoodsGoupCall goodsGoupCall){

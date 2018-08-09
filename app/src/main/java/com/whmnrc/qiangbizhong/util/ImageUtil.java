@@ -92,4 +92,30 @@ public class ImageUtil {
                     }
                 });
     }
+
+
+    public static void img1GoodsBanner(Activity activity){
+        RxPermissions rxPermissions = new RxPermissions(activity);
+        rxPermissions
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(granted -> {
+                    if (granted) {
+                        PictureSelector.create(activity)
+                                .openGallery(PictureMimeType.ofImage())
+                                .maxSelectNum(9)
+                                .imageSpanCount(4)
+                                .withAspectRatio(375,200)
+                                .enableCrop(true)// 是否裁剪 true or false
+                                .circleDimmedLayer(false)
+                                .showCropFrame(true)
+                                .showCropGrid(false)
+                                .compress(true)
+                                .cropCompressQuality(50)
+                                .previewImage(true)
+                                .forResult(PictureConfig.CHOOSE_REQUEST);
+                    } else {
+                        ToastUtils.showShort("未开启读写权限，请开启读写");
+                    }
+                });
+    }
 }

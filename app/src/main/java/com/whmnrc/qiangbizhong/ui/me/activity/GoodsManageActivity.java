@@ -87,7 +87,7 @@ public class GoodsManageActivity extends BaseActivity implements GoodsPresenter.
                 break;
             case R.id.tv_menu:
                 //全部下架
-                new AlertDialog(this).setMsg("本次商品确定下架吗？")
+                new AlertDialog(this).builder().setMsg("本次商品确定下架吗？")
                         .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -100,7 +100,7 @@ public class GoodsManageActivity extends BaseActivity implements GoodsPresenter.
                             goodsPresenter.setstoregoodsgoup(UserManage.getInstance().getLoginBean().getStoreInfo().getId(), 0, GoodsManageActivity.this);
                         }
                     }
-                });
+                }).show();
                 break;
         }
     }

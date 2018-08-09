@@ -213,16 +213,16 @@ public class ShopConfirmOrderActivity extends BaseActivity implements OrderPrese
     public void payPassBack() {
         if (addressBean != null) {
             showLoading("提交中..");
-            List<com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.GoodsPriceList> list = new ArrayList<>();
-            List<com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.RemarksList> list1 = new ArrayList<>();
-            com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.GoodsPriceList goodsPriceList =
-                    new com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.GoodsPriceList(shopDetailsBean.getPriceId(), shopDetailsBean.getCount());
+            List<com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter.GoodsPriceListBean> list = new ArrayList<>();
+            List<com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter.RemarksListBean> list1 = new ArrayList<>();
+            com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter.GoodsPriceListBean goodsPriceList =
+                    new com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter.GoodsPriceListBean(shopDetailsBean.getPriceId(), shopDetailsBean.getCount());
             list.add(goodsPriceList);
-            com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.RemarksList remarksList =
-                    new com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.RemarksList(storeInfoBean.getId(),desc);
+            com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter.RemarksListBean remarksList =
+                    new com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter.RemarksListBean(storeInfoBean.getId(),desc);
             list1.add(remarksList);
             com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter parameter =
-                    new com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter(addressBean.getAddress_ID(),list,list1, UserManage.getInstance().getUserID(),0);
+                    new com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter(addressBean.getAddress_ID(),UserManage.getInstance().getUserID(),0,"",list,list1);
             orderPresenter.submitshoppingorder(parameter,ShopConfirmOrderActivity.this);
         } else {
             ToastUtils.showShort("请选择地址");

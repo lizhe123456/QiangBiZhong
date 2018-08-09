@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
+import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
+import com.whmnrc.qiangbizhong.ui.me.fragment.order.BaseOrderFragment;
+import com.whmnrc.qiangbizhong.ui.me.fragment.order.OnOrderListenerAdapter;
 
 /**
  * Company 武汉麦诺软创
@@ -11,7 +14,7 @@ import com.whmnrc.qiangbizhong.base.BaseFragment;
  * 交易取消
  */
 
-public class ShopOrder3Fragment extends BaseFragment {
+public class ShopOrder3Fragment extends BaseOrderFragment {
 
 
     public static ShopOrder3Fragment newInstance() {
@@ -21,13 +24,18 @@ public class ShopOrder3Fragment extends BaseFragment {
         return fragment;
     }
 
+
     @Override
-    protected int setLayout() {
-        return R.layout.fragment_shop_order;
+    public void setClick() {
     }
 
     @Override
-    protected void initData() {
+    public String request() {
+        return "10";
+    }
 
+    @Override
+    public boolean isShop() {
+        return true;
     }
 }

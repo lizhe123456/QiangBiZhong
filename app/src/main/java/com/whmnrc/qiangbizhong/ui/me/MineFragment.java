@@ -23,6 +23,7 @@ import com.whmnrc.qiangbizhong.ui.me.activity.GiveActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyCollectionActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyShopActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.OpinionBackActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.ShapeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.UserInfoActivity;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OderMenuAdapter;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OptionAdapter;
@@ -219,7 +220,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_scan:
-
+                ShapeActivity.start(getContext());
                 break;
             case R.id.iv_head:
                 if (loginBean == null){

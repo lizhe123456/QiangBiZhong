@@ -8,17 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:layout_marginBottom="@dimen/dm_10">
         <ImageView
             android:id="@+id/iv_img_add"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dm_200"
             android:src="@drawable/ic_img_add"
             android:scaleType="center"/>
         <ImageView
             android:id="@+id/iv_img"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dm_200"
             android:scaleType="fitXY"/>
     </RelativeLayout>
 </LinearLayout>

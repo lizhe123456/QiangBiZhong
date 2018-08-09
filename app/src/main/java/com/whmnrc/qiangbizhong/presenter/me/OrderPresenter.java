@@ -73,6 +73,40 @@ public class OrderPresenter {
         });
     }
 
+    public void getShopOrderList(String orderStatus,boolean isRefresh,OrderCall orderCall){
+        Map<String,String> map = new HashMap<>();
+        if (isRefresh) {
+            page = 0;
+        }
+        page++;
+        map.put("PageIndex",page+"");
+        map.put("PageCount",size+"");
+        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.getorderlist)
+                + "?storeId=" + "f9641e98-a561-46f9-8cb9-aa9c43daabb0" + "&orderStatus=" + orderStatus, map, new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (!TextUtils.isEmpty(data)){
+                    List<OrderListBean> orderListBeans = JSON.parseArray(data, OrderListBean.class);
+                    if (orderCall != null){
+                        if (isRefresh) {
+                            orderCall.orderlistBack(orderListBeans);
+                        }else {
+                            orderCall.loadMore(orderListBeans);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (orderCall != null){
+                    orderCall.error();
+                }
+            }
+
+        });
+    }
+
     public void submitOrder(String goodsId,String addressId,SubmitOrederCall submitOrederCall){
         Map<String,String> map = new HashMap<>();
 //        map.put("goodsRushId",goodsId);
@@ -313,6 +347,44 @@ public class OrderPresenter {
             @Override
             public void onFailure(int code, String errorMsg) {
                 if (orderUpdateCall != null) {
+                    orderUpdateCall.error();
+                }
+            }
+        });
+    }
+
+    public void returngoods(String orderId,OrderUpdateCall orderUpdateCall){
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.returngoods)
+                + "?orderId=" + orderId, new HashMap<>(), new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (orderUpdateCall != null){
+                    orderUpdateCall.updateData();
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (orderUpdateCall != null){
+                    orderUpdateCall.error();
+                }
+            }
+        });
+    }
+
+    public void confirmused(String orderId,OrderUpdateCall orderUpdateCall){
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.returngoods)
+                + "?orderId=" + orderId, new HashMap<>(), new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                if (orderUpdateCall != null){
+                    orderUpdateCall.updateData();
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (orderUpdateCall != null){
                     orderUpdateCall.error();
                 }
             }

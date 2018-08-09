@@ -11,26 +11,26 @@ public class OrderdetailBean {
 
 
     /**
-     * Order_ID : d9596c8a-9045-43d2-a4b7-2740379f8d9c
-     * Order_No : S4623607880905890072
-     * UserInfo_ID : bda06fce-e199-47a9-9a45-6ee3c4fae39c
+     * Order_ID : 1d3a2112-405a-438d-880a-270cce53869f
+     * Order_No : S5227554199287838435
+     * UserInfo_ID : a1fc93cc-1964-41e3-ac8f-3a5976a94842
      * UserInfo_ParentID : null
-     * UserInfo_HeadImg : /Resource/HeadImage/bda06fce-e199-47a9-9a45-6ee3c4fae39c.jpg
-     * Order_PayNo : P5010999730971267971
-     * Order_CreateTime : 2018-08-03 09:18:00
-     * Address_Name : 拉拉
+     * UserInfo_HeadImg : /Resource/HeadImage/a1fc93cc-1964-41e3-ac8f-3a5976a94842.jpg
+     * Order_PayNo : P5607183283741864710
+     * Order_CreateTime : 2018-08-06 13:57:10
+     * Address_Name : 发个公告不不不
      * Address_Mobile : 15927297175
-     * Address_ID : 71cf77c0-2615-4ce8-be39-50faeb4b17a7
-     * Address_Provice : 110000
-     * Address_City : 110000
-     * Address_Region : 110101
-     * Address_Detail : hdhdjdjdk
-     * Address_FullAddress : 北京 北京 东城区 hdhdjdjdk
+     * Address_ID : 4f443763-b545-480a-81b0-eca1ec0433d5
+     * Address_Provice : 650000
+     * Address_City : 650000
+     * Address_Region : 650000
+     * Address_Detail : 过一个月过一会
+     * Address_FullAddress : 新疆维吾尔自治区 新疆维吾尔自治区 新疆维吾尔自治区 过一个月过一会
      * Order_PayType : -1
-     * Order_State : 1
-     * Order_Money : 1260
+     * Order_State : 10
+     * Order_Money : 360
      * ORder_Freight : 0
-     * Order_Seed : 86082
+     * Order_Seed : 85337
      * Order_Type : 0
      * OrderStartDate : null
      * OrderEndDate : null
@@ -38,16 +38,16 @@ public class OrderdetailBean {
      * Order_Remark :
      * Order_IntegerMoney : 0
      * Order_IntegerMoneyRate : 0
-     * Order_Number : 1
-     * Order_WaybillCompany : null
-     * Order_WaybillNumber : null
+     * Order_Number : 4
+     * Order_WaybillCompany : ems快递
+     * Order_WaybillNumber : 123456
      * Order_DeliverGoodsUserInfoID : null
-     * Order_RebateMoney : 1260
+     * Order_RebateMoney : 360
      * Order_HasNewGoods : false
-     * Order_DeliverGoodsTime : null
-     * Order_RebateNumber : 1
-     * UserInfo_Mobile : 17688943972
-     * UserInfo_NickName : 呵呵凉凉了
+     * Order_DeliverGoodsTime : 2018-08-06 13:58:51
+     * Order_RebateNumber : 4
+     * UserInfo_Mobile : 15927297175
+     * UserInfo_NickName : 蜡笔小新
      * UserInfo_RealName : null
      * Order_CreateType : 0
      * Order_StoreId : f9641e98-a561-46f9-8cb9-aa9c43daabb0
@@ -55,7 +55,8 @@ public class OrderdetailBean {
      * StoreName : 测试不要删除谢谢
      * StoreAddress : 湖北省武汉市洪山区珞喻路237号
      * StorePhone : 15988985669
-     * Detail : [{"OrderItem_ID":"ad91055f-9fc3-441b-8030-bf85857d4015","Product_ID":"5b575864-8732-4184-b18c-c3c043b41b4d","Product_Name":"PINKO女包","Product_ImgPath":"http://192.168.1.157:8011/Resource/PhotoFile/75c9bbc9-e9eb-4c83-abd5-2ab739ad9417.jpg","Product_Price":0,"OrderItem_Number":1,"OrderItem_Money":1260,"Order_ID":"d9596c8a-9045-43d2-a4b7-2740379f8d9c","DotProduct_ID":"","Spec_ID":"20bb9865-6b95-48a4-ae8d-51680d0276fd","Spec_Name":"21cm*11cm*7cm","SpecAttr_ID":"","SpecAttr_Name":"白色","SpecAttr_Price":1260,"SpecAttr_Integer":0,"OrderItem_Integer":0,"OrderItem_Discount":0,"OrderItem_Type":0,"OrderItem_UseCode":null,"RebateConfig_ID":null,"Bond":0}]
+     * Order_RefundRemark : null
+     * Detail : [{"OrderItem_ID":"38ce597a-40d2-40b4-a281-9d3e485cc173","Product_ID":"e3334ae0-7fac-41dc-ad78-b36a1734176a","Product_Name":"大米面膜10片装","Product_ImgPath":"http://testaml.whmnx.com/Resource/PhotoFile/3bed4a52-6499-446a-b7ef-84f80c98117e.jpg","Product_Price":0,"OrderItem_Number":2,"OrderItem_Money":300,"Order_ID":"1d3a2112-405a-438d-880a-270cce53869f","DotProduct_ID":"","Spec_ID":"681e0b82-e448-49ad-ba55-dd150810b982","Spec_Name":"一袋","SpecAttr_ID":"","SpecAttr_Name":"7片","SpecAttr_Price":150,"SpecAttr_Integer":0,"OrderItem_Integer":0,"OrderItem_Discount":0,"OrderItem_Type":0,"OrderItem_UseCode":null,"RebateConfig_ID":null,"Bond":0},{"OrderItem_ID":"4600b2a1-1536-423d-976d-72185ac67a7e","Product_ID":"59f341d6-dc3e-4466-83c8-fc96d102fb90","Product_Name":"海洋陶瓷餐具","Product_ImgPath":"http://testaml.whmnx.com/Resource/PhotoFile/d2cb0265-48d0-4ba9-ab28-07373d206dfa.jpg","Product_Price":0,"OrderItem_Number":2,"OrderItem_Money":60,"Order_ID":"1d3a2112-405a-438d-880a-270cce53869f","DotProduct_ID":"","Spec_ID":"c5864951-d388-4f6e-9f9d-863109360186","Spec_Name":"白鱼碗","SpecAttr_ID":"","SpecAttr_Name":"140ml","SpecAttr_Price":30,"SpecAttr_Integer":0,"OrderItem_Integer":0,"OrderItem_Discount":0,"OrderItem_Type":0,"OrderItem_UseCode":null,"RebateConfig_ID":null,"Bond":0}]
      */
 
     private String Order_ID;
@@ -86,12 +87,12 @@ public class OrderdetailBean {
     private int Order_IntegerMoney;
     private int Order_IntegerMoneyRate;
     private int Order_Number;
-    private Object Order_WaybillCompany;
+    private String Order_WaybillCompany;
     private String Order_WaybillNumber;
     private Object Order_DeliverGoodsUserInfoID;
     private int Order_RebateMoney;
     private boolean Order_HasNewGoods;
-    private Object Order_DeliverGoodsTime;
+    private String Order_DeliverGoodsTime;
     private int Order_RebateNumber;
     private String UserInfo_Mobile;
     private String UserInfo_NickName;
@@ -102,6 +103,7 @@ public class OrderdetailBean {
     private String StoreName;
     private String StoreAddress;
     private String StorePhone;
+    private Object Order_RefundRemark;
     private List<OrderListBean.DetailBean> Detail;
 
     public String getOrder_ID() {
@@ -328,11 +330,11 @@ public class OrderdetailBean {
         this.Order_Number = Order_Number;
     }
 
-    public Object getOrder_WaybillCompany() {
+    public String getOrder_WaybillCompany() {
         return Order_WaybillCompany;
     }
 
-    public void setOrder_WaybillCompany(Object Order_WaybillCompany) {
+    public void setOrder_WaybillCompany(String Order_WaybillCompany) {
         this.Order_WaybillCompany = Order_WaybillCompany;
     }
 
@@ -368,11 +370,11 @@ public class OrderdetailBean {
         this.Order_HasNewGoods = Order_HasNewGoods;
     }
 
-    public Object getOrder_DeliverGoodsTime() {
+    public String getOrder_DeliverGoodsTime() {
         return Order_DeliverGoodsTime;
     }
 
-    public void setOrder_DeliverGoodsTime(Object Order_DeliverGoodsTime) {
+    public void setOrder_DeliverGoodsTime(String Order_DeliverGoodsTime) {
         this.Order_DeliverGoodsTime = Order_DeliverGoodsTime;
     }
 
@@ -456,6 +458,14 @@ public class OrderdetailBean {
         this.StorePhone = StorePhone;
     }
 
+    public Object getOrder_RefundRemark() {
+        return Order_RefundRemark;
+    }
+
+    public void setOrder_RefundRemark(Object Order_RefundRemark) {
+        this.Order_RefundRemark = Order_RefundRemark;
+    }
+
     public List<OrderListBean.DetailBean> getDetail() {
         return Detail;
     }
@@ -464,219 +474,4 @@ public class OrderdetailBean {
         this.Detail = Detail;
     }
 
-    public static class DetailBean {
-        /**
-         * OrderItem_ID : ad91055f-9fc3-441b-8030-bf85857d4015
-         * Product_ID : 5b575864-8732-4184-b18c-c3c043b41b4d
-         * Product_Name : PINKO女包
-         * Product_ImgPath : http://192.168.1.157:8011/Resource/PhotoFile/75c9bbc9-e9eb-4c83-abd5-2ab739ad9417.jpg
-         * Product_Price : 0
-         * OrderItem_Number : 1
-         * OrderItem_Money : 1260
-         * Order_ID : d9596c8a-9045-43d2-a4b7-2740379f8d9c
-         * DotProduct_ID :
-         * Spec_ID : 20bb9865-6b95-48a4-ae8d-51680d0276fd
-         * Spec_Name : 21cm*11cm*7cm
-         * SpecAttr_ID :
-         * SpecAttr_Name : 白色
-         * SpecAttr_Price : 1260
-         * SpecAttr_Integer : 0
-         * OrderItem_Integer : 0
-         * OrderItem_Discount : 0
-         * OrderItem_Type : 0
-         * OrderItem_UseCode : null
-         * RebateConfig_ID : null
-         * Bond : 0
-         */
-
-        private String OrderItem_ID;
-        private String Product_ID;
-        private String Product_Name;
-        private String Product_ImgPath;
-        private int Product_Price;
-        private int OrderItem_Number;
-        private int OrderItem_Money;
-        private String Order_ID;
-        private String DotProduct_ID;
-        private String Spec_ID;
-        private String Spec_Name;
-        private String SpecAttr_ID;
-        private String SpecAttr_Name;
-        private int SpecAttr_Price;
-        private int SpecAttr_Integer;
-        private int OrderItem_Integer;
-        private int OrderItem_Discount;
-        private int OrderItem_Type;
-        private Object OrderItem_UseCode;
-        private Object RebateConfig_ID;
-        private int Bond;
-
-        public String getOrderItem_ID() {
-            return OrderItem_ID;
-        }
-
-        public void setOrderItem_ID(String OrderItem_ID) {
-            this.OrderItem_ID = OrderItem_ID;
-        }
-
-        public String getProduct_ID() {
-            return Product_ID;
-        }
-
-        public void setProduct_ID(String Product_ID) {
-            this.Product_ID = Product_ID;
-        }
-
-        public String getProduct_Name() {
-            return Product_Name;
-        }
-
-        public void setProduct_Name(String Product_Name) {
-            this.Product_Name = Product_Name;
-        }
-
-        public String getProduct_ImgPath() {
-            return Product_ImgPath;
-        }
-
-        public void setProduct_ImgPath(String Product_ImgPath) {
-            this.Product_ImgPath = Product_ImgPath;
-        }
-
-        public int getProduct_Price() {
-            return Product_Price;
-        }
-
-        public void setProduct_Price(int Product_Price) {
-            this.Product_Price = Product_Price;
-        }
-
-        public int getOrderItem_Number() {
-            return OrderItem_Number;
-        }
-
-        public void setOrderItem_Number(int OrderItem_Number) {
-            this.OrderItem_Number = OrderItem_Number;
-        }
-
-        public int getOrderItem_Money() {
-            return OrderItem_Money;
-        }
-
-        public void setOrderItem_Money(int OrderItem_Money) {
-            this.OrderItem_Money = OrderItem_Money;
-        }
-
-        public String getOrder_ID() {
-            return Order_ID;
-        }
-
-        public void setOrder_ID(String Order_ID) {
-            this.Order_ID = Order_ID;
-        }
-
-        public String getDotProduct_ID() {
-            return DotProduct_ID;
-        }
-
-        public void setDotProduct_ID(String DotProduct_ID) {
-            this.DotProduct_ID = DotProduct_ID;
-        }
-
-        public String getSpec_ID() {
-            return Spec_ID;
-        }
-
-        public void setSpec_ID(String Spec_ID) {
-            this.Spec_ID = Spec_ID;
-        }
-
-        public String getSpec_Name() {
-            return Spec_Name;
-        }
-
-        public void setSpec_Name(String Spec_Name) {
-            this.Spec_Name = Spec_Name;
-        }
-
-        public String getSpecAttr_ID() {
-            return SpecAttr_ID;
-        }
-
-        public void setSpecAttr_ID(String SpecAttr_ID) {
-            this.SpecAttr_ID = SpecAttr_ID;
-        }
-
-        public String getSpecAttr_Name() {
-            return SpecAttr_Name;
-        }
-
-        public void setSpecAttr_Name(String SpecAttr_Name) {
-            this.SpecAttr_Name = SpecAttr_Name;
-        }
-
-        public int getSpecAttr_Price() {
-            return SpecAttr_Price;
-        }
-
-        public void setSpecAttr_Price(int SpecAttr_Price) {
-            this.SpecAttr_Price = SpecAttr_Price;
-        }
-
-        public int getSpecAttr_Integer() {
-            return SpecAttr_Integer;
-        }
-
-        public void setSpecAttr_Integer(int SpecAttr_Integer) {
-            this.SpecAttr_Integer = SpecAttr_Integer;
-        }
-
-        public int getOrderItem_Integer() {
-            return OrderItem_Integer;
-        }
-
-        public void setOrderItem_Integer(int OrderItem_Integer) {
-            this.OrderItem_Integer = OrderItem_Integer;
-        }
-
-        public int getOrderItem_Discount() {
-            return OrderItem_Discount;
-        }
-
-        public void setOrderItem_Discount(int OrderItem_Discount) {
-            this.OrderItem_Discount = OrderItem_Discount;
-        }
-
-        public int getOrderItem_Type() {
-            return OrderItem_Type;
-        }
-
-        public void setOrderItem_Type(int OrderItem_Type) {
-            this.OrderItem_Type = OrderItem_Type;
-        }
-
-        public Object getOrderItem_UseCode() {
-            return OrderItem_UseCode;
-        }
-
-        public void setOrderItem_UseCode(Object OrderItem_UseCode) {
-            this.OrderItem_UseCode = OrderItem_UseCode;
-        }
-
-        public Object getRebateConfig_ID() {
-            return RebateConfig_ID;
-        }
-
-        public void setRebateConfig_ID(Object RebateConfig_ID) {
-            this.RebateConfig_ID = RebateConfig_ID;
-        }
-
-        public int getBond() {
-            return Bond;
-        }
-
-        public void setBond(int Bond) {
-            this.Bond = Bond;
-        }
-    }
 }

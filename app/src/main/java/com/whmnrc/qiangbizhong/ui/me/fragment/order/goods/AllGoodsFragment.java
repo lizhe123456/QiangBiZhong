@@ -17,11 +17,14 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
+import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.GoodsManageBean;
+import com.whmnrc.qiangbizhong.model.bean.ShopDetailsBean;
 import com.whmnrc.qiangbizhong.model.parameter.GoodsParam;
 import com.whmnrc.qiangbizhong.presenter.shop.GoodsPresenter;
 import com.whmnrc.qiangbizhong.ui.me.activity.GoodsManageActivity;
 import com.whmnrc.qiangbizhong.ui.me.adapter.GoodManageAdapter;
+import com.whmnrc.qiangbizhong.ui.shop.activity.ShopDetailsActivity;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
 
@@ -83,6 +86,14 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
         });
 
         goodManageAdapter.setOnGoodsManageListener(this);
+
+        goodManageAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Object item, int position) {
+                GoodsManageBean goodsManageBean = (GoodsManageBean) item;
+                ShopDetailsActivity.start(getContext(),goodsManageBean.getGoods_ID());
+            }
+        });
     }
 
     @Override
@@ -130,7 +141,7 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
     //下架商品
     @Override
     public void lowerFrame(GoodsManageBean item) {
-        new AlertDialog(getContext()).setMsg("本次商品确定下架吗？")
+        new AlertDialog(getContext()).builder().setMsg("本次商品确定下架吗？")
                 .setNegativeButton("取消", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,13 +152,13 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
             public void onClick(View v) {
                 goodsPresenter.setgoodsgoup(item.getGoods_ID(),0,AllGoodsFragment.this);
             }
-        });
+        }).show();
     }
 
     //上架商品
     @Override
     public void exhibitGoods(GoodsManageBean item) {
-        new AlertDialog(getContext()).setMsg("本次商品确定上架吗？")
+        new AlertDialog(getContext()).builder().setMsg("本次商品确定上架吗？")
                 .setNegativeButton("取消", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -158,7 +169,7 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
             public void onClick(View v) {
                 goodsPresenter.setgoodsgoup(item.getGoods_ID(),1,AllGoodsFragment.this);
             }
-        });
+        }).show();
     }
 
     @Override

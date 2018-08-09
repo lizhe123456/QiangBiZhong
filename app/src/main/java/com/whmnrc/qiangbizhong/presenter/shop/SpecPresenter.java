@@ -109,7 +109,7 @@ public class SpecPresenter {
     }
 
     public void deleteSpec(String goodsPriceId,SpecStatuCall specStatuCall){
-        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.updategoodsspec)+"?goodsPriceId=" + goodsPriceId,new HashMap<>(), new OkhttpUtil.BeanCallback() {
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.deletegoodsspec)+"?goodsPriceId=" + goodsPriceId,new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
                 if (specStatuCall != null){

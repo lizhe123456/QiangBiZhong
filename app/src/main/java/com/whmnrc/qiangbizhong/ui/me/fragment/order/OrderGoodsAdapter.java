@@ -18,7 +18,7 @@ public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.DetailBean>{
 
     private int type;
 
-    public OrderGoodsAdapter(Context context,int type) {
+    public OrderGoodsAdapter(Context context,int type ) {
         super(context);
         this.type = type;
     }
@@ -29,6 +29,7 @@ public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.DetailBean>{
                 .setText(R.id.tv_moeny,item.getSpecAttr_Price()+"")
                 .setGlieuImage(R.id.iv_goods,item.getProduct_ImgPath())
                 .setText(R.id.tv_goods_num,"x"+item.getOrderItem_Number());
+
         if (type == 0){
             holder.setOnClickListener(R.id.iv_goods, new View.OnClickListener() {
                 @Override

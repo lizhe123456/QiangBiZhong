@@ -624,27 +624,27 @@ public class OrderListBean {
 
     public static class DetailBean {
         /**
-         * OrderItem_ID : 6b11d9e2-acb5-4383-9eb6-21a01791a0ae
-         * Product_ID : bac3e3e2-80f3-4455-8216-fe9558b2f0e1
-         * Product_Name : 法拉利豪车
-         * Product_ImgPath : http://testaml.whmnx.com/Resource/PhotoFile/2a908ea7-5a5f-4f3f-b6a7-ae7a17849e9e.png
-         * Product_Price : 3000
-         * OrderItem_Number : 1
-         * OrderItem_Money : 3000
-         * Order_ID : d339d7f9-54c0-485e-946a-daf93c4cebb5
+         * OrderItem_ID : 38ce597a-40d2-40b4-a281-9d3e485cc173
+         * Product_ID : e3334ae0-7fac-41dc-ad78-b36a1734176a
+         * Product_Name : 大米面膜10片装
+         * Product_ImgPath : http://testaml.whmnx.com/Resource/PhotoFile/3bed4a52-6499-446a-b7ef-84f80c98117e.jpg
+         * Product_Price : 0
+         * OrderItem_Number : 2
+         * OrderItem_Money : 300
+         * Order_ID : 1d3a2112-405a-438d-880a-270cce53869f
          * DotProduct_ID :
-         * Spec_ID : fac3e3e2-80f3-4455-8216-fe9558b2f0e2
-         * Spec_Name : F430
-         * SpecAttr_ID : fac3e3e2-80f3-4455-8216-fe9558b2f0e2
-         * SpecAttr_Name : 一辆
-         * SpecAttr_Price : 3000
+         * Spec_ID : 681e0b82-e448-49ad-ba55-dd150810b982
+         * Spec_Name : 一袋
+         * SpecAttr_ID :
+         * SpecAttr_Name : 7片
+         * SpecAttr_Price : 150
          * SpecAttr_Integer : 0
          * OrderItem_Integer : 0
          * OrderItem_Discount : 0
          * OrderItem_Type : 0
          * OrderItem_UseCode : null
          * RebateConfig_ID : null
-         * Bond : 200
+         * Bond : 0
          */
 
         private String OrderItem_ID;

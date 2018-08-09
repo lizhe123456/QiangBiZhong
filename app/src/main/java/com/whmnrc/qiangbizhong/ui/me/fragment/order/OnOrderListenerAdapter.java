@@ -63,4 +63,19 @@ public class OnOrderListenerAdapter implements OnOrderListener {
     public void cancel(OrderListBean item) {
 
     }
+
+    @Override
+    public void sendGoods(OrderListBean item) {
+
+    }
+
+    @Override
+    public void returnGoods(OrderListBean item) {
+
+    }
+
+    @Override
+    public void confirmUsed(OrderListBean item) {
+
+    }
 }

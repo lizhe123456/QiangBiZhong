@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.ui.shop.shopenter.location;
 
+import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
@@ -36,7 +37,9 @@ import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
+import com.luck.picture.lib.permissions.RxPermissions;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.ui.shop.shopenter.location.adapter.AddressAdapter;
 import com.whmnrc.qiangbizhong.ui.shop.shopenter.location.utils.DataConversionUtils;
@@ -385,8 +388,18 @@ public class SelectAddressActivity extends AppCompatActivity {
         initLocation();
         // 设置定位参数
         locationClient.setLocationOption(locationOption);
-        // 启动定位
-        locationClient.startLocation();
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions
+                .request(Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe(granted -> {
+                    if (granted) {
+                        // 启动定位
+                        locationClient.startLocation();
+                    } else {
+                        ToastUtils.showShort("未开启定位权限，无法正常使用此功能");
+                    }
+                });
+
     }
 
     /**

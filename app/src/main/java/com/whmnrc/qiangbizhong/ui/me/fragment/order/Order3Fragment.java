@@ -54,6 +54,11 @@ public class Order3Fragment extends BaseOrderFragment implements OrderPresenter.
     }
 
     @Override
+    public boolean isShop() {
+        return false;
+    }
+
+    @Override
     public void collect() {
         refresh.autoRefresh();
     }

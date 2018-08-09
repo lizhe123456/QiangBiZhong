@@ -17,6 +17,7 @@ import com.whmnrc.qiangbizhong.ui.me.fragment.order.shop.ShopOrder1Fragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.shop.ShopOrder2Fragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.shop.ShopOrder3Fragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.shop.ShopOrder4Fragment;
+import com.whmnrc.qiangbizhong.ui.me.fragment.order.shop.ShopOrder5Fragment;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
 
 import butterknife.BindView;
@@ -58,16 +59,18 @@ public class ShopManageActivity extends BaseActivity {
         ivBack.setVisibility(View.VISIBLE);
         SparseArray<Fragment> fragments = new SparseArray<>();
         SparseArray<String> titles = new SparseArray<>();
-        titles.append(0,"交易中");
-        titles.append(1,"交易成功");
-        titles.append(2,"交易取消");
-        titles.append(3,"全部订单");
+        titles.append(0,"已支付");
+        titles.append(1,"待收货");
+        titles.append(2,"已完成");
+        titles.append(3,"待退款");
+        titles.append(4,"全部订单");
         fragments.append(0, ShopOrder1Fragment.newInstance());
         fragments.append(1, ShopOrder2Fragment.newInstance());
         fragments.append(2, ShopOrder3Fragment.newInstance());
         fragments.append(3, ShopOrder4Fragment.newInstance());
+        fragments.append(4, ShopOrder5Fragment.newInstance());
         page = getIntent().getIntExtra("page",0);
-        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,titles,20,page);
+        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,titles,0,page);
     }
 
 

@@ -83,7 +83,8 @@ public class EditListActivity extends BaseActivity {
                         goodsParam.setGoods_BrandName(goodsManageBean.getGoods_BrandName());
                         goodsParam.setGoods_PriceMax(goodsManageBean.getGoods_PriceMax()+"");
                         goodsParam.setGoods_PriceMin(goodsManageBean.getGoods_PriceMin()+"");
-                        ReleaseGoodsActivity.start(EditListActivity.this,goodsParam);
+                        goodsParam.setGoods_ImaPath(goodsManageBean.getGoods_ImaPath());
+                        ReleaseGoodsActivity.start(EditListActivity.this,goodsParam,1);
                         break;
                     case 1:
                         EditBannerActivity.start(EditListActivity.this,getIntent().getStringExtra("goodsId"));

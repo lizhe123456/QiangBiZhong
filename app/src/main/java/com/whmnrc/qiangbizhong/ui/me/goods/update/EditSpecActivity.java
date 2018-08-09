@@ -111,7 +111,7 @@ public class EditSpecActivity extends BaseActivity implements SpecPresenter.Edit
 
     @Override
     public void specBack() {
-
+        specPresenter.getEditSpecList(goodsId, this);
     }
 
 

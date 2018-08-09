@@ -36,6 +36,7 @@
             android:hint="请填写开户行账号"
             android:textColorHint="@color/tv_navigation"
             android:background="@color/white"
+            android:inputType="number"
             android:layout_marginLeft="@dimen/dm_15"
             android:maxLength="19"/>
 
@@ -74,7 +75,7 @@
             android:textSize="@dimen/dm_15"
             android:textColor="@color/tv_191"
             android:hint="请填写开户行名称"
-            android:maxLength="11"
+            android:inputType="text"
             android:textColorHint="@color/tv_navigation"
             android:background="@color/white"
             android:layout_marginLeft="@dimen/dm_15"/>
@@ -115,6 +116,7 @@
             android:textColor="@color/tv_191"
             android:hint="请填写开户行支行名称"
             android:maxLength="20"
+            android:inputType="text"
             android:textColorHint="@color/tv_navigation"
             android:background="@color/white"
             android:layout_marginLeft="@dimen/dm_15"/>
@@ -153,6 +155,7 @@
             android:textColorHint="@color/tv_navigation"
             android:background="@color/white"
             android:maxLength="19"
+            android:inputType="number"
             android:layout_marginLeft="@dimen/dm_15"/>
 
     </LinearLayout>
@@ -183,7 +186,7 @@
             android:textSize="@dimen/dm_15"
             android:textColor="@color/tv_navigation"/>
 
-        <EditText
+        <TextView
             android:id="@+id/tv_kaihu_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

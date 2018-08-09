@@ -34,6 +34,7 @@
                 android:background="@color/white"
                 android:hint="请输入手机号码"
                 android:textColor="@color/tv_191"
+                android:inputType="number"
                 android:textColorHint="@color/tv_navigation"
                 android:maxLength="11"
                 android:textSize="@dimen/dm_15" />
@@ -77,6 +78,7 @@
                 android:background="@color/white"
                 android:hint="请填写微信号或者微信绑定的手机号"
                 android:textColor="@color/tv_191"
+                android:inputType="text"
                 android:textColorHint="@color/tv_navigation"
                 android:textSize="@dimen/dm_15" />
 
@@ -119,6 +121,7 @@
                 android:background="@color/white"
                 android:hint="请填写企业法定代表的真实姓名"
                 android:textColor="@color/tv_191"
+                android:inputType="text"
                 android:textColorHint="@color/tv_navigation"
                 android:textSize="@dimen/dm_15" />
 
@@ -160,6 +163,8 @@
                 android:background="@color/white"
                 android:hint="请填写企业法人代表的身份证号"
                 android:textColor="@color/tv_191"
+                android:inputType="number"
+                android:maxLength="18"
                 android:textColorHint="@color/tv_navigation"
                 android:textSize="@dimen/dm_15" />
 
@@ -194,6 +199,7 @@
                 android:background="@color/white"
                 android:hint="请填写企业名的全称"
                 android:textColor="@color/tv_191"
+                android:inputType="text"
                 android:textColorHint="@color/tv_navigation"
                 android:textSize="@dimen/dm_15" />
 
@@ -236,6 +242,7 @@
                 android:background="@color/white"
                 android:hint="请填写企业的机构代码"
                 android:textColor="@color/tv_191"
+                android:inputType="number"
                 android:textColorHint="@color/tv_navigation"
                 android:textSize="@dimen/dm_15" />
 
@@ -321,6 +328,7 @@
                 android:hint="请填写详细地址，不少于5个字"
                 android:textColor="@color/tv_191"
                 android:maxLength="20"
+                android:inputType="text"
                 android:textColorHint="@color/tv_navigation"
                 android:textSize="@dimen/dm_15" />
 

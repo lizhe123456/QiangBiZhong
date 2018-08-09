@@ -139,8 +139,6 @@ public class ShopDetailsActivity extends BaseActivity implements ShopPresenter.S
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) bannerView.getLayoutParams();
 
-        layoutParams.height = ScreenUtils.getScreenWidth()/375*200;
-
         bannerView.setLayoutParams(layoutParams);
 
         //设置banner样式

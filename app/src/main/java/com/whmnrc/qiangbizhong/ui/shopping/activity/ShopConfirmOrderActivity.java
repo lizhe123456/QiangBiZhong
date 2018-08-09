@@ -3,7 +3,6 @@ package com.whmnrc.qiangbizhong.ui.shopping.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,29 +17,21 @@ import com.whmnrc.qiangbizhong.model.bean.AddressBean;
 import com.whmnrc.qiangbizhong.model.bean.ShopCarBean;
 import com.whmnrc.qiangbizhong.presenter.me.AddressPresenter;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
-import com.whmnrc.qiangbizhong.ui.StatusActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
-import com.whmnrc.qiangbizhong.ui.shop.activity.ConfirmOrderActivity;
-import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.SelectAddressActivity;
 import com.whmnrc.qiangbizhong.ui.shopping.adpter.ShopConfirmAdapter;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
-import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
 import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Company 武汉麦诺软创
@@ -195,17 +186,17 @@ public class ShopConfirmOrderActivity extends BaseActivity implements AddressPre
     public void payPassBack() {
         if (addressBean != null) {
             showLoading("提交中..");
-            List<GoodsPriceList> list = new ArrayList<>();
-            List<RemarksList> list1 = new ArrayList<>();
+            List<Parameter.GoodsPriceListBean> list = new ArrayList<>();
+            List<Parameter.RemarksListBean> list1 = new ArrayList<>();
             for (ShopCarBean shopCarBean : shopConfirmAdapter.getDataSource()) {
                 for (ShopCarBean.GoodsBean goodsBean : shopCarBean.getGoods()) {
-                    GoodsPriceList goodsPriceList = new GoodsPriceList(goodsBean.getGoodsPrice_ID(), goodsBean.getBuyCar_Num());
+                    Parameter.GoodsPriceListBean goodsPriceList = new Parameter.GoodsPriceListBean(goodsBean.getGoodsPrice_ID(), goodsBean.getBuyCar_Num());
                     list.add(goodsPriceList);
                 }
-                RemarksList remarksList = new RemarksList(shopCarBean.getStoreId(),shopCarBean.getEtDsec());
+                Parameter.RemarksListBean remarksList = new Parameter.RemarksListBean(shopCarBean.getStoreId(),shopCarBean.getEtDsec());
                 list1.add(remarksList);
             }
-            Parameter parameter = new Parameter(addressBean.getAddress_ID(),list,list1, UserManage.getInstance().getUserID(),0);
+            Parameter parameter = new Parameter(addressBean.getAddress_ID(),UserManage.getInstance().getUserID(),0,"",list,list1);
             orderPresenter.submitshoppingorder(parameter,this);
         } else {
             ToastUtils.showShort("请选择地址");
@@ -238,102 +229,141 @@ public class ShopConfirmOrderActivity extends BaseActivity implements AddressPre
     }
 
     public static class Parameter{
-        String AddressId;
-        List<GoodsPriceList> GoodsPriceList;
-        List<RemarksList> RemarksList;
-        String UserId;
-        int IsAgentPay;
 
-        public Parameter(String addressId, List<ShopConfirmOrderActivity.GoodsPriceList> goodsPriceList, List<ShopConfirmOrderActivity.RemarksList> remarksList, String userId, int IsAgentPay) {
+        /**
+         * AddressId : string
+         * GoodsPriceList : [{"Key":"string","Value":0}]
+         * RemarksList : [{"Key":"string","Value":"string"}]
+         * UserId : string
+         * IsAgentPay : 0
+         * AgentPayUserId : string
+         */
+
+        private String AddressId;
+        private String UserId;
+        private int IsAgentPay;
+        private String AgentPayUserId;
+        private List<GoodsPriceListBean> GoodsPriceList;
+        private List<RemarksListBean> RemarksList;
+
+        public Parameter(String addressId, String userId, int isAgentPay, String agentPayUserId, List<GoodsPriceListBean> goodsPriceList, List<RemarksListBean> remarksList) {
             AddressId = addressId;
+            UserId = userId;
+            IsAgentPay = isAgentPay;
+            AgentPayUserId = agentPayUserId;
             GoodsPriceList = goodsPriceList;
             RemarksList = remarksList;
-            UserId = userId;
-            this.IsAgentPay = IsAgentPay;
         }
 
         public String getAddressId() {
             return AddressId;
         }
 
-        public void setAddressId(String addressId) {
-            AddressId = addressId;
-        }
-
-        public List<ShopConfirmOrderActivity.GoodsPriceList> getGoodsPriceList() {
-            return GoodsPriceList;
-        }
-
-        public void setGoodsPriceList(List<ShopConfirmOrderActivity.GoodsPriceList> goodsPriceList) {
-            GoodsPriceList = goodsPriceList;
-        }
-
-        public List<ShopConfirmOrderActivity.RemarksList> getRemarksList() {
-            return RemarksList;
-        }
-
-        public void setRemarksList(List<ShopConfirmOrderActivity.RemarksList> remarksList) {
-            RemarksList = remarksList;
+        public void setAddressId(String AddressId) {
+            this.AddressId = AddressId;
         }
 
         public String getUserId() {
             return UserId;
         }
 
-        public void setUserId(String userId) {
-            UserId = userId;
-        }
-    }
-
-    public static class RemarksList {
-        String key;
-        String value;
-
-        public RemarksList(String key, String value) {
-            this.key = key;
-            this.value = value;
+        public void setUserId(String UserId) {
+            this.UserId = UserId;
         }
 
-        public String getKey() {
-            return key;
+        public int getIsAgentPay() {
+            return IsAgentPay;
         }
 
-        public void setKey(String key) {
-            this.key = key;
+        public void setIsAgentPay(int IsAgentPay) {
+            this.IsAgentPay = IsAgentPay;
         }
 
-        public String getValue() {
-            return value;
+        public String getAgentPayUserId() {
+            return AgentPayUserId;
         }
 
-        public void setValue(String value) {
-            this.value = value;
-        }
-    }
-
-    public static class GoodsPriceList {
-        String key;
-        int value;
-
-        public GoodsPriceList(String key, int value) {
-            this.key = key;
-            this.value = value;
+        public void setAgentPayUserId(String AgentPayUserId) {
+            this.AgentPayUserId = AgentPayUserId;
         }
 
-        public String getKey() {
-            return key;
+        public List<GoodsPriceListBean> getGoodsPriceList() {
+            return GoodsPriceList;
         }
 
-        public void setKey(String key) {
-            this.key = key;
+        public void setGoodsPriceList(List<GoodsPriceListBean> GoodsPriceList) {
+            this.GoodsPriceList = GoodsPriceList;
         }
 
-        public int getValue() {
-            return value;
+        public List<RemarksListBean> getRemarksList() {
+            return RemarksList;
         }
 
-        public void setValue(int value) {
-            this.value = value;
+        public void setRemarksList(List<RemarksListBean> RemarksList) {
+            this.RemarksList = RemarksList;
+        }
+
+        public static class GoodsPriceListBean {
+
+            public GoodsPriceListBean(String key, int value) {
+                Key = key;
+                Value = value;
+            }
+
+            /**
+             * Key : string
+             * Value : 0
+             */
+
+            private String Key;
+            private int Value;
+
+            public String getKey() {
+                return Key;
+            }
+
+            public void setKey(String Key) {
+                this.Key = Key;
+            }
+
+            public int getValue() {
+                return Value;
+            }
+
+            public void setValue(int Value) {
+                this.Value = Value;
+            }
+        }
+
+        public static class RemarksListBean {
+            /**
+             * Key : string
+             * Value : string
+             */
+
+            private String Key;
+            private String Value;
+
+            public RemarksListBean(String key, String value) {
+                Key = key;
+                Value = value;
+            }
+
+            public String getKey() {
+                return Key;
+            }
+
+            public void setKey(String Key) {
+                this.Key = Key;
+            }
+
+            public String getValue() {
+                return Value;
+            }
+
+            public void setValue(String Value) {
+                this.Value = Value;
+            }
         }
     }
 }

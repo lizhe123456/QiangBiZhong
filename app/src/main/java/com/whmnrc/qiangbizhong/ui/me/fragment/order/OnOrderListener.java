@@ -37,4 +37,10 @@ public interface OnOrderListener {
     void toQiangGou(OrderListBean item);
 
     void cancel(OrderListBean item);
+
+    void sendGoods(OrderListBean item);
+
+    void returnGoods(OrderListBean item);
+
+    void confirmUsed(OrderListBean item);
 }

@@ -1,5 +1,7 @@
 package com.whmnrc.qiangbizhong.ui.me.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -39,6 +41,12 @@ public class ShapeActivity extends BaseActivity implements ShapePresenter.CodeCa
 
 
     ShapePresenter shapePresenter;
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, ShapeActivity.class);
+        context.startActivity(starter);
+    }
+
 
     @Override
     protected int setLayout() {

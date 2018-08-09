@@ -17,7 +17,8 @@ android {
         config {
             keyAlias 'lizhe'
             keyPassword '123456'
-            storeFile file('D:/qiangbizhong.jks')
+//            storeFile file('D:/qiangbizhong.jks')
+            storeFile file('D:/qinagbizhong.jks')
             storePassword '123456'
         }
 

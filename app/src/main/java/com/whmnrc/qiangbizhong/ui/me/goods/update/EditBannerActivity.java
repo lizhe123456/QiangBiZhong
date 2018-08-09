@@ -20,6 +20,7 @@ import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.EditBannerBean;
+import com.whmnrc.qiangbizhong.model.parameter.BannerParam;
 import com.whmnrc.qiangbizhong.presenter.shop.GoodsPresenter;
 import com.whmnrc.qiangbizhong.presenter.shop.ImagePresenter;
 import com.whmnrc.qiangbizhong.util.ImageUtil;
@@ -52,6 +53,8 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
     private List<String> selectList1;
     private ImagePresenter imagePresenter;
     private int page;
+    private int oldPage;
+    private String goodsId;
 
     public static void start(Context context,String goodsId) {
         Intent starter = new Intent(context, EditBannerActivity.class);
@@ -74,13 +77,13 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
         imageAdapter = new ImageAdapter(this);
         rvBannerList.setAdapter(imageAdapter);
         showLoading("加载中..");
-        goodsPresenter.getgoodsbanner(getIntent().getStringExtra("goodsId"),this);
+        goodsId = getIntent().getStringExtra("goodsId");
+        goodsPresenter.getgoodsbanner(goodsId,this);
 
         imageAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-                page = position;
-                ImageUtil.img1Goods(EditBannerActivity.this);
+                ImageUtil.img1GoodsBanner(EditBannerActivity.this);
             }
         });
 
@@ -114,7 +117,9 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
                 case PictureConfig.CHOOSE_REQUEST:
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     selectList1 = new ArrayList<>();
-                    selectList1.add(selectList.get(0).getCompressPath());
+                    for (LocalMedia l: selectList) {
+                        selectList1.add(l.getCompressPath());
+                    }
                     showLoading("上传中..");
                     imagePresenter.uploadfilepublic(selectList1,this);
                     break;
@@ -124,18 +129,16 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
 
     @Override
     public void img(List<String> list) {
-        goodsPresenter.addgoodsbanner(list,this);
+        List<BannerParam> bannerParamList = new ArrayList<>();
+        for (int i = 0; i < selectList1.size(); i++) {
+            bannerParamList.add(new BannerParam(goodsId,list.get(i),i));
+        }
+        goodsPresenter.addgoodsbanner(bannerParamList,this);
     }
 
     @Override
     public void addGoodsBanner() {
-        imageAdapter.getDataSource().add(page,selectList1.get(0));
-        if (imageAdapter.getDataSource().size() < 3){
-            if (!imageAdapter.getDataSource().contains("")) {
-                imageAdapter.getDataSource().add("");
-            }
-            imageAdapter.notifyDataSetChanged();
-        }
+        imageAdapter.addFirstDataSet(selectList1);
     }
 
 
@@ -148,13 +151,6 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
             width = ScreenUtils.getScreenWidth();
         }
 
-        @Override
-        public void addFirstDataSet(List<String> data) {
-            if (data.size() < 3) {
-                data.add("");
-            }
-            super.addFirstDataSet(data);
-        }
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, String item, int position) {
@@ -162,14 +158,6 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
                 holder.setGlieuImage(R.id.iv_img, item);
             }
 
-            ImageView imageView = holder.getView(R.id.iv_img);
-            ImageView imageViewAdd = holder.getView(R.id.iv_img_add);
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
-            RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) imageViewAdd.getLayoutParams();
-            layoutParams.height = width;
-            layoutParams1.height = width;
-            imageViewAdd.setLayoutParams(layoutParams1);
-            imageView.setLayoutParams(layoutParams);
 
         }
 

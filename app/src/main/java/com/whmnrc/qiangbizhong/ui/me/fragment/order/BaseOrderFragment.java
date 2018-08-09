@@ -55,7 +55,7 @@ public abstract class BaseOrderFragment extends BaseFragment implements OrderPre
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new OrderAdapter(this);
+        mAdapter = new OrderAdapter(this,isShop());
         recyclerView.setAdapter(mAdapter);
         setClick();
         getData(request(),true);
@@ -78,9 +78,16 @@ public abstract class BaseOrderFragment extends BaseFragment implements OrderPre
 
     public abstract String request();
 
+    public abstract boolean isShop();
+
     public void getData(String type, boolean isR){
         showLoading("加载中..");
-        orderPresenter.getOrderList(type+"",isR,this);
+        if (isShop()){
+            orderPresenter.getShopOrderList(type+"",isR,this);
+        }else {
+            orderPresenter.getOrderList(type+"",isR,this);
+        }
+
     }
 
     public void orderlistBack(List<OrderListBean> orderListBeans) {

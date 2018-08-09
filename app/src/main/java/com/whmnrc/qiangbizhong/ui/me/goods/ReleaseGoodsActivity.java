@@ -85,15 +85,17 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
     private GoodsParam goodsParam;
     private List<LocalMedia> selectList;
     private List<ClassifyBean> classifyBeans;
-
+    private List<String> list;
+    private int type;
     public static void start(Context context) {
         Intent starter = new Intent(context, ReleaseGoodsActivity.class);
         context.startActivity(starter);
     }
 
-    public static void start(Context context,GoodsParam goodsParam) {
+    public static void start(Context context,GoodsParam goodsParam,int type) {
         Intent starter = new Intent(context, ReleaseGoodsActivity.class);
         starter.putExtra("goodsParam", GsonUtil.createGsonString(goodsParam));
+        starter.putExtra("type", type);
         context.startActivity(starter);
     }
 
@@ -107,17 +109,18 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("商品发布");
         String data = getIntent().getStringExtra("goodsParam");
+        type = getIntent().getIntExtra("type",0);
         if (TextUtils.isEmpty(data)){
             goodsParam = new GoodsParam();
         }else {
             goodsParam = GsonUtil.changeGsonToBean(data,GoodsParam.class);
             if (goodsParam != null){
                 etGoodsName.setText(goodsParam.getGoods_Name());
+                etGoodsName.setSelection(goodsParam.getGoods_Name().length());
                 etDesc.setText(goodsParam.getGoods_Describe());
-                icClassify.setText(goodsParam.getGoods_Type());
                 etBrand.setText(goodsParam.getGoods_BrandName());
                 etMinPrice.setText(goodsParam.getGoods_PriceMin());
-                etMinPrice.setText(goodsParam.getGoods_PriceMax());
+                etMaxPrice.setText(goodsParam.getGoods_PriceMax());
                 etSort.setText(goodsParam.getGoods_Sort());
                 GlideuUtil.loadImageView(this,goodsParam.getGoods_ImaPath(),ivGoodsImg);
             }
@@ -125,6 +128,7 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
 
         imagePresenter = new ImagePresenter(this);
         classifyPresenter = new ClassifyPresenter(this);
+        classifyPresenter.getClassifyList(0,this);
         goodsPresenter = new GoodsPresenter(this);
         goodsParam.setStoreId(UserManage.getInstance().getLoginBean().getStoreInfo().getId());
     }
@@ -184,11 +188,12 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
                 }
                 goodsParam.setGoods_Sort(etSort.getText().toString());
                 showLoading("发布中..");
-                goodsPresenter.releaseGoods(goodsParam,this);
+                goodsPresenter.releaseGoods(goodsParam,type,this);
                 break;
             case R.id.rl_select_classify:
-                classifyPresenter.getClassifyList(0,this);
-
+                if (list != null) {
+                    showVideoPicker(list);
+                }
                 break;
             case R.id.iv_goods_img:
                 ImageUtil.img1Goods(ReleaseGoodsActivity.this);
@@ -244,11 +249,20 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
     @Override
     public void classifyListBack(@NonNull List<ClassifyBean> classifyBeans) {
         this.classifyBeans = classifyBeans;
-        List<String> list = new ArrayList<>();
+        list = new ArrayList<>();
         for (ClassifyBean classifyBean : classifyBeans) {
             list.add(classifyBean.getTypeName());
         }
-        showVideoPicker(list);
+        if (goodsParam != null){
+            if (!TextUtils.isEmpty(goodsParam.getGoods_Type())){
+                for (ClassifyBean classifyBean : classifyBeans) {
+                    if (classifyBean.getId().equals(goodsParam.getGoods_Type())){
+                        icClassify.setText(classifyBean.getTypeName());
+                    }
+                }
+
+            }
+        }
     }
 
     @Override
