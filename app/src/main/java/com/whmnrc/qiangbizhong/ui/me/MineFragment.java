@@ -151,46 +151,33 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                         if (loginBean.getUserType() == 0){
                             //我要入驻
                             ShopEnter1Activity.start(mContext);
-                        }else{
+                        }else if (loginBean.getUserType() == 1){
+                            //代理商
+                        }else if (loginBean.getUserType() == 2){
                             //发布商品
 //                            MyShopActivity.start(mContext);
-                            AccountRechargeActivity.start(getContext(),2);
-                        }
+                            ReleaseGoodsActivity.start(getContext());
+                        }else if (loginBean.getUserType() == 3){
 
+                        }
                         break;
                     case 3:
-                        if (loginBean.getUserType() == 0){
-                            //成为会员
-                            AccountRechargeActivity.start(getContext(),1);
-                        }else if (loginBean.getUserType() == 1){
-                            MyShopActivity.start(mContext);
-                        }else if (loginBean.getUserType() == 2){
-
-                        }
-
+                        //成为会员
+                        AccountRechargeActivity.start(getContext(),1);
                         break;
                     case 4:
-                        if (loginBean.getUserType() == 0){
-                            //普通用户
-                            AccountRechargeActivity.start(getContext(),2);
-                        }else{
-                            //商家
-                            ReleaseGoodsActivity.start(mContext);
-                        }
-                        break;
-                    case 5:
                         //我的收藏
                         MyCollectionActivity.start(mContext);
                         break;
-                    case 6:
+                    case 5:
                         //收货信息
                         AddressManageActivity.start(getContext());
                         break;
-                    case 7:
+                    case 6:
                         //意见反馈
                         OpinionBackActivity.start(mContext);
                         break;
-                    case 8:
+                    case 7:
                         //设置
                         UserInfoActivity.start(getContext());
                         break;

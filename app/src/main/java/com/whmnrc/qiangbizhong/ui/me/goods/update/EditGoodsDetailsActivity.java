@@ -90,7 +90,7 @@ public class EditGoodsDetailsActivity extends BaseActivity {
         wvContent.addJavascriptInterface(new EditGoodsDetailsActivity(),
                 "android");
         String goodsId = getIntent().getStringExtra("goodsId");
-        wvContent.loadUrl("http://192.168.1.157:8011/GoodsDetail/Edit?goodsId=" + goodsId);
+        wvContent.loadUrl("http://testaml.whmnx.com/GoodsDetail/Edit?goodsId=" + goodsId);
 
        //H5加载链接监听
         wvContent.setWebViewClient(new WebViewClient() {
@@ -159,16 +159,29 @@ public class EditGoodsDetailsActivity extends BaseActivity {
      */
     private void onenFileChooseImpleForAndroid(ValueCallback<Uri[]> filePathCallback) {
         mUploadMessageForAndroid5 = filePathCallback;
-        Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
-        contentSelectionIntent.setType("image/*");
-
-        Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
-        chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
-        chooserIntent.putExtra(Intent.EXTRA_TITLE, "Image Chooser");
-
-        startActivityForResult(chooserIntent, FILE_CHOOSER_RESULT_CODE_FOR_ANDROID_5);
+//        Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//        contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+//        contentSelectionIntent.setType("image/*");
+//
+//        Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
+//        chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
+//        chooserIntent.putExtra(Intent.EXTRA_TITLE, "Image Chooser");
+//
+//        startActivityForResult(chooserIntent, FILE_CHOOSER_RESULT_CODE_FOR_ANDROID_5);
+        openPhoto(this);
     }
+
+    /**
+     * 打开机册
+     */
+    public static void openPhoto(Activity activity) {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media
+                .EXTERNAL_CONTENT_URI);
+//        intent.setType("image/*");
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        activity.startActivityForResult(intent, FILE_CHOOSER_RESULT_CODE_FOR_ANDROID_5);
+    }
+
 
 
     @Override

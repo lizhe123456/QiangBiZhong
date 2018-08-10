@@ -34,27 +34,23 @@ public class MineBean {
     public void initMineBean(int type){
         List<MenuBean> menuBeans= new ArrayList<>();
         List<ItemBean> itemBeans = new ArrayList<>();
-        if (type != 0) {
-            itemBeans.add(new ItemBean(R.drawable.ic_item1, "赠送记录"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item2, "我的抵用券"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item4, "成为会员"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item5, "我是代理商"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item3, "商品发布"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item6, "我的收藏"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item7, "收货信息"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item8, "意见反馈"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item9, "设置"));
-        }else {
-            itemBeans.add(new ItemBean(R.drawable.ic_item1, "赠送记录"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item2, "我的抵用券"));
+        itemBeans.add(new ItemBean(R.drawable.ic_item1, "赠送记录"));
+        itemBeans.add(new ItemBean(R.drawable.ic_item2, "我的抵用券"));
+
+        if (type == 0) {
             itemBeans.add(new ItemBean(R.drawable.ic_item3, "我要入驻"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item4, "成为会员"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item5, "代理充值"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item6, "我的收藏"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item7, "收货信息"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item8, "意见反馈"));
-            itemBeans.add(new ItemBean(R.drawable.ic_item9, "设置"));
+        }else if (type == 1){
+            itemBeans.add(new ItemBean(R.drawable.ic_item4, "我是代理商"));
+        }else if (type == 2){
+            itemBeans.add(new ItemBean(R.drawable.ic_item3, "商品发布"));
+        }else if (type == 3){
         }
+
+        itemBeans.add(new ItemBean(R.drawable.ic_item5, "充值"));
+        itemBeans.add(new ItemBean(R.drawable.ic_item6, "我的收藏"));
+        itemBeans.add(new ItemBean(R.drawable.ic_item7, "收货信息"));
+        itemBeans.add(new ItemBean(R.drawable.ic_item8, "意见反馈"));
+        itemBeans.add(new ItemBean(R.drawable.ic_item9, "设置"));
         this.itemBeans = itemBeans;
         List<HomePageBean.MenuBean> list = new ArrayList<>();
         list.add(new HomePageBean.MenuBean(R.drawable.ic_send_goods,"待发货"));
@@ -62,13 +58,14 @@ public class MineBean {
         list.add(new HomePageBean.MenuBean(R.drawable.ic_wait_evaluate,"待评价"));
         list.add(new HomePageBean.MenuBean(R.drawable.ic_wait_evaluate,"已完成"));
         menuBeans.add(new MenuBean("我的订单","全部订单",list));
-        if (type != 0){
+        if (type == 2){
             List<HomePageBean.MenuBean> list1 = new ArrayList<>();
 //            list1.add(new HomePageBean.MenuBean(R.drawable.ic_to_examine,"审核中"));
             list1.add(new HomePageBean.MenuBean(R.drawable.ic_on_sale,"已上架"));
+            list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_sold,"已售空"));
             list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_down,"已下架"));
 //            list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_sold,"已出售"));
-            list1.add(new HomePageBean.MenuBean(R.drawable.ic_already_sold,"已售空"));
+
             menuBeans.add(new MenuBean("商品管理","所有商品",list1));
             List<HomePageBean.MenuBean> list2 = new ArrayList<>();
             list2.add(new HomePageBean.MenuBean(R.drawable.ic_pending_payment,"已支付"));

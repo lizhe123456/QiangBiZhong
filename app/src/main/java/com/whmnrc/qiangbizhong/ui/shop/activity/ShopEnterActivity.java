@@ -153,6 +153,7 @@ public class ShopEnterActivity extends BaseActivity {
         wvContent.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         wvContent.getSettings().setLoadWithOverviewMode(true);
         wvContent.loadUrl("http://192.168.1.157:8011/Protocol/Admission");
+        wvContent.loadUrl("http://192.168.1.157:8011/Protocol/Admission");
 
         wvContent.setWebViewClient(new WebViewClient() {
 

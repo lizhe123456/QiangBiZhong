@@ -74,6 +74,20 @@ public abstract class BaseOrderFragment extends BaseFragment implements OrderPre
         });
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser) {
+            // 相当于onResume()方法--获取焦点
+            if (orderPresenter != null){
+                getData(request(),true);
+            }
+        }
+
+    }
+
     public abstract void setClick();
 
     public abstract String request();

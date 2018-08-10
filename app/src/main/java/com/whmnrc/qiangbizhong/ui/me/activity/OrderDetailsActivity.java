@@ -143,7 +143,7 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
         tvItem0.setText(orderdetailBean.getOrder_No());
         tvItem1.setText(orderdetailBean.getOrder_PayNo());
         tvOrderNum2.setText(orderdetailBean.getOrder_CreateTime());
-        tvOrderNum3.setText(orderdetailBean.getOrder_WaybillNumber() == null ? "" : orderdetailBean.getOrder_WaybillNumber());
+        tvOrderNum3.setText(orderdetailBean.getOrder_WaybillNumber() == null ? "" : orderdetailBean.getOrder_WaybillNumber() + "(" + orderdetailBean.getOrder_WaybillCompany() + ")");
 
 
         int num = 0;
@@ -193,6 +193,7 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
                 public void onClick(View v) {
                     new AlertEditTextDialog(OrderDetailsActivity.this).builder().setTitle("是否确认申请退款")
                             .setTvFundZfPwd(false)
+                            .setInputNume(20)
                             .setEidtMsg("请输入退款原因")
                             .setInputType(InputType.TYPE_CLASS_TEXT)
                             .setNegativeButton("取消", new View.OnClickListener() {

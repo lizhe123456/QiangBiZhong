@@ -183,15 +183,15 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
         }else if (item.getOrder_State() == 2){
             if (isShop){
                 holder.setText(R.id.order_state, "待收货");
-                holder.setText(R.id.tv_btn_2, "确认收货");
+                holder.setVisible(R.id.tv_btn_2, false);
                 holder.setVisible(R.id.tv_btn_3, false);
-                holder.setOnClickListener(R.id.tv_btn_2, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (onOrderListener != null)
-                            onOrderListener.collectGoods(item);
-                    }
-                });
+//                holder.setOnClickListener(R.id.tv_btn_2, new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if (onOrderListener != null)
+//                            onOrderListener.collectGoods(item);
+//                    }
+//                });
             }else {
                 //2待收货
                 holder.setText(R.id.order_state, "待收货");

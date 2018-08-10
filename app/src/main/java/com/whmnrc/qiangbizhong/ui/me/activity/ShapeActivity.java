@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,9 +66,13 @@ public class ShapeActivity extends BaseActivity implements ShapePresenter.CodeCa
     }
 
 
-    @OnClick(R.id.iv_back)
-    public void onViewClicked() {
-        this.finish();
+    @OnClick({R.id.iv_back})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                this.finish();
+            break;
+        }
     }
 
     @Override

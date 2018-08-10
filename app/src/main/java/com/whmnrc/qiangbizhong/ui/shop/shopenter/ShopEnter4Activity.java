@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
@@ -126,6 +127,9 @@ public class ShopEnter4Activity extends BaseActivity {
                 ShopEnter5Activity.start(this,shopEnterP);
                 break;
             case R.id.tv_kaihu_city:
+                if (KeyboardUtils.isSoftInputVisible(this)){
+                    KeyboardUtils.hideSoftInput(this);
+                }
                 mOptionsPickerView.show();
                 break;
         }

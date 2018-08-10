@@ -196,7 +196,7 @@ public class ShopConfirmOrderActivity extends BaseActivity implements AddressPre
                 Parameter.RemarksListBean remarksList = new Parameter.RemarksListBean(shopCarBean.getStoreId(),shopCarBean.getEtDsec());
                 list1.add(remarksList);
             }
-            Parameter parameter = new Parameter(addressBean.getAddress_ID(),UserManage.getInstance().getUserID(),0,"",list,list1);
+            Parameter parameter = new Parameter(addressBean.getAddress_ID(),UserManage.getInstance().getUserID(),0,list,list1);
             orderPresenter.submitshoppingorder(parameter,this);
         } else {
             ToastUtils.showShort("请选择地址");
@@ -245,6 +245,14 @@ public class ShopConfirmOrderActivity extends BaseActivity implements AddressPre
         private String AgentPayUserId;
         private List<GoodsPriceListBean> GoodsPriceList;
         private List<RemarksListBean> RemarksList;
+
+        public Parameter(String addressId, String userId, int isAgentPay , List<GoodsPriceListBean> goodsPriceList, List<RemarksListBean> remarksList) {
+            AddressId = addressId;
+            UserId = userId;
+            IsAgentPay = isAgentPay;
+            GoodsPriceList = goodsPriceList;
+            RemarksList = remarksList;
+        }
 
         public Parameter(String addressId, String userId, int isAgentPay, String agentPayUserId, List<GoodsPriceListBean> goodsPriceList, List<RemarksListBean> remarksList) {
             AddressId = addressId;

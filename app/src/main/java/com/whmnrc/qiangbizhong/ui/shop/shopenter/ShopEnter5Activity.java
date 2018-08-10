@@ -78,13 +78,12 @@ public class ShopEnter5Activity extends BaseActivity implements ShopEnterPresent
         shopEnterP = DataSave.getValue();
         tvDianMing.setText(UserManage.getInstance().getLoginBean().getUserInfo_NickName());
         shopEnterP.setUserId(UserManage.getInstance().getLoginBean().getUserInfo_ID());
-        Glide.with(this).asBitmap().load(UserManage.getInstance().getLoginBean().getUserInfo_HeadImg()).into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                shopEnterP.setStoreHeadImage(EncodeUtils.base64Encode2String(ImageUtils.bitmap2Bytes(resource, Bitmap.CompressFormat.JPEG)));
-                shopEnterP.setStoreImage(EncodeUtils.base64Encode2String(ImageUtils.bitmap2Bytes(resource, Bitmap.CompressFormat.JPEG)));
-            }
-        });
+        String img = UserManage.getInstance().getLoginBean().getUserInfo_HeadImg();
+//        String s = img.split(23);
+        img=img.replace("http://testaml.whmnx.com","");
+//                http://testaml.whmnx.com
+        shopEnterP.setStoreHeadImage(img);
+        shopEnterP.setStoreImage(img);
         shopEnterPresenter = new ShopEnterPresenter(this);
     }
 
@@ -115,11 +114,14 @@ public class ShopEnter5Activity extends BaseActivity implements ShopEnterPresent
 
     @Override
     public void error() {
-
+        if (loadingDialog.isShowing()){
+            loadingDialog.cancel();
+        }
     }
 
     @Override
     public void submitadmissionBack() {
         MainActivity.start(this,2);
     }
+
 }

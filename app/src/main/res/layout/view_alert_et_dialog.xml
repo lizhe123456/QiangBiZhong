@@ -63,6 +63,22 @@
         android:maxLength="6"
         android:padding="@dimen/dm_10"
         android:textSize="@dimen/dm_14"/>
+    <EditText
+        android:id="@+id/et_pay_pwd1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_20"
+        android:layout_marginLeft="@dimen/dm_30"
+        android:layout_marginRight="@dimen/dm_30"
+        android:paddingTop="@dimen/dm_24"
+        android:paddingBottom="@dimen/dm_24"
+        android:background="@drawable/shape_et_alert"
+        android:hint="请输退货原因"
+        android:inputType="numberPassword"
+        android:maxLength="30"
+        android:padding="@dimen/dm_10"
+        android:visibility="gone"
+        android:textSize="@dimen/dm_14"/>
 
     <ImageView
         android:layout_width="match_parent"

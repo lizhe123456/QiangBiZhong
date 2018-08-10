@@ -27,7 +27,8 @@ public class ShapePresenter {
             @Override
             public void onSuccess(String data) {
                 if (codeCall != null){
-                    codeCall.code("data:image/jpg;base64,"+data);
+//                    "data:image/jpg;base64,"+
+                    codeCall.code(data);
                 }
             }
 

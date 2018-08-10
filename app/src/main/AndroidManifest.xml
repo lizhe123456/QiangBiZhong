@@ -39,13 +39,13 @@
         tools:replace="android:icon, android:theme,android:allowBackup,android:label,android:supportsRtl"
         android:name=".app.App"
         android:allowBackup="true">
-        <!--<meta-data android:name="com.amap.api.v2.apikey"-->
-            <!--android:value="bfa933345c9f9bb89ae89facedcab4e8">-->
-        <!--</meta-data> -->
-        <!--测试-->
         <meta-data android:name="com.amap.api.v2.apikey"
-            android:value="0309838f144f945f4196b6603eeebd7d">
+            android:value="bfa933345c9f9bb89ae89facedcab4e8">
         </meta-data>
+        <!--测试-->
+        <!--<meta-data android:name="com.amap.api.v2.apikey"-->
+            <!--android:value="0309838f144f945f4196b6603eeebd7d">-->
+        <!--</meta-data>-->
         <meta-data
             android:name="PGYER_APPID"
             android:value="1fba0d0890282300433c8af6ae4fbdfe">
@@ -78,7 +78,8 @@
             android:launchMode="singleTask">
         </activity>
         <activity android:name=".ui.me.activity.AccountRechargeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.home.activity.LuckDrawActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.home.activity.FlashSaleActivity"
@@ -177,10 +178,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.shop.shopenter.ShopEnter3Activity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".ui.shop.shopenter.ShopEnter4Activity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".ui.shop.shopenter.ShopEnter5Activity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
@@ -194,7 +195,8 @@
             android:screenOrientation="portrait"
             tools:ignore="DuplicateActivity" />
         <activity android:name=".ui.me.goods.update.EditGoodsDetailsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.me.goods.update.EditBannerActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.me.goods.update.EditSpecActivity"

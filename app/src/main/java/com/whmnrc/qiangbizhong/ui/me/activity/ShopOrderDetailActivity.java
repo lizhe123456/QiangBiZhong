@@ -47,12 +47,18 @@ public class ShopOrderDetailActivity extends BaseActivity implements OrderPresen
     TextView tvOrderNum2;
     @BindView(R.id.tv_order_num_3)
     TextView tvOrderNum3;
+    @BindView(R.id.tv_order_num_4)
+    TextView tvOrderNum4;
+    @BindView(R.id.tv_order_num_5)
+    TextView tvOrderNum5;
     @BindView(R.id.tv_title1)
     TextView tvTitle1;
     @BindView(R.id.tv_btn)
     TextView tvBtn;
     @BindView(R.id.ll_btn_1)
     LinearLayout llBtn1;
+    @BindView(R.id.ll_tv_order_num1)
+    LinearLayout llTvOrder;
 
     private OrderPresenter orderPresenter;
     private String orderId;
@@ -133,17 +139,22 @@ public class ShopOrderDetailActivity extends BaseActivity implements OrderPresen
         tvItem1.setText(orderdetailBean.getOrder_PayNo());
         tvOrderNum2.setText(orderdetailBean.getOrder_CreateTime());
         tvTitle1.setText("付款时间：");
-        tvOrderNum3.setText(orderdetailBean.getOrder_DeliverGoodsTime());
+        tvOrderNum3.setText(orderdetailBean.getOrder_CreateTime());
 //        if (orderdetailBean.getOrder_State() != 1) {
 //            tvTitle1.setText("付款时间：");
 //            tvOrderNum3.setText(orderdetailBean.getOrder_DeliverGoodsTime());
 //        }else {
 //            tvTitle1.setText("运单号：");
-//            tvOrderNum3.setText(orderdetailBean.getOrder_WaybillNumber() == null ? "" : orderdetailBean.getOrder_WaybillNumber());
+//            tvOrderNum4.setText(orderdetailBean.getOrder_WaybillNumber() == null ? "" : orderdetailBean.getOrder_WaybillNumber());
 //        }
-
+        tvOrderNum4.setText(orderdetailBean.getOrder_WaybillNumber() == null ? "" : orderdetailBean.getOrder_WaybillNumber() + "(" + orderdetailBean.getOrder_WaybillCompany() + ")");
         if (orderdetailBean.getOrder_State() == -5){
-            orderState.setText("您的订单正在退款中");
+            llTvOrder.setVisibility(View.VISIBLE);
+            if (orderdetailBean.getOrder_RefundRemark() != null) {
+                tvOrderNum5.setText(orderdetailBean.getOrder_RefundRemark() + "");
+            }
+
+            orderState.setText("买家（"+orderdetailBean.getUserInfo_NickName()+"）" + "的订单，正在等待退款");
             tvBtn.setText("处理退款");
             tvBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -169,7 +180,7 @@ public class ShopOrderDetailActivity extends BaseActivity implements OrderPresen
 
         }else if (orderdetailBean.getOrder_State() == 0){
             //0未支付
-
+            tvBtn.setVisibility(View.GONE);
         }else if (orderdetailBean.getOrder_State() == 1){
             //1已支付
             orderState.setText("买家（"+orderdetailBean.getUserInfo_NickName()+"）" + "的订单，正在等待发货");
@@ -184,6 +195,7 @@ public class ShopOrderDetailActivity extends BaseActivity implements OrderPresen
             //2待收货
             orderState.setText("您的订单等待收货");
             tvBtn.setText("确认收货");
+            tvBtn.setVisibility(View.GONE);
             tvBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -206,15 +218,17 @@ public class ShopOrderDetailActivity extends BaseActivity implements OrderPresen
                 }
             });
         }else if (orderdetailBean.getOrder_State() == 3){
-
+            tvBtn.setVisibility(View.GONE);
 
         }else if (orderdetailBean.getOrder_State() == 4){
+            tvBtn.setVisibility(View.GONE);
             //已取消
             orderState.setText("买家（"+orderdetailBean.getUserInfo_NickName()+"）" + "的订单，已取消");
             llBtn1.setVisibility(View.GONE);
         }else if (orderdetailBean.getOrder_State() == 5){
+            tvBtn.setVisibility(View.GONE);
             //已退款
-            orderState.setText("买家（"+orderdetailBean.getUserInfo_NickName()+"）" + "的订单，已退款");
+            orderState.setText("买家（"+orderdetailBean.getUserInfo_NickName()+"）" + "的订单，已收到退款");
             llBtn1.setVisibility(View.GONE);
         }else if (orderdetailBean.getOrder_State() == 6){
             //6抢购成功
@@ -229,6 +243,7 @@ public class ShopOrderDetailActivity extends BaseActivity implements OrderPresen
             //8未中奖
 
         }else if (orderdetailBean.getOrder_State() == 10){
+            tvBtn.setVisibility(View.GONE);
             //已完成
             orderState.setText("买家（"+orderdetailBean.getUserInfo_NickName()+"）" + "的订单，已完成");
             llBtn1.setVisibility(View.GONE);

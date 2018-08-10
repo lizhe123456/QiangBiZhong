@@ -99,7 +99,7 @@ public class ConfirmSendGoodsActivity extends BaseActivity implements LiveryPres
             @Override
             public void onOptionPicked(int index, String item) {
                 tItem1.setText(item);
-                waybillCompany = liveryBeans.get(index).getItemId();
+                waybillCompany = liveryBeans.get(index).getItemValue();
             }
         });
         picker.show();

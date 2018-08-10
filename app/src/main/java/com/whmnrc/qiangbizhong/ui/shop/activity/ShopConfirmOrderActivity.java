@@ -222,7 +222,7 @@ public class ShopConfirmOrderActivity extends BaseActivity implements OrderPrese
                     new com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter.RemarksListBean(storeInfoBean.getId(),desc);
             list1.add(remarksList);
             com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter parameter =
-                    new com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter(addressBean.getAddress_ID(),UserManage.getInstance().getUserID(),0,"",list,list1);
+                    new com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity.Parameter(addressBean.getAddress_ID(),UserManage.getInstance().getUserID(),0,list,list1);
             orderPresenter.submitshoppingorder(parameter,ShopConfirmOrderActivity.this);
         } else {
             ToastUtils.showShort("请选择地址");

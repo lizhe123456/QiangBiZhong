@@ -2,6 +2,7 @@ package com.whmnrc.qiangbizhong.ui.me.goods.update;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.amap.api.services.core.SearchUtils;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -37,7 +39,7 @@ import butterknife.OnClick;
  * 编辑轮播图
  */
 
-public class EditBannerActivity extends BaseActivity implements GoodsPresenter.GoodsBannerCall,ImagePresenter.ImageCall,GoodsPresenter.AddGoodsBannerCall{
+public class EditBannerActivity extends BaseActivity implements GoodsPresenter.GoodsBannerCall, ImagePresenter.ImageCall, GoodsPresenter.AddGoodsBannerCall {
 
 
     @BindView(R.id.iv_back)
@@ -46,19 +48,21 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
     TextView tvTitle;
     @BindView(R.id.rv_banner_list)
     RecyclerView rvBannerList;
+    @BindView(R.id.tv_menu)
+    TextView tvMenu;
+    @BindView(R.id.rl_img)
+    RelativeLayout img;
 
     private ImageAdapter imageAdapter;
 
     private GoodsPresenter goodsPresenter;
     private List<String> selectList1;
     private ImagePresenter imagePresenter;
-    private int page;
-    private int oldPage;
     private String goodsId;
-
-    public static void start(Context context,String goodsId) {
+    private List<BannerParam> bannerParams = new ArrayList<>();
+    public static void start(Context context, String goodsId) {
         Intent starter = new Intent(context, EditBannerActivity.class);
-        starter.putExtra("goodsId",goodsId);
+        starter.putExtra("goodsId", goodsId);
         context.startActivity(starter);
     }
 
@@ -71,28 +75,50 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
     protected void setData() {
         tvTitle.setText("编辑商品轮播图");
         ivBack.setVisibility(View.VISIBLE);
+        tvMenu.setVisibility(View.VISIBLE);
+        tvMenu.setText("保存");
         goodsPresenter = new GoodsPresenter(this);
         imagePresenter = new ImagePresenter(this);
         rvBannerList.setLayoutManager(new LinearLayoutManager(this));
         imageAdapter = new ImageAdapter(this);
+
         rvBannerList.setAdapter(imageAdapter);
         showLoading("加载中..");
         goodsId = getIntent().getStringExtra("goodsId");
-        goodsPresenter.getgoodsbanner(goodsId,this);
+        goodsPresenter.getgoodsbanner(goodsId, this);
 
-        imageAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+        imageAdapter.setOnDelete(new onDelete() {
             @Override
-            public void onClick(View view, Object item, int position) {
-                ImageUtil.img1GoodsBanner(EditBannerActivity.this);
+            public void delete(int index) {
+                imageAdapter.getDataSource().remove(index);
+                imageAdapter.notifyDataSetChanged();
             }
         });
 
     }
 
 
-    @OnClick(R.id.iv_back)
-    public void onViewClicked() {
-        this.finish();
+    @OnClick({R.id.iv_back,R.id.tv_menu,R.id.rl_img})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.iv_back:
+                this.finish();
+                break;
+            case R.id.tv_menu:
+
+                if (bannerParams.size() > 0) {
+                    showLoading("保存中..");
+                    goodsPresenter.addgoodsbanner(bannerParams, this);
+                }else {
+                    ToastUtils.showShort("请添加轮播图");
+                }
+                break;
+            case R.id.rl_img:
+                if ( imageAdapter.getDataSource().size() <= 3){
+                    ImageUtil.img1GoodsBanner(EditBannerActivity.this);
+                }
+                break;
+        }
     }
 
     @Override
@@ -102,8 +128,8 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
 
     @Override
     public void getgoodsbanner(List<EditBannerBean> editBannerBeans) {
-        List<String> list = new ArrayList<>();
-        for (EditBannerBean editBannerBean :editBannerBeans) {
+       List<String> list = new ArrayList<>();
+        for (EditBannerBean editBannerBean : editBannerBeans) {
             list.add(editBannerBean.getImg_Path());
         }
         imageAdapter.addFirstDataSet(list);
@@ -117,11 +143,11 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
                 case PictureConfig.CHOOSE_REQUEST:
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     selectList1 = new ArrayList<>();
-                    for (LocalMedia l: selectList) {
+                    for (LocalMedia l : selectList) {
                         selectList1.add(l.getCompressPath());
                     }
                     showLoading("上传中..");
-                    imagePresenter.uploadfilepublic(selectList1,this);
+                    imagePresenter.uploadfilepublic(selectList1, this);
                     break;
             }
         }
@@ -129,35 +155,44 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
 
     @Override
     public void img(List<String> list) {
-        List<BannerParam> bannerParamList = new ArrayList<>();
-        for (int i = 0; i < selectList1.size(); i++) {
-            bannerParamList.add(new BannerParam(goodsId,list.get(i),i));
-        }
-        goodsPresenter.addgoodsbanner(bannerParamList,this);
+        bannerParams.add(new BannerParam(goodsId, list.get(0), imageAdapter.getDataSource().size()-1));
+        imageAdapter.addMoreDataSet(selectList1);
+
     }
 
     @Override
     public void addGoodsBanner() {
-        imageAdapter.addFirstDataSet(selectList1);
+        this.finish();
     }
 
 
-    public class ImageAdapter extends BaseAdapter<String>{
+
+    public class ImageAdapter extends BaseAdapter<String> {
 
         int width;
+
+        private onDelete onDelete;
 
         ImageAdapter(Context context) {
             super(context);
             width = ScreenUtils.getScreenWidth();
         }
 
+        public void setOnDelete(EditBannerActivity.onDelete onDelete) {
+            this.onDelete = onDelete;
+        }
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, String item, int position) {
-            if (!TextUtils.isEmpty(item)) {
-                holder.setGlieuImage(R.id.iv_img, item);
-            }
-
+            holder.setGlieuImage(R.id.iv_img, item);
+            holder.setOnClickListener(R.id.iv_delete, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onDelete != null) {
+                        onDelete.delete(position);
+                    }
+                }
+            });
 
         }
 
@@ -165,6 +200,10 @@ public class EditBannerActivity extends BaseActivity implements GoodsPresenter.G
         protected int getItemViewLayoutId(int position, String item) {
             return R.layout.item_image_banner;
         }
+    }
+
+    interface onDelete {
+        void delete(int index);
     }
 
 }

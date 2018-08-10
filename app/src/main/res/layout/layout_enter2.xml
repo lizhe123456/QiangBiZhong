@@ -1,201 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/ll_layout_2">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/tv_navigation"
-        android:textSize="@dimen/dm_13"
-        android:text="开户银行信息（此账号为结算账号）"
-        android:padding="@dimen/dm_15" />
-    <LinearLayout
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_layout_2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/dm_15"
-        android:paddingRight="@dimen/dm_15"
-        android:paddingBottom="@dimen/dm_10"
-        android:paddingTop="@dimen/dm_10">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开户行账号"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_navigation"/>
+            android:padding="@dimen/dm_15"
+            android:text="开户银行信息（此账号为结算账号）"
+            android:textColor="@color/tv_navigation"
+            android:textSize="@dimen/dm_13" />
 
-        <EditText
-            android:id="@+id/tv_kaihu_hao"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_191"
-            android:hint="请填写开户行账号"
-            android:textColorHint="@color/tv_navigation"
             android:background="@color/white"
-            android:inputType="number"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:maxLength="19"/>
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dm_10"
+            android:paddingLeft="@dimen/dm_15"
+            android:paddingRight="@dimen/dm_15"
+            android:paddingTop="@dimen/dm_10">
 
-    </LinearLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_1"
-        android:background="@color/white">
-        <View
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开户行账号"
+                android:textColor="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+
+            <EditText
+                android:id="@+id/tv_kaihu_hao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:background="@color/white"
+                android:hint="请填写开户行账号"
+                android:inputType="number"
+                android:maxLength="19"
+                android:textColor="@color/tv_191"
+                android:textColorHint="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+
+        </LinearLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
-            android:background="@color/divider_color"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:layout_marginRight="@dimen/dm_15"/>
-    </FrameLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/dm_15"
-        android:paddingRight="@dimen/dm_15"
-        android:paddingBottom="@dimen/dm_10"
-        android:paddingTop="@dimen/dm_10">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开户行"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_navigation"/>
+            android:background="@color/white">
 
-        <EditText
-            android:id="@+id/tv_kaihu_name"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"
+                android:background="@color/divider_color" />
+        </FrameLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_191"
-            android:hint="请填写开户行名称"
-            android:inputType="text"
-            android:textColorHint="@color/tv_navigation"
             android:background="@color/white"
-            android:layout_marginLeft="@dimen/dm_15"/>
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dm_10"
+            android:paddingLeft="@dimen/dm_15"
+            android:paddingRight="@dimen/dm_15"
+            android:paddingTop="@dimen/dm_10">
 
-    </LinearLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_1"
-        android:background="@color/white">
-        <View
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开户行"
+                android:textColor="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+
+            <EditText
+                android:id="@+id/tv_kaihu_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:background="@color/white"
+                android:hint="请填写开户行名称"
+                android:inputType="text"
+                android:textColor="@color/tv_191"
+                android:textColorHint="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+
+        </LinearLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
-            android:background="@color/divider_color"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:layout_marginRight="@dimen/dm_15"/>
-    </FrameLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/dm_15"
-        android:paddingRight="@dimen/dm_15"
-        android:paddingBottom="@dimen/dm_10"
-        android:paddingTop="@dimen/dm_10">
+            android:background="@color/white">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"
+                android:background="@color/divider_color" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dm_10"
+            android:paddingLeft="@dimen/dm_15"
+            android:paddingRight="@dimen/dm_15"
+            android:paddingTop="@dimen/dm_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开户行支行名称"
+                android:textColor="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+
+            <EditText
+                android:id="@+id/tv_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:background="@color/white"
+                android:hint="请填写开户行支行名称"
+                android:inputType="text"
+                android:maxLength="20"
+                android:textColor="@color/tv_191"
+                android:textColorHint="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开户行支行名称"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_navigation"/>
+            android:padding="@dimen/dm_15"
+            android:text="结算账号信息"
+            android:textColor="@color/tv_navigation"
+            android:textSize="@dimen/dm_13" />
 
-        <EditText
-            android:id="@+id/tv_city"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_191"
-            android:hint="请填写开户行支行名称"
-            android:maxLength="20"
-            android:inputType="text"
-            android:textColorHint="@color/tv_navigation"
             android:background="@color/white"
-            android:layout_marginLeft="@dimen/dm_15"/>
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dm_10"
+            android:paddingLeft="@dimen/dm_15"
+            android:paddingRight="@dimen/dm_15"
+            android:paddingTop="@dimen/dm_10">
 
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/tv_navigation"
-        android:textSize="@dimen/dm_13"
-        android:text="结算账号信息"
-        android:padding="@dimen/dm_15" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/dm_15"
-        android:paddingRight="@dimen/dm_15"
-        android:paddingBottom="@dimen/dm_10"
-        android:paddingTop="@dimen/dm_10">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="银行账号"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_navigation"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="银行账号"
+                android:textColor="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
 
-        <EditText
-            android:id="@+id/tv_band_hao_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_191"
-            android:hint="请填写银行账号"
-            android:textColorHint="@color/tv_navigation"
-            android:background="@color/white"
-            android:maxLength="19"
-            android:inputType="number"
-            android:layout_marginLeft="@dimen/dm_15"/>
+            <EditText
+                android:id="@+id/tv_band_hao_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:background="@color/white"
+                android:hint="请填写银行账号"
+                android:inputType="number"
+                android:maxLength="19"
+                android:textColor="@color/tv_191"
+                android:textColorHint="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
 
-    </LinearLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_1"
-        android:background="@color/white">
-        <View
+        </LinearLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_1"
-            android:background="@color/divider_color"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:layout_marginRight="@dimen/dm_15"/>
-    </FrameLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/dm_15"
-        android:paddingRight="@dimen/dm_15"
-        android:paddingBottom="@dimen/dm_10"
-        android:paddingTop="@dimen/dm_10">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开户行所在地"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_navigation"/>
+            android:background="@color/white">
 
-        <TextView
-            android:id="@+id/tv_kaihu_city"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"
+                android:background="@color/divider_color" />
+        </FrameLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dm_15"
-            android:textColor="@color/tv_191"
-            android:hint="请选择您所在的地区"
-            android:textColorHint="@color/tv_navigation"
             android:background="@color/white"
-            android:layout_marginLeft="@dimen/dm_15"
-            android:drawableRight="@drawable/ic_more"/>
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dm_10"
+            android:paddingLeft="@dimen/dm_15"
+            android:paddingRight="@dimen/dm_15"
+            android:paddingTop="@dimen/dm_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开户行所在地"
+                android:textColor="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+
+            <TextView
+                android:id="@+id/tv_kaihu_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:background="@color/white"
+                android:drawableRight="@drawable/ic_more"
+                android:hint="请选择您所在的地区"
+                android:textColor="@color/tv_191"
+                android:textColorHint="@color/tv_navigation"
+                android:textSize="@dimen/dm_15" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

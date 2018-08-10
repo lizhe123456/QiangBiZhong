@@ -3,7 +3,8 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/dm_10">
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
@@ -103,7 +104,8 @@
             android:layout_marginLeft="@dimen/dm_15"
             android:text="x1"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dm_15"/>
+            android:layout_marginRight="@dimen/dm_15"
+            android:visibility="gone"/>
         <View
             android:id="@+id/v_xian"
             android:layout_width="match_parent"

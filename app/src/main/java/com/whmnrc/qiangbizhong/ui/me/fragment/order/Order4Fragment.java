@@ -130,6 +130,7 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
             public void refund(OrderListBean item) {
                 new AlertEditTextDialog(mContext).builder().setTitle("是否确认申请退款")
                         .setTvFundZfPwd(false)
+                        .setInputNume(20)
                         .setEidtMsg("请输入退款原因")
                         .setInputType(InputType.TYPE_CLASS_TEXT)
                         .setNegativeButton("取消", new View.OnClickListener() {

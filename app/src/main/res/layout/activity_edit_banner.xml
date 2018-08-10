@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-    <include layout="@layout/layout_title"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_banner_list"
+    android:background="@color/bg_f5f5f5"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"/>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_banner_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="false"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dm_10"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/iv_img_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_200"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_img_add" />
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 </LinearLayout>

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_f5f5f5"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
     <include layout="@layout/layout_title" />
 
@@ -53,8 +54,8 @@
                 android:background="@color/white"
                 android:gravity="left"
                 android:hint="描述下您的商品吧！(140字以内)"
-                android:inputType="text"
                 android:maxLength="140"
+                android:inputType="textMultiLine"
                 android:padding="@dimen/dm_15"
                 android:textColor="@color/tv_000"
                 android:textColorHint="@color/tv_navigation"
@@ -288,6 +289,50 @@
                     android:maxLength="10"
                     android:paddingLeft="@dimen/dm_10"
                     android:hint="请输入排序"
+                    android:digits="0123456789"
+                    android:gravity="right"
+                    android:textColor="@color/tv_navigation"
+                    android:textSize="@dimen/dm_14" />
+            </RelativeLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_1"
+                android:background="@color/white">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_1"
+                    android:layout_marginLeft="@dimen/dm_15"
+                    android:layout_marginRight="@dimen/dm_15"
+                    android:background="@color/divider_color" />
+            </FrameLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_effect"
+                android:paddingBottom="@dimen/dm_12"
+                android:paddingLeft="@dimen/dm_15"
+                android:paddingRight="@dimen/dm_15"
+                android:paddingTop="@dimen/dm_12">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dm_10"
+                    android:text="最小购买量"
+                    android:textColor="@color/tv_191"
+                    android:textSize="@dimen/dm_14" />
+
+                <EditText
+                    android:id="@+id/et_min_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingLeft="@dimen/dm_10"
+                    android:hint="请输入最小购买"
                     android:digits="123456789"
                     android:gravity="right"
                     android:textColor="@color/tv_navigation"
@@ -297,8 +342,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dm_30" />
-
-
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

@@ -84,6 +84,16 @@ public class EditListActivity extends BaseActivity {
                         goodsParam.setGoods_PriceMax(goodsManageBean.getGoods_PriceMax()+"");
                         goodsParam.setGoods_PriceMin(goodsManageBean.getGoods_PriceMin()+"");
                         goodsParam.setGoods_ImaPath(goodsManageBean.getGoods_ImaPath());
+                        goodsParam.setGoods_Content(goodsManageBean.getGoods_ImaPath());
+                        goodsParam.setGoods_IsBuy(goodsManageBean.isGoods_IsBuy());
+                        goodsParam.setGoods_IsOn(goodsManageBean.isGoods_IsOn());
+                        goodsParam.setGoods_LimitCount(goodsManageBean.getGoods_LimitCount()+"");
+                        goodsParam.setGoods_Parameter(goodsManageBean.getGoods_Parameter()+"");
+                        goodsParam.setGoods_MonthCount(goodsManageBean.getGoods_MonthCount()+"");
+                        goodsParam.setGoods_LookCount(goodsManageBean.getGoods_LookCount()+"");
+                        goodsParam.setGoods_ShopType(goodsManageBean.getGoods_ShopType()+"");
+                        goodsParam.setGoods_ID(goodsManageBean.getGoods_ID()+"");
+
                         ReleaseGoodsActivity.start(EditListActivity.this,goodsParam,1);
                         break;
                     case 1:

@@ -94,6 +94,7 @@ public class ImageUtil {
     }
 
 
+
     public static void img1GoodsBanner(Activity activity){
         RxPermissions rxPermissions = new RxPermissions(activity);
         rxPermissions
@@ -102,7 +103,7 @@ public class ImageUtil {
                     if (granted) {
                         PictureSelector.create(activity)
                                 .openGallery(PictureMimeType.ofImage())
-                                .maxSelectNum(9)
+                                .maxSelectNum(1)
                                 .imageSpanCount(4)
                                 .withAspectRatio(375,200)
                                 .enableCrop(true)// 是否裁剪 true or false

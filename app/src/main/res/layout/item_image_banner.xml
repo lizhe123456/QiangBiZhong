@@ -11,15 +11,16 @@
         android:background="@color/white"
         android:layout_marginBottom="@dimen/dm_10">
         <ImageView
-            android:id="@+id/iv_img_add"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dm_200"
-            android:src="@drawable/ic_img_add"
-            android:scaleType="center"/>
-        <ImageView
             android:id="@+id/iv_img"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_200"
             android:scaleType="fitXY"/>
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cha_delete"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/dm_10" />
     </RelativeLayout>
 </LinearLayout>

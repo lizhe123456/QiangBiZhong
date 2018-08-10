@@ -18,7 +18,7 @@ android {
             keyAlias 'lizhe'
             keyPassword '123456'
 //            storeFile file('D:/qiangbizhong.jks')
-            storeFile file('D:/qinagbizhong.jks')
+            storeFile file('D:/qiangbizhong.jks')
             storePassword '123456'
         }
 

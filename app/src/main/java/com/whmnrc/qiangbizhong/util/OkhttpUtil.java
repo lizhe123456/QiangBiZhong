@@ -74,12 +74,11 @@ public class OkhttpUtil {
                                 //充值
                                 objectCallback.onFailure(101, "101");
                             } else {
-
-
                                 ToastUtils.showShort(baseResponse.getMessage());
                             }
                         }
                     }
+                    EventBus.getDefault().post(new LodingBean());
                 }
             });
         } catch (Exception e) {

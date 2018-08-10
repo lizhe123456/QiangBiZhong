@@ -17,6 +17,8 @@ import com.whmnrc.qiangbizhong.ui.me.fragment.order.Order3Fragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.Order4Fragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.Order5Fragment;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
+import com.whmnrc.qiangbizhong.widget.MyTabLayout;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -28,7 +30,7 @@ import butterknife.OnClick;
 public class MyOrderActivity extends BaseActivity {
 
     @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
+    MyTabLayout tabLayout;
     @BindView(R.id.vp_content)
     ViewPager vpContent;
 

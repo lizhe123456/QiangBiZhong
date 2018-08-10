@@ -15,6 +15,7 @@ public class PayDialogUtil {
                 .setMinTitle("设置支付密码")
                 .setTvFundZfPwd(true)
                 .setTitle("支付密码")
+                .setInputNume(6)
                 .setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD)
                 .setEidtMsg("请输入支付密码")
                 .setPositiveButton("确认", confirmListenter).show();

@@ -144,7 +144,6 @@ public class GoodsPresenter {
         });
     }
 
-
     //上架商品
     public void setgoodsgoup(String goodsId,int type,GoodsGoupCall goodsGoupCall){
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.setgoodsgoup) + "?goodsId="

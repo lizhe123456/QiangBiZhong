@@ -78,8 +78,7 @@
             android:background="@null"
             android:gravity="right"
             android:hint="请填写单号"
-            android:inputType="number"
-            android:maxLength="20"
+            android:inputType="text"
             android:paddingLeft="@dimen/dm_10"
             android:textColor="@color/tv_navigation"
             android:textSize="@dimen/dm_14" />

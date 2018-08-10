@@ -82,7 +82,7 @@ public class OrderPresenter {
         map.put("PageIndex",page+"");
         map.put("PageCount",size+"");
         OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.getorderlist)
-                + "?storeId=" + "f9641e98-a561-46f9-8cb9-aa9c43daabb0" + "&orderStatus=" + orderStatus, map, new OkhttpUtil.BeanCallback() {
+                + "?storeId=" + UserManage.getInstance().getLoginBean().getStoreInfo().getId() + "&orderStatus=" + orderStatus, map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)){

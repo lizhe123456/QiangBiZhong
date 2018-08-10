@@ -69,6 +69,22 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
         return R.layout.fragment_all_goods;
     }
 
+
+    @Override
+
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser) {
+            // 相当于onResume()方法--获取焦点
+            if (goodsPresenter != null){
+                goodsPresenter.getgoodslist(type, UserManage.getInstance().getLoginBean().getStoreInfo().getId(), true, this);
+            }
+        }
+
+    }
+
     @Override
     protected void initData() {
         goodsPresenter = new GoodsPresenter(getContext());
@@ -94,6 +110,8 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
                 ShopDetailsActivity.start(getContext(),goodsManageBean.getGoods_ID());
             }
         });
+
+
     }
 
     @Override
@@ -107,11 +125,17 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
         if (goodsParamList.size() == 0){
             showEmpty();
         }else {
-            vsEmpty.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
+            if (vsEmpty != null) {
+                vsEmpty.setVisibility(View.GONE);
+            }
+            if (recyclerView != null) {
+                recyclerView.setVisibility(View.VISIBLE);
+            }
         }
         goodManageAdapter.addFirstDataSet(goodsParamList);
-        refresh.finishRefresh(true);
+        if (refresh != null) {
+            refresh.finishRefresh(true);
+        }
     }
 
     public void showEmpty() {

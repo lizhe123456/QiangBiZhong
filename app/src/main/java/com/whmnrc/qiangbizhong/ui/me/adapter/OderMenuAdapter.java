@@ -52,9 +52,9 @@ public class OderMenuAdapter extends BaseAdapter<MineBean.MenuBean> {
                             if (position == 0 ) {
                                 GoodsManageActivity.start(getContext(), 1);
                             }else if (position == 1){
-                                GoodsManageActivity.start(getContext(), 2);
-                            }else if (position == 2){
                                 GoodsManageActivity.start(getContext(), 3);
+                            }else if (position == 2){
+                                GoodsManageActivity.start(getContext(), 2);
                             }
                         }else if (position1 == 2){
                             ShopManageActivity.start(getContext(),position);

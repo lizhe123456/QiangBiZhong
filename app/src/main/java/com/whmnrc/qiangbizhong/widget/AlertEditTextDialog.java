@@ -40,6 +40,7 @@ public class AlertEditTextDialog {
     private boolean showNegBtn = false;
 
     private EditText mEtPayPwd;
+    private EditText mEtPayPwd1;
 
 
     public AlertEditTextDialog(Context context) {
@@ -67,6 +68,7 @@ public class AlertEditTextDialog {
         btn_pos.setVisibility(View.GONE);
         img_line = (ImageView) view.findViewById(R.id.img_line);
         mEtPayPwd = (EditText) view.findViewById(R.id.et_pay_pwd);
+        mEtPayPwd1 = (EditText) view.findViewById(R.id.et_pay_pwd1);
         img_line.setVisibility(View.GONE);
 
         // 定义Dialog布局和参数
@@ -138,10 +140,24 @@ public class AlertEditTextDialog {
     }
 
     public AlertEditTextDialog setInputType(int type){
-        mEtPayPwd.setMaxEms(6);
         mEtPayPwd.setInputType(type);
+        mEtPayPwd1.setInputType(type);
         return this;
     }
+
+    public AlertEditTextDialog setInputNume(int num){
+        if (num == 6){
+            mEtPayPwd.setVisibility(View.VISIBLE);
+            mEtPayPwd1.setVisibility(View.GONE);
+        }else {
+            mEtPayPwd.setVisibility(View.GONE);
+            mEtPayPwd1.setVisibility(View.VISIBLE);
+        }
+
+        return this;
+    }
+
+
 
     public AlertEditTextDialog setCancelable(boolean cancel) {
         dialog.setCancelable(cancel);
@@ -160,13 +176,13 @@ public class AlertEditTextDialog {
             public void onClick(View v) {
 
                 String payPwd = mEtPayPwd.getText().toString().trim();
-                if (TextUtils.isEmpty(payPwd)) {
-                    ToastUtils.showShort("请输入支付密码");
-                    return;
-                }
-
+                String com = mEtPayPwd1.getText().toString();
                 KeyboardUtils.hideSoftInput(v);
-                confirmListenter.comfrim(payPwd);
+                if (TextUtils.isEmpty(payPwd)){
+                    confirmListenter.comfrim(com);
+                }else {
+                    confirmListenter.comfrim(payPwd);
+                }
                 dialog.dismiss();
                 KeyboardUtils.hideSoftInput(btn_pos);
             }

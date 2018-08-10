@@ -77,6 +77,8 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
     EditText etSort;
     @BindView(R.id.tv_release)
     TextView tvRelease;
+    @BindView(R.id.et_min_num)
+    EditText etMinNum;
 
     private ImagePresenter imagePresenter;
     private ClassifyPresenter classifyPresenter;
@@ -122,6 +124,7 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
                 etMinPrice.setText(goodsParam.getGoods_PriceMin());
                 etMaxPrice.setText(goodsParam.getGoods_PriceMax());
                 etSort.setText(goodsParam.getGoods_Sort());
+                etMinNum.setText(goodsParam.getGoods_LimitCount());
                 GlideuUtil.loadImageView(this,goodsParam.getGoods_ImaPath(),ivGoodsImg);
             }
         }
@@ -174,20 +177,33 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
                     ToastUtils.showShort("请输入最小价格");
                     return;
                 }
-                goodsParam.setGoods_PriceMin(etMinPrice.getText().toString());
+
 
                 if (TextUtils.isEmpty(etMaxPrice.getText().toString())){
                     ToastUtils.showShort("请输入最大价格");
                     return;
                 }
+
+
+                if (Double.valueOf(etMinPrice.getText().toString().trim()) > Double.valueOf(etMaxPrice.getText().toString())){
+                    ToastUtils.showShort("请输入最小价格不可超过最大价格");
+                    return;
+                }
+                goodsParam.setGoods_PriceMin(etMinPrice.getText().toString());
                 goodsParam.setGoods_PriceMax(etMaxPrice.getText().toString());
 
                 if (TextUtils.isEmpty(etSort.getText().toString())){
                     ToastUtils.showShort("请输入排序");
                     return;
                 }
+
                 goodsParam.setGoods_Sort(etSort.getText().toString());
-                showLoading("发布中..");
+                if (TextUtils.isEmpty(etMinNum.getText().toString())){
+                    ToastUtils.showShort("请输入最小购买");
+                    return;
+                }
+                goodsParam.setGoods_LimitCount(etMinNum.getText().toString());
+                showLoading("提交中..");
                 goodsPresenter.releaseGoods(goodsParam,type,this);
                 break;
             case R.id.rl_select_classify:

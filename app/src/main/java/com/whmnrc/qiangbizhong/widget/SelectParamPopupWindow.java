@@ -74,8 +74,8 @@ public class SelectParamPopupWindow extends PopupWindow {
         RelativeLayout relativeLayout = mRealContentLayout.findViewById(R.id.rl_count);
         RecyclerView recyclerView = mRealContentLayout.findViewById(R.id.rv_list1);
         RecyclerView recyclerView2 = mRealContentLayout.findViewById(R.id.rv_list2);
-        SpceAdapter spceAdapter = new SpceAdapter(activity);
-        spceAdapter2 = new SpceAdapter(activity);
+        SpceAdapter spceAdapter = new SpceAdapter(activity,0);
+        spceAdapter2 = new SpceAdapter(activity,1);
 
         GridLayoutManager gridLayoutManager1 = new GridLayoutManager(activity,4);
         recyclerView.setLayoutManager(gridLayoutManager1);
@@ -84,10 +84,12 @@ public class SelectParamPopupWindow extends PopupWindow {
             spceAdapter.setSelect(position);
             spceAdapter2.addFirstDataSet(specBean.getItems().get(position).getSpecItems());
             if (specBean.getItems().get(position).getSpecItems().size() > 0) {
-                spceAdapter2.setSelect(0);
-                textPrice.setText(StringUtil.weiString1(specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_Price()));
-                textSpec.setText("已选 " + specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_AttrName() + " " + specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_SpecName());
-                priceId = specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_ID();
+                if (specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_Stock() > 0) {
+                    spceAdapter2.setSelect(0);
+                    textPrice.setText(StringUtil.weiString1(specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_Price()));
+                    textSpec.setText("已选 " + specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_AttrName() + " " + specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_SpecName());
+                    priceId = specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_ID();
+                }
             }
         });
 
@@ -96,17 +98,19 @@ public class SelectParamPopupWindow extends PopupWindow {
         recyclerView2.setLayoutManager(gridLayoutManager);
         recyclerView2.setAdapter(spceAdapter2);
         spceAdapter2.setOnItemClickListener((view, item, position) -> {
-            spceAdapter2.setSelect(position);
             SpecBean.ItemsBean.SpecItemsBean specItemsBean = (SpecBean.ItemsBean.SpecItemsBean) item;
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getGoodsPrice_AttrName().equals(specItemsBean.getGoodsPrice_SpecName())){
-                    spceAdapter.setSelect(i);
-                    break;
+            if (specItemsBean.getGoodsPrice_Stock() > 0) {
+                spceAdapter2.setSelect(position);
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getGoodsPrice_AttrName().equals(specItemsBean.getGoodsPrice_SpecName())) {
+                        spceAdapter.setSelect(i);
+                        break;
+                    }
                 }
+                priceId = specItemsBean.getGoodsPrice_ID();
+                textPrice.setText(StringUtil.weiString1(specItemsBean.getGoodsPrice_Price()));
+                textSpec.setText("已选 " + specItemsBean.getGoodsPrice_AttrName() + " " + specItemsBean.getGoodsPrice_SpecName());
             }
-            priceId = specItemsBean.getGoodsPrice_ID();
-            textPrice.setText(StringUtil.weiString1(specItemsBean.getGoodsPrice_Price()));
-            textSpec.setText("已选 " + specItemsBean.getGoodsPrice_AttrName() + " " + specItemsBean.getGoodsPrice_SpecName());
         });
         if (specBean.getItems().size() > 0) {
             spceAdapter2.addFirstDataSet(specBean.getItems().get(0).getSpecItems());
@@ -270,9 +274,11 @@ public class SelectParamPopupWindow extends PopupWindow {
 
 
     class SpceAdapter extends BaseAdapter<SpecBean.ItemsBean.SpecItemsBean> {
+        private int type;
 
-        private SpceAdapter(Context context) {
+        private SpceAdapter(Context context,int type) {
             super(context);
+            this.type = type;
         }
 
 
@@ -287,14 +293,33 @@ public class SelectParamPopupWindow extends PopupWindow {
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, SpecBean.ItemsBean.SpecItemsBean item, int position) {
             TextView textView = holder.getView(R.id.tv_spec);
-            textView.setText(item.getGoodsPrice_AttrName());
-            if (item.isSelect()) {
-                textView.setSelected(true);
-                textView.setTextColor(getContext().getResources().getColor(R.color.goods_price));
-            } else {
-                textView.setSelected(false);
-                textView.setTextColor(getContext().getResources().getColor(R.color.tv_777));
+            textView.setBackgroundResource(R.drawable.bg_spec);
+            if (type == 0){
+                textView.setText(item.getGoodsPrice_AttrName());
+                if (item.isSelect()) {
+                    textView.setSelected(true);
+                    textView.setTextColor(getContext().getResources().getColor(R.color.goods_price));
+                } else {
+                    textView.setSelected(false);
+                    textView.setTextColor(getContext().getResources().getColor(R.color.tv_777));
+                }
+            }else {
+                textView.setText(item.getGoodsPrice_AttrName());
+                if (item.isSelect()) {
+                    textView.setSelected(true);
+                    textView.setTextColor(getContext().getResources().getColor(R.color.goods_price));
+                } else {
+                    textView.setSelected(false);
+                    if (item.getGoodsPrice_Stock() > 0) {
+                        textView.setTextColor(getContext().getResources().getColor(R.color.tv_777));
+                    }else {
+                        textView.setBackgroundResource(R.drawable.bu_sort_bg);
+                        textView.setTextColor(getContext().getResources().getColor(R.color.tv_999));
+                    }
+                }
             }
+
+
         }
 
         @Override
