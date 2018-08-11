@@ -11,18 +11,24 @@ public class YiMeiGoodsDetailBean {
 
 
     /**
-     * Goods : {"Goods_ID":"c3375c79-5637-4719-93de-a9f9b049417c","Goods_Name":"印度神油","Goods_BrandName":"ymd","Goods_Describe":"印度神油，是产自印度的一款按摩精油，又称阿育吠陀印度神油，是一种男女性保健品","Goods_ImaPath":"http://testaml.whmnx.com/Resource/PhotoFile/5696be82-583a-4605-8333-349eaeda7f74.png","Goods_Content":null,"Goods_LookCount":0,"Goods_MonthCount":0,"Goods_Sort":99,"Goods_IsOn":true,"Goods_IsBuy":true,"Goods_Type":"08868888-16f1-4c58-a428-2b01bd1b14a1","Goods_LimitCount":1,"StoreId":"16e074f3-7279-4abb-8ad2-5d42f3e8ac7c","Goods_Parameter":null,"Goods_ShopType":3,"Goods_PriceMin":400,"Goods_PriceMax":400}
-     * GoodsPrice : {"GoodsPrice_ID":"1dc38420-d1a9-41bd-a7a2-4451d005a2e3","GoodsPrice_AttrName":"10支装","GoodsPrice_SpecName":"盒","GoodsPrice_Price":400,"Goods_ID":"c3375c79-5637-4719-93de-a9f9b049417c","GoodsPrice_Sort":1,"GoodsPrice_Stock":1000,"GoodsPrice_TotalStock":1000,"GoodsPrice_VirtualPrice":800}
-     * StoreInfo : {"Id":"16e074f3-7279-4abb-8ad2-5d42f3e8ac7c","StoreName":"辛巴的店","StoreImage":"http://testaml.whmnx.com","LegalPerson":null,"IdentityCard":null,"CompanyName":null,"OrganizationCode":null,"Area":null,"Address":"湖北省武汉市洪山区珞喻路237号","IdentityCardImage1":null,"IdentityCardImage2":null,"LicenseImage":null,"Phone":null,"WeChartNum":null,"BankAccount":null,"BankName":null,"BankBranchName":null,"SettlementBankAccount":null,"SettlementBankName":null,"Explain":"1111111111111111最棒的","StoreHeadImage":"http://testaml.whmnx.com","UserId":null,"Status":0,"CreateDate":"0001-01-01 00:00:00","Reson":null,"Latitude":null,"Longitude":null}
+     * Goods : {"Goods_ID":"43ea6b21-647d-46de-87ac-bf3a4e9caeaa","Goods_Name":"韩式硅胶隆鼻","Goods_BrandName":"XGD","Goods_Describe":"医美服务商品","Goods_ImaPath":"http://192.168.1.157:8011/Resource/PhotoFile/a23f13ab-1f34-4127-97a3-2b8fe1fe42d1.png","Goods_Content":"<p><img src=\"/Resource/image/20180720/6366769421222335554786451.jpg\" alt=\"6366769421222335554786451.jpg\"/><\/p>","Goods_LookCount":0,"Goods_MonthCount":0,"Goods_Sort":99,"Goods_IsOn":true,"Goods_IsBuy":true,"Goods_Type":"317c693a-b6a4-44aa-b401-98dd9e95ef69","Goods_LimitCount":1,"StoreId":"f9641e98-a561-46f9-8cb9-aa9c43daabb0","Goods_Parameter":null,"Goods_ShopType":3,"Goods_PriceMin":168,"Goods_PriceMax":500}
+     * GoodsIsCollection : 0
+     * GoodsPrice : {"GoodsPrice_ID":"965344d2-f10a-4fb1-a204-5e7f693098b8","GoodsPrice_SpecName":"盒","GoodsPrice_AttrName":"一号","GoodsPrice_Price":200,"Goods_ID":"43ea6b21-647d-46de-87ac-bf3a4e9caeaa","GoodsPrice_Sort":1,"GoodsPrice_Stock":1000,"GoodsPrice_TotalStock":1000,"GoodsPrice_VirtualPrice":600,"GoodsPrice_PayMaxCount":0}
+     * StoreInfo : {"Id":"f9641e98-a561-46f9-8cb9-aa9c43daabb0","StoreName":"测试不要删除谢谢","StoreImage":"http://192.168.1.157:8011","LegalPerson":null,"IdentityCard":null,"CompanyName":null,"OrganizationCode":null,"Area":null,"Address":"湖北省武汉市洪山区珞喻路237号","IdentityCardImage1":null,"IdentityCardImage2":null,"LicenseImage":null,"Phone":null,"WeChartNum":null,"BankAccount":null,"BankName":null,"BankBranchName":null,"SettlementBankAccount":null,"SettlementBankName":null,"Explain":"1111111111111111最棒的","StoreHeadImage":"http://192.168.1.157:8011","UserId":null,"Status":0,"CreateDate":"0001-01-01 00:00:00","Reson":null,"Latitude":null,"Longitude":null}
+     * StoreIsCollection : 0
      * Evaluate : []
      * EvaluateCount : 0
+     * Banner : []
      */
 
     private GoodsBean Goods;
+    private int GoodsIsCollection;
     private GoodsPriceBean GoodsPrice;
     private StoreInfoBean StoreInfo;
+    private int StoreIsCollection;
     private int EvaluateCount;
     private List<CommentBean> Evaluate;
+    private List<YiMeiIndexBean.BannerBean> Banner;
 
     public GoodsBean getGoods() {
         return Goods;
@@ -30,6 +36,14 @@ public class YiMeiGoodsDetailBean {
 
     public void setGoods(GoodsBean Goods) {
         this.Goods = Goods;
+    }
+
+    public int getGoodsIsCollection() {
+        return GoodsIsCollection;
+    }
+
+    public void setGoodsIsCollection(int GoodsIsCollection) {
+        this.GoodsIsCollection = GoodsIsCollection;
     }
 
     public GoodsPriceBean getGoodsPrice() {
@@ -48,6 +62,14 @@ public class YiMeiGoodsDetailBean {
         this.StoreInfo = StoreInfo;
     }
 
+    public int getStoreIsCollection() {
+        return StoreIsCollection;
+    }
+
+    public void setStoreIsCollection(int StoreIsCollection) {
+        this.StoreIsCollection = StoreIsCollection;
+    }
+
     public int getEvaluateCount() {
         return EvaluateCount;
     }
@@ -64,26 +86,34 @@ public class YiMeiGoodsDetailBean {
         this.Evaluate = Evaluate;
     }
 
+    public List<YiMeiIndexBean.BannerBean> getBanner() {
+        return Banner;
+    }
+
+    public void setBanner(List<YiMeiIndexBean.BannerBean> Banner) {
+        this.Banner = Banner;
+    }
+
     public static class GoodsBean {
         /**
-         * Goods_ID : c3375c79-5637-4719-93de-a9f9b049417c
-         * Goods_Name : 印度神油
-         * Goods_BrandName : ymd
-         * Goods_Describe : 印度神油，是产自印度的一款按摩精油，又称阿育吠陀印度神油，是一种男女性保健品
-         * Goods_ImaPath : http://testaml.whmnx.com/Resource/PhotoFile/5696be82-583a-4605-8333-349eaeda7f74.png
-         * Goods_Content : null
+         * Goods_ID : 43ea6b21-647d-46de-87ac-bf3a4e9caeaa
+         * Goods_Name : 韩式硅胶隆鼻
+         * Goods_BrandName : XGD
+         * Goods_Describe : 医美服务商品
+         * Goods_ImaPath : http://192.168.1.157:8011/Resource/PhotoFile/a23f13ab-1f34-4127-97a3-2b8fe1fe42d1.png
+         * Goods_Content : <p><img src="/Resource/image/20180720/6366769421222335554786451.jpg" alt="6366769421222335554786451.jpg"/></p>
          * Goods_LookCount : 0
          * Goods_MonthCount : 0
          * Goods_Sort : 99
          * Goods_IsOn : true
          * Goods_IsBuy : true
-         * Goods_Type : 08868888-16f1-4c58-a428-2b01bd1b14a1
+         * Goods_Type : 317c693a-b6a4-44aa-b401-98dd9e95ef69
          * Goods_LimitCount : 1
-         * StoreId : 16e074f3-7279-4abb-8ad2-5d42f3e8ac7c
+         * StoreId : f9641e98-a561-46f9-8cb9-aa9c43daabb0
          * Goods_Parameter : null
          * Goods_ShopType : 3
-         * Goods_PriceMin : 400
-         * Goods_PriceMax : 400
+         * Goods_PriceMin : 168
+         * Goods_PriceMax : 500
          */
 
         private String Goods_ID;
@@ -91,7 +121,7 @@ public class YiMeiGoodsDetailBean {
         private String Goods_BrandName;
         private String Goods_Describe;
         private String Goods_ImaPath;
-        private Object Goods_Content;
+        private String Goods_Content;
         private int Goods_LookCount;
         private int Goods_MonthCount;
         private int Goods_Sort;
@@ -145,11 +175,11 @@ public class YiMeiGoodsDetailBean {
             this.Goods_ImaPath = Goods_ImaPath;
         }
 
-        public Object getGoods_Content() {
+        public String getGoods_Content() {
             return Goods_Content;
         }
 
-        public void setGoods_Content(Object Goods_Content) {
+        public void setGoods_Content(String Goods_Content) {
             this.Goods_Content = Goods_Content;
         }
 
@@ -252,26 +282,28 @@ public class YiMeiGoodsDetailBean {
 
     public static class GoodsPriceBean {
         /**
-         * GoodsPrice_ID : 1dc38420-d1a9-41bd-a7a2-4451d005a2e3
-         * GoodsPrice_AttrName : 10支装
+         * GoodsPrice_ID : 965344d2-f10a-4fb1-a204-5e7f693098b8
          * GoodsPrice_SpecName : 盒
-         * GoodsPrice_Price : 400
-         * Goods_ID : c3375c79-5637-4719-93de-a9f9b049417c
+         * GoodsPrice_AttrName : 一号
+         * GoodsPrice_Price : 200
+         * Goods_ID : 43ea6b21-647d-46de-87ac-bf3a4e9caeaa
          * GoodsPrice_Sort : 1
          * GoodsPrice_Stock : 1000
          * GoodsPrice_TotalStock : 1000
-         * GoodsPrice_VirtualPrice : 800
+         * GoodsPrice_VirtualPrice : 600
+         * GoodsPrice_PayMaxCount : 0
          */
 
         private String GoodsPrice_ID;
-        private String GoodsPrice_AttrName;
         private String GoodsPrice_SpecName;
+        private String GoodsPrice_AttrName;
         private int GoodsPrice_Price;
         private String Goods_ID;
         private int GoodsPrice_Sort;
         private int GoodsPrice_Stock;
         private int GoodsPrice_TotalStock;
         private int GoodsPrice_VirtualPrice;
+        private int GoodsPrice_PayMaxCount;
 
         public String getGoodsPrice_ID() {
             return GoodsPrice_ID;
@@ -281,20 +313,20 @@ public class YiMeiGoodsDetailBean {
             this.GoodsPrice_ID = GoodsPrice_ID;
         }
 
-        public String getGoodsPrice_AttrName() {
-            return GoodsPrice_AttrName;
-        }
-
-        public void setGoodsPrice_AttrName(String GoodsPrice_AttrName) {
-            this.GoodsPrice_AttrName = GoodsPrice_AttrName;
-        }
-
         public String getGoodsPrice_SpecName() {
             return GoodsPrice_SpecName;
         }
 
         public void setGoodsPrice_SpecName(String GoodsPrice_SpecName) {
             this.GoodsPrice_SpecName = GoodsPrice_SpecName;
+        }
+
+        public String getGoodsPrice_AttrName() {
+            return GoodsPrice_AttrName;
+        }
+
+        public void setGoodsPrice_AttrName(String GoodsPrice_AttrName) {
+            this.GoodsPrice_AttrName = GoodsPrice_AttrName;
         }
 
         public int getGoodsPrice_Price() {
@@ -344,13 +376,21 @@ public class YiMeiGoodsDetailBean {
         public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
             this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
         }
+
+        public int getGoodsPrice_PayMaxCount() {
+            return GoodsPrice_PayMaxCount;
+        }
+
+        public void setGoodsPrice_PayMaxCount(int GoodsPrice_PayMaxCount) {
+            this.GoodsPrice_PayMaxCount = GoodsPrice_PayMaxCount;
+        }
     }
 
     public static class StoreInfoBean {
         /**
-         * Id : 16e074f3-7279-4abb-8ad2-5d42f3e8ac7c
-         * StoreName : 辛巴的店
-         * StoreImage : http://testaml.whmnx.com
+         * Id : f9641e98-a561-46f9-8cb9-aa9c43daabb0
+         * StoreName : 测试不要删除谢谢
+         * StoreImage : http://192.168.1.157:8011
          * LegalPerson : null
          * IdentityCard : null
          * CompanyName : null
@@ -368,7 +408,7 @@ public class YiMeiGoodsDetailBean {
          * SettlementBankAccount : null
          * SettlementBankName : null
          * Explain : 1111111111111111最棒的
-         * StoreHeadImage : http://testaml.whmnx.com
+         * StoreHeadImage : http://192.168.1.157:8011
          * UserId : null
          * Status : 0
          * CreateDate : 0001-01-01 00:00:00

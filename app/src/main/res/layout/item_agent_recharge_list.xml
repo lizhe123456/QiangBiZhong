@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_bg"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/dm_10"
     android:layout_marginLeft="@dimen/dm_10"
-    android:layout_marginRight="@dimen/dm_10">
+    android:layout_marginRight="@dimen/dm_10"
+    android:background="@drawable/bg_recharge">
     <LinearLayout
         android:id="@+id/ll_price"
         android:layout_width="wrap_content"
@@ -21,6 +23,7 @@
             android:textSize="@dimen/dm_16"
             android:text="58,000"/>
         <ImageView
+            android:id="@+id/iv_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -33,7 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dm_1"
         android:layout_marginTop="@dimen/dm_3"
-        android:layout_marginBottom="@dimen/dm_3"/>
+        android:layout_marginBottom="@dimen/dm_3"
+        android:background="@color/tv_navigation"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

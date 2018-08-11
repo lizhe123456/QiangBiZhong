@@ -80,22 +80,23 @@
         android:layout_height="@dimen/dm_1"
         android:background="@color/divider_color"
         android:layout_marginLeft="@dimen/dm_15"
-        android:layout_marginRight="@dimen/dm_15"/>
+        android:layout_marginRight="@dimen/dm_15" />
     <EditText
         android:id="@+id/et_recharge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请手动输入充值数量"
+        android:hint="请输入购买数量"
         android:textColorHint="@color/tv_navigation"
         android:textColor="@color/tv_191"
         android:textSize="@dimen/dm_14"
-        android:inputType="text"
+        android:inputType="number"
         android:background="@null"
         android:padding="@dimen/dm_15"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dm_1"
-        android:background="@color/divider_color"/>
+        android:background="@color/divider_color"
+        android:layout_marginBottom="@dimen/dm_20"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
@@ -108,8 +109,10 @@
         android:background="@drawable/bg_btn_buy"
         android:textColor="@color/white"
         android:textSize="@dimen/dm_15"
+        android:gravity="center"
         android:layout_marginLeft="@dimen/dm_15"
         android:layout_marginRight="@dimen/dm_15"
-        android:layout_marginTop="@dimen/dm_30"/>
+        android:layout_marginTop="@dimen/dm_30"
+        android:text="确认支付"/>
 
 </LinearLayout>

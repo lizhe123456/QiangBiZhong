@@ -19,13 +19,14 @@
             android:textColor="@color/tv_navigation"
             android:text="库存"
             />
-        <EditText
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_sorck"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:textColor="@color/tv_000"
+            android:textColor="@color/tv_191"
             android:textSize="@dimen/dm_15"
-            android:background="@null"/>
+            android:layout_marginLeft="@dimen/dm_15" />
     </LinearLayout>
     <View
         android:layout_width="345dp"
@@ -47,12 +48,14 @@
             android:textSize="@dimen/dm_15"
             android:textColor="@color/tv_navigation"
             android:text="单价"/>
-        <EditText
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:textColor="@color/tv_000"
+            android:textColor="@color/tv_191"
             android:textSize="@dimen/dm_15"
+            android:layout_marginLeft="@dimen/dm_15"
             android:background="@null"/>
     </LinearLayout>
     <View
@@ -75,12 +78,14 @@
             android:textSize="@dimen/dm_15"
             android:textColor="@color/tv_navigation"
             android:text="折扣"/>
-        <EditText
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_zhe"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:textColor="@color/tv_000"
+            android:textColor="@color/tv_191"
             android:textSize="@dimen/dm_15"
+            android:layout_marginLeft="@dimen/dm_15"
             android:background="@null"/>
     </LinearLayout>
 </LinearLayout>

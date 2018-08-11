@@ -21,6 +21,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiSortBean;
+import com.whmnrc.qiangbizhong.presenter.me.CollectionPresenter;
 import com.whmnrc.qiangbizhong.presenter.yimei.StorePresenter;
 import com.whmnrc.qiangbizhong.ui.yimei.fragment.ComprehensiveFragment;
 import com.whmnrc.qiangbizhong.ui.yimei.fragment.PriceFragment;
@@ -61,6 +62,7 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
     ViewPager vpContent;
 
     private StorePresenter storePresenter;
+    private CollectionPresenter collectionPresenter;
 
     public double latitude;
     public double longitude;
@@ -68,6 +70,7 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
     private AMapLocationClient mapLocationClient = null;
     private boolean isFrist;
     private String sId;
+    private boolean isColl;
 
     AMapLocationListener mAMapLocationListener = new AMapLocationListener() {
         @Override
@@ -124,6 +127,7 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
         ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,titles,20,0);
         sId = getIntent().getStringExtra("sortId");
         storePresenter = new StorePresenter(this);
+        collectionPresenter = new CollectionPresenter(this);
         initLocation();
     }
 
@@ -150,9 +154,20 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
     }
 
 
-    @OnClick(R.id.iv_back)
-    public void onViewClicked() {
-        this.finish();
+    @OnClick({R.id.iv_back,R.id.tv_collection})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.tv_collection:
+                if (isColl){
+                    collectionPresenter.cannercollection(1,sId,this);
+                }else {
+                    collectionPresenter.cannercollection(1,sId,this);
+                }
+                break;
+            case R.id.iv_back:
+                this.finish();
+                break;
+        }
     }
 
     @Override

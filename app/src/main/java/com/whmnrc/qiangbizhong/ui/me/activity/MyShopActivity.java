@@ -52,13 +52,7 @@ public class MyShopActivity extends BaseActivity {
     protected void setData() {
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("代理商");
-        SparseArray<Fragment> fragments = new SparseArray<>();
-        SparseArray<String> strings = new SparseArray<>();
-        strings.append(0,"商品信息");
-        strings.append(1,"销售明细");
-        fragments.append(0, GoodsInfoFragment.newInstance());
-        fragments.append(1, ShopRFragment.newInstance());
-        ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,strings,40,0);
+
     }
 
 

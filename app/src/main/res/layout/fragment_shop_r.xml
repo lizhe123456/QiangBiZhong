@@ -11,25 +11,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dm_12"
-            android:textColor="@color/tv_navigation"/>
+            android:textColor="@color/tv_navigation"
+            android:text="订单"/>
         <TextView
+            android:id="@+id/tv_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dm_17"
             android:textColor="@color/tv_000"
-            android:layout_marginLeft="@dimen/dm_5"/>
+            android:layout_marginLeft="@dimen/dm_5"
+            android:text="7"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dm_12"
             android:textColor="@color/tv_navigation"
-            android:layout_marginLeft="@dimen/dm_50"/>
+            android:layout_marginLeft="@dimen/dm_50"
+            android:text="销售总额"/>
         <TextView
+            android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dm_17"
             android:textColor="@color/tv_000"
-            android:layout_marginLeft="@dimen/dm_5"/>
+            android:layout_marginLeft="@dimen/dm_5"
+            android:text="7"/>
     </LinearLayout>
     <include layout="@layout/layout_refresh"/>
 </LinearLayout>

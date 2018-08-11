@@ -8,6 +8,7 @@ import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiSortBean;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
+import com.whmnrc.qiangbizhong.util.UserManage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ public class StorePresenter {
         }
         map.put("PageIndex",page+"");
         map.put("PageCount","10");
-        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.getmedicalstorelist)+ "?storeId="+ sId + "&latitude=" + latitude + "&longitude=" + longitude, map, new OkhttpUtil.BeanCallback() {
+        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.getmedicalstorelist)+ "?storeId="+ sId+"&userId="+ UserManage.getInstance().getUserID() + "&latitude=" + latitude + "&longitude=" + longitude, map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
                 YiMeiSortBean yiMeiSortBean = GsonUtil.changeGsonToBean(data,YiMeiSortBean.class);

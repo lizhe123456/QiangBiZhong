@@ -104,4 +104,11 @@ public class PwdCheckUtil {
         }
     }
 
+    public static boolean isNumber(EditText edInput){
+        String txt = edInput.getText().toString();
+        Pattern p = Pattern.compile("[0-9]*");
+        Matcher m = p.matcher(txt);
+        return m.matches();
+    }
+
 }

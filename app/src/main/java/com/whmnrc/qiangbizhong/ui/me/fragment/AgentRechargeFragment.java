@@ -19,6 +19,8 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.AgentBean;
 import com.whmnrc.qiangbizhong.presenter.me.RechargePresenter;
+import com.whmnrc.qiangbizhong.ui.me.activity.RechargeCoreActivity;
+
 import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -80,20 +82,29 @@ public class AgentRechargeFragment extends BaseFragment implements RechargePrese
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(agentRechargeAdapter);
         refresh.setOnLoadMoreListener(refreshLayout -> {
-            rechargePresenter.agentshopQuery(sortName, sortType, keyWord, true, this);
+            rechargePresenter.agentshopQuery(sortName, sortType, keyWord, false, this);
         });
 
         refresh.setOnRefreshListener(refreshLayout -> {
-            rechargePresenter.agentshopQuery(sortName, sortType, keyWord, false, this);
+            rechargePresenter.agentshopQuery(sortName, sortType, keyWord, true, this);
         });
 
         etText.setOnEditorActionListener(this);
         agentRechargeAdapter.setAgentRechargeCall(new AgentRechargeCall() {
             @Override
             public void agentRecharge(AgentBean item) {
-
+                RechargeCoreActivity.start(getContext(),item.getId());
             }
         });
+        ivSort.setSelected(true);
+        tvSort.setTextColor(getResources().getColor(R.color.colorAccent));
+        ivStock.setSelected(false);
+        tvStock.setTextColor(getResources().getColor(R.color.tv_191));
+        ivPrice.setSelected(false);
+        tvPrice.setTextColor(getResources().getColor(R.color.tv_191));
+        sortName = "Sort";
+        sortType = "asc";
+        req();
     }
 
 
@@ -104,9 +115,9 @@ public class AgentRechargeFragment extends BaseFragment implements RechargePrese
                 ivSort.setSelected(true);
                 tvSort.setTextColor(getResources().getColor(R.color.colorAccent));
                 ivStock.setSelected(false);
-                tvSort.setTextColor(getResources().getColor(R.color.tv_191));
+                tvStock.setTextColor(getResources().getColor(R.color.tv_191));
                 ivPrice.setSelected(false);
-                tvSort.setTextColor(getResources().getColor(R.color.tv_191));
+                tvPrice.setTextColor(getResources().getColor(R.color.tv_191));
                 sortName = "Sort";
                 sortType = "asc";
                 break;
@@ -114,9 +125,9 @@ public class AgentRechargeFragment extends BaseFragment implements RechargePrese
                 ivSort.setSelected(false);
                 tvSort.setTextColor(getResources().getColor(R.color.tv_191));
                 ivStock.setSelected(true);
-                tvSort.setTextColor(getResources().getColor(R.color.colorAccent));
+                tvStock.setTextColor(getResources().getColor(R.color.colorAccent));
                 ivPrice.setSelected(false);
-                tvSort.setTextColor(getResources().getColor(R.color.tv_191));
+                tvPrice.setTextColor(getResources().getColor(R.color.tv_191));
                 sortName = "Stock";
                 sortType = "desc";
                 break;
@@ -124,9 +135,9 @@ public class AgentRechargeFragment extends BaseFragment implements RechargePrese
                 ivSort.setSelected(false);
                 tvSort.setTextColor(getResources().getColor(R.color.tv_191));
                 ivStock.setSelected(false);
-                tvSort.setTextColor(getResources().getColor(R.color.tv_191));
+                tvStock.setTextColor(getResources().getColor(R.color.tv_191));
                 ivPrice.setSelected(true);
-                tvSort.setTextColor(getResources().getColor(R.color.colorAccent));
+                tvPrice.setTextColor(getResources().getColor(R.color.colorAccent));
                 sortName = "Price";
                 sortType = "asc";
                 break;
@@ -140,7 +151,8 @@ public class AgentRechargeFragment extends BaseFragment implements RechargePrese
 
     @Override
     public void error() {
-
+        refresh.finishRefresh(false);
+        refresh.finishLoadMore(false);
     }
 
     public void showEmpty() {

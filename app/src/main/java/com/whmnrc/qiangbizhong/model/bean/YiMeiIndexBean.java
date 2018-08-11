@@ -12,7 +12,7 @@ public class YiMeiIndexBean {
 
     private List<MedicalListBean> MedicalList;
     private List<TypeListBean> TypeList;
-    private List<?> Banner;
+    private List<BannerBean> Banner;
 
     public List<MedicalListBean> getMedicalList() {
         return MedicalList;
@@ -30,11 +30,11 @@ public class YiMeiIndexBean {
         this.TypeList = TypeList;
     }
 
-    public List<?> getBanner() {
+    public List<BannerBean> getBanner() {
         return Banner;
     }
 
-    public void setBanner(List<?> Banner) {
+    public void setBanner(List<BannerBean> Banner) {
         this.Banner = Banner;
     }
 
@@ -429,6 +429,92 @@ public class YiMeiIndexBean {
 
         public void setStatus(int Status) {
             this.Status = Status;
+        }
+    }
+
+    public static class BannerBean {
+        /**
+         * Banner_ID : 69495428-b729-4a21-91b7-e0965f0e480f
+         * Banner_Url : http://192.168.1.157:8011/Resource/PhotoFile/7d965d0e-2734-4c29-a715-6ecead9d5426.png
+         * Banner_LinkUrl : /Resource/PhotoFile/7d965d0e-2734-4c29-a715-6ecead9d5426.png
+         * AppBanner_LikUrl : null
+         * Category : 医美首页轮播图
+         * Banner_Sort : 0
+         * Name : null
+         * Descriable : null
+         */
+
+        private String Banner_ID;
+        private String Banner_Url;
+        private String Banner_LinkUrl;
+        private Object AppBanner_LikUrl;
+        private String Category;
+        private int Banner_Sort;
+        private Object Name;
+        private Object Descriable;
+
+        public String getBanner_ID() {
+            return Banner_ID;
+        }
+
+        public void setBanner_ID(String Banner_ID) {
+            this.Banner_ID = Banner_ID;
+        }
+
+        public String getBanner_Url() {
+            return Banner_Url;
+        }
+
+        public void setBanner_Url(String Banner_Url) {
+            this.Banner_Url = Banner_Url;
+        }
+
+        public String getBanner_LinkUrl() {
+            return Banner_LinkUrl;
+        }
+
+        public void setBanner_LinkUrl(String Banner_LinkUrl) {
+            this.Banner_LinkUrl = Banner_LinkUrl;
+        }
+
+        public Object getAppBanner_LikUrl() {
+            return AppBanner_LikUrl;
+        }
+
+        public void setAppBanner_LikUrl(Object AppBanner_LikUrl) {
+            this.AppBanner_LikUrl = AppBanner_LikUrl;
+        }
+
+        public String getCategory() {
+            return Category;
+        }
+
+        public void setCategory(String Category) {
+            this.Category = Category;
+        }
+
+        public int getBanner_Sort() {
+            return Banner_Sort;
+        }
+
+        public void setBanner_Sort(int Banner_Sort) {
+            this.Banner_Sort = Banner_Sort;
+        }
+
+        public Object getName() {
+            return Name;
+        }
+
+        public void setName(Object Name) {
+            this.Name = Name;
+        }
+
+        public Object getDescriable() {
+            return Descriable;
+        }
+
+        public void setDescriable(Object Descriable) {
+            this.Descriable = Descriable;
         }
     }
 }

@@ -19,8 +19,8 @@
     <string name="rule">（1）每人每天必须支付了预付金才有抽奖资格 \n（2）每人每天必须支付了预付金才有抽奖资格 \n（3）每人每天必须支付了预付金才有抽奖资格</string>
     
     <!--api-->
-    <!--<string name="server_address">http://192.168.1.157:8010</string>-->
-    <string name="server_address">http://testaml.whmnx.com/Api</string>
+    <string name="server_address">http://192.168.1.157:8010</string>
+    <!--<string name="server_address">http://testaml.whmnx.com/Api</string>-->
     <!--注册-->
 
     <string name="register">/api/user/register</string>
@@ -204,10 +204,16 @@
     <string name="confirmused">/api/storemanager/confirmused</string>
     <!--发货-->
     <string name="sendgoods">/api/storemanager/sendgoods</string>
+    <!--代理商充值类型-->
+    <string name="querytype">/api/home/agentshop/querytype</string>
+    <string name="getexpressdelivery">/api/storemanager/getexpressdelivery</string>
+    <string name="getagentshopinfo">/api/home/getagentshopinfo</string>
+    <string name="getagentsalesrecord">/api/home/getagentsalesrecord</string>
+
 
 
     <string name="getcode_again">重新获取</string>
     <string name="timer_message">秒</string>
-    <string name="getexpressdelivery">/api/storemanager/getexpressdelivery</string>
+
 
 </resources>

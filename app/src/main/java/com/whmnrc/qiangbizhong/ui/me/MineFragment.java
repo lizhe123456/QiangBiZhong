@@ -18,6 +18,7 @@ import com.whmnrc.qiangbizhong.model.bean.MineBean;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AddressManageActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.AgentActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.CouponActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.GiveActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyCollectionActivity;
@@ -153,6 +154,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                             ShopEnter1Activity.start(mContext);
                         }else if (loginBean.getUserType() == 1){
                             //代理商
+                            AgentActivity.start(getContext());
                         }else if (loginBean.getUserType() == 2){
                             //发布商品
 //                            MyShopActivity.start(mContext);

@@ -9,6 +9,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.AgentBean;
 import com.whmnrc.qiangbizhong.model.bean.RechargeBean;
+import com.whmnrc.qiangbizhong.model.bean.RechargeCoreBean;
 import com.whmnrc.qiangbizhong.model.bean.RechargeRrecordBean;
 import com.whmnrc.qiangbizhong.model.parameter.AgentshopParam;
 import com.whmnrc.qiangbizhong.pay.alipay.AliPayTools;
@@ -119,6 +120,31 @@ public class RechargePresenter {
         });
     }
 
+    public void querytype(String id, QuerytypeListCall querytypeListCall){
+
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.querytype)
+                + "?keyValue=" + id, new HashMap<>(), new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                RechargeCoreBean rechargeCoreBean = GsonUtil.changeGsonToBean(data,RechargeCoreBean.class);
+                if (querytypeListCall != null){
+                    if (rechargeCoreBean != null) {
+                        querytypeListCall.querytype(rechargeCoreBean);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                if (querytypeListCall != null){
+                    querytypeListCall.error();
+                }
+            }
+        });
+
+    }
+
+
     public void pay(String orerId,RechargeCall rechargeCall){
         Map<String,String> map = new HashMap<>();
         map.put("orderNo",orerId);
@@ -194,5 +220,9 @@ public class RechargePresenter {
         void loadMore(List<RechargeRrecordBean> rechargeRrecordBeans);
     }
 
+    public interface QuerytypeListCall extends BaseCall{
+
+        void querytype(RechargeCoreBean rechargeCoreBean);
+    }
 
 }
