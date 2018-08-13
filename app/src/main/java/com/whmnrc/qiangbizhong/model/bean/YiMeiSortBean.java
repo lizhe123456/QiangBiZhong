@@ -17,6 +17,15 @@ public class YiMeiSortBean {
 
     private StoreInfoBean StoreInfo;
     private List<YiMeiGoodsBean> Goods;
+    private  int StoreIsCollection;
+
+    public int getStoreIsCollection() {
+        return StoreIsCollection;
+    }
+
+    public void setStoreIsCollection(int storeIsCollection) {
+        StoreIsCollection = storeIsCollection;
+    }
 
     public StoreInfoBean getStoreInfo() {
         return StoreInfo;

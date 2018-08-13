@@ -16,6 +16,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsDetailBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiIndexBean;
+import com.whmnrc.qiangbizhong.presenter.me.CollectionPresenter;
 import com.whmnrc.qiangbizhong.presenter.yimei.YiMeiPresenter;
 import com.whmnrc.qiangbizhong.ui.yimei.adpter.CommentAdapter;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
@@ -38,7 +39,7 @@ import butterknife.OnClick;
  * 医美详情
  */
 
-public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPresenter.MedicaldetailCall {
+public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPresenter.MedicaldetailCall, CollectionPresenter.CollectionCall{
 
 
     @BindView(R.id.iv_img)
@@ -84,6 +85,8 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
 
     private YiMeiGoodsDetailBean yiMeiGoodsDetailBean;
     private boolean isColl;
+    private boolean isSColl;
+    private CollectionPresenter collectionPresenter;
 
     public static void start(Context context, String goodsId) {
         Intent starter = new Intent(context, YiMeiGoodsDetailsActivity.class);
@@ -106,6 +109,7 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
         commentAdapter = new CommentAdapter(this);
         rvCommentList.setAdapter(commentAdapter);
         rvCommentList.setLayoutManager(new LinearLayoutManager(this));
+        collectionPresenter = new CollectionPresenter(this);
 
         //设置banner样式
         ivGoodsImg.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
@@ -148,7 +152,8 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
         tvTitle.setText(yiMeiGoodsDetailBean.getGoods().getGoods_Describe());
         tvLoction.setText(yiMeiGoodsDetailBean.getStoreInfo().getAddress());
         tvOldPrice.setText("原价：" + yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_VirtualPrice() + "");
-        tvPrice.setText(yiMeiGoodsDetailBean.getGoods().getGoods_PriceMin() + "-" + yiMeiGoodsDetailBean.getGoods().getGoods_PriceMax());
+        tvPrice.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
+        tvNowMoeny.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
 
         GlideuUtil.loadImageView(this, yiMeiGoodsDetailBean.getStoreInfo().getStoreHeadImage(), ivImg);
         tvAddress.setText(yiMeiGoodsDetailBean.getStoreInfo().getAddress());
@@ -156,8 +161,6 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
         commentAdapter.addFirstDataSet(yiMeiGoodsDetailBean.getEvaluate());
         tvCommentCount.setText("看看大家怎么说（" + yiMeiGoodsDetailBean.getEvaluateCount() + "）");
 
-
-        tvNowMoeny.setText(String.valueOf(yiMeiGoodsDetailBean.getGoods().getGoods_PriceMin()));
 
         if (yiMeiGoodsDetailBean.getGoodsIsCollection() == 1){
             isColl = true;
@@ -168,9 +171,11 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
         }
 
         if (yiMeiGoodsDetailBean.getStoreIsCollection() == 1){
+            isSColl = true;
             tvCollection.setSelected(true);
             tvCollection.setText("已收藏");
         }else {
+            isSColl = false;
             tvCollection.setSelected(false);
             tvCollection.setText("收藏");
         }
@@ -178,12 +183,44 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
     }
 
 
-    @OnClick({R.id.rl_sort})
+    @OnClick({R.id.rl_sort,R.id.tv_collection,R.id.iv_coll,R.id.tv_buy})
     public void onViewClicked(View v) {
         switch (v.getId()){
             case R.id.rl_sort:
                 YiMeiDetailsActivity.start(this,yiMeiGoodsDetailBean.getStoreInfo().getId());
                 break;
+            case R.id.tv_collection:
+                if (isSColl){
+                    isSColl = false;
+                    tvCollection.setSelected(false);
+                    tvCollection.setText("收藏");
+                    collectionPresenter.cannercollection(1,yiMeiGoodsDetailBean.getStoreInfo().getId(),this);
+                }else {
+                    isSColl = true;
+                    collectionPresenter.addcollection(3,yiMeiGoodsDetailBean.getStoreInfo().getId(),1,this);
+                    tvCollection.setText("已收藏");
+                    tvCollection.setSelected(true);
+                }
+                break;
+            case R.id.iv_coll:
+                if (isColl){
+                    isColl = false;
+                    icColl.setImageResource(R.drawable.ic_collection_bott);
+                    collectionPresenter.cannercollection(0,yiMeiGoodsDetailBean.getGoods().getGoods_ID(),this);
+                }else {
+                    isColl = true;
+                    icColl.setImageResource(R.drawable.ic_collection_bottom);
+                    collectionPresenter.addcollection(3,yiMeiGoodsDetailBean.getGoods().getGoods_ID(),0,this);
+                }
+                break;
+            case R.id.tv_buy:
+                ConfirmOrderActivity.start(this,yiMeiGoodsDetailBean);
+                break;
         }
+    }
+
+    @Override
+    public void cS() {
+
     }
 }

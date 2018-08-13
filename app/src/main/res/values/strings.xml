@@ -210,10 +210,20 @@
     <string name="getagentshopinfo">/api/home/getagentshopinfo</string>
     <string name="getagentsalesrecord">/api/home/getagentsalesrecord</string>
 
+    <!--医美-->
+    <!--医美下单-->
+    <string name="submitmedicalorder">/api/app/submitmedicalorder</string>
+    <!--代付用户查询-->
+    <string name="getagentuserid">/api/app/getagentuserid</string>
+    <string name="orderdetailmedical">/api/home/orderdetailmedical</string>
+    <string name="canneragentpay">/api/app/canneragentpay</string>
+    <string name="cannerorder">/api/app/cannerorder</string>
+    <string name="paymedicalorder">/api/app/paymedicalorder</string>
 
 
     <string name="getcode_again">重新获取</string>
     <string name="timer_message">秒</string>
+
 
 
 </resources>

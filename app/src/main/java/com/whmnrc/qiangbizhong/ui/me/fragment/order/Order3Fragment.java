@@ -1,9 +1,12 @@
 package com.whmnrc.qiangbizhong.ui.me.fragment.order;
 
 
+import android.view.View;
+
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
+import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -20,18 +23,17 @@ public class Order3Fragment extends BaseOrderFragment implements OrderPresenter.
         mAdapter.setOnOrderListener(new OnOrderListenerAdapter(){
             @Override
             public void collectGoods(OrderListBean item) {
-                new SweetAlertDialog(mContext)
-                        .setTitleText("提示")
-                        .setContentText("确定要收货吗？")
-                        .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+                new AlertDialog(mContext).builder()
+                        .setTitle("提示")
+                        .setMsg("确定要收货吗？")
+                        .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismiss();
+                            public void onClick(View v) {
+
                             }
-                        }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                        }).setNegativeButton("确认", new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
+                    public void onClick(View sweetAlertDialog) {
                         showLoading("收货中..");
                         orderPresenter.collectgoods(item.getOrder_ID(), Order3Fragment.this);
                     }

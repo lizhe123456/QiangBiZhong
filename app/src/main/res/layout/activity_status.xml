@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dm_100"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_s"/>
 
     <TextView
         android:id="@+id/tv_state"
@@ -18,5 +19,8 @@
         android:textSize="@dimen/dm_12"
         android:textColor="@color/tv_navigation"
         android:text="您入驻的申请提交失败，请重新提交！"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dm_10"/>
+
+
 </LinearLayout>

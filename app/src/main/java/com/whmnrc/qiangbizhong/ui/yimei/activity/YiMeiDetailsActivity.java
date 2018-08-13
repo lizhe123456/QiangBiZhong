@@ -41,7 +41,7 @@ import butterknife.OnClick;
  * 商铺详情
  */
 
-public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter.MedicalStoreCall{
+public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter.MedicalStoreCall, CollectionPresenter.CollectionCall{
 
 
     @BindView(R.id.iv_back)
@@ -159,9 +159,11 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
         switch (view.getId()){
             case R.id.tv_collection:
                 if (isColl){
+
                     collectionPresenter.cannercollection(1,sId,this);
                 }else {
-                    collectionPresenter.cannercollection(1,sId,this);
+
+                    collectionPresenter.addcollection(3,sId,1,this);
                 }
                 break;
             case R.id.iv_back:
@@ -180,7 +182,15 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
         tvYimeiName.setText(yiMeiSortBean.getStoreInfo().getStoreName());
         tvAddress.setText(yiMeiSortBean.getStoreInfo().getAddress());
         GlideuUtil.loadImageView(this,yiMeiSortBean.getStoreInfo().getStoreImage(),ivImg);
-
+        if (yiMeiSortBean.getStoreIsCollection() == 1){
+            isColl = true;
+            tvCollection.setSelected(true);
+            tvCollection.setText("已收藏");
+        }else {
+            isColl = false;
+            tvCollection.setSelected(false);
+            tvCollection.setText("收藏");
+        }
     }
 
     @Override
@@ -189,4 +199,12 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
     }
 
 
+    @Override
+    public void cS() {
+        if (isColl){
+            isColl = false;
+        }else {
+            isColl = true;
+        }
+    }
 }

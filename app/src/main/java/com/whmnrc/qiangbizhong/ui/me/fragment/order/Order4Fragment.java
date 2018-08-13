@@ -44,18 +44,17 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
 
             @Override
             public void cancel(OrderListBean item) {
-                new SweetAlertDialog(mContext)
-                        .setTitleText("提示")
-                        .setContentText("确定要取消吗？")
-                        .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+                new AlertDialog(mContext).builder()
+                        .setTitle("提示")
+                        .setMsg("确定要取消吗？")
+                        .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismiss();
+                            public void onClick(View v) {
+
                             }
-                        }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                        }).setNegativeButton("确认", new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
+                    public void onClick(View sweetAlertDialog) {
                         showLoading("取消中..");
                         orderPresenter.abandon(item.getRushRecord().getRushId(), Order4Fragment.this);
                     }
@@ -65,18 +64,18 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
 
             @Override
             public void collectGoods(OrderListBean item) {
-                new SweetAlertDialog(mContext)
-                        .setTitleText("提示")
-                        .setContentText("确定要收货吗？")
-                        .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+
+                new AlertDialog(mContext).builder()
+                        .setTitle("提示")
+                        .setMsg("确定要收货吗？")
+                        .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismiss();
+                            public void onClick(View v) {
+
                             }
-                        }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                        }).setNegativeButton("确认", new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
+                    public void onClick(View sweetAlertDialog) {
                         showLoading("收货中..");
                         orderPresenter.collectgoods(item.getOrder_ID(), Order4Fragment.this);
                     }
@@ -87,27 +86,25 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
             @Override
             public void payClick(OrderListBean item) {
                 orderListBean = item;
-                new SweetAlertDialog(mContext)
-                        .setTitleText("提示")
-                        .setContentText("确定要支付吗？")
-                        .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+                new AlertDialog(mContext).builder()
+                        .setTitle("提示")
+                        .setMsg("确定要支付吗？")
+                        .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismiss();
+                            public void onClick(View v) {
+
                             }
-                        }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                        }).setNegativeButton("确认", new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
-                        PayDialogUtil.payDialogShow(mContext, new AlertEditTextDialog.ConfirmListenter(){
+                    public void onClick(View sweetAlertDialog) {
+                        PayDialogUtil.payDialogShow(mContext, new AlertEditTextDialog.ConfirmListenter() {
 
                             @Override
                             public void comfrim(String content) {
                                 showLoading("支付中..");
-                                orderPresenter.yzPass(content,Order4Fragment.this);
+                                orderPresenter.yzPass(content, Order4Fragment.this);
                             }
                         });
-
                     }
                 }).show();
             }
@@ -120,7 +117,7 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
                         .setPositiveButton("确认", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                orderPresenter.cannerrefund(item.getOrder_ID(),Order4Fragment.this);
+                                orderPresenter.cannerrefund(item.getOrder_ID(), Order4Fragment.this);
                             }
                         }).show();
 
@@ -142,7 +139,7 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
                         .setPositive1Button("确认", new AlertEditTextDialog.ConfirmListenter() {
                             @Override
                             public void comfrim(String content) {
-                                orderPresenter.submitrefund(item.getOrder_ID(),content,Order4Fragment.this);
+                                orderPresenter.submitrefund(item.getOrder_ID(), content, Order4Fragment.this);
                             }
                         }).show();
 
@@ -150,7 +147,7 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
 
             @Override
             public void evaluate(OrderListBean item) {
-                EvaluateActivity.start(Order4Fragment.this,item);
+                EvaluateActivity.start(Order4Fragment.this, item);
             }
         });
     }
@@ -182,19 +179,17 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
 
     @Override
     public void recharge() {
-        new SweetAlertDialog(mContext)
-                .setTitleText("提示")
-                .setContentText("余额不足,请充值！")
-                .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+        new AlertDialog(mContext).builder()
+                .setTitle("提示")
+                .setMsg("余额不足,请充值！")
+                .setNegativeButton("取消", new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
+                    public void onClick(View sweetAlertDialog) {
                     }
-                }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                }).setPositiveButton("确认", new View.OnClickListener() {
             @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                sweetAlertDialog.dismiss();
-                AccountRechargeActivity.start(mContext,1);
+            public void onClick(View sweetAlertDialog) {
+                AccountRechargeActivity.start(mContext, 1);
             }
         }).show();
     }

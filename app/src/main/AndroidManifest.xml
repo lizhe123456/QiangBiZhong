@@ -213,6 +213,12 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.me.activity.AgentActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.yimei.activity.ConfirmOrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.yimei.activity.SubstitutePayActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.yimei.activity.YiMeiOrderDetailsActivity"
+            android:screenOrientation="portrait"/>
         <service android:name="com.amap.api.location.APSService"/>
     </application>
 
