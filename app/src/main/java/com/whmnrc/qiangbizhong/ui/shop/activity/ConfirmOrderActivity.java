@@ -23,6 +23,7 @@ import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.Order4Fragment;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
+import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
 import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
 
@@ -124,18 +125,17 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
                 SelectAddressActivity.start(this);
                 break;
             case R.id.tv_tijiao:
-                new SweetAlertDialog(this)
-                        .setTitleText("提示")
-                        .setContentText("确定支付预约金"+(goodsRushinfoBean == null ? awardBeanInfo.getBond() : goodsRushinfoBean.getBond())+"?")
-                        .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+                new AlertDialog(this).builder()
+                        .setTitle("提示")
+                        .setMsg("确定支付预约金"+(goodsRushinfoBean == null ? awardBeanInfo.getBond() : goodsRushinfoBean.getBond())+"?")
+                        .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismiss();
+                            public void onClick(View sweetAlertDialog) {
+
                             }
-                        }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                        }).setPositiveButton("确认", new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
+                    public void onClick(View sweetAlertDialog) {
                         PayDialogUtil.payDialogShow(ConfirmOrderActivity.this, new AlertEditTextDialog.ConfirmListenter(){
 
                             @Override

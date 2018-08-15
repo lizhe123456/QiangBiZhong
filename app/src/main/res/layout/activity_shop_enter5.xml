@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
     <include layout="@layout/layout_title"/>
     <LinearLayout
         android:id="@+id/ll_bz"
@@ -30,19 +29,22 @@
                 android:orientation="horizontal">
                 <View
                     android:layout_width="@dimen/dm_30"
-                    android:layout_height="@dimen/dm_1"
+                    android:layout_height="@dimen/dm_3"
                     android:layout_marginRight="@dimen/dm_10"
                     android:layout_weight="1"
+                    android:layerType="software"
+                    android:background="@drawable/shape_line_dash"
                     android:layout_gravity="center_vertical"/>
                 <ImageView
                     android:id="@+id/iv_bz1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_img_btn_select"/>
+                    android:src="@drawable/ic_img_select"/>
                 <View
                     android:layout_width="@dimen/dm_30"
                     android:layout_height="@dimen/dm_3"
                     android:layout_weight="1"
+                    android:layerType="software"
                     android:background="@drawable/shape_line_dash"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dm_10"/>
@@ -73,6 +75,7 @@
                     android:layout_width="@dimen/dm_30"
                     android:layout_weight="1"
                     android:layout_height="@dimen/dm_3"
+                    android:layerType="software"
                     android:background="@drawable/shape_line_dash"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="@dimen/dm_10"/>
@@ -80,11 +83,12 @@
                     android:id="@+id/iv_bz2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_img_btn_select"/>
+                    android:src="@drawable/ic_img_select"/>
                 <View
                     android:layout_width="@dimen/dm_30"
                     android:layout_weight="1"
                     android:layout_height="@dimen/dm_3"
+                    android:layerType="software"
                     android:background="@drawable/shape_line_dash"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dm_10"/>
@@ -115,6 +119,7 @@
                     android:layout_width="@dimen/dm_30"
                     android:layout_height="@dimen/dm_3"
                     android:layout_weight="1"
+                    android:layerType="software"
                     android:background="@drawable/shape_line_dash"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="@dimen/dm_10"/>
@@ -122,11 +127,12 @@
                     android:id="@+id/iv_bz3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_img_btn_select"/>
+                    android:src="@drawable/ic_img_select"/>
                 <View
                     android:layout_width="@dimen/dm_30"
                     android:layout_height="@dimen/dm_3"
                     android:layout_weight="1"
+                    android:layerType="software"
                     android:background="@drawable/shape_line_dash"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dm_10"/>
@@ -157,6 +163,7 @@
                     android:layout_width="@dimen/dm_30"
                     android:layout_height="@dimen/dm_3"
                     android:layout_weight="1"
+                    android:layerType="software"
                     android:background="@drawable/shape_line_dash"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="@dimen/dm_10"/>
@@ -167,10 +174,11 @@
                     android:src="@drawable/ic_img_select"/>
                 <View
                     android:layout_width="@dimen/dm_30"
-                    android:layout_height="@dimen/dm_1"
+                    android:layout_height="@dimen/dm_3"
                     android:layout_marginLeft="@dimen/dm_10"
-
+                    android:background="@drawable/shape_line_dash"
                     android:layout_weight="1"
+                    android:layerType="software"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <TextView

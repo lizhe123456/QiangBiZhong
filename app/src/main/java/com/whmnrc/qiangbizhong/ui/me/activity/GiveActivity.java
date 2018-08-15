@@ -9,11 +9,17 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.GiveBean;
+import com.whmnrc.qiangbizhong.model.bean.GiveRBean;
+import com.whmnrc.qiangbizhong.presenter.me.GivePresenter;
+import com.whmnrc.qiangbizhong.util.UserManage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +33,7 @@ import butterknife.OnClick;
  * 赠送记录
  */
 
-public class GiveActivity extends BaseActivity {
+public class GiveActivity extends BaseActivity implements GivePresenter.GiveListCall{
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -40,6 +46,7 @@ public class GiveActivity extends BaseActivity {
     ViewStub vsEmpty;
 
     private GiveAdapter mGiveAdapter;
+    private GivePresenter givePresenter;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, GiveActivity.class);
@@ -58,13 +65,25 @@ public class GiveActivity extends BaseActivity {
         mGiveAdapter = new GiveAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mGiveAdapter);
+        givePresenter = new GivePresenter(this);
+        showLoading("加载中..");
+        givePresenter.getgivelist(true,this);
 
-        List<GiveBean> list = new ArrayList<>();
-        list.add(new GiveBean("【皮肤】【瑞月雅水光针2ml】美莱肤质，提亮肤色",2,1,"2018.06.08 14:31:23"));
-        list.add(new GiveBean("瑞月雅水光针2ml】美莱肤质，提亮肤色瑞月雅水光\n" +
-                "针2ml】美莱肤质，提亮肤色",1,1,"2018.06.08 14:31:23"));
+        refresh.setOnLoadMoreListener(refreshLayout -> {
+            givePresenter.getgivelist(false,this);
+        });
 
-        mGiveAdapter.addFirstDataSet(list);
+        refresh.setOnRefreshListener(refreshLayout -> {
+            givePresenter.getgivelist(true,this);
+        });
+
+        mGiveAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Object item, int position) {
+                GiveRBean giveRBean = (GiveRBean) item;
+                GiveDetailActivity.start(GiveActivity.this,giveRBean.getGiveId());
+            }
+        });
 
     }
 
@@ -74,30 +93,65 @@ public class GiveActivity extends BaseActivity {
         this.finish();
     }
 
-    public class GiveAdapter extends BaseAdapter<GiveBean>{
+    @Override
+    public void error() {
+        refresh.finishRefresh(false);
+        refresh.finishLoadMore(false);
+    }
+
+    public void showEmpty() {
+        if (vsEmpty.getParent() != null) {
+            View view = vsEmpty.inflate();
+            ImageView imageView = view.findViewById(R.id.iv_empty);
+            TextView textView = view.findViewById(R.id.tv_text);
+            imageView.setImageResource(R.drawable.ic_empty_public);
+            textView.setText("");
+            textView.setTextColor(getResources().getColor(R.color.tv_navigation));
+        }
+        vsEmpty.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void getGiveList(List<GiveRBean> giveRBeans) {
+        if (giveRBeans.size() == 0){
+            showEmpty();
+        }else {
+            vsEmpty.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+        mGiveAdapter.addFirstDataSet(giveRBeans);
+        refresh.finishRefresh(true);
+
+    }
+
+    @Override
+    public void loadMore(List<GiveRBean> giveRBeans) {
+        mGiveAdapter.addMoreDataSet(giveRBeans);
+        refresh.finishLoadMore(true);
+    }
+
+    public class GiveAdapter extends BaseAdapter<GiveRBean>{
 
         public GiveAdapter(Context context) {
             super(context);
         }
 
         @Override
-        protected void bindDataToItemView(BaseViewHolder holder, GiveBean item, int position) {
-            holder.setText(R.id.tv_title,item.getTitle()).setText(R.id.tv_time,item.getTime());
-            if (item.getZs() - item.getYl() == 0){
-                holder.setVisible(R.id.tv_ly,false);
-                holder.setVisible(R.id.tv_zs,false);
+        protected void bindDataToItemView(BaseViewHolder holder, GiveRBean item, int position) {
+            holder.setText(R.id.tv_title,item.getGoods_Name()).setText(R.id.tv_time,item.getCreateDate());
+            if (item.getFromUserId().equals(UserManage.getInstance().getUserID())){
+                //赠出
+                holder.setText(R.id.tv_count,"赠出");
+
             }else {
-                holder.setVisible(R.id.tv_ly,true);
-                holder.setVisible(R.id.tv_zs,true);
-                holder.setText(R.id.tv_ly,String.valueOf(item.getYl()));
-                holder.setText(R.id.tv_zs,"/"+item.getYl()+"个");
+                //接收
+                holder.setText(R.id.tv_count,"接收");
             }
-
-
         }
 
         @Override
-        protected int getItemViewLayoutId(int position, GiveBean item) {
+        protected int getItemViewLayoutId(int position, GiveRBean item) {
             return R.layout.item_give_r;
         }
     }

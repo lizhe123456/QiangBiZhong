@@ -21,6 +21,7 @@ import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
+import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.HashMap;
@@ -512,6 +513,39 @@ public class OrderPresenter {
             @Override
             public void onFailure(int code, String errorMsg) {
                 StatusActivity.start(context,0,"支付失败，请重试","支付失败");
+            }
+        });
+    }
+
+    public void giveorder(String orderId,String giveUserId,String desc){
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.giveorder) + "?orderId="
+                + orderId + "&fromUserId=" + UserManage.getInstance().getUserID() + "&giveUserId=" + giveUserId + "&context=" + desc, new HashMap<>(), new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                StatusActivity.start(context,1,"赠送成功，请到赠送记录里查看","赠送成功");
+                if (TextUtils.isEmpty(data)){
+                    return;
+                }
+                ToastUtils.showShort(data);
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+                StatusActivity.start(context,0,"赠送失败，请重试","赠送失败");
+            }
+        });
+    }
+
+    public void confirmused(String orderId,String sid){
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.confirmused) + "?orderId="
+                + orderId + "&storeId=" + sid , new HashMap<>(), new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                ToastUtils.showShort("操作成功");
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
             }
         });
     }

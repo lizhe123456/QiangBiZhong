@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <!--允许程序访问WiFi网络信息-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!--允许程序读写手机状态和身份-->
@@ -100,9 +101,25 @@
         <activity android:name=".ui.home.activity.UnveiledActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.shop.activity.ShopDetailsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="launchapp" android:pathPrefix="/flashSaleDetail"
+                    tools:ignore="AppLinkUrlError" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.shop.activity.FlashSaleDetailsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="launchapp" android:pathPrefix="/flashSaleDetail"
+                    tools:ignore="AppLinkUrlError" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.me.activity.MyOrderActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.me.activity.UserInfoActivity"
@@ -114,7 +131,15 @@
         <activity android:name=".ui.shop.activity.SelectAddressActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.home.activity.AwardDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="launchapp" android:pathPrefix="/awardDetail"
+                    tools:ignore="AppLinkUrlError" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.home.activity.RushRecordActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.me.activity.UpdatePassV2Activity"
@@ -147,7 +172,15 @@
         <activity android:name=".ui.yimei.activity.CommentListActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.yimei.activity.YiMeiGoodsDetailsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="launchapp" android:pathPrefix="/yimei"
+                    tools:ignore="AppLinkUrlError" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.shopping.activity.ShopConfirmOrderActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.shopping.activity.EvaluateActivity"
@@ -218,6 +251,19 @@
         <activity android:name=".ui.yimei.activity.SubstitutePayActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.yimei.activity.YiMeiOrderDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.home.activity.NewsDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.home.activity.DaiPayActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.yimei.activity.GiveActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".ui.me.activity.GiveDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.me.activity.SecondActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.QuestionnaireInvestigationActivity"
             android:screenOrientation="portrait"/>
         <service android:name="com.amap.api.location.APSService"/>
     </application>

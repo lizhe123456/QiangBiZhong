@@ -4,38 +4,26 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.GoodsManageBean;
-import com.whmnrc.qiangbizhong.model.bean.ShopDetailsBean;
-import com.whmnrc.qiangbizhong.model.parameter.GoodsParam;
 import com.whmnrc.qiangbizhong.presenter.shop.GoodsPresenter;
 import com.whmnrc.qiangbizhong.ui.me.activity.GoodsManageActivity;
 import com.whmnrc.qiangbizhong.ui.me.adapter.GoodManageAdapter;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopDetailsActivity;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Company 武汉麦诺软创
@@ -182,6 +170,10 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
     //上架商品
     @Override
     public void exhibitGoods(GoodsManageBean item) {
+        if (item.getSpecCount() == 0){
+            ToastUtils.showShort("此商品暂无规格，请先编辑规格");
+            return;
+        }
         new AlertDialog(getContext()).builder().setMsg("本次商品确定上架吗？")
                 .setNegativeButton("取消", new View.OnClickListener() {
                     @Override

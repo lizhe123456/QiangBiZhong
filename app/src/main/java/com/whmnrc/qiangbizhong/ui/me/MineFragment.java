@@ -1,20 +1,26 @@
 package com.whmnrc.qiangbizhong.ui.me;
 
+import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.blankj.utilcode.util.ToastUtils;
 import com.gyf.barlibrary.ImmersionBar;
+import com.luck.picture.lib.permissions.RxPermissions;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.LoginBean;
 import com.whmnrc.qiangbizhong.model.bean.MineBean;
+import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AddressManageActivity;
@@ -22,8 +28,8 @@ import com.whmnrc.qiangbizhong.ui.me.activity.AgentActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.CouponActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.GiveActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyCollectionActivity;
-import com.whmnrc.qiangbizhong.ui.me.activity.MyShopActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.OpinionBackActivity;
+import com.whmnrc.qiangbizhong.ui.me.activity.SecondActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.ShapeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.UserInfoActivity;
 import com.whmnrc.qiangbizhong.ui.me.adapter.OderMenuAdapter;
@@ -33,6 +39,7 @@ import com.whmnrc.qiangbizhong.ui.shop.shopenter.ShopEnter1Activity;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
+import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.RoundedImageView;
 import java.util.List;
 import butterknife.BindView;
@@ -65,6 +72,8 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
     ImmersionBar mImmersionBar;
 
     private LoginBean loginBean;
+    private static final int REQUEST_CODE = 101;
+    private OrderPresenter orderPresenter;
 
     public static MineFragment newInstance() {
         Bundle args = new Bundle();
@@ -76,12 +85,15 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
     @Override
     public void onResume() {
         super.onResume();
-        update();
+        if (UserManage.getInstance().getLoginBean() != null) {
+            UserManage.getInstance().getUserInfo(MineFragment.this);
+        }else {
+            refreshLayout.finishRefresh(3000);
+        }
 
     }
 
     public void update(){
-        loginBean = UserManage.getInstance().getLoginBean();
         MineBean mineBean = new MineBean();
         if (loginBean != null){
             tvUsername.setText(loginBean.getUserInfo_NickName());
@@ -100,6 +112,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
 
         initMenu(mineBean.getMenuBeans());
         initOption(mineBean.getItemBeans());
+        orderPresenter = new OrderPresenter(getContext());
     }
 
     @Override
@@ -141,12 +154,32 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                 }
                 switch (position){
                     case 0:
-                        //赠送记录
-                        GiveActivity.start(mContext);
+                        if (loginBean.getUserType() == 2){
+//                            SanActivity.start(mContext);
+                            RxPermissions rxPermissions = new RxPermissions(getActivity());
+                            rxPermissions
+                                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                    .subscribe(granted -> {
+                                        if (granted) {
+                                            Intent intent = new Intent(getActivity(), SecondActivity.class);
+                                            MineFragment.this.startActivityForResult(intent, REQUEST_CODE);
+                                        } else {
+                                            ToastUtils.showShort("未开启读写权限，请开启读写");
+                                        }
+                                    });
+
+                        }else {
+                            //赠送记录
+                            GiveActivity.start(mContext);
+                        }
                         break;
                     case 1:
                         //我的抵用券
-                        CouponActivity.start(mContext);
+                        if (loginBean.getUserType() == 2){
+                            GiveActivity.start(mContext);
+                        }else {
+                            CouponActivity.start(mContext);
+                        }
                         break;
                     case 2:
                         if (loginBean.getUserType() == 0){
@@ -158,31 +191,58 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                         }else if (loginBean.getUserType() == 2){
                             //发布商品
 //                            MyShopActivity.start(mContext);
-                            ReleaseGoodsActivity.start(getContext());
+                            CouponActivity.start(mContext);
+//                            ReleaseGoodsActivity.start(getContext());
                         }else if (loginBean.getUserType() == 3){
 
                         }
                         break;
                     case 3:
                         //成为会员
-                        AccountRechargeActivity.start(getContext(),1);
+                        if (loginBean.getUserType() == 2){
+                            ReleaseGoodsActivity.start(getContext());
+                        }else {
+                            AccountRechargeActivity.start(getContext(),1);
+                        }
                         break;
                     case 4:
                         //我的收藏
-                        MyCollectionActivity.start(mContext);
+                        if (loginBean.getUserType() == 2){
+                            AccountRechargeActivity.start(getContext(),1);
+                        }else {
+                            MyCollectionActivity.start(mContext);
+                        }
                         break;
                     case 5:
                         //收货信息
-                        AddressManageActivity.start(getContext());
+                        if (loginBean.getUserType() == 2){
+                            MyCollectionActivity.start(mContext);
+                        }else {
+                            AddressManageActivity.start(getContext());
+                        }
                         break;
                     case 6:
                         //意见反馈
-                        OpinionBackActivity.start(mContext);
+                        if (loginBean.getUserType() == 2){
+                            AddressManageActivity.start(getContext());
+                        }else {
+                            OpinionBackActivity.start(mContext);
+                        }
                         break;
                     case 7:
                         //设置
-                        UserInfoActivity.start(getContext());
+                        if (loginBean.getUserType() == 2){
+                            OpinionBackActivity.start(mContext);
+                        }else {
+                            UserInfoActivity.start(getContext());
+                        }
                         break;
+                    case 8:
+                        if (loginBean.getUserType() == 2){
+                            UserInfoActivity.start(getContext());
+                        }
+                        break;
+
                 }
             }
         });
@@ -225,6 +285,49 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                 break;
         }
     }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+//                    ToastUtils.showShort("解析结果:" + result);
+                    new AlertDialog(getContext()).builder()
+                            .setTitle("提示")
+                            .setMsg("是否要核销该订单")
+                            .setNegativeButton("取消", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                }
+                            })
+                            .setPositiveButton("确认", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    if (UserManage.getInstance().getLoginBean().getStoreInfo() != null) {
+                                        showLoading("核销中..");
+                                        orderPresenter.confirmused(result, UserManage.getInstance().getLoginBean().getStoreInfo().getId());
+                                    }
+                                }
+                            }).show();
+
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    ToastUtils.showShort("解析二维码失败");
+                }
+            }
+        }
+    }
+
 
     @Override
     public void onDestroyView() {

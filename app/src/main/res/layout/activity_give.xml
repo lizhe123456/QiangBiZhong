@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main">
+
+    <include layout="@layout/layout_title" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bsv_view">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/dm_10">
+
+                <ImageView
+                    android:id="@+id/iv_goods"
+                    android:layout_width="@dimen/dm_100"
+                    android:layout_height="@dimen/dm_100"
+                    android:layout_marginLeft="@dimen/dm_15"
+                    android:layout_marginTop="@dimen/dm_10"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/tv_goods_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dm_10"
+                    android:layout_marginRight="@dimen/dm_15"
+                    android:layout_marginTop="@dimen/dm_10"
+                    android:layout_toRightOf="@+id/iv_goods"
+                    android:text="大众老新捷达雨刮器 桑塔纳POLO宝来朗 逸有无骨雨刷汽车原装配件"
+                    android:textColor="@color/tv_000"
+                    android:textSize="@dimen/dm_14" />
+
+                <TextView
+                    android:id="@+id/tv_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_goods_desc"
+                    android:layout_marginLeft="@dimen/dm_10"
+                    android:layout_marginTop="@dimen/dm_10"
+                    android:layout_toRightOf="@+id/iv_goods"
+                    android:gravity="bottom"
+                    android:textColor="@color/tv_777"
+                    android:textSize="@dimen/dm_12" />
+
+                <LinearLayout
+                    android:id="@+id/fl_moeny"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_goods"
+                    android:layout_marginLeft="@dimen/dm_10"
+                    android:layout_toRightOf="@+id/iv_goods"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_moeny"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text="5000"
+                        android:textColor="@color/goods_price"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="@dimen/dm_3"
+                        android:layout_marginLeft="@dimen/dm_5"
+                        android:src="@drawable/ic_yudou" />
+                </LinearLayout>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"
+                android:layout_marginTop="@dimen/dm_15"
+                android:orientation="vertical"
+                android:background="@drawable/bg_edit_white">
+            <EditText
+                android:id="@+id/et_desc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_200"
+                android:gravity="left"
+                android:hint="请输入备注"
+                android:background="@drawable/bg_edit_white"
+                android:inputType="textMultiLine"
+                android:textColorHint="@color/tv_navigation"
+                android:textColor="@color/tv_191"
+                android:textSize="@dimen/dm_14"
+                android:maxLength="140"
+                android:padding="@dimen/dm_15" />
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0/140字"
+                    android:layout_marginBottom="@dimen/dm_15"
+                    android:layout_marginRight="@dimen/dm_15"
+                    android:layout_gravity="right"
+                    android:textSize="@dimen/dm_13"
+                    android:textColor="@color/tv_navigation"
+                    />
+            </LinearLayout>
+            <EditText
+                android:id="@+id/et_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"
+                android:layout_marginTop="@dimen/dm_10"
+                android:background="@drawable/bg_edit_white"
+                android:gravity="left"
+                android:hint="请填写赠送人的手机号码或ID"
+                android:inputType="textMultiLine"
+                android:maxLength="140"
+                android:textSize="@dimen/dm_14"
+                android:textColorHint="@color/tv_navigation"
+                android:textColor="@color/tv_191"
+                android:padding="@dimen/dm_10" />
+            <TextView
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_shap"
+                android:layout_marginTop="@dimen/dm_20"
+                android:layout_marginBottom="@dimen/dm_15"
+                android:layout_marginRight="@dimen/dm_15"
+                android:layout_marginLeft="@dimen/dm_15"
+                android:paddingTop="@dimen/dm_14"
+                android:paddingBottom="@dimen/dm_14"
+                android:textSize="18sp"
+                android:text="马上赠送"
+                android:gravity="center"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

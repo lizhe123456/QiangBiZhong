@@ -2,16 +2,11 @@ package com.whmnrc.qiangbizhong.ui.me.adapter;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.GoodsManageBean;
-import com.whmnrc.qiangbizhong.model.parameter.GoodsParam;
 import com.whmnrc.qiangbizhong.ui.me.goods.update.EditListActivity;
-import com.whmnrc.qiangbizhong.util.StringUtil;
 
 /**
  * Company 武汉麦诺软创

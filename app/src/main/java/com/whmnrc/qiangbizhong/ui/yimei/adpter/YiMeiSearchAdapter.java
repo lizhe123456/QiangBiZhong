@@ -2,12 +2,14 @@ package com.whmnrc.qiangbizhong.ui.yimei.adpter;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.view.View;
 import android.widget.TextView;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsBean;
+import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
 import com.whmnrc.qiangbizhong.util.StringUtil;
 
 /**
@@ -32,6 +34,12 @@ public class YiMeiSearchAdapter extends BaseAdapter<YiMeiGoodsBean>{
         tvOldMoeny.setText("原价："+String.valueOf(item.getGoods_PriceMax()));
         tvOldMoeny.getPaint().setAntiAlias(true);//抗锯齿
         tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
+//        holder.setOnClickListener(R.id.iv_img, new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                YiMeiGoodsDetailsActivity.start(getContext(),item.getGoods_ID());
+//            }
+//        });
     }
 
     @Override

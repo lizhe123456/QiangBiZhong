@@ -8,134 +8,178 @@
 
     <include layout="@layout/layout_title" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.whmnrc.qiangbizhong.widget.RoundedImageView
-            android:id="@+id/iv_img"
-            android:layout_width="@dimen/dm_80"
-            android:layout_height="@dimen/dm_80"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dm_19"
-            android:scaleType="centerCrop"
-            app:riv_oval="true"
-            app:riv_border_width="@dimen/dm_2"
-            app:riv_border_color="@color/white"/>
-        <LinearLayout
+        <android.support.design.widget.CoordinatorLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dm_45"
-            android:background="@color/white"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_yimei_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/tv_191"
-                android:textSize="@dimen/dm_15"
-                android:layout_marginTop="@dimen/dm_65"
-                android:text="武汉美基元医疗美容机构"/>
+            android:layout_height="match_parent"
+            tools:context="com.kongqw.kbox.activity.ResumeActivity">
 
-            <TextView
-                android:id="@+id/tv_collection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:background="@drawable/bg_collection"
-                android:paddingTop="@dimen/dm_3"
-                android:paddingBottom="@dimen/dm_4"
-                android:paddingLeft="@dimen/dm_12"
-                android:paddingRight="@dimen/dm_12"
-                android:textSize="@dimen/dm_12"
-                android:layout_marginTop="@dimen/dm_15"
-                android:text="收藏"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_1"
-                android:background="#cccccc"
-                android:layout_marginTop="@dimen/dm_15"
-                android:layout_marginLeft="@dimen/dm_50"
-                android:layout_marginRight="@dimen/dm_50"/>
-
-            <LinearLayout
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/dm_30"
-                android:layout_marginLeft="@dimen/dm_50"
-                android:layout_marginRight="@dimen/dm_50"
-                android:paddingTop="@dimen/dm_30">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/ic_logo1"
-                    android:drawablePadding="@dimen/dm_5"
-                    android:text="医疗许可证"
-                    android:textSize="@dimen/dm_15"
-                    android:textColor="@color/tv_191" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/ic_logo2"
-                    android:drawablePadding="@dimen/dm_5"
-                    android:text="品牌认证"
-                    android:textSize="@dimen/dm_15"
-                    android:textColor="@color/tv_191"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/ic_logo3"
-                    android:drawablePadding="@dimen/dm_5"
-                    android:text="荣誉展示"
-                    android:textSize="@dimen/dm_15"
-                    android:textColor="@color/tv_191"/>
-            </LinearLayout>
+                android:background="@android:color/transparent">
 
-            <View
+
+                <android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dm_45"
+                                android:background="@color/white"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_yimei_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dm_65"
+                                    android:text="武汉美基元医疗美容机构"
+                                    android:textColor="@color/tv_191"
+                                    android:textSize="@dimen/dm_15" />
+
+                                <TextView
+                                    android:id="@+id/tv_collection"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dm_15"
+                                    android:background="@drawable/bg_collection"
+                                    android:paddingBottom="@dimen/dm_4"
+                                    android:paddingLeft="@dimen/dm_12"
+                                    android:paddingRight="@dimen/dm_12"
+                                    android:paddingTop="@dimen/dm_3"
+                                    android:text="收藏"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dm_12" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/dm_1"
+                                    android:layout_marginLeft="@dimen/dm_50"
+                                    android:layout_marginRight="@dimen/dm_50"
+                                    android:layout_marginTop="@dimen/dm_15"
+                                    android:background="#cccccc" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dm_50"
+                                    android:layout_marginRight="@dimen/dm_50"
+                                    android:orientation="horizontal"
+                                    android:paddingBottom="@dimen/dm_30"
+                                    android:paddingTop="@dimen/dm_30">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:drawablePadding="@dimen/dm_5"
+                                        android:drawableTop="@drawable/ic_logo1"
+                                        android:gravity="center"
+                                        android:text="医疗许可证"
+                                        android:textColor="@color/tv_191"
+                                        android:textSize="@dimen/dm_15" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:drawablePadding="@dimen/dm_5"
+                                        android:drawableTop="@drawable/ic_logo2"
+                                        android:gravity="center"
+                                        android:text="品牌认证"
+                                        android:textColor="@color/tv_191"
+                                        android:textSize="@dimen/dm_15" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:drawablePadding="@dimen/dm_5"
+                                        android:drawableTop="@drawable/ic_logo3"
+                                        android:gravity="center"
+                                        android:text="荣誉展示"
+                                        android:textColor="@color/tv_191"
+                                        android:textSize="@dimen/dm_15" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/dm_1"
+                                    android:layout_marginLeft="@dimen/dm_50"
+                                    android:layout_marginRight="@dimen/dm_50"
+                                    android:background="#cccccc" />
+
+                                <TextView
+                                    android:id="@+id/tv_address"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/dm_30"
+                                    android:layout_marginTop="@dimen/dm_30"
+                                    android:text="地址：武汉市武昌区杏林路"
+                                    android:textColor="@color/tv_navigation"
+                                    android:textSize="@dimen/dm_13" />
+                            </LinearLayout>
+                            <com.whmnrc.qiangbizhong.widget.RoundedImageView
+                                android:id="@+id/iv_img"
+                                android:layout_width="@dimen/dm_80"
+                                android:layout_height="@dimen/dm_80"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/dm_19"
+                                android:scaleType="centerCrop"
+                                app:riv_oval="true" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </android.support.design.widget.CollapsingToolbarLayout>
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_45"
+                    android:layout_below="@+id/ll_all_title"
+                    android:background="@color/white"
+                    app:tabIndicatorColor="@color/tv_title_color"
+                    app:tabIndicatorHeight="@dimen/dm_2"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@color/tv_title_color"
+                    app:tabTextColor="@color/tv_191" />
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_1"
-                android:background="#cccccc"
-                android:layout_marginLeft="@dimen/dm_50"
-                android:layout_marginRight="@dimen/dm_50"/>
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/tv_navigation"
-                android:textSize="@dimen/dm_13"
-                android:layout_marginTop="@dimen/dm_30"
-                android:text="地址：武汉市武昌区杏林路"
-                android:layout_marginBottom="@dimen/dm_30"/>
-        </LinearLayout>
-    </RelativeLayout>
+                <com.whmnrc.qiangbizhong.widget.WrapContentHeightViewPager
+                    android:id="@+id/vp_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never" />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_45"
-        android:layout_below="@+id/ll_all_title"
-        android:layout_marginTop="@dimen/dm_15"
-        android:background="@color/white"
-        app:tabIndicatorColor="@color/tv_title_color"
-        app:tabIndicatorHeight="@dimen/dm_2"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/tv_title_color"
-        app:tabTextColor="@color/tv_191" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never" />
+            </android.support.v4.widget.NestedScrollView>
+        </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

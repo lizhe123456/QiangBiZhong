@@ -95,6 +95,7 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
 
         tvGoodsName.setText(yiMeiGoodsDetailBean.getGoods().getGoods_Name());
         tvPrice.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
+        tvYuyue.setText(""+(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price() * count));
         tvEditCount.setText("1");
     }
 

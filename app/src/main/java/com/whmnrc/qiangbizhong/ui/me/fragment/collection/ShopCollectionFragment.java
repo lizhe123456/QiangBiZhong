@@ -74,6 +74,7 @@ public class ShopCollectionFragment extends BaseFragment implements CollectionPr
         recyclerView.setAdapter(shopCollectionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         collectionPresenter = new CollectionPresenter(getContext());
+        showLoading("加载中..");
         collectionPresenter.getcollectionlist(1,true,this);
 
         refresh.setOnLoadMoreListener(refreshLayout -> collectionPresenter.getcollectionlist(1, false, this));

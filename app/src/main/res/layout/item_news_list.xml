@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/btn_effect"
+    android:padding="@dimen/dm_15"
+    android:layout_marginBottom="@dimen/dm_5">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="在新时代党的阳光照耀下前进——习近平总书
+记关心关怀青年和青年工作纪实"
+        android:textColor="@color/tv_000"
+        android:textSize="@dimen/dm_14" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-03-02"
+        android:textColor="@color/tv_aaa"
+        android:textSize="@dimen/dm_14"
+        android:layout_marginTop="@dimen/dm_10"/>
+</LinearLayout>

@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
-            android:scrollbars="none"
+            android:nestedScrollingEnabled="false"
             android:layout_below="@+id/xian"
             android:layout_marginTop="@dimen/dm_10"/>
         <LinearLayout

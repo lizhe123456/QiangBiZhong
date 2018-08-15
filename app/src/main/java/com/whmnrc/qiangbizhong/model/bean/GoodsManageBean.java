@@ -58,6 +58,16 @@ public class GoodsManageBean {
     private String Address;
     private String Latitude;
     private String Longitude;
+    private int SpecCount;
+
+
+    public int getSpecCount() {
+        return SpecCount;
+    }
+
+    public void setSpecCount(int specCount) {
+        SpecCount = specCount;
+    }
 
     public String getGoods_ID() {
         return Goods_ID;

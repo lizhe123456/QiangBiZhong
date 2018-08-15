@@ -81,6 +81,7 @@ public class GoodsCollectionFragment extends BaseFragment implements
     @Override
     protected void initData() {
         collectionPresenter = new CollectionPresenter(mContext);
+        showLoading("加载中..");
         collectionPresenter.getcollectionlist(0, true, this);
         goodsCollectionAdapter = new GoodsCollectionAdapter(getContext());
         recyclerView.setLayoutManager(new GridLayoutManager(mContext,2));

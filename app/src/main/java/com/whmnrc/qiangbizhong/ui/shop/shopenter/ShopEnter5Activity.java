@@ -26,6 +26,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.DataSave;
 import com.whmnrc.qiangbizhong.presenter.shop.ShopEnterPresenter;
+import com.whmnrc.qiangbizhong.ui.StatusActivity;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.ToastUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
@@ -121,7 +122,8 @@ public class ShopEnter5Activity extends BaseActivity implements ShopEnterPresent
 
     @Override
     public void submitadmissionBack() {
-        MainActivity.start(this,2);
+        StatusActivity.start(this,1,"您入驻的申请目前正在等待审核中，\n" +
+                "我们将于5个工作日告知结果，请耐心等待！","入驻结果");
     }
 
 }

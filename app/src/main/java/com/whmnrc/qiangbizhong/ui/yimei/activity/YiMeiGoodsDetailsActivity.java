@@ -2,6 +2,7 @@ package com.whmnrc.qiangbizhong.ui.yimei.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import com.whmnrc.qiangbizhong.presenter.me.CollectionPresenter;
 import com.whmnrc.qiangbizhong.presenter.yimei.YiMeiPresenter;
 import com.whmnrc.qiangbizhong.ui.yimei.adpter.CommentAdapter;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
+import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
 import com.whmnrc.qiangbizhong.widget.RoundedImageView;
 import com.youth.banner.Banner;
@@ -104,6 +106,7 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
     protected void setData() {
         yiMeiPresenter = new YiMeiPresenter(this);
         goodsId = getIntent().getStringExtra("goodsId");
+        showLoading("加载中..");
         yiMeiPresenter.getmedicaldetail(goodsId, this);
 
         commentAdapter = new CommentAdapter(this);
@@ -147,11 +150,17 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
 
     private void medicalData(YiMeiGoodsDetailBean yiMeiGoodsDetailBean) {
         this.yiMeiGoodsDetailBean = yiMeiGoodsDetailBean;
-        initBanner(yiMeiGoodsDetailBean.getBanner());
+        if (yiMeiGoodsDetailBean != null) {
+            initBanner(yiMeiGoodsDetailBean.getBanner());
+        }
         tvName.setText(yiMeiGoodsDetailBean.getGoods().getGoods_Name());
         tvTitle.setText(yiMeiGoodsDetailBean.getGoods().getGoods_Describe());
         tvLoction.setText(yiMeiGoodsDetailBean.getStoreInfo().getAddress());
         tvOldPrice.setText("原价：" + yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_VirtualPrice() + "");
+        //抗锯齿
+        tvOldPrice.getPaint().setAntiAlias(true);
+        //中划线
+        tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         tvPrice.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
         tvNowMoeny.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
 
@@ -183,7 +192,7 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
     }
 
 
-    @OnClick({R.id.rl_sort,R.id.tv_collection,R.id.iv_coll,R.id.tv_buy})
+    @OnClick({R.id.rl_sort,R.id.tv_collection,R.id.iv_coll,R.id.tv_buy,R.id.iv_back,R.id.tv_comment_count,R.id.iv_customer_service})
     public void onViewClicked(View v) {
         switch (v.getId()){
             case R.id.rl_sort:
@@ -215,6 +224,15 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
                 break;
             case R.id.tv_buy:
                 ConfirmOrderActivity.start(this,yiMeiGoodsDetailBean);
+                break;
+            case R.id.iv_back:
+                this.finish();
+                break;
+            case R.id.tv_comment_count:
+                CommentListActivity.start(this,goodsId);
+                break;
+            case R.id.iv_customer_service:
+                CustomerServiceDialog.showDialog(this);
                 break;
         }
     }

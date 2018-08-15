@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -12,12 +14,14 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.FragmentUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.pgyersdk.update.DownloadFileListener;
 import com.pgyersdk.update.PgyUpdateManager;
 import com.pgyersdk.update.UpdateManagerListener;
 import com.pgyersdk.update.javabean.AppBean;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.home.HomeFragment;
@@ -27,6 +31,7 @@ import com.whmnrc.qiangbizhong.ui.shopping.ShopCarFragment;
 import com.whmnrc.qiangbizhong.ui.yimei.YiMeiFragment;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
+import com.whmnrc.qiangbizhong.widget.QuestionnaireDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,6 +102,12 @@ public class MainActivity extends BaseActivity {
         showFragment = fragments.get(shopIndex);
         switchBtn(shopIndex);
         bugongyin();
+//        SPUtils.getInstance().put("isFrist",false);
+        if (!SPUtils.getInstance().getBoolean("isFrist",false)){
+            QuestionnaireDialog questionnaireDialog = new QuestionnaireDialog(this);
+            questionnaireDialog.show();
+            SPUtils.getInstance().put("isFrist",true);
+        }
     }
 
 

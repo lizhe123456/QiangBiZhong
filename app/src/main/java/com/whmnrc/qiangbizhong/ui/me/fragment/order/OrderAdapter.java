@@ -14,6 +14,7 @@ import com.whmnrc.qiangbizhong.ui.me.activity.OrderDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.ShopOrderDetailActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopsListActivity;
+import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiOrderDetailsActivity;
 
 /**
@@ -29,6 +30,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
 
     private Fragment activity;
     private boolean isShop;
+    private boolean isFrist;
 
     public OrderAdapter(Fragment activity, boolean isShop) {
         super(activity.getContext());
@@ -39,6 +41,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
     public void setOnOrderListener(OnOrderListener onOrderListener) {
         this.onOrderListener = onOrderListener;
     }
+
 
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, OrderListBean item, int position) {
@@ -68,7 +71,16 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
         } else if (item.getOrder_CreateType() == 2) {
             holder.setText(R.id.tv_order_num, "抽奖订单");
         } else if (item.getOrder_CreateType() == 3) {
-            holder.setText(R.id.tv_order_num, "医美服务订单");
+            if (item.getStoreInfo() != null) {
+                holder.setText(R.id.tv_order_num, item.getStoreInfo().getStoreName() == null ? "" : item.getStoreInfo().getStoreName()).setOnClickListener(R.id.tv_order_num, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        YiMeiGoodsDetailsActivity.start(getContext(), item.getStoreInfo().getId());
+                    }
+                });
+            } else {
+                holder.setText(R.id.tv_order_num, "");
+            }
         }
         if (item.getOrder_State() == -1) {
             //-1已预约
@@ -345,14 +357,18 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
             }
         }
 
-
-        RecyclerView goodsList = holder.getView(R.id.rv_goods_list);
         OrderGoodsAdapter adapter = new OrderGoodsAdapter(getContext(), item.getOrder_CreateType());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        goodsList.setLayoutManager(layoutManager);
-        goodsList.setAdapter(adapter);
-        adapter.addFirstDataSet(item.getDetail());
+        if (!item.isLoging()) {
+            RecyclerView goodsList = holder.getView(R.id.rv_goods_list);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            goodsList.setLayoutManager(layoutManager);
+            goodsList.setNestedScrollingEnabled(false);
+            goodsList.setAdapter(adapter);
+            adapter.addFirstDataSet(item.getDetail());
+            item.setLoging(true);
+        }
+
         if (item.getOrder_CreateType() == 0) {
             adapter.setOnItemClickListener((view, item1, position1) -> {
                 if (isShop) {
@@ -375,6 +391,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
         } else if (item.getOrder_CreateType() == 3) {
             adapter.setOnItemClickListener((view, item1, position1) -> YiMeiOrderDetailsActivity.start(getContext(), item.getOrder_ID()));
         }
+
 
     }
 

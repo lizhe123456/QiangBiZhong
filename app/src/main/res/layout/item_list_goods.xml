@@ -19,6 +19,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/tv_191"
         android:textSize="15sp"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:layout_toRightOf="@+id/iv_img"
         android:layout_marginLeft="@dimen/dm_15" />
     <TextView

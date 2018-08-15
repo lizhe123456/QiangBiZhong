@@ -99,6 +99,15 @@ public class OrderListBean {
     private AwardBean Award;
     private StoreInfo StoreInfo;
     private List<DetailBean> Detail;
+    private boolean isLoging;
+
+    public boolean isLoging() {
+        return isLoging;
+    }
+
+    public void setLoging(boolean loging) {
+        isLoging = loging;
+    }
 
     public String getOrder_ID() {
         return Order_ID;

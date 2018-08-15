@@ -30,7 +30,72 @@
                 <com.youth.banner.Banner
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dm_188" />
+                    android:layout_height="@dimen/dm_200">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dm_20" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dm_48">
+
+                            <ImageView
+                                android:id="@+id/iv_search"
+                                android:layout_width="@dimen/dm_20"
+                                android:layout_height="@dimen/dm_20"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/dm_20"
+                                android:layout_toStartOf="@+id/fl_meg"
+                                android:src="@drawable/ic_search" />
+
+                            <FrameLayout
+                                android:id="@+id/fl_meg"
+                                android:layout_width="@dimen/dm_28"
+                                android:layout_height="@dimen/dm_28"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/dm_21">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dm_20"
+                                    android:layout_height="@dimen/dm_20"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_msg" />
+
+                                <TextView
+                                    android:id="@+id/tv_num"
+                                    android:layout_width="@dimen/dm_15"
+                                    android:layout_height="@dimen/dm_15"
+                                    android:layout_gravity="right|top"
+                                    android:background="@drawable/bg_msg_num"
+                                    android:gravity="center"
+                                    android:text="0"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dm_9" />
+
+                                <TextView
+                                    android:id="@+id/tv_big_num"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dm_15"
+                                    android:layout_gravity="right|top"
+                                    android:background="@drawable/bg_msg_big_num"
+                                    android:gravity="center"
+                                    android:paddingLeft="@dimen/dm_8"
+                                    android:paddingRight="@dimen/dm_8"
+                                    android:text="99+"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dm_10"
+                                    android:visibility="gone" />
+                            </FrameLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </com.youth.banner.Banner>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_menu"
@@ -50,8 +115,7 @@
                     android:id="@+id/rv_second_kill"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:overScrollMode="never"
-                    />
+                    android:overScrollMode="never" />
 
                 <View
                     android:id="@+id/v_item2"
@@ -182,45 +246,15 @@
                     android:paddingRight="@dimen/dm_7" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_20"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_48">
-
-                <ImageView
-                    android:id="@+id/iv_search"
-                    android:layout_width="@dimen/dm_20"
-                    android:layout_height="@dimen/dm_20"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/dm_20"
-                    android:layout_toStartOf="@+id/fl_meg"
-                    android:src="@drawable/ic_search" />
-
-                <FrameLayout
-                    android:id="@+id/fl_meg"
-                    android:layout_width="@dimen/dm_20"
-                    android:layout_height="@dimen/dm_20"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/dm_21">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_msg" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|top" />
-                </FrameLayout>
-            </RelativeLayout>
+                android:layout_height="@dimen/dm_20" />
         </LinearLayout>
     </RelativeLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

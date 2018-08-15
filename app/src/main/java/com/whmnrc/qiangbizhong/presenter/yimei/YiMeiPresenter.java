@@ -1,6 +1,7 @@
 package com.whmnrc.qiangbizhong.presenter.yimei;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
@@ -70,7 +71,7 @@ public class YiMeiPresenter {
 
     }
 
-    public void medicalsearchlist(boolean isR,String keyWord,int sortIndex,double latitude, double longitude,SearchCall searchCall){
+    public void medicalsearchlist(boolean isR,String keyWord,int sortIndex,double latitude, double longitude,String typeId,SearchCall searchCall){
         Map<String, String> map = new HashMap<>();
         if (isR){
             page = 1;
@@ -79,6 +80,9 @@ public class YiMeiPresenter {
         map.put("PageCount","10");
         map.put("KeyWord",keyWord);
         map.put("SortIndex",sortIndex+"");
+        if (!TextUtils.isEmpty(typeId)) {
+            map.put("ProductTypeId", typeId);
+        }
         OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.medicalsearchlist) +"?latitude="+latitude + "&longitude=" + longitude, map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
@@ -126,49 +130,6 @@ public class YiMeiPresenter {
 
     }
 
-    //商品评价列表
-    public void getcommentlist(boolean isR,String goodsId, CommentlistCall commentlistCall){
-        Map<String, String> map = new HashMap<>();
-        if (isR){
-            page = 1;
-        }
-        map.put("PageIndex",page+"");
-        map.put("PageCount","10");
-        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.getcommentlist) + "?goodsId=" + goodsId ,map, new OkhttpUtil.BeanCallback(){
-
-            @Override
-            public void onSuccess(String data) {
-                if (commentlistCall != null){
-                    if (isR){
-                        commentlistCall.commentBack();
-                    }else {
-                        commentlistCall.loadMore();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(int code, String errorMsg) {
-
-            }
-        });
-    }
-
-    //添加收藏
-    public void addcollection(String type, String goodsIdOrStoreId){
-        Map<String, String> map = new HashMap<>();
-        OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.addcollection) + "?userId="+ UserManage.getInstance().getUserID() + "&type=" + type + "&goodsIdOrStoreId" + goodsIdOrStoreId, map, new OkhttpUtil.BeanCallback() {
-            @Override
-            public void onSuccess(String data) {
-            }
-
-            @Override
-            public void onFailure(int code, String errorMsg) {
-            }
-        });
-
-    }
-
     public interface SearchCall extends BaseCall{
         void searchGoods(List<YiMeiGoodsBean> yiMeiGoodsBeanList);
 
@@ -184,13 +145,6 @@ public class YiMeiPresenter {
 
     public interface MedicaldetailCall extends BaseCall{
         void medicaldetai(YiMeiGoodsDetailBean yiMeiGoodsDetailBean);
-    }
-
-    public interface CommentlistCall{
-
-        void commentBack();
-
-        void loadMore();
     }
 
 }

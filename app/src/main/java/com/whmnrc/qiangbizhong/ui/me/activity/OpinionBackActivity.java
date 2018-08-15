@@ -4,14 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
+import com.whmnrc.qiangbizhong.presenter.yimei.NewsPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +26,7 @@ import butterknife.OnClick;
  * 意见反馈
  */
 
-public class OpinionBackActivity extends BaseActivity {
+public class OpinionBackActivity extends BaseActivity implements NewsPresenter.FeedbackCall{
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -35,6 +38,8 @@ public class OpinionBackActivity extends BaseActivity {
     EditText etContent;
     @BindView(R.id.tv_count)
     TextView tvCount;
+
+    private NewsPresenter newsPresenter;
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -72,6 +77,7 @@ public class OpinionBackActivity extends BaseActivity {
         tvMenu.setVisibility(View.VISIBLE);
         tvMenu.setText("提交");
         etContent.addTextChangedListener(textWatcher);
+        newsPresenter = new NewsPresenter(this);
     }
 
 
@@ -82,8 +88,24 @@ public class OpinionBackActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.tv_menu:
+                if (TextUtils.isEmpty(etContent.getText().toString())){
+                    ToastUtils.showShort("请填写反馈意见");
+                    return;
+                }
+                showLoading("提交中..");
                 //提交
+                newsPresenter.feedback(etContent.getText().toString(),this);
                 break;
         }
+    }
+
+    @Override
+    public void error() {
+
+    }
+
+    @Override
+    public void feedBack() {
+        this.finish();
     }
 }

@@ -25,7 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dm_10"
         android:ellipsize="end"
+        android:maxLines="1"
         android:maxLength="10"
+        android:maxWidth="@dimen/dm_60"
         android:textColor="@color/goods_text"
         android:textSize="13sp"
         android:text="苹果 iPhone 8 Plus"/>

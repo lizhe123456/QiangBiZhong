@@ -3,8 +3,8 @@
     android:shape="line">
     <!--线宽为dashWith，线之间空隙dashGap，dashGap=0dp时，是实线 -->
     <stroke
-        android:width="@dimen/dm_2"
+        android:width="@dimen/dm_1"
         android:color="@color/divider_color"
         android:dashGap="@dimen/dm_2"
-        android:dashWidth="@dimen/dm_2"/>
+        android:dashWidth="@dimen/dm_4"/>
 </shape>

@@ -34,6 +34,10 @@ public class MineBean {
     public void initMineBean(int type){
         List<MenuBean> menuBeans= new ArrayList<>();
         List<ItemBean> itemBeans = new ArrayList<>();
+        if (type == 2) {
+            itemBeans.add(new ItemBean(R.drawable.ic_san_san, "扫一扫"));
+        }
+
         itemBeans.add(new ItemBean(R.drawable.ic_item1, "赠送记录"));
         itemBeans.add(new ItemBean(R.drawable.ic_item2, "我的抵用券"));
 

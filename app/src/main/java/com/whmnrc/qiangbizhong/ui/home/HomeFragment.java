@@ -6,8 +6,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -22,6 +25,7 @@ import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.AwardDetailActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.FlashSaleActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.LuckDrawActivity;
+import com.whmnrc.qiangbizhong.ui.home.activity.NewsListActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.RushRecordActivity;
 import com.whmnrc.qiangbizhong.ui.home.activity.UnveiledActivity;
 import com.whmnrc.qiangbizhong.ui.home.adapter.GoodsAdapter;
@@ -91,6 +95,12 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     View vItem3;
     @BindView(R.id.v_item4)
     View vItem4;
+    @BindView(R.id.tv_chouj_more)
+    TextView tvChoujMore;
+    @BindView(R.id.tv_num)
+    TextView tvNum;
+    @BindView(R.id.tv_big_num)
+    TextView tvBigNum;
 
     private HomePageBean homePageBean;
     private HomePresenter homePresenter;
@@ -122,6 +132,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         homePageBean = new HomePageBean();
         homePageBean = homePageBean.intiHome();
         initMenu(homePageBean.getMenuBeans());
+//        homePresenter.getappversion();
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
@@ -289,10 +300,11 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     }
 
 
-    @OnClick({R.id.fl_meg, R.id.tv_more, R.id.tv_chouj_more, R.id.tv_jiexiao_more, R.id.tv_for_you_more,R.id.iv_search})
+    @OnClick({R.id.fl_meg, R.id.tv_more, R.id.tv_chouj_more, R.id.tv_jiexiao_more, R.id.tv_for_you_more, R.id.iv_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fl_meg:
+                NewsListActivity.start(getContext());
                 break;
             case R.id.tv_more:
                 if (UserManage.getInstance().getLoginBean() == null) {
@@ -312,7 +324,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                 if (UserManage.getInstance().getLoginBean() == null) {
                     LoginActivity.start(getContext());
                 } else {
-                    SearchGoodsActivity.start(mContext,"");
+                    SearchGoodsActivity.start(mContext, "");
                 }
                 break;
             case R.id.tv_jiexiao_more:
@@ -323,7 +335,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                 }
                 break;
             case R.id.iv_search:
-                SearchGoodsActivity.start(mContext,"");
+                SearchGoodsActivity.start(mContext, "");
                 break;
         }
     }
@@ -344,6 +356,22 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         initGoods(homeResult.getGoodsTj());
         initNewUnveileds(homeResult.getGoodsOpenedAward());
         refreshLayout.finishRefresh(true);
+    }
+
+    @Override
+    public void noticeCount(String count) {
+
+        if (Integer.parseInt(count) > 99){
+            tvNum.setVisibility(View.GONE);
+            tvBigNum.setVisibility(View.VISIBLE);
+        }else if (Integer.parseInt(count) == 0){
+            tvBigNum.setVisibility(View.GONE);
+            tvNum.setVisibility(View.GONE);
+        }else {
+            tvNum.setText(count);
+            tvBigNum.setVisibility(View.GONE);
+            tvNum.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

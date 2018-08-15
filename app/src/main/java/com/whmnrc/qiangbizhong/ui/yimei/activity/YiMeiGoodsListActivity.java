@@ -100,9 +100,16 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
     };
 
     private YiMeiSearchAdapter mYiMeiSearchAdapter;
+    private String typeId;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, YiMeiGoodsListActivity.class);
+        context.startActivity(starter);
+    }
+
+    public static void start(Context context,String typeId) {
+        Intent starter = new Intent(context, YiMeiGoodsListActivity.class);
+        starter.putExtra("typeId",typeId);
         context.startActivity(starter);
     }
 
@@ -117,9 +124,10 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
         mYiMeiSearchAdapter = new YiMeiSearchAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mYiMeiSearchAdapter);
+        typeId = getIntent().getStringExtra("typeId");
 
-        refresh.setOnRefreshListener(refreshLayout -> yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString(), type, latitude, longitude, this));
-        refresh.setOnLoadMoreListener(refreshLayout -> yiMeiPresenter.medicalsearchlist(false, etKeyword.getText().toString(), type, latitude, longitude, this));
+        refresh.setOnRefreshListener(refreshLayout -> yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString(), type, latitude, longitude,typeId, this));
+        refresh.setOnLoadMoreListener(refreshLayout -> yiMeiPresenter.medicalsearchlist(false, etKeyword.getText().toString(), type, latitude, longitude,typeId, this));
 
         etKeyword.setOnEditorActionListener(this);
         initLocation();
@@ -202,7 +210,7 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
         }
 
         showLoading("加载中..");
-        yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString(), type, latitude, longitude, this);
+        yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString(), type, latitude, longitude,typeId, this);
 
     }
 
@@ -243,7 +251,7 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             // 当按了搜索之后关闭软键盘
             showLoading("加载中..");
-            yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString().trim(), type, latitude, longitude, this);
+            yiMeiPresenter.medicalsearchlist(true, etKeyword.getText().toString().trim(), type, latitude, longitude,typeId, this);
             KeyboardUtils.hideSoftInput(this);
             return true;
         }

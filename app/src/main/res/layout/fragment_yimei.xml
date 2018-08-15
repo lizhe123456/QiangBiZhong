@@ -38,7 +38,7 @@
                 <com.youth.banner.Banner
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dm_150" />
+                    android:layout_height="@dimen/dm_200" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_menu"

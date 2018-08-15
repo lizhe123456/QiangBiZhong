@@ -29,6 +29,8 @@
             android:layout_marginTop="@dimen/dm_10"
             android:layout_toRightOf="@+id/iv_img"
             android:text="海边旅游黑色男款英伦风情汽车"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="@color/tv_000"
             android:textSize="@dimen/dm_15" />
 

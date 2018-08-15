@@ -16,10 +16,12 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
+import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiSortBean;
 import com.whmnrc.qiangbizhong.presenter.yimei.StorePresenter;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiDetailsActivity;
+import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.adpter.YiMeiSearchAdapter;
 
 import java.util.List;
@@ -51,8 +53,10 @@ public class SalesVolumeFragment extends BaseFragment implements StorePresenter.
     private YiMeiSearchAdapter mYiMeiSearchAdapter;
 
 
-    public static SalesVolumeFragment newInstance() {
+    public static SalesVolumeFragment newInstance(String sortId,String type) {
         Bundle args = new Bundle();
+        args.putString("sortId",sortId);
+        args.putString("type",type);
         SalesVolumeFragment fragment = new SalesVolumeFragment();
         fragment.setArguments(args);
         return fragment;
@@ -70,6 +74,7 @@ public class SalesVolumeFragment extends BaseFragment implements StorePresenter.
         storePresenter = new StorePresenter(mContext);
         latitude = ((YiMeiDetailsActivity) getActivity()).latitude;
         longitude = ((YiMeiDetailsActivity) getActivity()).longitude;
+        showLoading("加载中..");
         storePresenter.getmedicalstorelist(true, sortId,type, latitude, longitude, this);
         refresh.setOnRefreshListener(refreshLayout -> storePresenter.getmedicalstorelist(true, sortId,type, latitude, longitude, this));
 
@@ -78,6 +83,8 @@ public class SalesVolumeFragment extends BaseFragment implements StorePresenter.
         mYiMeiSearchAdapter = new YiMeiSearchAdapter(mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(mYiMeiSearchAdapter);
+        recyclerView.setNestedScrollingEnabled(true);
+
     }
 
 

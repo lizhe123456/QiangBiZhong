@@ -21,6 +21,7 @@
     <color name="tv_191">#19191E</color>
     <color name="tv_989898">#989898</color>
     <color name="tv_999">#999999</color>
+    <color name="tv_aaa">#AAAAAA</color>
     <color name="black">#000000</color>
     <color name="tv_title_color">#4F5FFF</color>
     <color name="slide_line">#DDDDDD</color>
@@ -34,4 +35,6 @@
     <color name="title1">#4a4a4a</color>
     <color name="title2">#a2a2a2</color>
     <color name="line">#d1d1d1</color>
+
+    <color name="scan_corner_color">#0effc2</color>
 </resources>

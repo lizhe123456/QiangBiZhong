@@ -120,12 +120,13 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
         titles.append(0,"综合");
         titles.append(1,"销量");
         titles.append(2,"价格");
-        fragments.append(0, SalesVolumeFragment.newInstance());
-        fragments.append(1, SalesVolumeFragment.newInstance());
-        fragments.append(2, SalesVolumeFragment.newInstance());
+        sId = getIntent().getStringExtra("sortId");
+        fragments.append(0, SalesVolumeFragment.newInstance(sId,"0"));
+        fragments.append(1, SalesVolumeFragment.newInstance(sId,"1"));
+        fragments.append(2, SalesVolumeFragment.newInstance(sId,"2"));
 
         ViewPagerUtil.initViewPage(vpContent,tabLayout,this,fragments,titles,20,0);
-        sId = getIntent().getStringExtra("sortId");
+
         storePresenter = new StorePresenter(this);
         collectionPresenter = new CollectionPresenter(this);
         initLocation();
@@ -159,10 +160,8 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
         switch (view.getId()){
             case R.id.tv_collection:
                 if (isColl){
-
                     collectionPresenter.cannercollection(1,sId,this);
                 }else {
-
                     collectionPresenter.addcollection(3,sId,1,this);
                 }
                 break;
@@ -181,7 +180,7 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
     public void medicalStoreBack(YiMeiSortBean yiMeiSortBean) {
         tvYimeiName.setText(yiMeiSortBean.getStoreInfo().getStoreName());
         tvAddress.setText(yiMeiSortBean.getStoreInfo().getAddress());
-        GlideuUtil.loadImageView(this,yiMeiSortBean.getStoreInfo().getStoreImage(),ivImg);
+        GlideuUtil.loadImageView(this,yiMeiSortBean.getStoreInfo().getStoreHeadImage(),ivImg);
         if (yiMeiSortBean.getStoreIsCollection() == 1){
             isColl = true;
             tvCollection.setSelected(true);

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
+import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.HomeResult;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiIndexBean;
 import com.whmnrc.qiangbizhong.presenter.yimei.YiMeiPresenter;
@@ -104,6 +105,13 @@ public class YiMeiFragment extends BaseFragment implements YiMeiPresenter.Medica
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 5);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvMenu.setLayoutManager(gridLayoutManager);
+        menuAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Object item, int position) {
+                YiMeiIndexBean.TypeListBean typeListBean = (YiMeiIndexBean.TypeListBean) item;
+                YiMeiGoodsListActivity.start(getContext(),typeListBean.getId());
+            }
+        });
     }
 
     private void initBanner(List<YiMeiIndexBean.BannerBean> banners) {

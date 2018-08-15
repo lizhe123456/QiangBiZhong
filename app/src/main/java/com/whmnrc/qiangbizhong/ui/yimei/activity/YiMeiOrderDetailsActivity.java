@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.whmnrc.qiangbizhong.ui.me.activity.ShopOrderDetailActivity;
 import com.whmnrc.qiangbizhong.ui.shopping.activity.EvaluateActivity;
 import com.whmnrc.qiangbizhong.util.DateUtil;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
@@ -113,6 +115,8 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
                     time -= 1000;
                     if (time < 0){
                         orderPresenter.orderdetailmedical(orderId,YiMeiOrderDetailsActivity.this);
+                        orderTime.setText(formatCountDownTime(time));
+                        timer.cancel();
                     }else {
                         orderTime.setText(formatCountDownTime(time));
                     }
@@ -143,6 +147,7 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
 
     @Override
     protected void setData() {
+        tvTitle.setText("订单详情");
         ivBack.setVisibility(View.VISIBLE);
         orderId = getIntent().getStringExtra("orderId");
         orderPresenter = new OrderPresenter(this);
@@ -219,9 +224,12 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
             llVolume.setVisibility(View.GONE);
             time = 30 * 60 * 1000 - (TimeUtils.string2Milliseconds(UserManage.getInstance().getServerTime())
                     - TimeUtils.string2Milliseconds(yiMeiOrderDetailBean.getOrder_CreateTime()));
-            if (!isFrist) {
-                isFrist = true;
-                timer.schedule(timerTask, 1000);
+            orderTime.setText(formatCountDownTime(time));
+            if (time > 0) {
+                if (!isFrist) {
+                    isFrist = true;
+                    timer.schedule(timerTask, 0, 1000);
+                }
             }
             //未支付
             tvSubstitute.setVisibility(View.VISIBLE);
@@ -290,15 +298,17 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
                 }
             });
 
-            tvCancel.setVisibility(View.VISIBLE);
-
-            tvCancel.setText("赠送他人");
-            tvCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //赠送
-                }
-            });
+            if (TextUtils.isEmpty(yiMeiOrderDetailBean.getGiveRecordInfo().toString())) {
+                tvCancel.setVisibility(View.VISIBLE);
+                tvCancel.setText("赠送他人");
+                tvCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //赠送
+                        GiveActivity.start(YiMeiOrderDetailsActivity.this, yiMeiOrderDetailBean.getDetail().get(0).getProduct_ImgPath(), yiMeiOrderDetailBean.getDetail().get(0).getProduct_Name(), StringUtil.weiString1(yiMeiOrderDetailBean.getOrder_Money()), yiMeiOrderDetailBean.getOrder_Number() + "", yiMeiOrderDetailBean.getUserInfo_ID(), yiMeiOrderDetailBean.getOrder_ID());
+                    }
+                });
+            }
         }else if (yiMeiOrderDetailBean.getOrder_State() == 3){
             llVolume.setVisibility(View.GONE);
             orderState.setText("您的订单正在等待评价");
@@ -341,6 +351,7 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
     }
 
     public String formatCountDownTime(long timeLeft) {
+        timeLeft = timeLeft/1000;
         String h, m, s;
         if (timeLeft < 0) {
             return "0时0分0秒自动取消订单";

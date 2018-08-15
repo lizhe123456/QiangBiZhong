@@ -219,11 +219,20 @@
     <string name="canneragentpay">/api/app/canneragentpay</string>
     <string name="cannerorder">/api/app/cannerorder</string>
     <string name="paymedicalorder">/api/app/paymedicalorder</string>
-
+    <string name="giveorder"> /api/app/giveorder</string>
+    <string name="getmessagenotice">/api/home/getmessagenotice</string>
+    <string name="getcouponlist">/api/home/getcouponlist</string>
+    <string name="getgivelist">/api/home/getgivelist</string>
+    <string name="giveorderdetail">/api/home/giveorderdetail</string>
 
     <string name="getcode_again">重新获取</string>
     <string name="timer_message">秒</string>
-
+    <string name="getnoticecount">/api/home/getnoticecount</string>
+    <string name="setnoticeisread">/api/app/setnoticeisread</string>
+    <string name="feedback">/api/app/feedback</string>
+    <string name="getappversion">/api/app/getappversion</string>
+    <string name="downloadapp">/api/app/downloadapp</string>
+    <string name="submitquestion">/api/app/submitquestion</string>
 
 
 </resources>

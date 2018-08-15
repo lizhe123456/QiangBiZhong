@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.Utils;
 import com.pgyersdk.crash.PgyCrashManager;
 import com.pgyersdk.crash.PgyerCrashObservable;
 import com.pgyersdk.crash.PgyerObserver;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 
 /**
@@ -26,6 +27,7 @@ public class App extends Application {
         Utils.init(context);
         PgyCrashManager.register();
         CrashHandler.getInstance().init(this);
+        ZXingLibrary.initDisplayOpinion(this);
     }
 
     @Override

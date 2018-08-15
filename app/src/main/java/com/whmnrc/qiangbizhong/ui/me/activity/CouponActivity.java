@@ -9,11 +9,15 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.CouponBean;
+import com.whmnrc.qiangbizhong.presenter.me.CouponPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +30,7 @@ import butterknife.OnClick;
  * Created by lizhe on 2018/7/21.
  */
 
-public class CouponActivity extends BaseActivity {
+public class CouponActivity extends BaseActivity implements CouponPresenter.CouponListCall{
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -40,6 +44,7 @@ public class CouponActivity extends BaseActivity {
     ViewStub vsEmpty;
 
     private CouponAdapter mCouponAdapter;
+    private CouponPresenter couponPresenter;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, CouponActivity.class);
@@ -58,16 +63,57 @@ public class CouponActivity extends BaseActivity {
         mCouponAdapter = new CouponAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mCouponAdapter);
-        List<CouponBean> couponBeans = new ArrayList<>();
-        couponBeans.add(new CouponBean("使用期限 2018.06.06-2018.06.15","抽奖抵用券","仅限于[限时抽奖]活动专属"));
-        couponBeans.add(new CouponBean("使用期限 2018.06.06-2018.06.15","抽奖抵用券","仅限于[限时抽奖]活动专属"));
-        mCouponAdapter.addFirstDataSet(couponBeans);
+        couponPresenter = new CouponPresenter(this);
+        couponPresenter.getcouponlist(true,this);
+
+        refresh.setOnRefreshListener(refreshLayout -> {
+            couponPresenter.getcouponlist(true,this);
+        });
+        refresh.setOnLoadMoreListener(refreshLayout -> {
+            couponPresenter.getcouponlist(false,this);
+        });
     }
 
 
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         this.finish();
+    }
+
+    @Override
+    public void error() {
+        refresh.finishLoadMore(false);
+        refresh.finishRefresh(false);
+    }
+
+    @Override
+    public void getcouponlist(List<CouponBean> couponBeans) {
+        if (couponBeans.size() == 0){
+            showEmpty();
+        }else {
+            vsEmpty.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+        mCouponAdapter.addFirstDataSet(couponBeans);
+        refresh.finishRefresh(true);
+    }
+
+    @Override
+    public void loadMore(List<CouponBean> couponBeans) {
+        mCouponAdapter.addMoreDataSet(couponBeans);
+        refresh.finishLoadMore(true);
+    }
+
+    public void showEmpty() {
+        if (vsEmpty.getParent() != null) {
+            View view = vsEmpty.inflate();
+            ImageView imageView = view.findViewById(R.id.iv_empty);
+            TextView textView = view.findViewById(R.id.tv_text);
+            imageView.setImageResource(R.drawable.ic_empty_coupon);
+            textView.setText("暂无更多抵用券~");
+        }
+        vsEmpty.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
     }
 
     class CouponAdapter extends BaseAdapter<CouponBean> {
@@ -78,7 +124,7 @@ public class CouponActivity extends BaseActivity {
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, CouponBean item, int position) {
-            holder.setText(R.id.tv_time,item.getTime()).setText(R.id.tv_name,item.getName()).setText(R.id.tv_limit,item.getLimit());
+            holder.setText(R.id.tv_time,"使用期限 "+item.getStartDate()+"-"+item.getEndDate()).setText(R.id.tv_name,item.getName()).setText(R.id.tv_limit,item.getCondition_desc());
         }
 
         @Override

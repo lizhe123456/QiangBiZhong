@@ -13,9 +13,6 @@ import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.EncodeUtils;
-import com.blankj.utilcode.util.EncryptUtils;
-import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -31,18 +28,12 @@ import com.whmnrc.qiangbizhong.ui.me.activity.GoodsManageActivity;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.ImageUtil;
-import com.whmnrc.qiangbizhong.util.ToastUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.qqtheme.framework.picker.OptionPicker;
-import cn.qqtheme.framework.picker.WheelPicker;
 
 /**
  * Company 武汉麦诺软创
@@ -77,6 +68,8 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
     EditText etSort;
     @BindView(R.id.tv_release)
     TextView tvRelease;
+    @BindView(R.id.tv_r_classify)
+    TextView tvRRelease;
     @BindView(R.id.et_min_num)
     EditText etMinNum;
 
@@ -89,6 +82,7 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
     private List<ClassifyBean> classifyBeans;
     private List<String> list;
     private int type;
+    private int shopType;
     public static void start(Context context) {
         Intent starter = new Intent(context, ReleaseGoodsActivity.class);
         context.startActivity(starter);
@@ -125,21 +119,51 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
                 etMaxPrice.setText(goodsParam.getGoods_PriceMax());
                 etSort.setText(goodsParam.getGoods_Sort());
                 etMinNum.setText(goodsParam.getGoods_LimitCount());
+                if (goodsParam.getGoods_ShopType().equals("0")){
+                    tvRRelease.setText("商城商品");
+                    shopType = 0;
+                }else if (goodsParam.getGoods_ShopType().equals("3")){
+                    shopType = 1;
+                    tvRRelease.setText("医美服务");
+                }
                 GlideuUtil.loadImageView(this,goodsParam.getGoods_ImaPath(),ivGoodsImg);
             }
         }
 
         imagePresenter = new ImagePresenter(this);
         classifyPresenter = new ClassifyPresenter(this);
-        classifyPresenter.getClassifyList(0,this);
         goodsPresenter = new GoodsPresenter(this);
         goodsParam.setStoreId(UserManage.getInstance().getLoginBean().getStoreInfo().getId());
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_release,R.id.rl_select_classify,R.id.iv_goods_img})
+    @OnClick({R.id.iv_back, R.id.tv_release,R.id.rl_select_classify,R.id.iv_goods_img,R.id.rl_select_r__classify})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.rl_select_r__classify:
+                List<String> list1 = new ArrayList<>();
+                list1.add("商城商品");
+                list1.add("医美服务");
+                OptionPicker picker = new OptionPicker(this,list1);
+
+                picker.setDividerVisible(false);
+                picker.setOffset(2);//偏移量
+                picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                    @Override
+                    public void onOptionPicked(int index, String item) {
+                        tvRRelease.setText(item);
+                        if (index == 0){
+                            shopType = 0;
+                            goodsParam.setGoods_ShopType("0");
+                        }else {
+                            shopType = 1;
+                            goodsParam.setGoods_ShopType("3");
+                        }
+                        classifyPresenter.getClassifyList(shopType,ReleaseGoodsActivity.this);
+                    }
+                });
+                picker.show();
+                break;
             case R.id.iv_back:
                 this.finish();
                 break;
@@ -159,6 +183,11 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
 
                 if (TextUtils.isEmpty(goodsParam.getGoods_ImaPath())){
                     ToastUtils.showShort("请上传商品主图");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(tvRRelease.getText().toString())){
+                    ToastUtils.showShort("请选择发布类型");
                     return;
                 }
 
@@ -221,7 +250,6 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
     private void showVideoPicker(List<String> list) {
         OptionPicker picker = new OptionPicker(this,list);
 
-        picker.setCycleDisable(false);
         picker.setDividerVisible(false);
         picker.setOffset(2);//偏移量
         picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
@@ -279,6 +307,10 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
 
             }
         }
+
+        icClassify.setText(list.get(0));
+        goodsParam.setGoods_Type(classifyBeans.get(0).getId());
+
     }
 
     @Override
