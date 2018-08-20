@@ -98,6 +98,7 @@
                         android:layout_alignParentStart="true"
                         tool:text="武汉市"
                         android:textColor="@color/tv_191"
+                        android:visibility="gone"
                         android:textSize="@dimen/dm_13" />
 
                     <TextView
@@ -107,8 +108,9 @@
                         android:layout_alignParentRight="true"
                         android:layout_below="@+id/ll_now_moeny2"
                         android:layout_marginTop="@dimen/dm_10"
-                        tool:text="已预约：101"
                         android:textColor="@color/tv_191"
+                        android:drawableLeft="@drawable/ic_sales_volume"
+                        android:drawablePadding="@dimen/dm_10"
                         android:textSize="@dimen/dm_13" />
                 </RelativeLayout>
 
@@ -149,6 +151,9 @@
                         android:layout_marginTop="@dimen/dm_5"
                         android:layout_toRightOf="@+id/iv_img"
                         tool:text="资质：医疗美容医院"
+                        android:maxEms="8"
+                        android:lines="1"
+                        android:ellipsize="end"
                         android:textColor="@color/tv_191"
                         android:textSize="@dimen/dm_13" />
 
@@ -175,6 +180,8 @@
                         android:paddingLeft="@dimen/dm_10"
                         android:paddingRight="@dimen/dm_10"
                         android:paddingTop="@dimen/dm_3"
+                        android:drawablePadding="@dimen/dm_3"
+                        android:gravity="center"
                         android:text="收藏"
                         android:textColor="@color/white"
                         android:textSize="@dimen/dm_12" />
@@ -212,6 +219,7 @@
             android:background="@color/white"
             android:orientation="horizontal">
 
+
             <TextView
                 android:id="@+id/tv_price_title"
                 android:layout_width="wrap_content"
@@ -220,7 +228,7 @@
                 android:layout_marginLeft="@dimen/dm_15"
                 android:textColor="@color/tv_191"
                 android:textSize="@dimen/dm_12"
-                tool:text="价格：" />
+                android:text="价格：" />
 
             <LinearLayout
                 android:id="@+id/ll_now_moeny"
@@ -229,6 +237,7 @@
                 android:layout_alignBottom="@+id/tv_price_title"
                 android:layout_marginLeft="@dimen/dm_11"
                 android:layout_toRightOf="@+id/tv_price_title"
+
                 android:orientation="horizontal">
 
                 <TextView
@@ -315,6 +324,15 @@
             android:layout_below="@+id/v_hei"
             android:scaleType="center"
             android:src="@drawable/ic_black_back" />
+
+        <ImageView
+            android:id="@+id/iv_shape"
+            android:layout_width="@dimen/dm_48"
+            android:layout_height="@dimen/dm_48"
+            android:layout_below="@+id/v_hei"
+            android:scaleType="center"
+            android:src="@drawable/ic_shape"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 </RelativeLayout>

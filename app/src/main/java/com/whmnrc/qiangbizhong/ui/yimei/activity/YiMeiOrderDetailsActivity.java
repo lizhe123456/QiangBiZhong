@@ -12,19 +12,15 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
-import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsDetailBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiOrderDetailBean;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
-import com.whmnrc.qiangbizhong.ui.me.activity.OrderDetailsActivity;
-import com.whmnrc.qiangbizhong.ui.me.activity.ShopOrderDetailActivity;
 import com.whmnrc.qiangbizhong.ui.shopping.activity.EvaluateActivity;
-import com.whmnrc.qiangbizhong.util.DateUtil;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
+import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
@@ -153,7 +149,6 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
         orderPresenter = new OrderPresenter(this);
         showLoading("加载中..");
         orderPresenter.orderdetailmedical(orderId,this);
-        timer = new Timer();
     }
 
 
@@ -169,6 +164,16 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
     @Override
     public void error() {
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101){
+            if (resultCode == 102){
+                orderPresenter.orderdetailmedical(orderId,this);
+            }
+        }
     }
 
     @Override
@@ -188,6 +193,11 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
         tvDesc.setText("数量：x"+yiMeiOrderDetailBean.getOrder_Number());
         tvMoeny.setText(yiMeiOrderDetailBean.getOrder_Money()+"");
         GlideuUtil.loadImageView(this,yiMeiOrderDetailBean.getDetail().get(0).getProduct_ImgPath(),ivGoods);
+
+        if (timer != null){
+            timer.cancel();
+            timer = null;
+        }
 
         if (yiMeiOrderDetailBean.getOrder_State() == -5){
             orderState.setText("您的订单正在退款中");
@@ -224,28 +234,63 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
             llVolume.setVisibility(View.GONE);
             time = 30 * 60 * 1000 - (TimeUtils.string2Milliseconds(UserManage.getInstance().getServerTime())
                     - TimeUtils.string2Milliseconds(yiMeiOrderDetailBean.getOrder_CreateTime()));
-            orderTime.setText(formatCountDownTime(time));
-            if (time > 0) {
-                if (!isFrist) {
-                    isFrist = true;
-                    timer.schedule(timerTask, 0, 1000);
+            //未支付
+            if (!TextUtils.isEmpty(yiMeiOrderDetailBean.getAgentPayInfo())){
+                YiMeiOrderDetailBean.AgentPayInfo agentPayInfo = GsonUtil.changeGsonToBean(yiMeiOrderDetailBean.getAgentPayInfo(), YiMeiOrderDetailBean.AgentPayInfo.class);
+                if (agentPayInfo.getPayStatus() == 0){
+                    tvSubstitute.setVisibility(View.VISIBLE);
+                    if (time > 0) {
+                        if (!isFrist) {
+                            isFrist = true;
+                            timer = new Timer();
+                            timer.schedule(timerTask, 0, 1000);
+                        }
+                    }
+                }else if (agentPayInfo.getPayStatus() == 1){
+                    tvSubstitute.setVisibility(View.INVISIBLE);
+                    orderTime.setVisibility(View.GONE);
+                }else if (agentPayInfo.getPayStatus() == 2){
+                    tvSubstitute.setVisibility(View.INVISIBLE);
+                    orderTime.setVisibility(View.GONE);
                 }
             }
-            //未支付
-            tvSubstitute.setVisibility(View.VISIBLE);
             tvSubstitute.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showLoading("取消中..");
-                    orderPresenter.canneragentpay(yiMeiOrderDetailBean.getOrder_ID(),YiMeiOrderDetailsActivity.this);
+                    new AlertDialog(YiMeiOrderDetailsActivity.this).builder()
+                            .setTitle("提示")
+                            .setMsg("确定要取消代付吗？").setNegativeButton("取消", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    }).setPositiveButton("确认", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            showLoading("取消中..");
+                            orderPresenter.canneragentpay(orderId,YiMeiOrderDetailsActivity.this);
+                        }
+                    }).show();
                 }
             });
             tvCancel.setVisibility(View.VISIBLE);
             tvCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showLoading("取消中..");
-                    orderPresenter.cannerorder(yiMeiOrderDetailBean.getOrder_ID(),YiMeiOrderDetailsActivity.this);
+                    new AlertDialog(YiMeiOrderDetailsActivity.this).builder()
+                            .setTitle("提示")
+                            .setMsg("确定要取消订单吗？").setNegativeButton("取消", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    }).setPositiveButton("确认", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            showLoading("取消中..");
+                            orderPresenter.cannerorder(orderId,YiMeiOrderDetailsActivity.this);
+                        }
+                    }).show();
                 }
             });
             tvPay.setVisibility(View.VISIBLE);
@@ -304,6 +349,7 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
                 tvCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        finish();
                         //赠送
                         GiveActivity.start(YiMeiOrderDetailsActivity.this, yiMeiOrderDetailBean.getDetail().get(0).getProduct_ImgPath(), yiMeiOrderDetailBean.getDetail().get(0).getProduct_Name(), StringUtil.weiString1(yiMeiOrderDetailBean.getOrder_Money()), yiMeiOrderDetailBean.getOrder_Number() + "", yiMeiOrderDetailBean.getUserInfo_ID(), yiMeiOrderDetailBean.getOrder_ID());
                     }
@@ -375,13 +421,17 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
 
     @Override
     protected void onDestroy() {
-        timer.cancel();
+        if (timer != null){
+            timer.cancel();
+            timer = null;
+        }
+
         super.onDestroy();
     }
 
     @Override
     public void payPassBack() {
         showLoading("支付中..");
-        orderPresenter.paymedicalorder(yiMeiOrderDetailBean.getOrder_ID());
+        orderPresenter.paymedicalorder(this,yiMeiOrderDetailBean.getOrder_ID());
     }
 }

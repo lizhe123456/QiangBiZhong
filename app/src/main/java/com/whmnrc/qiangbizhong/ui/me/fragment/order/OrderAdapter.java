@@ -14,6 +14,7 @@ import com.whmnrc.qiangbizhong.ui.me.activity.OrderDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.ShopOrderDetailActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.FlashSaleDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopsListActivity;
+import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiOrderDetailsActivity;
 
@@ -68,14 +69,16 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
             }
         } else if (item.getOrder_CreateType() == 1) {
             holder.setText(R.id.tv_order_num, "抢购订单");
+            holder.setVisible(R.id.heji,false);
         } else if (item.getOrder_CreateType() == 2) {
             holder.setText(R.id.tv_order_num, "抽奖订单");
+            holder.setVisible(R.id.heji,false);
         } else if (item.getOrder_CreateType() == 3) {
             if (item.getStoreInfo() != null) {
                 holder.setText(R.id.tv_order_num, item.getStoreInfo().getStoreName() == null ? "" : item.getStoreInfo().getStoreName()).setOnClickListener(R.id.tv_order_num, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        YiMeiGoodsDetailsActivity.start(getContext(), item.getStoreInfo().getId());
+                        YiMeiDetailsActivity.start(getContext(), item.getStoreInfo().getId());
                     }
                 });
             } else {
@@ -112,10 +115,10 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                         onOrderListener.toQiangGou(item);
                     }
                 });
-                holder.setText(R.id.tv_btn_3, "取消抢购");
+                holder.setText(R.id.tv_btn_3, "放弃抢购");
                 holder.setOnClickListener(R.id.tv_btn_2, v -> {
                     if (onOrderListener != null)
-                        FlashSaleDetailsActivity.start(getContext(), item.getRushRecord().getRushId(), 1);
+                        FlashSaleDetailsActivity.start(getContext(), item.getRushRecord().getRushId());
                 });
                 holder.setOnClickListener(R.id.tv_btn_3, v -> {
                     if (onOrderListener != null)
@@ -150,6 +153,7 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                     if (onOrderListener != null)
                         onOrderListener.returnGoods(item);
                 });
+
             } else {
                 holder.setText(R.id.order_state, "退款中");
                 holder.setText(R.id.tv_btn_3, "联系客服");
@@ -185,16 +189,30 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
             }
         } else if (item.getOrder_State() == 1) {
             if (isShop) {
-                holder.setText(R.id.order_state, "已支付");
-                holder.setText(R.id.tv_btn_2, "确认发货");
-                holder.setVisible(R.id.tv_btn_3, false);
-                holder.setOnClickListener(R.id.tv_btn_2, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (onOrderListener != null)
-                            onOrderListener.sendGoods(item);
-                    }
-                });
+                if (item.getOrder_CreateType() == 3) {
+                    holder.setText(R.id.order_state, "已支付");
+                    holder.setText(R.id.tv_btn_2, "确认发货");
+                    holder.setVisible(R.id.tv_btn_3, false);
+                    holder.setVisible(R.id.tv_btn_2, false);
+                    holder.setOnClickListener(R.id.tv_btn_2, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (onOrderListener != null)
+                                onOrderListener.sendGoods(item);
+                        }
+                    });
+                }else {
+                    holder.setText(R.id.order_state, "已支付");
+                    holder.setText(R.id.tv_btn_2, "确认发货");
+                    holder.setVisible(R.id.tv_btn_3, false);
+                    holder.setOnClickListener(R.id.tv_btn_2, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (onOrderListener != null)
+                                onOrderListener.sendGoods(item);
+                        }
+                    });
+                }
             } else {
                 //1已支付
                 holder.setText(R.id.order_state, "已支付");
@@ -204,23 +222,23 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                     if (onOrderListener != null)
                         onOrderListener.customerServicePhoneClick(item);
                 });
-                holder.setOnClickListener(R.id.tv_btn_2, v -> {
-                    if (onOrderListener != null)
-                        onOrderListener.refund(item);
-                });
+
+                if (item.getOrder_State() == 0 | item.getOrder_State() == 3){
+                    holder.setText(R.id.tv_btn_2, "申请退款");
+                    holder.setOnClickListener(R.id.tv_btn_2, v -> {
+                        if (onOrderListener != null)
+                            onOrderListener.returnGoods(item);
+                    });
+                }else {
+                    holder.setVisible(R.id.tv_btn_2,false);
+                }
+
             }
         } else if (item.getOrder_State() == 2) {
             if (isShop) {
                 holder.setText(R.id.order_state, "待收货");
                 holder.setVisible(R.id.tv_btn_2, false);
                 holder.setVisible(R.id.tv_btn_3, false);
-//                holder.setOnClickListener(R.id.tv_btn_2, new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (onOrderListener != null)
-//                            onOrderListener.collectGoods(item);
-//                    }
-//                });
             } else {
                 //2待收货
                 holder.setText(R.id.order_state, "待收货");
@@ -378,18 +396,25 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                 }
             });
         } else if (item.getOrder_CreateType() == 1) {
-            adapter.setOnItemClickListener((view, item1, position1) ->
-            {
-                if (isShop) {
-                    ShopOrderDetailActivity.start(activity, item.getOrder_ID());
-                } else {
-                    OrderDetailsActivity.start(activity, item.getOrder_ID());
-                }
-            });
+            adapter.setOnItemClickListener((view, item1, position1) -> FlashSaleDetailsActivity.start(getContext(), item.getRushRecord().getRushId()));
+//            adapter.setOnItemClickListener((view, item1, position1) ->
+//            {
+//                if (isShop) {
+//                    ShopOrderDetailActivity.start(activity, item.getOrder_ID());
+//                } else {
+//                    OrderDetailsActivity.start(activity, item.getOrder_ID());
+//                }
+//            });
         } else if (item.getOrder_CreateType() == 2) {
             adapter.setOnItemClickListener((view, item1, position1) -> AwardDetailActivity.start(getContext(), item.getAward().getGoodsAwardId()));
         } else if (item.getOrder_CreateType() == 3) {
-            adapter.setOnItemClickListener((view, item1, position1) -> YiMeiOrderDetailsActivity.start(getContext(), item.getOrder_ID()));
+            adapter.setOnItemClickListener((view, item1, position1) -> {
+                if (isShop) {
+
+                }else {
+                    YiMeiOrderDetailsActivity.start(getContext(), item.getOrder_ID());
+                }
+            });
         }
 
 

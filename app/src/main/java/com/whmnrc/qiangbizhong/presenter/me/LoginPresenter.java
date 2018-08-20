@@ -38,6 +38,10 @@ public class LoginPresenter{
     public void login(String phone, String pwd, String code, int type, final LoginCall loginCall){
         Map<String,String> map = new HashMap<>();
         map.put("LoginType",type+"");
+        if (App.getDeviceToken() != null) {
+            map.put("Device_Token", App.getDeviceToken());
+        }
+        map.put("Device_Type","Android");
         map.put("Phone",phone);
         if (type == 0){
             map.put("Pwd",EncryptUtils.encryptMD5ToString(pwd));
@@ -65,7 +69,7 @@ public class LoginPresenter{
     public void sendsmscode(String phone){
         Map<String,String> map = new HashMap<>();
         map.put("phone",phone);
-        OkhttpUtil.get(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.sendSmsCode), map, new OkhttpUtil.ObjectCallback() {
+        OkhttpUtil.get(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.sendSmsCode), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String st) {
                 if (!TextUtils.isEmpty(st)) {

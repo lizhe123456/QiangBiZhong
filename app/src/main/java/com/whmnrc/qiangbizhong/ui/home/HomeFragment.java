@@ -132,7 +132,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         homePageBean = new HomePageBean();
         homePageBean = homePageBean.intiHome();
         initMenu(homePageBean.getMenuBeans());
-//        homePresenter.getappversion();
+        homePresenter.getappversion();
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
@@ -280,7 +280,7 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         killAdapter.setOnItemClickListener((view, item, position) -> {
             if (UserManage.getInstance().getLoginBean() != null) {
                 HomeResult.GoodsRushBean goodsRushBean = (HomeResult.GoodsRushBean) item;
-                FlashSaleDetailsActivity.start(mContext, goodsRushBean.getRushId(), 1);
+                FlashSaleDetailsActivity.start(mContext, goodsRushBean.getRushId());
             } else {
                 LoginActivity.start(getContext());
             }

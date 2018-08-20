@@ -102,17 +102,10 @@ public class RechargeCoreActivity extends BaseActivity implements RechargePresen
                 break;
             case R.id.tv_confirm_pay:
                 //确认
-                if (!PwdCheckUtil.isNumber(etRecharge)){
-                    ToastUtils.showShort("输入格式有误");
-                    return;
-                }
-
-                if (Integer.parseInt(etRecharge.getText().toString()) > 0){
-                    ToastUtils.showShort("购买数量不能为0");
-                    return;
-                }
                 String agentShopDiscountId = "";
                 String agentshopId = "";
+                int Number = 0;
+
 
                 if (rechargeCoreBean != null){
                     if (rechargeCoreBean.getAgentShopInfo() != null){
@@ -120,6 +113,7 @@ public class RechargeCoreActivity extends BaseActivity implements RechargePresen
                             if (itemsBean.isSelect()){
                                 agentShopDiscountId = itemsBean.getId();
                                 agentshopId = itemsBean.getAgentShopId();
+                                Number = itemsBean.getNumber();
                             }
                         }
                     }
@@ -134,8 +128,14 @@ public class RechargeCoreActivity extends BaseActivity implements RechargePresen
                     ToastUtils.showShort("未选择购买商品");
                     return;
                 }
-                showLoading("购买中..");
-                rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"0",agentshopId,agentShopDiscountId,this);
+                if (!TextUtils.isEmpty(etRecharge.getText().toString().trim())) {
+                    if (20 <= Number * Integer.parseInt(etRecharge.getText().toString().trim())) {
+                        showLoading("购买中..");
+                        rechargePresenter.submitorder(etRecharge.getText().toString().trim(), "0", agentshopId, agentShopDiscountId, this);
+                    } else {
+                        ToastUtils.showShort("最少充值数量为20");
+                    }
+                }
                 break;
         }
     }
@@ -180,7 +180,11 @@ public class RechargeCoreActivity extends BaseActivity implements RechargePresen
             @Override
             public void onError(String s) {
                 rechargePresenter.rechargeQuery(1, RechargeCoreActivity.this);
-                ToastUtils.showShort("充值失败");
+                if (s.equals("4000")) {
+                    ToastUtils.showShort("请确认支付宝是否安装");
+                }else {
+                    ToastUtils.showShort("充值失败");
+                }
             }
         });
     }

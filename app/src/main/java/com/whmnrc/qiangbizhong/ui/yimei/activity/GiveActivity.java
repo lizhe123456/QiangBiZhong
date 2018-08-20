@@ -145,6 +145,6 @@ public class GiveActivity extends BaseActivity implements SubstitutePresenter.Ag
     @Override
     public void getAgentUserIdS(String userId) {
         showLoading("提交中..");
-        orderPresenter.giveorder(orderId,userId,etDesc.getText().toString());
+        orderPresenter.giveorder(this,orderId,userId,etDesc.getText().toString());
     }
 }

@@ -53,7 +53,7 @@ public class ShopEnter1Activity extends BaseActivity {
         wvContent.getSettings().setLoadWithOverviewMode(true);
 //        wvContent.loadUrl("http://192.168.1.157:8011/Protocol/AdmissionInstructions");
 //        wvContent.loadUrl("http://192.168.1.157:8011/Protocol/AdmissionInstructions");
-        wvContent.loadUrl("http://testaml.whmnx.com/Protocol/AdmissionInstructions");
+        wvContent.loadUrl(getResources().getString(R.string.server_address)+"/Protocol/AdmissionInstructions");
     }
 
 

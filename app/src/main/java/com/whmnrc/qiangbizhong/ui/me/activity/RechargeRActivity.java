@@ -141,7 +141,7 @@ public class RechargeRActivity extends BaseActivity implements RechargePresenter
             View view = vsEmpty.inflate();
             ImageView imageView = view.findViewById(R.id.iv_empty);
             TextView textView = view.findViewById(R.id.tv_text);
-            imageView.setImageResource(R.drawable.ic_empty_order);
+            imageView.setImageResource(R.drawable.ic_empty_public);
             textView.setText("暂无更多数据~");
             vsEmpty.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);

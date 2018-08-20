@@ -85,6 +85,10 @@ public class UserManage {
             map.put("LoginType", 0 + "");
             map.put("Phone", loginBean.getUserInfo_Mobile());
             map.put("Pwd", loginBean.getUserInfo_Pwd());
+            if (App.getDeviceToken() != null) {
+                map.put("Device_Token", App.getDeviceToken());
+            }
+            map.put("Device_Type", "Android");
 
             OkhttpUtil.post(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.login), map, new OkhttpUtil.BeanCallback() {
                 @Override

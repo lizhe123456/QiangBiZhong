@@ -12,7 +12,9 @@ import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsDetailBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiIndexBean;
+import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
+import com.whmnrc.qiangbizhong.util.UserManage;
 
 /**
  * Company 武汉麦诺软创
@@ -40,8 +42,12 @@ public class YiMeiGoodsAdapter extends BaseAdapter<YiMeiIndexBean.MedicalListBea
         goodsAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-                YiMeiIndexBean.MedicalListBean.GoodsBean medicalListBean = (YiMeiIndexBean.MedicalListBean.GoodsBean) item;
-                YiMeiGoodsDetailsActivity.start(getContext(),medicalListBean.getGoods_ID());
+                if (UserManage.getInstance().getLoginBean() != null) {
+                    YiMeiIndexBean.MedicalListBean.GoodsBean medicalListBean = (YiMeiIndexBean.MedicalListBean.GoodsBean) item;
+                    YiMeiGoodsDetailsActivity.start(getContext(), medicalListBean.getGoods_ID());
+                }else {
+                    LoginActivity.start(getContext());
+                }
             }
         });
     }

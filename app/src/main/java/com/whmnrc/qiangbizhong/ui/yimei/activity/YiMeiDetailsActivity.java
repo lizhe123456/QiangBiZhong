@@ -3,6 +3,7 @@ package com.whmnrc.qiangbizhong.ui.yimei.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -179,16 +180,20 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
     @Override
     public void medicalStoreBack(YiMeiSortBean yiMeiSortBean) {
         tvYimeiName.setText(yiMeiSortBean.getStoreInfo().getStoreName());
-        tvAddress.setText(yiMeiSortBean.getStoreInfo().getAddress());
+        tvAddress.setText("地址："+yiMeiSortBean.getStoreInfo().getAddress());
         GlideuUtil.loadImageView(this,yiMeiSortBean.getStoreInfo().getStoreHeadImage(),ivImg);
         if (yiMeiSortBean.getStoreIsCollection() == 1){
-            isColl = true;
-            tvCollection.setSelected(true);
-            tvCollection.setText("已收藏");
-        }else {
-            isColl = false;
             tvCollection.setSelected(false);
+            isColl = true;
+            tvCollection.setText("已收藏");
+            tvCollection.setCompoundDrawables(null,null,null,null);
+        }else {
+            tvCollection.setSelected(true);
+            isColl = false;
             tvCollection.setText("收藏");
+            Drawable nav_up=getResources().getDrawable(R.drawable.ic_white_coll);
+            nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+            tvCollection.setCompoundDrawables(nav_up,null,null,null);
         }
     }
 
@@ -201,9 +206,17 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
     @Override
     public void cS() {
         if (isColl){
+            tvCollection.setSelected(true);
             isColl = false;
+            tvCollection.setText("收藏");
+            Drawable nav_up=getResources().getDrawable(R.drawable.ic_white_coll);
+            nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+            tvCollection.setCompoundDrawables(nav_up,null,null,null);
         }else {
+            tvCollection.setSelected(false);
             isColl = true;
+            tvCollection.setText("已收藏");
+            tvCollection.setCompoundDrawables(null,null,null,null);
         }
     }
 }

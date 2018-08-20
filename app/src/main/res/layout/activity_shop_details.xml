@@ -77,7 +77,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/goods_price"
                             android:textSize="@dimen/dm_18"
-                            android:text="580"
+                            tool:text="580"
                             android:layout_gravity="bottom"/>
                         <ImageView
                             android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/tv_191"
                         android:textSize="@dimen/dm_13"
-                        android:text="销量：101"
+                        tool:text="销量：101"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="@dimen/dm_10"
                         android:layout_alignBottom="@+id/ll_now_moeny2"
@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/dm_14"
                         android:textColor="@color/tv_navigation"
-                        android:text="查看更多共有2条"
+                        tool:text="查看更多共有2条"
                         android:layout_alignParentRight="true"
                         android:drawableRight="@drawable/ic_more"
                         android:drawablePadding="@dimen/dm_5"
@@ -182,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/dm_14"
                         android:textColor="@color/tv_191"
-                        android:text="武汉美基元医疗美容机构"
+                        tool:text="武汉美基元医疗美容机构"
                         android:layout_toRightOf="@+id/iv_img"
                         android:layout_marginTop="@dimen/dm_25"/>
                     <TextView
@@ -305,11 +305,19 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_20" />
         <ImageView
+            android:id="@+id/iv_shape"
+            android:layout_width="@dimen/dm_48"
+            android:layout_height="@dimen/dm_48"
+            android:layout_below="@+id/v_hei"
+            android:scaleType="center"
+            android:src="@drawable/ic_shape"
+            android:layout_alignParentRight="true"/>
+        <ImageView
             android:id="@+id/iv_shop_car"
             android:layout_width="@dimen/dm_48"
             android:layout_height="@dimen/dm_48"
             android:src="@drawable/ic_shop_car"
-            android:layout_alignParentRight="true"
+           android:layout_toLeftOf="@+id/iv_shape"
             android:layout_below="@+id/v_hei"
             android:scaleType="center"/>
 

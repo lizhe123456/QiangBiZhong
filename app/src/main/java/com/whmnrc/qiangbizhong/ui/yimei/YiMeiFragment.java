@@ -108,8 +108,12 @@ public class YiMeiFragment extends BaseFragment implements YiMeiPresenter.Medica
         menuAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Object item, int position) {
-                YiMeiIndexBean.TypeListBean typeListBean = (YiMeiIndexBean.TypeListBean) item;
-                YiMeiGoodsListActivity.start(getContext(),typeListBean.getId());
+                if (UserManage.getInstance().getLoginBean() != null) {
+                    YiMeiIndexBean.TypeListBean typeListBean = (YiMeiIndexBean.TypeListBean) item;
+                    YiMeiGoodsListActivity.start(getContext(), typeListBean.getId());
+                }else {
+                    LoginActivity.start(getContext());
+                }
             }
         });
     }

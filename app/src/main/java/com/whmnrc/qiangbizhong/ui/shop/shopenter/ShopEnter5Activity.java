@@ -81,7 +81,8 @@ public class ShopEnter5Activity extends BaseActivity implements ShopEnterPresent
         shopEnterP.setUserId(UserManage.getInstance().getLoginBean().getUserInfo_ID());
         String img = UserManage.getInstance().getLoginBean().getUserInfo_HeadImg();
 //        String s = img.split(23);
-        img=img.replace("http://testaml.whmnx.com","");
+//        img=img.replace("http://testaml.whmnx.com","");
+        img=img.replace("http://qbz.aimeilian.com.cn","");
 //                http://testaml.whmnx.com
         shopEnterP.setStoreHeadImage(img);
         shopEnterP.setStoreImage(img);
@@ -122,6 +123,7 @@ public class ShopEnter5Activity extends BaseActivity implements ShopEnterPresent
 
     @Override
     public void submitadmissionBack() {
+
         StatusActivity.start(this,1,"您入驻的申请目前正在等待审核中，\n" +
                 "我们将于5个工作日告知结果，请耐心等待！","入驻结果");
     }

@@ -90,6 +90,8 @@ public class NewsListActivity extends BaseActivity implements NewsPresenter.Mess
                 }else if (newsBean.getType() == 2){
                     //赠送
                     GiveDetailActivity.start(NewsListActivity.this,newsBean.getObjectId());
+                }else if (newsBean.getType() == 3){
+                    NewsDetailActivity.start(NewsListActivity.this,newsBean.getNotice_ID());
                 }
             }
         });
@@ -170,6 +172,8 @@ public class NewsListActivity extends BaseActivity implements NewsPresenter.Mess
                 str = "[代付]";
             }else if (item.getType() == 2){
                 str = "[赠送]";
+            }else if (item.getType() == 3){
+                str = "[其他]";
             }
             String text = str + item.getNotice_Title();
             holder.setText(R.id.tv_title,text)

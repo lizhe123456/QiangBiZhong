@@ -3,12 +3,10 @@ package com.whmnrc.qiangbizhong.ui.yimei.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
@@ -16,20 +14,16 @@ import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsDetailBean;
 import com.whmnrc.qiangbizhong.model.parameter.YiMeiOrderParam;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
-import com.whmnrc.qiangbizhong.ui.StatusActivity;
+import com.whmnrc.qiangbizhong.ui.PayStuActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
-import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
-import com.whmnrc.qiangbizhong.ui.shop.activity.ShopConfirmOrderActivity;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
 import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -177,12 +171,14 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
 
     @Override
     public void error() {
-
+        this.finish();
+        PayStuActivity.start(this,0);
     }
 
     @Override
     public void submitOrederBack() {
-        StatusActivity.start(this,1,"支付成功，请到订单列表里查看","支付成功");
+        this.finish();
+        PayStuActivity.start(this,1);
     }
 
     @Override

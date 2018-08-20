@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/dm_14"
             android:textColor="@color/white"
-            android:text="发起代付"
+            android:text="代付金额"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dm_44"/>
         <LinearLayout
@@ -68,7 +68,7 @@
         android:textColor="@color/tv_191"
         android:textSize="@dimen/dm_13"
         android:textColorHint="@color/tv_navigation"
-        android:hint="请输入对方手机号码或ID"
+        android:hint="请输入对方手机号码"
         android:background="@color/white"
         android:padding="@dimen/dm_15"/>
     <View

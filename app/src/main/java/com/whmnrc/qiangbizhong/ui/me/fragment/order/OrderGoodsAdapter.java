@@ -8,6 +8,7 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopDetailsActivity;
+import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
 
 /**
  * Company 武汉麦诺软创
@@ -46,6 +47,13 @@ public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.DetailBean>{
             holder.setText(R.id.tv_yu_moeny,""+item.getBond()).setText(R.id.tv_now_moeny,""+ (item.getProduct_Price() - item.getBond()));
         }else if (type == 3){
             holder.setVisible(R.id.rl_moeny,false);
+
+            holder.setOnClickListener(R.id.iv_goods, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    YiMeiGoodsDetailsActivity.start(getContext(),item.getProduct_ID());
+                }
+            });
         }
     }
 

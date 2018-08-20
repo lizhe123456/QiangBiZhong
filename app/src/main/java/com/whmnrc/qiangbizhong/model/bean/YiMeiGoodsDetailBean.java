@@ -28,7 +28,7 @@ public class YiMeiGoodsDetailBean {
     private int StoreIsCollection;
     private int EvaluateCount;
     private List<CommentBean> Evaluate;
-    private List<YiMeiIndexBean.BannerBean> Banner;
+    private List<BannerBean> Banner;
 
     public GoodsBean getGoods() {
         return Goods;
@@ -86,11 +86,11 @@ public class YiMeiGoodsDetailBean {
         this.Evaluate = Evaluate;
     }
 
-    public List<YiMeiIndexBean.BannerBean> getBanner() {
+    public List<BannerBean> getBanner() {
         return Banner;
     }
 
-    public void setBanner(List<YiMeiIndexBean.BannerBean> Banner) {
+    public void setBanner(List<BannerBean> Banner) {
         this.Banner = Banner;
     }
 
@@ -661,4 +661,62 @@ public class YiMeiGoodsDetailBean {
             this.Longitude = Longitude;
         }
     }
+
+    public class BannerBean{
+
+        /**
+         * Img_ID : 092d1ad2-6ab2-4c09-8156-c078fe4ed4c7
+         * Object_ID : 185d31ff-2059-446e-9f21-73829f26ec72
+         * Img_Path : http://192.168.1.157:8011/Resource/PhotoFile/b919e0e2-a39b-4d52-a1bd-6fdffc38649c.jpg
+         * Img_Sort : 0
+         * Img_Type : 0
+         */
+
+        private String Img_ID;
+        private String Object_ID;
+        private String Img_Path;
+        private int Img_Sort;
+        private int Img_Type;
+
+        public String getImg_ID() {
+            return Img_ID;
+        }
+
+        public void setImg_ID(String Img_ID) {
+            this.Img_ID = Img_ID;
+        }
+
+        public String getObject_ID() {
+            return Object_ID;
+        }
+
+        public void setObject_ID(String Object_ID) {
+            this.Object_ID = Object_ID;
+        }
+
+        public String getImg_Path() {
+            return Img_Path;
+        }
+
+        public void setImg_Path(String Img_Path) {
+            this.Img_Path = Img_Path;
+        }
+
+        public int getImg_Sort() {
+            return Img_Sort;
+        }
+
+        public void setImg_Sort(int Img_Sort) {
+            this.Img_Sort = Img_Sort;
+        }
+
+        public int getImg_Type() {
+            return Img_Type;
+        }
+
+        public void setImg_Type(int Img_Type) {
+            this.Img_Type = Img_Type;
+        }
+    }
+
 }

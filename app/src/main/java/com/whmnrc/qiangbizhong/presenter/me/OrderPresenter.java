@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -7,22 +8,18 @@ import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.gson.Gson;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.model.bean.OrderdetailBean;
-import com.whmnrc.qiangbizhong.model.bean.ShopCarBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiOrderDetailBean;
 import com.whmnrc.qiangbizhong.model.parameter.YiMeiOrderParam;
-import com.whmnrc.qiangbizhong.ui.StatusActivity;
-import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
+import com.whmnrc.qiangbizhong.ui.PayStuActivity;
 import com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity;
-import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
-import com.whmnrc.qiangbizhong.widget.AlertDialog;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -435,7 +432,8 @@ public class OrderPresenter {
                 new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                YiMeiOrderDetailBean yiMeiOrderDetailBean = GsonUtil.changeGsonToBean(data,YiMeiOrderDetailBean.class);
+                YiMeiOrderDetailBean yiMeiOrderDetailBean = JSON.parseObject(data,YiMeiOrderDetailBean.class);
+//                YiMeiOrderDetailBean yiMeiOrderDetailBean = GsonUtil.changeGsonToBean(data,YiMeiOrderDetailBean.class);
                 if (orderDetailMedicalCall != null){
                     if (yiMeiOrderDetailBean != null) {
                         orderDetailMedicalCall.orderDetailMedical(yiMeiOrderDetailBean);
@@ -498,12 +496,13 @@ public class OrderPresenter {
         });
     }
 
-    public void paymedicalorder(String orderId){
+    public void paymedicalorder(Activity activity ,String orderId){
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.paymedicalorder) + "?orderId="
                 + orderId + "&userId=" + UserManage.getInstance().getUserID(), new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                StatusActivity.start(context,1,"支付成功，请到订单列表里查看","支付成功");
+                activity.finish();
+                PayStuActivity.start(context,1);
                 if (TextUtils.isEmpty(data)){
                     return;
                 }
@@ -512,17 +511,20 @@ public class OrderPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                StatusActivity.start(context,0,"支付失败，请重试","支付失败");
+                activity.finish();
+                PayStuActivity.start(context,0);
             }
         });
     }
 
-    public void giveorder(String orderId,String giveUserId,String desc){
-        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.giveorder) + "?orderId="
-                + orderId + "&fromUserId=" + UserManage.getInstance().getUserID() + "&giveUserId=" + giveUserId + "&context=" + desc, new HashMap<>(), new OkhttpUtil.BeanCallback() {
+    public void paymedicalorder(String orderId,OrderUpdateCall orderUpdateCall){
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.paymedicalorder) + "?orderId="
+                + orderId + "&userId=" + UserManage.getInstance().getUserID(), new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                StatusActivity.start(context,1,"赠送成功，请到赠送记录里查看","赠送成功");
+                if (orderUpdateCall != null){
+                    orderUpdateCall.updateData();
+                }
                 if (TextUtils.isEmpty(data)){
                     return;
                 }
@@ -531,7 +533,30 @@ public class OrderPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                StatusActivity.start(context,0,"赠送失败，请重试","赠送失败");
+                if (orderUpdateCall != null){
+                    orderUpdateCall.error();
+                }
+            }
+        });
+    }
+
+
+    public void giveorder(Activity activity,String orderId,String giveUserId,String desc){
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.giveorder) + "?orderId="
+                + orderId + "&fromUserId=" + UserManage.getInstance().getUserID() + "&giveUserId=" + giveUserId + "&context=" + desc, new HashMap<>(), new OkhttpUtil.BeanCallback() {
+            @Override
+            public void onSuccess(String data) {
+                activity.finish();
+//                StatusActivity.start(context,1,"赠送成功，请到赠送记录里查看","赠送成功");
+                if (TextUtils.isEmpty(data)){
+                    return;
+                }
+                ToastUtils.showShort(data);
+            }
+
+            @Override
+            public void onFailure(int code, String errorMsg) {
+//                StatusActivity.start(context,0,"赠送失败，请重试","赠送失败");
             }
         });
     }

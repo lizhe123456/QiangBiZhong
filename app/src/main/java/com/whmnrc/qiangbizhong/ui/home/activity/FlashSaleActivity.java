@@ -130,7 +130,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
             View view = vsEmpty.inflate();
             ImageView imageView = view.findViewById(R.id.iv_empty);
             TextView textView = view.findViewById(R.id.tv_text);
-            imageView.setImageResource(R.drawable.ic_empty_order);
+            imageView.setImageResource(R.drawable.ic_empty_public);
             textView.setText("暂无更多数据~");
             vsEmpty.setVisibility(View.VISIBLE);
             rvGoods.setVisibility(View.GONE);
@@ -147,7 +147,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
                 break;
             case R.id.tv_confirm:
                 if (killGoodsBeans != null) {
-                    FlashSaleDetailsActivity.start(this, killGoodsBeans.getHotGoods().getRushId(), 0);
+                    FlashSaleDetailsActivity.start(this, killGoodsBeans.getHotGoods().getRushId());
                 }
                 break;
         }
@@ -310,7 +310,7 @@ public class FlashSaleActivity extends BaseActivity implements FlashSalePresente
                 holder.setBackgroundResource(R.id.tv_confirm, R.drawable.bg_red_v3);
             }
 
-            holder.setOnClickListener(R.id.tv_confirm, v -> FlashSaleDetailsActivity.start(getContext(),item.getRushId(),0));
+            holder.setOnClickListener(R.id.tv_confirm, v -> FlashSaleDetailsActivity.start(getContext(),item.getRushId()));
         }
 
         @Override

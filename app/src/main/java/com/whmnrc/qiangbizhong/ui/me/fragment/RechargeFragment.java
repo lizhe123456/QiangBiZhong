@@ -105,7 +105,11 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
             public void onError(String s) {
                 UserManage.getInstance().getUserInfo(RechargeFragment.this);
                 rechargePresenter.rechargeQuery(0, RechargeFragment.this);
-                ToastUtils.showShort("充值失败");
+                if (s.equals("4000")) {
+                    ToastUtils.showShort("请确认支付宝是否安装");
+                }else {
+                    ToastUtils.showShort("充值失败");
+                }
             }
         });
     }
@@ -114,8 +118,12 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
     @OnClick(R.id.btn_confirm)
     public void onViewClicked() {
         if (!TextUtils.isEmpty(etRecharge.getText().toString().trim())){
-            showLoading("充值中..");
-            rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"2","","",this);
+            if(Integer.parseInt(etRecharge.getText().toString().trim()) >= 20){
+                showLoading("充值中..");
+                rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"2","","",this);
+            }else {
+                ToastUtils.showShort("最少充值数量为20");
+            }
         }
     }
 

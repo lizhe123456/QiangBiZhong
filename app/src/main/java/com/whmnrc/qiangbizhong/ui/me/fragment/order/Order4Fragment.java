@@ -39,7 +39,7 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
 
             @Override
             public void toQiangGou(OrderListBean item) {
-                FlashSaleDetailsActivity.start(getContext(), item.getRushRecord().getRushId(), 0);
+                FlashSaleDetailsActivity.start(getContext(), item.getRushRecord().getRushId());
             }
 
             @Override

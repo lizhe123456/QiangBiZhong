@@ -61,16 +61,13 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
     @Override
 
     public void setUserVisibleHint(boolean isVisibleToUser) {
-
         super.setUserVisibleHint(isVisibleToUser);
-
         if (isVisibleToUser) {
             // 相当于onResume()方法--获取焦点
             if (goodsPresenter != null){
                 goodsPresenter.getgoodslist(type, UserManage.getInstance().getLoginBean().getStoreInfo().getId(), true, this);
             }
         }
-
     }
 
     @Override
@@ -95,11 +92,11 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
             @Override
             public void onClick(View view, Object item, int position) {
                 GoodsManageBean goodsManageBean = (GoodsManageBean) item;
-                ShopDetailsActivity.start(getContext(),goodsManageBean.getGoods_ID());
+                if (goodsManageBean.getGoods_ShopType() == 0) {
+                    ShopDetailsActivity.start(getContext(), goodsManageBean.getGoods_ID());
+                }
             }
         });
-
-
     }
 
     @Override

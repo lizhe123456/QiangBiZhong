@@ -134,6 +134,7 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
         classifyPresenter = new ClassifyPresenter(this);
         goodsPresenter = new GoodsPresenter(this);
         goodsParam.setStoreId(UserManage.getInstance().getLoginBean().getStoreInfo().getId());
+        classifyPresenter.getClassifyList(shopType,ReleaseGoodsActivity.this);
     }
 
 
@@ -236,6 +237,7 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
                 goodsPresenter.releaseGoods(goodsParam,type,this);
                 break;
             case R.id.rl_select_classify:
+
                 if (list != null) {
                     showVideoPicker(list);
                 }
@@ -248,6 +250,7 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
     }
 
     private void showVideoPicker(List<String> list) {
+
         OptionPicker picker = new OptionPicker(this,list);
 
         picker.setDividerVisible(false);

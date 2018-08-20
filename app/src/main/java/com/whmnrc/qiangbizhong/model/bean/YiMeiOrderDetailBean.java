@@ -109,9 +109,18 @@ public class YiMeiOrderDetailBean {
     private String StorePhone;
     private Object Order_RefundRemark;
     private String QrCode;
-    private Object AgentPayInfo;
+    private int PayStatus;
+    private String AgentPayInfo;
     private List<OrderListBean.DetailBean> Detail;
     private Object GiveRecordInfo;
+
+    public int getPayStatus() {
+        return PayStatus;
+    }
+
+    public void setPayStatus(int payStatus) {
+        PayStatus = payStatus;
+    }
 
     public Object getGiveRecordInfo() {
         return GiveRecordInfo;
@@ -399,6 +408,7 @@ public class YiMeiOrderDetailBean {
 
     public void setOrder_RebateNumber(int Order_RebateNumber) {
         this.Order_RebateNumber = Order_RebateNumber;
+
     }
 
     public String getUserInfo_Mobile() {
@@ -489,14 +499,11 @@ public class YiMeiOrderDetailBean {
         this.QrCode = QrCode;
     }
 
-    public Object getAgentPayInfo() {
-        if (TextUtils.isEmpty(AgentPayUserId)){
-            return "";
-        }
+    public String getAgentPayInfo() {
         return AgentPayInfo;
     }
 
-    public void setAgentPayInfo(Object AgentPayInfo) {
+    public void setAgentPayInfo(String AgentPayInfo) {
         this.AgentPayInfo = AgentPayInfo;
     }
 

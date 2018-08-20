@@ -179,10 +179,10 @@ public class RegisterActivity extends BaseActivity implements LoginPresenter.Reg
                 loginPresenter.sendsmscode(etPhoneNumber.getText().toString().trim());
                 break;
             case R.id.tv_xieyi:
-                UserXieYiActivity.start(this,"http://testaml.whmnx.com/Protocol/Index");
+                UserXieYiActivity.start(this,"http://qbz.aimeilian.com.cn/Protocol/Index");
                 break;
             case R.id.tv_cz_xieyi:
-                UserXieYiActivity.start(this,"http://testaml.whmnx.com/Protocol/Recharge");
+                UserXieYiActivity.start(this,"http://qbz.aimeilian.com.cn/Protocol/Recharge");
                 break;
             case R.id.iv_select:
                 if (isSelect){

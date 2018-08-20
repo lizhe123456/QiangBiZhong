@@ -19,8 +19,9 @@
     <string name="rule">（1）每人每天必须支付了预付金才有抽奖资格 \n（2）每人每天必须支付了预付金才有抽奖资格 \n（3）每人每天必须支付了预付金才有抽奖资格</string>
     
     <!--api-->
-    <string name="server_address">http://192.168.1.157:8010</string>
+    <!--<string name="server_address">http://192.168.1.157:8010</string>-->
     <!--<string name="server_address">http://testaml.whmnx.com/Api</string>-->
+    <string name="server_address">http://qbz.aimeilian.com.cn/Api</string>
     <!--注册-->
 
     <string name="register">/api/user/register</string>

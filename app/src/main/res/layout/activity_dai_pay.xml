@@ -11,6 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dm_200"
         android:background="@drawable/bg_color_btn">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dm_10"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dm_13"/>
 
         <TextView
             android:id="@+id/tv_substitute"
@@ -176,6 +184,7 @@
         android:paddingBottom="@dimen/dm_14"
         android:paddingTop="@dimen/dm_14"
         android:text="慷慨付款"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="18sp" />
 

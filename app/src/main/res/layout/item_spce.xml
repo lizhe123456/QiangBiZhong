@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/dm_10"
-    android:layout_marginRight="@dimen/dm_10">
+    android:layout_marginRight="@dimen/dm_10"
+    android:layout_marginTop="@dimen/dm_5">
     <TextView
         android:id="@+id/tv_spec"
         android:layout_width="match_parent"

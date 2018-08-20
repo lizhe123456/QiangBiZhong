@@ -80,6 +80,7 @@
                     android:textColor="@color/colorAccent"
                     android:layout_alignParentRight="true"
                     android:textSize="@dimen/dm_13"
+                    android:visibility="gone"
                     android:layout_alignBottom="@+id/iv_goods"/>
 
                 <TextView

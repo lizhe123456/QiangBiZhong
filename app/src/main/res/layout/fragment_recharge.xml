@@ -131,6 +131,7 @@
         android:paddingBottom="@dimen/dm_12"
         android:paddingTop="@dimen/dm_15"
         android:maxLength="7"
+        android:digits="0123456789"
         android:inputType="number"
         android:hint="￥   请输入充值数"
         android:textSize="15sp"

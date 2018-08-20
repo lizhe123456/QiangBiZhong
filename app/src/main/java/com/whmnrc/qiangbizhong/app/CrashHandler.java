@@ -2,20 +2,10 @@ package com.whmnrc.qiangbizhong.app;
 
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Looper;
 import android.util.Log;
 import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.EncryptUtils;
-import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.pgyersdk.crash.PgyCrashManager;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -84,7 +74,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             }
         }.start();
         //收集设备参数信息
-        PgyCrashManager.reportCaughtException(new Exception(ex));
         return true;
     }
 

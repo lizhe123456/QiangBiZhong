@@ -2,6 +2,7 @@ package com.whmnrc.qiangbizhong.ui.home.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -39,7 +40,10 @@ public class NewsDetailActivity extends BaseActivity {
 
     @Override
     protected void setData() {
-        String url = "http://127.0.0.1:8011/MessageNotice/Index?noticeId=" + getIntent().getStringExtra("newsId");
+        ivBack.setVisibility(View.VISIBLE);
+        tvTitle.setText("消息详情");
+//        String url = "http://127.0.0.1:8011/MessageNotice/Index?noticeId=" + getIntent().getStringExtra("newsId");
+        String url = "http:/testaml.whmnx.com/MessageNotice/Index?noticeId=" + getIntent().getStringExtra("newsId");
 
         wvView.getSettings().setJavaScriptEnabled(true);
         //支持屏幕缩放

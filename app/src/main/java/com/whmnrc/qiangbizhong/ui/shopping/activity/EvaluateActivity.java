@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ToastUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -59,7 +58,7 @@ public class EvaluateActivity extends BaseActivity implements ImagePresenter.Ima
     private ImagePresenter imagePresenter;
     private EvaluatePresenter mEvaluatePresenter;
     private int imgIndex;
-    TCommentAdapter tCommentAdapter;
+    private TCommentAdapter tCommentAdapter;
     private List<String> selectList;
 
     public static void start(Fragment context, OrderListBean orderListBean) {
@@ -123,7 +122,14 @@ public class EvaluateActivity extends BaseActivity implements ImagePresenter.Ima
             evaluateParam.setGoods_ID(detailBean.getProduct_ID());
             evaluateParam.setGoodsPrice_ID(detailBean.getSpecAttr_ID());
             evaluateParam.setOrder_ID(detailBean.getOrder_ID());
-            evaluateParam.setImageContext(detailBean.getList());
+            List<String> list1  = new ArrayList<>();
+            for (int i = 0; i < detailBean.getList().size(); i++) {
+                if (detailBean.getList().get(i).equals("")){
+                }else {
+                    list1.add(detailBean.getList().get(i));
+                }
+            }
+            evaluateParam.setImageContext(list1);
             evaluateParam.setTextContext(detailBean.getComment());
             evaluateParam.setUserId(UserManage.getInstance().getUserID());
             list.add(evaluateParam);
@@ -163,7 +169,7 @@ public class EvaluateActivity extends BaseActivity implements ImagePresenter.Ima
         this.finish();
     }
 
-    class TCommentAdapter extends BaseAdapter<OrderListBean.DetailBean>{
+    public class TCommentAdapter extends BaseAdapter<OrderListBean.DetailBean>{
 
         private ImgCall imgCall;
 

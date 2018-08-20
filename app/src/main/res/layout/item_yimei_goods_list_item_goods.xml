@@ -16,10 +16,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#19191E"
-        android:ellipsize="end"
         android:maxLines="1"
-        android:textSize="@dimen/dm_13"
-        android:layout_marginTop="@dimen/dm_5"
+        android:maxEms="8"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:text="asdasdsadsadasdsdsadasda"
         android:layout_gravity="center_horizontal"/>
     <LinearLayout
         android:layout_width="wrap_content"

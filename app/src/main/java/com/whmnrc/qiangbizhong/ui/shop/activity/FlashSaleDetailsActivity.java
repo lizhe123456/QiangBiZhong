@@ -106,10 +106,9 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
     long lstart;
     long now;
 
-    public static void start(Context context, String goodsId, int type) {
+    public static void start(Context context, String goodsId) {
         Intent starter = new Intent(context, FlashSaleDetailsActivity.class);
         starter.putExtra("goodsId", goodsId);
-        starter.putExtra("type", type);
         context.startActivity(starter);
     }
 

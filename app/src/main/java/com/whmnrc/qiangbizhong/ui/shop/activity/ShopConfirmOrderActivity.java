@@ -22,6 +22,7 @@ import com.whmnrc.qiangbizhong.model.bean.ShopCarBean;
 import com.whmnrc.qiangbizhong.model.bean.ShopDetailsBean;
 import com.whmnrc.qiangbizhong.presenter.me.AddressPresenter;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
+import com.whmnrc.qiangbizhong.ui.PayStuActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 import com.whmnrc.qiangbizhong.ui.shop.bean.OrderBeanReq;
@@ -206,7 +207,8 @@ public class ShopConfirmOrderActivity extends BaseActivity implements OrderPrese
 
     @Override
     public void error() {
-
+        this.finish();
+        PayStuActivity.start(this,0);
     }
 
     @Override
@@ -233,7 +235,8 @@ public class ShopConfirmOrderActivity extends BaseActivity implements OrderPrese
 
     @Override
     public void submitOrederBack() {
-        MyOrderActivity.start(this,0);
+        this.finish();
+        PayStuActivity.start(this,1);
     }
 
     @Override

@@ -88,7 +88,15 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
         if (UserManage.getInstance().getLoginBean() != null) {
             UserManage.getInstance().getUserInfo(MineFragment.this);
         }else {
-            refreshLayout.finishRefresh(3000);
+            MineBean mineBean = new MineBean();
+            tvUsername.setText("请先登录");
+            GlideuUtil.loadImageView(mContext,"",ivHead);
+            tvYudou.setText(0+"");
+            tvPurchaseRestrictions.setText("今日可购"+ 0);
+            mineBean.initMineBean(0);
+            initMenu(mineBean.getMenuBeans());
+            initOption(mineBean.getItemBeans());
+            loginBean = null;
         }
 
     }
@@ -269,7 +277,11 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_scan:
-                ShapeActivity.start(getContext());
+                if (loginBean == null) {
+                    LoginActivity.start(getContext());
+                }else {
+                    ShapeActivity.start(getContext());
+                }
                 break;
             case R.id.iv_head:
                 if (loginBean == null){

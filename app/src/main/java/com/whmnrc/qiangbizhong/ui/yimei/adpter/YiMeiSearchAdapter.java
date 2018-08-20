@@ -34,12 +34,12 @@ public class YiMeiSearchAdapter extends BaseAdapter<YiMeiGoodsBean>{
         tvOldMoeny.setText("原价："+String.valueOf(item.getGoods_PriceMax()));
         tvOldMoeny.getPaint().setAntiAlias(true);//抗锯齿
         tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
-//        holder.setOnClickListener(R.id.iv_img, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                YiMeiGoodsDetailsActivity.start(getContext(),item.getGoods_ID());
-//            }
-//        });
+        holder.setOnClickListener(R.id.iv_img, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YiMeiGoodsDetailsActivity.start(getContext(),item.getGoods_ID());
+            }
+        });
     }
 
     @Override

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_title"/>
+    <TextView
+        android:id="@+id/tv_pay_stu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_pay_s"
+        android:text="购买成功"
+        android:textSize="@dimen/dm_18"
+        android:textColor="@color/tv_191"
+        android:drawablePadding="@dimen/dm_5"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dm_30"/>
+    <TextView
+        android:id="@+id/tv_to_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="查看订单详情"
+        android:layout_marginLeft="@dimen/dm_22"
+        android:layout_marginRight="@dimen/dm_22"
+        android:paddingTop="@dimen/dm_12"
+        android:paddingBottom="@dimen/dm_12"
+        android:layout_marginTop="@dimen/dm_62"
+        android:background="@drawable/login_shap" />
+</LinearLayout>

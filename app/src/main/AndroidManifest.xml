@@ -40,6 +40,12 @@
         tools:replace="android:icon, android:theme,android:allowBackup,android:label,android:supportsRtl"
         android:name=".app.App"
         android:allowBackup="true">
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5b74f4beb27b0a091f000201" />
+        <!-- Channel ID用来标识App的推广渠道，作为推送消息时给用户分组的一个维度。-->
+
         <meta-data android:name="com.amap.api.v2.apikey"
             android:value="bfa933345c9f9bb89ae89facedcab4e8">
         </meta-data>
@@ -51,11 +57,6 @@
             android:name="PGYER_APPID"
             android:value="1fba0d0890282300433c8af6ae4fbdfe">
         </meta-data>
-
-        <provider
-            android:name="com.pgyersdk.PgyerProvider"
-            android:authorities="${applicationId}.com.pgyer.provider"
-            android:exported="false"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -224,9 +225,6 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.me.goods.update.EditListActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.shop.shopenter.location.SearchActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="DuplicateActivity" />
         <activity android:name=".ui.me.goods.update.EditGoodsDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
@@ -265,6 +263,14 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.QuestionnaireInvestigationActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.PayStuActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".pay.wechat.share.WXEntryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Fullscreen.Translucent"/>
+
         <service android:name="com.amap.api.location.APSService"/>
     </application>
 

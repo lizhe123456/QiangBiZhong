@@ -34,7 +34,7 @@
         android:layout_marginTop="@dimen/dm_10"
         android:src="@drawable/ic_aixin"
         android:layout_gravity="center"
-        android:layout_marginRight="@dimen/dm_15"
+        android:gravity="center"
         android:layout_marginBottom="@dimen/dm_30"/>
 
 

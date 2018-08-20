@@ -90,7 +90,7 @@ public class EditGoodsDetailsActivity extends BaseActivity {
         wvContent.addJavascriptInterface(new EditGoodsDetailsActivity(),
                 "android");
         String goodsId = getIntent().getStringExtra("goodsId");
-        wvContent.loadUrl("http://testaml.whmnx.com/GoodsDetail/Edit?goodsId=" + goodsId);
+        wvContent.loadUrl("http://qbz.aimeilian.com.cn/GoodsDetail/Edit?goodsId=" + goodsId);
 
        //H5加载链接监听
         wvContent.setWebViewClient(new WebViewClient() {

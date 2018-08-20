@@ -100,7 +100,11 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
             public void onError(String s) {
                 UserManage.getInstance().getUserInfo(OpenVipFragment.this);
                 rechargePresenter.rechargeQuery(1, OpenVipFragment.this);
-                ToastUtils.showShort("充值失败");
+                if (s.equals("4000")) {
+                    ToastUtils.showShort("请确认支付宝是否安装");
+                }else {
+                    ToastUtils.showShort("充值失败");
+                }
             }
         });
     }
@@ -108,8 +112,12 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
     @OnClick(R.id.btn_confirm)
     public void onViewClicked() {
         if (!TextUtils.isEmpty(etRecharge.getText().toString().trim())){
-            showLoading("充值中..");
-            rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"1","","",this);
+            if(Integer.parseInt(etRecharge.getText().toString().trim()) >= 20){
+                showLoading("充值中..");
+                rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"1","","",this);
+            }else {
+                ToastUtils.showShort("最少充值数量为20");
+            }
         }
     }
 

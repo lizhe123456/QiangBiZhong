@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:background="@drawable/ic_bg_3"
     android:orientation="vertical">
     <View
@@ -59,14 +60,14 @@
         app:riv_border_color="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="@dimen/dm_120"/>
+        android:layout_marginBottom="@dimen/dm_130"/>
     <TextView
         android:id="@+id/tv_nick_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/dm_15"
-        android:text="hahah"
+        tool:text="hahah"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dm_100"

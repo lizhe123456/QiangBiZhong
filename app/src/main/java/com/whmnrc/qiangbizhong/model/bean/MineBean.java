@@ -35,7 +35,7 @@ public class MineBean {
         List<MenuBean> menuBeans= new ArrayList<>();
         List<ItemBean> itemBeans = new ArrayList<>();
         if (type == 2) {
-            itemBeans.add(new ItemBean(R.drawable.ic_san_san, "扫一扫"));
+            itemBeans.add(new ItemBean(R.drawable.ic_san_san, "订单核销"));
         }
 
         itemBeans.add(new ItemBean(R.drawable.ic_item1, "赠送记录"));

@@ -49,6 +49,7 @@
             android:layout_below="@+id/xian"
             android:layout_marginTop="@dimen/dm_10"/>
         <LinearLayout
+            android:id="@+id/heji"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rv_goods_list"

@@ -100,6 +100,7 @@ public class RushRecordActivity extends BaseActivity implements FlashSalePresent
     @Override
     public void loadMore(List<RushRecordBean> rushRecordBeans) {
         rushRecordAdapter.addMoreDataSet(rushRecordBeans);
+        refresh.finishLoadMore(true);
     }
 
     public void showEmpty() {
@@ -107,7 +108,7 @@ public class RushRecordActivity extends BaseActivity implements FlashSalePresent
             View view = vsEmpty.inflate();
             ImageView imageView = view.findViewById(R.id.iv_empty);
             TextView textView = view.findViewById(R.id.tv_text);
-            imageView.setImageResource(R.drawable.ic_empty_order);
+            imageView.setImageResource(R.drawable.ic_empty_public);
             textView.setText("暂无更多数据~");
             vsEmpty.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
@@ -143,7 +144,7 @@ public class RushRecordActivity extends BaseActivity implements FlashSalePresent
             holder.setOnClickListener(R.id.ll_goods, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashSaleDetailsActivity.start(getContext(),item.getRushId(),0);
+                    FlashSaleDetailsActivity.start(getContext(),item.getRushId());
                 }
             });
         }

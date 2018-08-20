@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
 import com.whmnrc.qiangbizhong.model.bean.HomeResult;
+import com.whmnrc.qiangbizhong.ui.home.HomeFragment;
 import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
@@ -87,7 +88,7 @@ public class HomePresenter {
             @Override
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)) {
-                    if (!AppUtils.getAppPackageName().equals(data)) {
+                    if (!AppUtils.getAppVersionName().equals(data)) {
                         downloadapp();
                     }
                 }
@@ -120,6 +121,7 @@ public class HomePresenter {
                                     Uri content_url = Uri.parse(data);
                                     intent.setData(content_url);
                                     mContext.startActivity(intent);
+                                    AppUtils.exitApp();
                                 }
                             }).show();
                 }

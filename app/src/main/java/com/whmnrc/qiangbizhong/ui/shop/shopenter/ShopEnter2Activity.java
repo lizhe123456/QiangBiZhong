@@ -66,9 +66,7 @@ public class ShopEnter2Activity extends BaseActivity {
         wvContent.getSettings().setUseWideViewPort(true);
         wvContent.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         wvContent.getSettings().setLoadWithOverviewMode(true);
-//        wvContent.loadUrl("http://192.168.1.157:8011/Protocol/AdmissionInstructions");
-//        wvContent.loadUrl("http://192.168.1.157:8011/Protocol/Admission");
-        wvContent.loadUrl("http://testaml.whmnx.com/Protocol/Admission");
+        wvContent.loadUrl("http://qbz.aimeilian.com.cn/Protocol/Admission");
     }
 
 

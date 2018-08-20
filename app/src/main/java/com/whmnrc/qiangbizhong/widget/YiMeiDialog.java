@@ -1,6 +1,7 @@
 package com.whmnrc.qiangbizhong.widget;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.AppUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 
@@ -25,13 +28,14 @@ public class YiMeiDialog extends Dialog {
     private ImageView imageView;
     private Display display;
     private LinearLayout lLayout_bg;
+    private Activity activity;
 
-
-    public YiMeiDialog(@NonNull Context context) {
+    public YiMeiDialog(@NonNull Activity context) {
         super(context,R.style.AlertDialogStyle);
         WindowManager windowManager = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
         display = windowManager.getDefaultDisplay();
+        activity = context;
     }
 
     public YiMeiDialog(@NonNull Context context, int themeResId) {
@@ -49,12 +53,14 @@ public class YiMeiDialog extends Dialog {
             public void onClick(View v) {
                 MyOrderActivity.start(getContext(),4);
                 dismiss();
+                activity.finish();
             }
         });
         setCancelable(false);
         // 调整dialog背景大小
         lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (display
                 .getWidth() * 0.85), LinearLayout.LayoutParams.WRAP_CONTENT));
+
     }
 
 }
