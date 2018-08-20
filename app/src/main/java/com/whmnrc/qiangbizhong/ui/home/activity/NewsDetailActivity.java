@@ -43,7 +43,7 @@ public class NewsDetailActivity extends BaseActivity {
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("消息详情");
 //        String url = "http://127.0.0.1:8011/MessageNotice/Index?noticeId=" + getIntent().getStringExtra("newsId");
-        String url = "http:/testaml.whmnx.com/MessageNotice/Index?noticeId=" + getIntent().getStringExtra("newsId");
+        String url = "http://qbz.aimeilian.com.cn/MessageNotice/Index?noticeId=" + getIntent().getStringExtra("newsId");
 
         wvView.getSettings().setJavaScriptEnabled(true);
         //支持屏幕缩放
