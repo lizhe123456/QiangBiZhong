@@ -33,7 +33,9 @@ public class ShopOrder2Fragment extends BaseOrderFragment {
 
             @Override
             public void collectGoods(OrderListBean item) {
-                new AlertDialog(getContext()).builder().setMsg("确认要收货吗？")
+                new AlertDialog(getContext()).builder().setTitle("提示")
+                        .setMsg("确认要收货吗？")
+
                         .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

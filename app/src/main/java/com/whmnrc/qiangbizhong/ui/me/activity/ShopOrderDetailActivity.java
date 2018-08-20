@@ -193,7 +193,7 @@ public class ShopOrderDetailActivity extends BaseActivity implements OrderPresen
             });
         }else if (orderdetailBean.getOrder_State() == 2){
             //2待收货
-            orderState.setText("您的订单等待收货");
+            orderState.setText("买家（"+orderdetailBean.getUserInfo_NickName()+"）" + "的订单，正在等待收货");
             tvBtn.setText("确认收货");
             tvBtn.setVisibility(View.GONE);
             tvBtn.setOnClickListener(new View.OnClickListener() {

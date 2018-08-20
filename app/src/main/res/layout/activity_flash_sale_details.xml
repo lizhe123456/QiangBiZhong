@@ -30,7 +30,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <com.youth.banner.Banner
@@ -80,6 +80,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_toRightOf="@+id/title"
                             app:viewSize="12" />
+
                         <com.whmnrc.qiangbizhong.widget.SnapUpCountDownTimerView
                             android:id="@+id/countDownTimerView1"
                             android:layout_width="wrap_content"
@@ -87,20 +88,21 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_horizontal"
                             android:layout_toRightOf="@+id/title"
-                            app:viewSize="12"
-                            android:visibility="gone"/>
+                            android:visibility="gone"
+                            app:viewSize="12" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/tv_canyu_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dm_18"
-                        android:layout_toRightOf="@+id/ll_time"
-                        android:text="已有68990人参加"
+                        android:layout_marginRight="@dimen/dm_20"
                         android:textColor="#ffffffff"
-                        android:textSize="10sp" />
+                        android:textSize="10sp"
+                        tool:text="已有68990人参加" />
 
                 </RelativeLayout>
 
@@ -122,9 +124,9 @@
                         android:id="@+id/tv_goods_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="海边旅游红色男士英伦风情炫酷跑车"
                         android:textColor="@color/tv_191"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        tool:text="海边旅游红色男士英伦风情炫酷跑车" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -141,9 +143,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
-                                android:text="5000"
                                 android:textColor="@color/goods_price"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                tool:text="5000" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -167,9 +169,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
-                                android:text="5000"
                                 android:textColor="@color/tv_navigation"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                tool:text="5000" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -180,19 +182,22 @@
                                 android:src="@drawable/ic_yudou" />
                         </LinearLayout>
                     </LinearLayout>
+
                     <TextView
                         android:id="@+id/tv_goods_desc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/tv_navigation"
-                        android:textSize="@dimen/dm_12"
+                        android:layout_marginBottom="@dimen/dm_5"
                         android:layout_marginTop="@dimen/dm_5"
-                        android:layout_marginBottom="@dimen/dm_5"/>
+                        android:textColor="@color/tv_navigation"
+                        android:textSize="@dimen/dm_12" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dm_1"
                         android:layout_marginTop="@dimen/dm_10"
                         android:background="@color/divider_color" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -264,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dm_15"
-                        android:text="已选"
+                        tool:text="已选"
                         android:textColor="@color/goods_price"
                         android:textSize="@dimen/dm_12" />
 
@@ -273,9 +278,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dm_20"
-                        android:text="海边旅游红色男士英伦风情炫酷跑车"
                         android:textColor="@color/tv_191"
-                        android:textSize="@dimen/dm_12" />
+                        android:textSize="@dimen/dm_12"
+                        tool:text="海边旅游红色男士英伦风情炫酷跑车" />
                 </LinearLayout>
 
                 <View
@@ -330,7 +335,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_yuyue"
                 android:layout_marginLeft="@dimen/dm_15"
-                android:text="中奖后再付：340"
+                tool:text="中奖后再付：340"
                 android:textColor="@color/tv_navigation"
                 android:textSize="@dimen/dm_10" />
 
@@ -341,7 +346,7 @@
                 android:layout_marginBottom="@dimen/dm_5"
                 android:layout_marginTop="@dimen/dm_10"
                 android:layout_toRightOf="@+id/tv_yuyue"
-                android:text="10"
+                tool:text="10"
                 android:textColor="@color/goods_price"
                 android:textSize="@dimen/dm_15" />
 

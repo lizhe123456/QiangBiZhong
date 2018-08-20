@@ -237,6 +237,53 @@
                         android:textSize="@dimen/dm_13"
                         android:layout_marginLeft="@dimen/dm_10"/>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dm_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/tv_191"
+                        android:textSize="@dimen/dm_13"
+                        android:text="下单用户："/>
+
+                    <TextView
+                        android:id="@+id/tv_order_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="@color/tv_191"
+                        android:textSize="@dimen/dm_13"
+                        android:layout_marginLeft="@dimen/dm_10"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dm_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/tv_191"
+                        android:textSize="@dimen/dm_13"
+                        android:text="下单电话："/>
+
+                    <TextView
+                        android:id="@+id/tv_order_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="@color/tv_191"
+                        android:textSize="@dimen/dm_13"
+                        android:layout_marginLeft="@dimen/dm_10"/>
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

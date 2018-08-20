@@ -20,7 +20,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@color/white"
                 android:padding="@dimen/dm_15"
                 android:text="买家(13)的订单，正在等待发货"
                 android:textColor="@color/tv_navigation"

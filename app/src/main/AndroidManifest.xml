@@ -271,6 +271,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Fullscreen.Translucent"/>
 
+        <activity android:name=".ui.WxRegisterActivity"
+            android:screenOrientation="portrait"/>
+
         <service android:name="com.amap.api.location.APSService"/>
     </application>
 

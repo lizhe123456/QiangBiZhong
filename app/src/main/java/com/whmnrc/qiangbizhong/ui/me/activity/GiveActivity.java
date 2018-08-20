@@ -9,21 +9,14 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
-import com.whmnrc.qiangbizhong.model.bean.GiveBean;
 import com.whmnrc.qiangbizhong.model.bean.GiveRBean;
 import com.whmnrc.qiangbizhong.presenter.me.GivePresenter;
 import com.whmnrc.qiangbizhong.util.UserManage;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -129,6 +122,11 @@ public class GiveActivity extends BaseActivity implements GivePresenter.GiveList
     public void loadMore(List<GiveRBean> giveRBeans) {
         mGiveAdapter.addMoreDataSet(giveRBeans);
         refresh.finishLoadMore(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     public class GiveAdapter extends BaseAdapter<GiveRBean>{

@@ -56,6 +56,8 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
 //        holder.setVisible(R.id.tv_btn_2,false);
 //        holder.setVisible(R.id.tv_btn_3,false);
         holder.setText(R.id.tv_moeny, moeny + "");
+        holder.setVisible(R.id.tv_btn_3, true);
+        holder.setVisible(R.id.tv_btn_2, true);
         if (item.getOrder_CreateType() == 0) {
             if (item.getStoreInfo() != null) {
                 holder.setText(R.id.tv_order_num, item.getStoreInfo().getStoreName() == null ? "" : item.getStoreInfo().getStoreName()).setOnClickListener(R.id.tv_order_num, new View.OnClickListener() {
@@ -223,13 +225,13 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
                         onOrderListener.customerServicePhoneClick(item);
                 });
 
-                if (item.getOrder_State() == 0 | item.getOrder_State() == 3){
+                if (item.getOrder_CreateType() == 0 | item.getOrder_CreateType() == 3){
                     holder.setText(R.id.tv_btn_2, "申请退款");
                     holder.setOnClickListener(R.id.tv_btn_2, v -> {
                         if (onOrderListener != null)
-                            onOrderListener.returnGoods(item);
+                            onOrderListener.refund(item);
                     });
-                }else {
+                }else{
                     holder.setVisible(R.id.tv_btn_2,false);
                 }
 

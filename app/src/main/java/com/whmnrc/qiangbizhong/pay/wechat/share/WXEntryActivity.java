@@ -4,13 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.whmnrc.qiangbizhong.app.Constants;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
+import com.whmnrc.qiangbizhong.model.bean.WeiXin;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Company 武汉麦诺软创
@@ -19,49 +27,37 @@ import com.whmnrc.qiangbizhong.base.BaseActivity;
 
 public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
-    private IWXAPI api;
-
+    private IWXAPI wxAPI;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        WXShare share = new WXShare(this);
-//        api = share
-//                .register()
-//                .getApi();
-//
-//        //注意：
-//        //第三方开发者如果使用透明界面来实现WXEntryActivity，需要判断handleIntent的返回值，如果返回值为false，则说明入参不合法未被SDK处理，应finish当前透明界面，避免外部通过传递非法参数的Intent导致停留在透明界面，引起用户的疑惑
-//        try {
-//            if (!api.handleIntent(getIntent(), this)) {
-//                finish();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
+        wxAPI = WXAPIFactory.createWXAPI(this, Constants.WX_APP_ID,true);
+        wxAPI.registerApp(Constants.WX_APP_ID);
+        wxAPI.handleIntent(getIntent(), this);
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
+    protected void onNewIntent(Intent intent){
         super.onNewIntent(intent);
+        wxAPI.handleIntent(getIntent(),this);
+    }
 
-        LogUtils.i("onNewIntent");
-        setIntent(intent);
-        if (!api.handleIntent(intent, this)) {
-            finish();
+    @Override
+    public void onReq(BaseReq arg0) {
+        Log.i("ansen","WXEntryActivity onReq:"+arg0);
+    }
+
+    @Override
+    public void onResp(BaseResp resp){
+        if(resp.getType()== ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX){//分享
+//            WeiXin weiXin=new WeiXin(2,resp.errCode,"",authResp.openId);
+//            EventBus.getDefault().post(weiXin);
+        }else if(resp.getType()==ConstantsAPI.COMMAND_SENDAUTH){//登陆
+            SendAuth.Resp authResp = (SendAuth.Resp) resp;
+            WeiXin weiXin=new WeiXin(1,resp.errCode,authResp.code,authResp.openId);
+            EventBus.getDefault().post(weiXin);
         }
-
-    }
-
-    @Override
-    public void onReq(BaseReq baseReq) {
-
-    }
-
-    @Override
-    public void onResp(BaseResp baseResp) {
-
+        finish();
     }
 }

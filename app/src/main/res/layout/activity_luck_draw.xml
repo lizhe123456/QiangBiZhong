@@ -37,7 +37,7 @@
            android:drawableTop="@drawable/btn_my_luck_draw"
            android:gravity="center"
            android:padding="@dimen/dm_3"
-           android:text="我的中奖"
+           android:text="我的奖品"
            android:textColor="@color/tv_navigation"
            android:textSize="12sp" />
 

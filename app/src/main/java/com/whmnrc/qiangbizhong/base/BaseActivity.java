@@ -65,10 +65,8 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected abstract void setData();
 
     protected void showLoading(String msg) {
-        if (!loadingDialog.isShowing()) {
-            loadingDialog.setMessage(msg);
-            loadingDialog.show();
-        }
+        loadingDialog.setMessage(msg);
+        loadingDialog.showDialog();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

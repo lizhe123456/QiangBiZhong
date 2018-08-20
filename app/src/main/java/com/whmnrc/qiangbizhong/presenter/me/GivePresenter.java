@@ -84,7 +84,6 @@ public class GivePresenter {
     }
 
 
-
     public interface GiveListCall extends BaseCall{
 
         void getGiveList(List<GiveRBean> giveRBeans);

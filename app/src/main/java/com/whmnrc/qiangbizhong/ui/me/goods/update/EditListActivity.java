@@ -59,13 +59,15 @@ public class EditListActivity extends BaseActivity {
     protected void setData() {
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("编辑商品");
+        String data = getIntent().getStringExtra("goodsManageBean");
+        goodsManageBean = GsonUtil.changeGsonToBean(data, GoodsManageBean.class);
         List<String> list = new ArrayList<>();
         list.add("编辑商品信息");
         list.add("编辑商品轮播图");
         list.add("编辑商品规格");
-        list.add("编辑商品详情");
-        String data = getIntent().getStringExtra("goodsManageBean");
-        goodsManageBean = GsonUtil.changeGsonToBean(data, GoodsManageBean.class);
+        if (goodsManageBean.getGoods_ShopType() != 3) {
+            list.add("编辑商品详情");
+        }
         EditItemAdapter editItemAdapter = new EditItemAdapter(this);
         rvEditList.setLayoutManager(new LinearLayoutManager(this));
         rvEditList.setAdapter(editItemAdapter);

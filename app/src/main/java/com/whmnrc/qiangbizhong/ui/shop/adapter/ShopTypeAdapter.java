@@ -30,18 +30,20 @@ public class ShopTypeAdapter extends BaseAdapter<ShopBean.TypeListBean>{
     }
 
     public void setOpen(boolean isOpen,@NonNull List<ShopBean.TypeListBean> datas){
-        if (datas.size() > 10) {
-            if (isOpen) {
-                addFirstDataSet(datas);
-            } else {
-                List<ShopBean.TypeListBean> list = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    list.add(datas.get(i));
+        if (datas != null) {
+            if (datas.size() > 10) {
+                if (isOpen) {
+                    addFirstDataSet(datas);
+                } else {
+                    List<ShopBean.TypeListBean> list = new ArrayList<>();
+                    for (int i = 0; i < 10; i++) {
+                        list.add(datas.get(i));
+                    }
+                    addFirstDataSet(list);
                 }
-                addFirstDataSet(list);
+            } else {
+                addFirstDataSet(datas);
             }
-        }else {
-            addFirstDataSet(datas);
         }
     }
 

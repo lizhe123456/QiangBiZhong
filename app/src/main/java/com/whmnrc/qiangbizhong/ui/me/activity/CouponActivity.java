@@ -105,15 +105,16 @@ public class CouponActivity extends BaseActivity implements CouponPresenter.Coup
     }
 
     public void showEmpty() {
-        if (vsEmpty.getParent() != null) {
-            View view = vsEmpty.inflate();
-            ImageView imageView = view.findViewById(R.id.iv_empty);
-            TextView textView = view.findViewById(R.id.tv_text);
-            imageView.setImageResource(R.drawable.ic_empty_coupon);
-            textView.setText("暂无更多抵用券~");
-        }
-        vsEmpty.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
+        if (vsEmpty != null)
+            if (vsEmpty.getParent() != null) {
+                View view = vsEmpty.inflate();
+                ImageView imageView = view.findViewById(R.id.iv_empty);
+                TextView textView = view.findViewById(R.id.tv_text);
+                imageView.setImageResource(R.drawable.ic_empty_coupon);
+                textView.setText("暂无更多抵用券~");
+            }
+            vsEmpty.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
     }
 
     class CouponAdapter extends BaseAdapter<CouponBean> {

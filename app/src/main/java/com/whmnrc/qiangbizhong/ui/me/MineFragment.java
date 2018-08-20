@@ -2,12 +2,17 @@ package com.whmnrc.qiangbizhong.ui.me;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.luck.picture.lib.permissions.RxPermissions;
@@ -68,12 +73,21 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
     RecyclerView rvOption;
     @BindView(R.id.refresh)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.ll_all_title)
+    LinearLayout llAllTtile;
+    @BindView(R.id.nv_s)
+    NestedScrollView nestedScrollView;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.v_divider)
+    View vDivider;
 
     ImmersionBar mImmersionBar;
 
     private LoginBean loginBean;
     private static final int REQUEST_CODE = 101;
     private OrderPresenter orderPresenter;
+    private int height = SizeUtils.dp2px(150);
 
     public static MineFragment newInstance() {
         Bundle args = new Bundle();
@@ -145,6 +159,30 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
                 }
             }
         });
+
+//        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//
+////                int y =  oldScrollY - scrollY;
+//                if (scrollY <= 0) {   //设置标题的背景颜色
+//                    tvTitle.setTextColor(getResources().getColor(R.color.transparent));
+//                    llAllTtile.setBackgroundColor(getResources().getColor(R.color.transparent));
+//                    vDivider.setBackgroundColor(getResources().getColor(R.color.transparent));
+////                    llAllTtile.setBackgroundColor(Color.argb((int) 0, 144,151,166));
+//                } else if (scrollY > 0 && scrollY <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+//                    float scale = (float) scrollY / height;
+//                    float alpha = (255 * scale);
+//                    tvTitle.setTextColor(Color.argb((int) alpha, 36,36,36));
+//                    llAllTtile.setBackgroundColor(Color.argb((int) alpha, 255,255,255));
+//                    vDivider.setBackgroundColor(Color.argb((int) alpha, 221,221,221));
+//                } else {    //滑动到banner下面设置普通颜色
+//                    tvTitle.setTextColor(Color.argb((int) 255, 36,36,36));
+//                    llAllTtile.setBackgroundColor(Color.argb((int) 255, 255,255,255));
+//                    vDivider.setBackgroundColor(Color.argb((int) 255, 221,221,221));
+//                }
+//            }
+//        });
     }
 
     private void initOption(List<MineBean.ItemBean> itemBeans) {

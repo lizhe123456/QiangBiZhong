@@ -18,6 +18,7 @@ import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.me.LoginPresenter;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.ZhaoPwdActivity;
+import com.whmnrc.qiangbizhong.util.PwdCheckUtil;
 import com.whmnrc.qiangbizhong.util.ToastUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
@@ -79,6 +80,10 @@ public class UpdatePassActivity extends BaseActivity implements LoginPresenter.U
                 }
                 if (TextUtils.isEmpty(etNewPass.getText().toString())){
                     ToastUtils.showShort("新密码不能为空");
+                    return;
+                }
+                if (!PwdCheckUtil.isLetterDigit(etNewPass.getText().toString().trim())){
+                    ToastUtils.showShort("至少包含大小写字母及数字");
                     return;
                 }
                 if (TextUtils.isEmpty(etNewPass2.getText().toString())){

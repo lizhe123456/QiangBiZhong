@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
@@ -93,6 +94,8 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
     RelativeLayout rlJs;
     @BindView(R.id.refresh)
     SmartRefreshLayout refresh;
+    @BindView(R.id.ll_time)
+    LinearLayout llTime;
 
 
     private SparseArray<Fragment> fragments;
@@ -298,9 +301,15 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                     countDownTimerView.start();
                     countDownTimerView.setVisibility(View.VISIBLE);
                     countDownTimerView1.setVisibility(View.GONE);
+                    rlCanYu.setVisibility(View.VISIBLE);
+                    llTime.setVisibility(View.GONE);
+                }else {
+                    rlCanYu.setVisibility(View.GONE);
+                    llTime.setVisibility(View.VISIBLE);
                 }
             }
-            rlCanYu.setVisibility(View.VISIBLE);
+
+
             if (goodsRushinfoBean.getParticipate() == 1) {
                 if (btnStatu() == 1) {
                     //再活动时间内

@@ -11,117 +11,149 @@
         app:srlAccentColor="@color/tv_191"
         app:srlTextSizeTime="@dimen/dm_14"
         app:srlTextSizeTitle="@dimen/dm_14" />
-
-    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg_f5f5f5"
-            android:orientation="vertical">
-
-            <RelativeLayout
+            android:id="@+id/nv_s">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_150"
-                android:background="@drawable/ic_mine_bg"
-                android:paddingTop="@dimen/dm_20">
+                android:layout_height="match_parent"
+                android:background="@color/bg_f5f5f5"
+                android:orientation="vertical">
+                <!--<include layout="@layout/layout_title"/>-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_150"
+                    android:background="@drawable/ic_mine_bg"
+                    android:paddingTop="@dimen/dm_20">
 
-                <ImageView
-                    android:id="@+id/iv_scan"
-                    android:layout_width="@dimen/dm_30"
-                    android:layout_height="@dimen/dm_30"
-                    android:layout_marginLeft="@dimen/dm_42"
-                    android:layout_marginTop="@dimen/dm_31"
-                    android:src="@drawable/ic_scan"/>
-
-                <com.whmnrc.qiangbizhong.widget.RoundedImageView
-                    android:id="@+id/iv_head"
-                    android:layout_width="@dimen/dm_55"
-                    android:layout_height="@dimen/dm_55"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/dm_20"
-                    android:scaleType="centerCrop"
-                    app:riv_oval="true" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:textSize="@dimen/dm_12"
-                    android:paddingBottom="@dimen/dm_3"
-                    android:paddingLeft="@dimen/dm_8"
-                    android:paddingRight="@dimen/dm_17"
-                    android:paddingTop="@dimen/dm_3"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/dm_34"
-                    android:background="@drawable/ic_bg"
-                    android:gravity="center">
-                    <TextView
-                        android:id="@+id/tv_purchase_restrictions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="今日可够0"
-                        android:layout_marginLeft="@dimen/dm_10"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/dm_12"/>
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dm_3"
-                        android:layout_marginLeft="@dimen/dm_5"
-                        android:src="@drawable/ic_yudou" />
-                </LinearLayout>
+                        android:id="@+id/iv_scan"
+                        android:layout_width="@dimen/dm_30"
+                        android:layout_height="@dimen/dm_30"
+                        android:layout_marginLeft="@dimen/dm_42"
+                        android:layout_marginTop="@dimen/dm_31"
+                        android:src="@drawable/ic_scan"/>
 
-                <TextView
-                    android:id="@+id/tv_username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_head"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/dm_5"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/dm_14" />
-                <LinearLayout
-                    android:id="@+id/ll_now_moeny"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/dm_5"
-                    android:layout_below="@+id/tv_username"
-                    android:layout_centerHorizontal="true">
-                    <TextView
-                        android:id="@+id/tv_yudou"
+                    <com.whmnrc.qiangbizhong.widget.RoundedImageView
+                        android:id="@+id/iv_head"
+                        android:layout_width="@dimen/dm_55"
+                        android:layout_height="@dimen/dm_55"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dm_20"
+                        android:scaleType="centerCrop"
+                        app:riv_oval="true" />
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:textSize="@dimen/dm_12"
+                        android:paddingBottom="@dimen/dm_3"
+                        android:paddingLeft="@dimen/dm_8"
+                        android:paddingRight="@dimen/dm_17"
+                        android:paddingTop="@dimen/dm_3"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/dm_34"
+                        android:background="@drawable/ic_bg"
+                        android:gravity="center">
+                        <TextView
+                            android:id="@+id/tv_purchase_restrictions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="今日可够0"
+                            android:layout_marginLeft="@dimen/dm_10"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dm_12"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dm_3"
+                            android:layout_marginLeft="@dimen/dm_5"
+                            android:src="@drawable/ic_yudou" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_head"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dm_5"
                         android:textColor="@color/white"
                         android:textSize="@dimen/dm_14" />
-                    <ImageView
+                    <LinearLayout
+                        android:id="@+id/ll_now_moeny"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginBottom="@dimen/dm_3"
-                        android:layout_marginLeft="@dimen/dm_5"
-                        android:src="@drawable/ic_yudou" />
-                </LinearLayout>
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/dm_5"
+                        android:layout_below="@+id/tv_username"
+                        android:layout_centerHorizontal="true">
+                        <TextView
+                            android:id="@+id/tv_yudou"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/dm_14" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginBottom="@dimen/dm_3"
+                            android:layout_marginLeft="@dimen/dm_5"
+                            android:src="@drawable/ic_yudou" />
+                    </LinearLayout>
 
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dm_10"
+                    android:overScrollMode="never" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dm_10"
+                    android:overScrollMode="never" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_69"
+            android:orientation="vertical"
+            android:id="@+id/ll_all_title"
+            android:background="@color/transparent">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_20" />
+            <RelativeLayout
+                android:id="@+id/ll_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_48"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/transparent"
+                    android:textSize="@dimen/dm_15"
+                    android:text="我的"/>
             </RelativeLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_menu"
+            <View
+                android:id="@+id/v_divider"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dm_10"
-                android:overScrollMode="never" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_option"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dm_10"
-                android:overScrollMode="never" />
+                android:layout_height="@dimen/dm_1"
+                android:background="@color/transparent"/>
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-
+    </FrameLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

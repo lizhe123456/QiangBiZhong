@@ -91,10 +91,8 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void showLoading(String msg) {
-        if (!loadingDialog.isShowing()) {
-            loadingDialog.setMessage(msg);
-            loadingDialog.show();
-        }
+        loadingDialog.setMessage(msg);
+        loadingDialog.showDialog();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

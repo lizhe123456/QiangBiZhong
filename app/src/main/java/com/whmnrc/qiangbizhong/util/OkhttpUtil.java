@@ -63,6 +63,8 @@ public class OkhttpUtil {
 
                 @Override
                 public void onResponse(String response, int id) {
+                    if (response != null)
+                        LogUtils.e("返回结果=", response);
                     if (objectCallback != null) {
                         if (!TextUtils.isEmpty(response)) {
                             BaseResponse baseResponse = JSON.parseObject(response, BaseResponse.class);
@@ -177,7 +179,8 @@ public class OkhttpUtil {
                 @Override
                 public void onResponse(String response, int id) {
                     if (BuildConfig.DEBUG)
-                        LogUtils.e("返回结果=", response);
+                        if (response != null)
+                            LogUtils.e("返回结果=", response);
                     if (callback != null) {
                         if (!TextUtils.isEmpty(response)) {
                             BaseResponse baseResponse = JSON.parseObject(response, BaseResponse.class);
@@ -193,7 +196,7 @@ public class OkhttpUtil {
                 }
             });
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             EventBus.getDefault().post(new LodingBean());
         }
     }
@@ -224,7 +227,8 @@ public class OkhttpUtil {
                         @Override
                         public void onResponse(String responseString, int id) {
                             if (BuildConfig.DEBUG)
-                                Log.e("返回结果=", responseString);
+                                if (responseString != null)
+                                    LogUtils.e("返回结果=", responseString);
 
                             if (callback != null) {
                                 callback.onSuccess(responseString);
@@ -233,7 +237,7 @@ public class OkhttpUtil {
                         }
                     });
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             EventBus.getDefault().post(new LodingBean());
         }
 
@@ -265,7 +269,8 @@ public class OkhttpUtil {
                         @Override
                         public void onResponse(String responseString, int id) {
                             if (BuildConfig.DEBUG)
-                                Log.e("返回结果=", responseString);
+                                if (responseString != null)
+                                    LogUtils.e("返回结果=", responseString);
 
                             if (callback != null) {
                                 if (!TextUtils.isEmpty(responseString)) {

@@ -65,6 +65,10 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
     LinearLayout llBtn_1;
     @BindView(R.id.tv_moeny)
     TextView tvMoeny;
+    @BindView(R.id.tv_order_user)
+    TextView tvOrderUser;
+    @BindView(R.id.tv_order_phone)
+    TextView tvOrderPhone;
 
     private OrderPresenter orderPresenter;
     private String orderId;
@@ -144,7 +148,8 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
         tvItem1.setText(orderdetailBean.getOrder_PayNo());
         tvOrderNum2.setText(orderdetailBean.getOrder_CreateTime());
         tvOrderNum3.setText(orderdetailBean.getOrder_WaybillNumber() == null ? "" : orderdetailBean.getOrder_WaybillNumber() + "(" + orderdetailBean.getOrder_WaybillCompany() + ")");
-
+        tvOrderUser.setText(orderdetailBean.getUserInfo_NickName());
+        tvOrderPhone.setText(orderdetailBean.getAddress_Mobile());
 
         int num = 0;
         int moeny = 0;

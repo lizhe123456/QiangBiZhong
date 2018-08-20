@@ -37,4 +37,11 @@ public class LoadingDialog extends Dialog {
         return this;
     }
 
+
+    public void showDialog() {
+        if (isShowing()){
+            cancel();
+        }
+        show();
+    }
 }

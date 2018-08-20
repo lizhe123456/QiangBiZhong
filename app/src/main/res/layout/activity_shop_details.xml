@@ -311,13 +311,14 @@
             android:layout_below="@+id/v_hei"
             android:scaleType="center"
             android:src="@drawable/ic_shape"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
         <ImageView
             android:id="@+id/iv_shop_car"
             android:layout_width="@dimen/dm_48"
             android:layout_height="@dimen/dm_48"
             android:src="@drawable/ic_shop_car"
-           android:layout_toLeftOf="@+id/iv_shape"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/v_hei"
             android:scaleType="center"/>
 

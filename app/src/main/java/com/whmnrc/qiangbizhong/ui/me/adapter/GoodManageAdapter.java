@@ -29,8 +29,12 @@ public class GoodManageAdapter extends BaseAdapter<GoodsManageBean>{
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, GoodsManageBean item, int position) {
         holder.setText(R.id.tv_goods_desc,item.getGoods_Name())
-                .setText(R.id.tv_moeny, item.getGoods_PriceMin() + "~" + item.getGoods_PriceMax())
                 .setGlieuImage(R.id.iv_goods,item.getGoods_ImaPath()).setText(R.id.tv_order_num,"");
+        if (item.getGoods_PriceMin() != item.getGoods_PriceMax()) {
+            holder.setText(R.id.tv_moeny, item.getGoods_PriceMin() + "~" + item.getGoods_PriceMax());
+        }else {
+            holder.setText(R.id.tv_moeny, item.getGoods_PriceMin()+"");
+        }
         if (item.isGoods_IsOn()){
             holder.setText(R.id.order_state,"已上架");
             holder.setText(R.id.tv_btn_3,"直接下架");

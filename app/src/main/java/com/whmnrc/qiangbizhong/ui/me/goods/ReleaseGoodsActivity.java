@@ -134,7 +134,8 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
         classifyPresenter = new ClassifyPresenter(this);
         goodsPresenter = new GoodsPresenter(this);
         goodsParam.setStoreId(UserManage.getInstance().getLoginBean().getStoreInfo().getId());
-        classifyPresenter.getClassifyList(shopType,ReleaseGoodsActivity.this);
+        tvRRelease.setText("商城商品");
+        classifyPresenter.getClassifyList(0,ReleaseGoodsActivity.this);
     }
 
 
@@ -310,9 +311,12 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
 
             }
         }
-
-        icClassify.setText(list.get(0));
-        goodsParam.setGoods_Type(classifyBeans.get(0).getId());
+        if (list.size() > 0) {
+            if (list.get(0) != null) {
+                icClassify.setText(list.get(0));
+                goodsParam.setGoods_Type(classifyBeans.get(0).getId());
+            }
+        }
 
     }
 

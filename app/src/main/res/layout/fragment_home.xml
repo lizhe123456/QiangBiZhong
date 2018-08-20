@@ -19,6 +19,7 @@
         android:background="@color/white">
 
         <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nv_s"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -31,8 +32,8 @@
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dm_200">
-
                     <LinearLayout
+                        android:id="@+id/ll_title_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -247,14 +248,69 @@
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_title_bg"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_20" />
-        </LinearLayout>
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/dm_20" />-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/dm_48">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_search"-->
+                    <!--android:layout_width="@dimen/dm_20"-->
+                    <!--android:layout_height="@dimen/dm_20"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginEnd="@dimen/dm_20"-->
+                    <!--android:layout_toStartOf="@+id/fl_meg"-->
+                    <!--android:src="@drawable/ic_search" />-->
+
+                <!--<FrameLayout-->
+                    <!--android:id="@+id/fl_meg"-->
+                    <!--android:layout_width="@dimen/dm_28"-->
+                    <!--android:layout_height="@dimen/dm_28"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginEnd="@dimen/dm_21">-->
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="@dimen/dm_20"-->
+                        <!--android:layout_height="@dimen/dm_20"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:src="@drawable/ic_msg" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_num"-->
+                        <!--android:layout_width="@dimen/dm_15"-->
+                        <!--android:layout_height="@dimen/dm_15"-->
+                        <!--android:layout_gravity="right|top"-->
+                        <!--android:background="@drawable/bg_msg_num"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="0"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/dm_9" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_big_num"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="@dimen/dm_15"-->
+                        <!--android:layout_gravity="right|top"-->
+                        <!--android:background="@drawable/bg_msg_big_num"-->
+                        <!--android:gravity="center"-->
+                        <!--android:paddingLeft="@dimen/dm_8"-->
+                        <!--android:paddingRight="@dimen/dm_8"-->
+                        <!--android:text="99+"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/dm_10"-->
+                        <!--android:visibility="gone" />-->
+                <!--</FrameLayout>-->
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
     </RelativeLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

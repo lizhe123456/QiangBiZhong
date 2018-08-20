@@ -195,6 +195,7 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarBean> {
                                 public void jj() {
                                     item.setBuyCar_Num(item.getBuyCar_Num() + 1);
                                     notifyItemChanged(position);
+                                    onEditCall.heji();
                                 }
 
                                 @Override
@@ -230,6 +231,7 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarBean> {
                                 public void jj() {
                                     item.setBuyCar_Num(item.getBuyCar_Num() - 1);
                                     notifyItemChanged(position);
+                                    onEditCall.heji();
                                 }
 
                                 @Override

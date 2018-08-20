@@ -24,6 +24,7 @@ import com.whmnrc.qiangbizhong.presenter.shopcar.ShopCarPresenter;
 import com.whmnrc.qiangbizhong.ui.shop.bean.OrderBeanReq;
 import com.whmnrc.qiangbizhong.ui.shopping.activity.ShopConfirmOrderActivity;
 import com.whmnrc.qiangbizhong.ui.shopping.adpter.ShopCarAdapter;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.SelectParamPopupWindow;
@@ -331,7 +332,7 @@ public class ShopCarFragment extends BaseFragment implements ShopCarPresenter.Ca
                 }
             }
         }
-        tvMoeny.setText(num+"");
+        tvMoeny.setText(StringUtil.weiString1(num));
         if (isEdit) {
             tvDelete.setText("删除");
         }else {

@@ -1,7 +1,9 @@
 package com.whmnrc.qiangbizhong.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +11,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -101,6 +105,12 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
     TextView tvNum;
     @BindView(R.id.tv_big_num)
     TextView tvBigNum;
+    @BindView(R.id.ll_title_bg)
+    LinearLayout llTitleBg;
+    @BindView(R.id.nv_s)
+    NestedScrollView nestedScrollView;
+
+    private int height = SizeUtils.dp2px(200);
 
     private HomePageBean homePageBean;
     private HomePresenter homePresenter;
@@ -139,6 +149,25 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
                 homePresenter.getHomepage();
             }
         });
+
+//        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//
+////                int y =  oldScrollY - scrollY;
+//                if (scrollY <= 0) {   //设置标题的背景颜色
+//                    llTitleBg.setBackgroundColor(getResources().getColor(R.color.transparent));
+////                    llAllTtile.setBackgroundColor(Color.argb((int) 0, 144,151,166));
+//                } else if (scrollY > 0 && scrollY <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+//                    float scale = (float) scrollY / height;
+//                    float alpha = (255 * scale);
+//                    llTitleBg.setBackgroundColor(Color.argb((int) alpha, 255,255,255));
+//                } else {    //滑动到banner下面设置普通颜色
+//                    llTitleBg.setBackgroundColor(Color.argb((int) 255, 255,255,255));
+//                }
+//            }
+//        });
+
         //设置banner样式
         bannerView.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         bannerView.setIndicatorGravity(BannerConfig.CENTER);

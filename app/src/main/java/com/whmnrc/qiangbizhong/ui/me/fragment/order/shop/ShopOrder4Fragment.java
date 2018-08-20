@@ -34,7 +34,9 @@ public class ShopOrder4Fragment extends BaseOrderFragment implements OrderPresen
             @Override
             public void returnGoods(OrderListBean item) {
                 new AlertDialog(getContext()).builder()
-                        .setMsg("是否同意退款").setNegativeButton("取消", new View.OnClickListener() {
+                        .setMsg("是否同意退款")
+                        .setTitle("提示")
+                        .setNegativeButton("取消", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 

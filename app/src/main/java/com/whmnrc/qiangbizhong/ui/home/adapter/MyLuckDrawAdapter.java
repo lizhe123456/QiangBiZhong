@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.ui.home.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.widget.TextView;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
@@ -25,6 +27,10 @@ public class MyLuckDrawAdapter extends BaseAdapter<MyLuckDrawBean>{
                 .setText(R.id.tv_old_moeny,item.getGoodsPrice_VirtualPrice()+"")
                 .setText(R.id.tv_yuyue,"预约金"+item.getBond())
                 .setGlieuImage(R.id.iv_img,item.getProduct_ImgPath());
+        TextView textView = holder.getView(R.id.tv_old_moeny);
+        textView.getPaint().setAntiAlias(true);//抗锯齿
+        textView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
+        textView.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);  // 设置中划线并加清晰
     }
 
     @Override
