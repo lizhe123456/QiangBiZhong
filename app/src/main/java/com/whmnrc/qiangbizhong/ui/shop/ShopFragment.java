@@ -77,7 +77,7 @@ public class ShopFragment extends BaseFragment implements ShopPresenter.ShopInde
     @Override
     protected void initData() {
         tvTitle.setText("商城");
-        shopPresenter = new ShopPresenter(mContext);
+        shopPresenter = new ShopPresenter(getActivity());
         showLoading("加载中..");
         shopPresenter.getshoppingindex(true, this);
 

@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.home;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -22,12 +24,12 @@ import java.util.Map;
 
 public class LuckDrawPresenter {
 
-    private Context context;
+    private Activity context;
 
     private int page = 1;
     private int size = 10;
 
-    public LuckDrawPresenter(Context context) {
+    public LuckDrawPresenter(Activity context) {
         this.context = context;
     }
 
@@ -43,20 +45,24 @@ public class LuckDrawPresenter {
             @Override
             public void onSuccess(String data) {
                 List<LuckDrawGoodsBean> luckDrawGoodsBean = GsonUtil.changeGsonToList(data,LuckDrawGoodsBean.class);
-                if (luckDrawCall != null){
-                    if (isR) {
-                        luckDrawCall.luckDrawBack(luckDrawGoodsBean);
-                    }else {
-                        luckDrawCall.loadMore(luckDrawGoodsBean);
+                if (!context.isDestroyed()) {
+                    if (luckDrawCall != null) {
+                        if (isR) {
+                            luckDrawCall.luckDrawBack(luckDrawGoodsBean);
+                        } else {
+                            luckDrawCall.loadMore(luckDrawGoodsBean);
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (luckDrawCall != null){
-                    luckDrawCall.error();
+                if (!context.isDestroyed()) {
+                    if (luckDrawCall != null) {
+                        luckDrawCall.error();
+                    }
                 }
             }
         });
@@ -74,20 +80,24 @@ public class LuckDrawPresenter {
             @Override
             public void onSuccess(String data) {
                 List<LuckDrawGoodsBeanV2> luckDrawGoodsBean = GsonUtil.changeGsonToList(data,LuckDrawGoodsBeanV2.class);
-                if (luckDrawCall != null){
-                    if (isR) {
-                        luckDrawCall.luckDrawBack(luckDrawGoodsBean);
-                    }else {
-                        luckDrawCall.loadMore(luckDrawGoodsBean);
+                if (!context.isDestroyed()) {
+                    if (luckDrawCall != null) {
+                        if (isR) {
+                            luckDrawCall.luckDrawBack(luckDrawGoodsBean);
+                        } else {
+                            luckDrawCall.loadMore(luckDrawGoodsBean);
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (luckDrawCall != null){
-                    luckDrawCall.error();
+                if (!context.isDestroyed()) {
+                    if (luckDrawCall != null) {
+                        luckDrawCall.error();
+                    }
                 }
             }
         });
@@ -106,45 +116,49 @@ public class LuckDrawPresenter {
             @Override
             public void onSuccess(String data) {
                 List<MyLuckDrawBean> luckDrawBeans = GsonUtil.changeGsonToList(data,MyLuckDrawBean.class);
-                if (myLuckDrawCall != null){
-                    if (isR) {
-                        myLuckDrawCall.myLuckDraw(luckDrawBeans);
-                    }else {
-                        myLuckDrawCall.loadMore(luckDrawBeans);
+                if (!context.isDestroyed()) {
+                    if (myLuckDrawCall != null) {
+                        if (isR) {
+                            myLuckDrawCall.myLuckDraw(luckDrawBeans);
+                        } else {
+                            myLuckDrawCall.loadMore(luckDrawBeans);
+                        }
+                        page++;
                     }
-                    page++;
                 }
 
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (myLuckDrawCall != null){
-                    myLuckDrawCall.error();
+                if (!context.isDestroyed()) {
+                    if (myLuckDrawCall != null) {
+                        myLuckDrawCall.error();
+                    }
                 }
             }
         });
     }
 
     public interface LuckDrawCall2 extends BaseCall{
-        void luckDrawBack(List<LuckDrawGoodsBeanV2> luckDrawGoodsBean);
+        void luckDrawBack(@NonNull List<LuckDrawGoodsBeanV2> luckDrawGoodsBean);
 
-        void loadMore(List<LuckDrawGoodsBeanV2> luckDrawGoodsBean);
+        void loadMore(@NonNull List<LuckDrawGoodsBeanV2> luckDrawGoodsBean);
     }
 
     public interface MyLuckDrawCall extends BaseCall{
 
-        void myLuckDraw(List<MyLuckDrawBean> myLuckDrawBeans);
+        void myLuckDraw(@NonNull List<MyLuckDrawBean> myLuckDrawBeans);
 
-        void loadMore(List<MyLuckDrawBean> myLuckDrawBeans);
+        void loadMore(@NonNull List<MyLuckDrawBean> myLuckDrawBeans);
 
     }
 
     public interface LuckDrawCall extends BaseCall {
 
-        void luckDrawBack(List<LuckDrawGoodsBean> luckDrawGoodsBean);
+        void luckDrawBack(@NonNull List<LuckDrawGoodsBean> luckDrawGoodsBean);
 
-        void loadMore(List<LuckDrawGoodsBean> luckDrawGoodsBean);
+        void loadMore(@NonNull List<LuckDrawGoodsBean> luckDrawGoodsBean);
 
     }
 

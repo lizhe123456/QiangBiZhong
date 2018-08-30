@@ -83,12 +83,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/goods_price"
-                android:textSize="16sp"
+                android:textSize="@dimen/dm_16"
                 android:text="5000"
                 android:layout_gravity="bottom"/>
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dm_16"
+                android:layout_height="@dimen/dm_16"
                 android:layout_marginLeft="@dimen/dm_5"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="@dimen/dm_3"

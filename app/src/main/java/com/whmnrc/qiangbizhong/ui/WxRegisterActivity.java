@@ -158,10 +158,10 @@ public class WxRegisterActivity extends BaseActivity implements LoginPresenter.R
                 }
                 break;
             case R.id.tv_xieyi:
-                UserXieYiActivity.start(this, "http://qbz.aimeilian.com.cn/Protocol/Index");
+                UserXieYiActivity.start(this, "http://qbz.aimeilian.com.cn/Protocol/Index","用户协议");
                 break;
             case R.id.tv_cz_xieyi:
-                UserXieYiActivity.start(this, "http://qbz.aimeilian.com.cn/Protocol/Recharge");
+                UserXieYiActivity.start(this, "http://qbz.aimeilian.com.cn/Protocol/Recharge", "充值协议");
                 break;
             case R.id.tv_login:
                 //注册

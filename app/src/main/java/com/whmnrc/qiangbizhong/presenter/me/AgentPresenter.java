@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -21,10 +23,10 @@ import java.util.Map;
 
 public class AgentPresenter {
 
-    private Context context;
+    private Activity context;
     private int page;
 
-    public AgentPresenter(Context context) {
+    public AgentPresenter(Activity context) {
         this.context = context;
     }
 
@@ -35,15 +37,19 @@ public class AgentPresenter {
             @Override
             public void onSuccess(String data) {
                 AgentShopBean agentShopBean = GsonUtil.changeGsonToBean(data,AgentShopBean.class);
-                if (agentShopInfoCall != null){
-                    agentShopInfoCall.AgentShopInfoaBack(agentShopBean);
+                if (!context.isDestroyed()) {
+                    if (agentShopInfoCall != null) {
+                        agentShopInfoCall.AgentShopInfoaBack(agentShopBean);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (agentShopInfoCall != null){
-                    agentShopInfoCall.error();
+                if (!context.isDestroyed()) {
+                    if (agentShopInfoCall != null) {
+                        agentShopInfoCall.error();
+                    }
                 }
             }
         });
@@ -61,13 +67,15 @@ public class AgentPresenter {
             @Override
             public void onSuccess(String data) {
                 AgentSalesRecordBean agentSalesRecordBean = GsonUtil.changeGsonToBean(data,AgentSalesRecordBean.class);
-                if (agentSalesRecordCall != null){
-                    if (isR){
-                        agentSalesRecordCall.AgentSalesRecordBack(agentSalesRecordBean);
-                    }else {
-                        agentSalesRecordCall.loadMore(agentSalesRecordBean.getRecordList());
+                if (!context.isDestroyed()) {
+                    if (agentSalesRecordCall != null) {
+                        if (isR) {
+                            agentSalesRecordCall.AgentSalesRecordBack(agentSalesRecordBean);
+                        } else {
+                            agentSalesRecordCall.loadMore(agentSalesRecordBean.getRecordList());
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
@@ -79,12 +87,12 @@ public class AgentPresenter {
     }
 
     public interface AgentShopInfoCall extends BaseCall{
-        void AgentShopInfoaBack(AgentShopBean agentShopBean);
+        void AgentShopInfoaBack(@NonNull AgentShopBean agentShopBean);
     }
 
     public interface AgentSalesRecordCall extends BaseCall{
-        void AgentSalesRecordBack(AgentSalesRecordBean agentSalesRecordBean);
+        void AgentSalesRecordBack(@NonNull AgentSalesRecordBean agentSalesRecordBean);
 
-        void loadMore(List<AgentSalesRecordBean.RecordListBean> recordListBeans);
+        void loadMore(@NonNull List<AgentSalesRecordBean.RecordListBean> recordListBeans);
     }
 }

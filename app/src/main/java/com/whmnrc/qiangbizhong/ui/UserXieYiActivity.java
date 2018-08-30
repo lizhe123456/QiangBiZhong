@@ -30,11 +30,15 @@ public class UserXieYiActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView tvTitle;
 
-    public static void start(Context context,String url) {
+    private String title;
+
+    public static void start(Context context,String url,String title) {
         Intent starter = new Intent(context, UserXieYiActivity.class);
         starter.putExtra("url",url);
+        starter.putExtra("title",title);
         context.startActivity(starter);
     }
+
 
     @Override
     protected int setLayout() {
@@ -44,8 +48,9 @@ public class UserXieYiActivity extends BaseActivity {
     @Override
     protected void setData() {
         String url = getIntent().getStringExtra("url");
+        title = getIntent().getStringExtra("title");
         ivBack.setVisibility(View.VISIBLE);
-        tvTitle.setText("用户协议");
+        tvTitle.setText(title);
         //支持javascript
         wvContent.getSettings().setJavaScriptEnabled(true);
         //支持屏幕缩放

@@ -73,7 +73,7 @@ public class YiMeiFragment extends BaseFragment implements YiMeiPresenter.Medica
     protected void initData() {
         initMenu();
         initGoodsList();
-        mYiMeiPresenter = new YiMeiPresenter(mContext);
+        mYiMeiPresenter = new YiMeiPresenter(getActivity());
         mYiMeiPresenter.medicalIndex(true, this);
 
         //设置banner样式

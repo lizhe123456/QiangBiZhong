@@ -48,6 +48,7 @@ import com.whmnrc.qiangbizhong.widget.SnapUpCountDownTimerView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -137,12 +138,12 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
 
     @Override
     protected void initData() {
-        homePresenter = new HomePresenter(getContext(), this);
+        homePresenter = new HomePresenter(getActivity(), this);
         homePresenter.getHomepage();
         homePageBean = new HomePageBean();
         homePageBean = homePageBean.intiHome();
         initMenu(homePageBean.getMenuBeans());
-        homePresenter.getappversion();
+//        homePresenter.getappversion();
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
@@ -316,11 +317,25 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
         });
     }
 
+    int index = -1;
+
     private void initBanner(@Nullable List<HomeResult.BannerBean> list) {
         List<String> stringList = new ArrayList<>();
-        for (HomeResult.BannerBean bannerBean : list) {
-            stringList.add(bannerBean.getBanner_Url());
+
+        for (int i = 0; i < list.size(); i++) {
+            stringList.add(list.get(i).getBanner_Url());
+            if (list.get(i).getBanner_LinkUrl().equals("99")){
+                index = i;
+            }
         }
+        bannerView.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                if (index == position){
+                    AccountRechargeActivity.start(getContext(),1);
+                }
+            }
+        });
         //设置图片集合
         if (bannerView != null) {
             bannerView.setImages(stringList);

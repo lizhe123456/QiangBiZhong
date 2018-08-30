@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.presenter.shop;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -26,11 +27,11 @@ import java.util.Map;
 
 public class ShopPresenter {
 
-    private Context context;
+    private Activity context;
 
     private int page;
 
-    public ShopPresenter(Context context) {
+    public ShopPresenter(Activity context) {
         this.context = context;
     }
 
@@ -45,24 +46,28 @@ public class ShopPresenter {
             @Override
             public void onSuccess(String data) {
                 ShopBean sHopBean = GsonUtil.changeGsonToBean(data,ShopBean.class);
-                if (shopIndexCall != null) {
-                    if (isR) {
-                        if (sHopBean != null) {
-                            shopIndexCall.shoIndex(sHopBean);
+                if (!context.isDestroyed()) {
+                    if (shopIndexCall != null) {
+                        if (isR) {
+                            if (sHopBean != null) {
+                                shopIndexCall.shoIndex(sHopBean);
+                            }
+                        } else {
+                            if (sHopBean != null) {
+                                shopIndexCall.loadMore(sHopBean.getPalteList());
+                            }
                         }
-                    } else {
-                        if (sHopBean != null) {
-                            shopIndexCall.loadMore(sHopBean.getPalteList());
-                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (shopIndexCall != null) {
-                    shopIndexCall.error();
+                if (!context.isDestroyed()) {
+                    if (shopIndexCall != null) {
+                        shopIndexCall.error();
+                    }
                 }
             }
         });
@@ -85,21 +90,25 @@ public class ShopPresenter {
             @Override
             public void onSuccess(String data) {
                 List<ShopGoodsBean> yiMeiGoodsBeans = GsonUtil.changeGsonToList(data,ShopGoodsBean.class);
-                if (shopIndexCall != null) {
-                    if (yiMeiGoodsBeans != null)
-                    if (isR) {
-                        shopIndexCall.searchList(yiMeiGoodsBeans);
-                    } else {
-                        shopIndexCall.loadMore(yiMeiGoodsBeans);
+                if (!context.isDestroyed()) {
+                    if (shopIndexCall != null) {
+                        if (yiMeiGoodsBeans != null)
+                            if (isR) {
+                                shopIndexCall.searchList(yiMeiGoodsBeans);
+                            } else {
+                                shopIndexCall.loadMore(yiMeiGoodsBeans);
+                            }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (shopIndexCall != null) {
-                    shopIndexCall.error();
+                if (!context.isDestroyed()) {
+                    if (shopIndexCall != null) {
+                        shopIndexCall.error();
+                    }
                 }
             }
         });
@@ -115,17 +124,21 @@ public class ShopPresenter {
             @Override
             public void onSuccess(String data) {
                 ShopDetailsBean shopDetailsBean = GsonUtil.changeGsonToBean(data,ShopDetailsBean.class);
-                if (shopIndexCall != null) {
-                    if (shopDetailsBean != null) {
-                        shopIndexCall.shopDetails(shopDetailsBean);
+                if (!context.isDestroyed()) {
+                    if (shopIndexCall != null) {
+                        if (shopDetailsBean != null) {
+                            shopIndexCall.shopDetails(shopDetailsBean);
+                        }
                     }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (shopIndexCall != null) {
-                    shopIndexCall.error();
+                if (!context.isDestroyed()) {
+                    if (shopIndexCall != null) {
+                        shopIndexCall.error();
+                    }
                 }
             }
         });
@@ -146,22 +159,26 @@ public class ShopPresenter {
             @Override
             public void onSuccess(String data) {
                 StroeBean stroeBean = GsonUtil.changeGsonToBean(data,StroeBean.class);
-                if (storeDeailCall != null){
-                    if (stroeBean != null) {
-                        if (isR) {
-                            storeDeailCall.storeDeail(stroeBean.getResult());
-                        }else {
-                            storeDeailCall.loadMore(stroeBean.getResult().getGoods());
+                if (!context.isDestroyed()) {
+                    if (storeDeailCall != null) {
+                        if (stroeBean != null) {
+                            if (isR) {
+                                storeDeailCall.storeDeail(stroeBean.getResult());
+                            } else {
+                                storeDeailCall.loadMore(stroeBean.getResult().getGoods());
+                            }
+                            page++;
                         }
-                        page++;
                     }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (storeDeailCall != null){
-                    storeDeailCall.error();
+                if (!context.isDestroyed()) {
+                    if (storeDeailCall != null) {
+                        storeDeailCall.error();
+                    }
                 }
             }
         });
@@ -233,7 +250,7 @@ public class ShopPresenter {
     public interface StoreDeailCall extends BaseCall{
         void storeDeail(@NonNull StroeBean.ResultBean stroeBean);
 
-        void loadMore(List<StroeBean.ResultBean.GoodsBean> goodsBeans);
+        void loadMore(@NonNull List<StroeBean.ResultBean.GoodsBean> goodsBeans);
 
     }
 

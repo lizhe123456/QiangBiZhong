@@ -109,9 +109,9 @@ public class ShopCarFragment extends BaseFragment implements ShopCarPresenter.Ca
         tvMenu.setText("编辑");
         tvMenu.setTextColor(mContext.getResources().getColor(R.color.tv_191));
         tvMenu.setVisibility(View.VISIBLE);
-        mShopCarPresenter = new ShopCarPresenter(getContext());
-        mSpecPresenter = new SpecPresenter(getContext());
-        mCollectionPresenter = new CollectionPresenter(getContext());
+        mShopCarPresenter = new ShopCarPresenter(getActivity());
+        mSpecPresenter = new SpecPresenter(getActivity());
+        mCollectionPresenter = new CollectionPresenter(getActivity());
         mShopCarPresenter.getcarlist(this);
         rvGoodsList.setLayoutManager(new LinearLayoutManager(getContext()));
         shopCarAdapter = new ShopCarAdapter(getContext(),mShopCarPresenter);

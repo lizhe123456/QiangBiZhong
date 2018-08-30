@@ -50,7 +50,7 @@ public abstract class BaseOrderFragment extends BaseFragment implements OrderPre
     }
 
     public void initRecyclerView() {
-        orderPresenter = new OrderPresenter(getContext());
+        orderPresenter = new OrderPresenter(getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);

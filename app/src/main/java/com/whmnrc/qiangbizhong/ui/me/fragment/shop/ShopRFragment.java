@@ -64,7 +64,7 @@ public class ShopRFragment extends BaseFragment implements AgentPresenter.AgentS
 
     @Override
     protected void initData() {
-        agentPresenter = new AgentPresenter(getContext());
+        agentPresenter = new AgentPresenter(getActivity());
         showLoading("加载中..");
         agentPresenter.getagentsalesrecord(true,this);
         rAdapter = new RAdapter(getContext());

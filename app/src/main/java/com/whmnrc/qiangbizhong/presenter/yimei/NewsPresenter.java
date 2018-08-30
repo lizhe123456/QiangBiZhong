@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.yimei;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
@@ -21,11 +23,11 @@ import java.util.Map;
 
 public class NewsPresenter {
 
-    private Context context;
+    private Activity context;
 
     private int page;
 
-    public NewsPresenter(Context context) {
+    public NewsPresenter(Activity context) {
         this.context = context;
     }
 
@@ -42,18 +44,22 @@ public class NewsPresenter {
             @Override
             public void onSuccess(String data) {
                 List<NewsBean> newsBeans = GsonUtil.changeGsonToList(data,NewsBean.class);
-                if (isR){
-                    messageNoticeCall.getmessagenotice(newsBeans);
-                }else {
-                    messageNoticeCall.loadMore(newsBeans);
+                if (!context.isDestroyed()) {
+                    if (isR) {
+                        messageNoticeCall.getmessagenotice(newsBeans);
+                    } else {
+                        messageNoticeCall.loadMore(newsBeans);
+                    }
+                    page++;
                 }
-                page++;
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (messageNoticeCall != null){
-                    messageNoticeCall.error();
+                if (!context.isDestroyed()) {
+                    if (messageNoticeCall != null) {
+                        messageNoticeCall.error();
+                    }
                 }
             }
         });
@@ -82,16 +88,20 @@ public class NewsPresenter {
                 +"?userId="+ UserManage.getInstance().getUserID() + "&context=" + text, new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (feedbackCall != null){
-                    feedbackCall.feedBack();
+                if (!context.isDestroyed()) {
+                    if (feedbackCall != null) {
+                        feedbackCall.feedBack();
+                    }
+                    ToastUtils.showShort("提交成功");
                 }
-                ToastUtils.showShort("提交成功");
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (feedbackCall != null){
-                    feedbackCall.error();
+                if (!context.isDestroyed()) {
+                    if (feedbackCall != null) {
+                        feedbackCall.error();
+                    }
                 }
             }
         });
@@ -99,14 +109,13 @@ public class NewsPresenter {
 
 
     public interface MessageNoticeCall extends BaseCall{
-        void getmessagenotice(List<NewsBean> newsBeans);
+        void getmessagenotice(@NonNull List<NewsBean> newsBeans);
 
-        void loadMore(List<NewsBean> newsBeans);
+        void loadMore(@NonNull List<NewsBean> newsBeans);
     }
 
     public interface FeedbackCall extends BaseCall{
         void feedBack();
-
     }
 
 }

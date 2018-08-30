@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -16,9 +18,9 @@ import java.util.HashMap;
 
 public class ShapePresenter {
 
-    private Context context;
+    private Activity context;
 
-    public ShapePresenter(Context context) {
+    public ShapePresenter(Activity context) {
         this.context = context;
     }
 
@@ -26,16 +28,20 @@ public class ShapePresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.getshardcode) + "?userId=" + UserManage.getInstance().getUserID(), new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (codeCall != null){
+                if (!context.isDestroyed()) {
+                    if (codeCall != null) {
 //                    "data:image/jpg;base64,"+
-                    codeCall.code(data);
+                        codeCall.code(data);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (codeCall != null){
-                    codeCall.error();
+                if (!context.isDestroyed()) {
+                    if (codeCall != null) {
+                        codeCall.error();
+                    }
                 }
             }
         });
@@ -43,7 +49,7 @@ public class ShapePresenter {
 
     public interface CodeCall extends BaseCall{
 
-        void code(String code);
+        void code(@NonNull String code);
     }
 
 }

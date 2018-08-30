@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.presenter.shopcar;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -25,9 +26,9 @@ import java.util.Map;
 
 public class ShopCarPresenter {
 
-    private Context context;
+    private Activity context;
 
-    public ShopCarPresenter(Context context) {
+    public ShopCarPresenter(Activity context) {
         this.context = context;
     }
 
@@ -39,17 +40,21 @@ public class ShopCarPresenter {
                 "&number=" + count,map,new OkhttpUtil.BeanCallback(){
             @Override
             public void onSuccess(String data) {
-                if (collectionCall != null){
-                    collectionCall.csS();
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        collectionCall.csS();
+                    }
+                    ToastUtils.showShort("加入成功");
                 }
-                ToastUtils.showShort("加入成功");
 
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (collectionCall != null){
-                    collectionCall.error();
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        collectionCall.error();
+                    }
                 }
             }
         });
@@ -60,20 +65,24 @@ public class ShopCarPresenter {
         OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.deletecars), GsonUtil.createGsonString(carIds), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String st) {
-                if (carStatuCall != null){
-                    carStatuCall.deleteCar();
-                }
-                if (TextUtils.isEmpty(st)) {
-                    ToastUtils.showShort("删除成功");
-                }else {
-                    ToastUtils.showShort(st);
+                if (!context.isDestroyed()) {
+                    if (carStatuCall != null) {
+                        carStatuCall.deleteCar();
+                    }
+                    if (TextUtils.isEmpty(st)) {
+                        ToastUtils.showShort("删除成功");
+                    } else {
+                        ToastUtils.showShort(st);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (carStatuCall != null){
-                    carStatuCall.error();
+                if (!context.isDestroyed()) {
+                    if (carStatuCall != null) {
+                        carStatuCall.error();
+                    }
                 }
             }
         });
@@ -86,15 +95,19 @@ public class ShopCarPresenter {
             @Override
             public void onSuccess(String data) {
                 List<ShopCarBean> shopCarBeans = GsonUtil.changeGsonToList(data, ShopCarBean.class);
-                if (carCall != null){
-                    carCall.showCarList(shopCarBeans);
+                if (!context.isDestroyed()) {
+                    if (carCall != null) {
+                        carCall.showCarList(shopCarBeans);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (carCall != null){
-                    carCall.error();
+                if (!context.isDestroyed()) {
+                    if (carCall != null) {
+                        carCall.error();
+                    }
                 }
             }
         });
@@ -107,20 +120,24 @@ public class ShopCarPresenter {
                         "&goodsPriceId=" + goodsPriceId, new HashMap<>(), new OkhttpUtil.BeanCallback() {
                     @Override
                     public void onSuccess(String data) {
-                        if (carStatuCall != null){
-                            carStatuCall.updateS();
-                        }
-                        if (TextUtils.isEmpty(data)) {
-                            ToastUtils.showShort("修改成功");
-                        }else {
-                            ToastUtils.showShort(data);
+                        if (!context.isDestroyed()) {
+                            if (carStatuCall != null) {
+                                carStatuCall.updateS();
+                            }
+                            if (TextUtils.isEmpty(data)) {
+                                ToastUtils.showShort("修改成功");
+                            } else {
+                                ToastUtils.showShort(data);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(int code, String errorMsg) {
-                        if (carStatuCall != null){
-                            carStatuCall.error();
+                        if (!context.isDestroyed()) {
+                            if (carStatuCall != null) {
+                                carStatuCall.error();
+                            }
                         }
                     }
                 }
@@ -133,20 +150,24 @@ public class ShopCarPresenter {
                 , new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (carStatuCall != null){
-                    carStatuCall.jj();
-                }
-                if (TextUtils.isEmpty(data)) {
-                    ToastUtils.showShort("修改成功");
-                }else {
-                    ToastUtils.showShort(data);
+                if (!context.isDestroyed()) {
+                    if (carStatuCall != null) {
+                        carStatuCall.jj();
+                    }
+                    if (TextUtils.isEmpty(data)) {
+                        ToastUtils.showShort("修改成功");
+                    } else {
+                        ToastUtils.showShort(data);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (carStatuCall != null){
-                    carStatuCall.error();
+                if (!context.isDestroyed()) {
+                    if (carStatuCall != null) {
+                        carStatuCall.error();
+                    }
                 }
             }
         });
@@ -166,7 +187,7 @@ public class ShopCarPresenter {
 
     public interface CarCall extends BaseCall{
 
-        void showCarList(List<ShopCarBean> shopCarBeans);
+        void showCarList(@NonNull List<ShopCarBean> shopCarBeans);
 
     }
 

@@ -47,7 +47,7 @@ public class GoodsInfoFragment extends BaseFragment implements AgentPresenter.Ag
 
     @Override
     protected void initData() {
-        agentPresenter = new AgentPresenter(getContext());
+        agentPresenter = new AgentPresenter(getActivity());
         showLoading("加载中..");
         agentPresenter.getagentshopinfo(this);
     }

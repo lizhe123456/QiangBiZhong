@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.shop;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -20,9 +22,9 @@ import java.util.Map;
 
 public class SpecPresenter {
 
-    private Context context;
+    private Activity context;
 
-    public SpecPresenter(Context context) {
+    public SpecPresenter(Activity context) {
         this.context = context;
     }
 
@@ -34,15 +36,19 @@ public class SpecPresenter {
             @Override
             public void onSuccess(String data) {
                 SpecBean specBean = GsonUtil.changeGsonToBean(data,SpecBean.class);
-                if (goodsSpecCall != null){
-                    goodsSpecCall.spceBack(specBean);
+                if (!context.isDestroyed()) {
+                    if (goodsSpecCall != null) {
+                        goodsSpecCall.spceBack(specBean);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (goodsSpecCall != null){
-                    goodsSpecCall.error();
+                if (!context.isDestroyed()) {
+                    if (goodsSpecCall != null) {
+                        goodsSpecCall.error();
+                    }
                 }
             }
         });
@@ -55,16 +61,20 @@ public class SpecPresenter {
             @Override
             public void onSuccess(String data) {
                 EditSpecBean editSpecBean = GsonUtil.changeGsonToBean(data,EditSpecBean.class);
-                if (editSpecCall != null){
-                    editSpecCall.specBack(editSpecBean);
+                if (!context.isDestroyed()) {
+                    if (editSpecCall != null) {
+                        editSpecCall.specBack(editSpecBean);
+                    }
                 }
 
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (editSpecCall != null){
-                    editSpecCall.error();
+                if (!context.isDestroyed()) {
+                    if (editSpecCall != null) {
+                        editSpecCall.error();
+                    }
                 }
             }
         });
@@ -75,15 +85,19 @@ public class SpecPresenter {
         OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.addgoodsspec), GsonUtil.createGsonString(specParam), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (specStatuCall != null){
-                    specStatuCall.specBack();
+                if (!context.isDestroyed()) {
+                    if (specStatuCall != null) {
+                        specStatuCall.specBack();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (specStatuCall != null){
-                    specStatuCall.error();
+                if (!context.isDestroyed()) {
+                    if (specStatuCall != null) {
+                        specStatuCall.error();
+                    }
                 }
             }
         });
@@ -94,15 +108,19 @@ public class SpecPresenter {
         OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.updategoodsspec), GsonUtil.createGsonString(specParam), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (specStatuCall != null){
-                    specStatuCall.specBack();
+                if (!context.isDestroyed()) {
+                    if (specStatuCall != null) {
+                        specStatuCall.specBack();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (specStatuCall != null){
-                    specStatuCall.error();
+                if (!context.isDestroyed()) {
+                    if (specStatuCall != null) {
+                        specStatuCall.error();
+                    }
                 }
             }
         });
@@ -112,15 +130,19 @@ public class SpecPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.deletegoodsspec)+"?goodsPriceId=" + goodsPriceId,new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (specStatuCall != null){
-                    specStatuCall.specBack();
+                if (!context.isDestroyed()) {
+                    if (specStatuCall != null) {
+                        specStatuCall.specBack();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (specStatuCall != null){
-                    specStatuCall.error();
+                if (!context.isDestroyed()) {
+                    if (specStatuCall != null) {
+                        specStatuCall.error();
+                    }
                 }
             }
         });
@@ -128,12 +150,12 @@ public class SpecPresenter {
 
 
     public interface GoodsSpecCall extends BaseCall{
-        void spceBack(SpecBean specBean);
+        void spceBack(@NonNull SpecBean specBean);
     }
 
     public interface EditSpecCall extends BaseCall{
 
-        void specBack(EditSpecBean editSpecBean);
+        void specBack(@NonNull EditSpecBean editSpecBean);
     }
 
     public interface SpecStatuCall extends BaseCall{

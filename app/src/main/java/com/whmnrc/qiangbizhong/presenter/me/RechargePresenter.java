@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -31,11 +33,11 @@ import java.util.Map;
 
 public class RechargePresenter {
 
-    private Context context;
+    private Activity context;
 
     private int page;
 
-    public RechargePresenter(Context context) {
+    public RechargePresenter(Activity context) {
         this.context = context;
     }
 
@@ -56,10 +58,12 @@ public class RechargePresenter {
         OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.submitorder),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (data != null) {
-                    pay(data, rechargeCall);
-                }else {
-                    ToastUtils.showShort("请确认支付宝是否安装");
+                if (!context.isDestroyed()) {
+                    if (data != null) {
+                        pay(data, rechargeCall);
+                    } else {
+                        ToastUtils.showShort("请确认支付宝是否安装");
+                    }
                 }
             }
 
@@ -78,8 +82,10 @@ public class RechargePresenter {
             @Override
             public void onSuccess(String data) {
                 RechargeBean rechargeBean = JSON.parseObject(data,RechargeBean.class);
-                if (rechargeCall != null){
-                    rechargeCall.rechargeData(rechargeBean);
+                if (!context.isDestroyed()) {
+                    if (rechargeCall != null) {
+                        rechargeCall.rechargeData(rechargeBean);
+                    }
                 }
             }
 
@@ -101,20 +107,24 @@ public class RechargePresenter {
             @Override
             public void onSuccess(String data) {
                 List<RechargeRrecordBean> rechargeBean = GsonUtil.changeGsonToList(data,RechargeRrecordBean.class);
-                if (rechargeRCall != null){
-                    if (isR) {
-                        rechargeRCall.rechargeBack(rechargeBean);
-                    }else {
-                        rechargeRCall.loadMore(rechargeBean);
+                if (!context.isDestroyed()) {
+                    if (rechargeRCall != null) {
+                        if (isR) {
+                            rechargeRCall.rechargeBack(rechargeBean);
+                        } else {
+                            rechargeRCall.loadMore(rechargeBean);
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (rechargeRCall != null) {
-                    rechargeRCall.error();
+                if (!context.isDestroyed()) {
+                    if (rechargeRCall != null) {
+                        rechargeRCall.error();
+                    }
                 }
             }
         });
@@ -127,17 +137,21 @@ public class RechargePresenter {
             @Override
             public void onSuccess(String data) {
                 RechargeCoreBean rechargeCoreBean = GsonUtil.changeGsonToBean(data,RechargeCoreBean.class);
-                if (querytypeListCall != null){
-                    if (rechargeCoreBean != null) {
-                        querytypeListCall.querytype(rechargeCoreBean);
+                if (!context.isDestroyed()) {
+                    if (querytypeListCall != null) {
+                        if (rechargeCoreBean != null) {
+                            querytypeListCall.querytype(rechargeCoreBean);
+                        }
                     }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (querytypeListCall != null){
-                    querytypeListCall.error();
+                if (!context.isDestroyed()) {
+                    if (querytypeListCall != null) {
+                        querytypeListCall.error();
+                    }
                 }
             }
         });
@@ -151,8 +165,10 @@ public class RechargePresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.alipay),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (rechargeCall != null){
-                    rechargeCall.payS(data);
+                if (!context.isDestroyed()) {
+                    if (rechargeCall != null) {
+                        rechargeCall.payS(data);
+                    }
                 }
             }
 
@@ -179,50 +195,54 @@ public class RechargePresenter {
             @Override
             public void onSuccess(String data) {
                 List<AgentBean> list = GsonUtil.changeGsonToList(data,AgentBean.class);
-                if (agentshopQueryCall != null){
-                    if (isR) {
-                        agentshopQueryCall.agentshopQuery(list);
-                    }else {
-                        agentshopQueryCall.loadMore(list);
+                if (!context.isDestroyed()) {
+                    if (agentshopQueryCall != null) {
+                        if (isR) {
+                            agentshopQueryCall.agentshopQuery(list);
+                        } else {
+                            agentshopQueryCall.loadMore(list);
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (agentshopQueryCall != null){
-                    agentshopQueryCall.error();
+                if (!context.isDestroyed()) {
+                    if (agentshopQueryCall != null) {
+                        agentshopQueryCall.error();
+                    }
                 }
             }
         });
     }
 
     public interface AgentshopQueryCall extends BaseCall{
-        void agentshopQuery(List<AgentBean> agentBeans);
+        void agentshopQuery(@NonNull List<AgentBean> agentBeans);
 
-        void loadMore(List<AgentBean> agentBeans);
+        void loadMore(@NonNull List<AgentBean> agentBeans);
     }
 
     public interface RechargeCall extends BaseCall {
 
         void rechargeBack();
 
-        void rechargeData(RechargeBean rechargeBean);
+        void rechargeData(@NonNull RechargeBean rechargeBean);
 
-        void payS(String data);
+        void payS(@NonNull String data);
     }
 
     public interface RechargeRCall extends BaseCall {
 
-        void rechargeBack(List<RechargeRrecordBean> rechargeRrecordBeans);
+        void rechargeBack(@NonNull List<RechargeRrecordBean> rechargeRrecordBeans);
 
-        void loadMore(List<RechargeRrecordBean> rechargeRrecordBeans);
+        void loadMore(@NonNull List<RechargeRrecordBean> rechargeRrecordBeans);
     }
 
     public interface QuerytypeListCall extends BaseCall{
 
-        void querytype(RechargeCoreBean rechargeCoreBean);
+        void querytype(@NonNull RechargeCoreBean rechargeCoreBean);
     }
 
 }

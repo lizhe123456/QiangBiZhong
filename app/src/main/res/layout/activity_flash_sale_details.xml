@@ -148,10 +148,10 @@
                                 tool:text="5000" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="@dimen/dm_18"
+                                android:layout_height="@dimen/dm_18"
                                 android:layout_gravity="bottom"
-                                android:layout_marginBottom="@dimen/dm_5"
+                                android:layout_marginBottom="@dimen/dm_2"
                                 android:layout_marginLeft="@dimen/dm_5"
                                 android:src="@drawable/ic_yudou" />
                         </LinearLayout>
@@ -170,12 +170,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:textColor="@color/tv_navigation"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/dm_12"
                                 tool:text="5000" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="@dimen/dm_12"
+                                android:layout_height="@dimen/dm_12"
                                 android:layout_gravity="bottom"
                                 android:layout_marginBottom="@dimen/dm_2"
                                 android:layout_marginLeft="@dimen/dm_5"
@@ -329,26 +329,58 @@
                 android:textColor="@color/tv_191"
                 android:textSize="@dimen/dm_13" />
 
-            <TextView
-                android:id="@+id/tv_yu_price"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_yuyue"
-                android:layout_marginLeft="@dimen/dm_15"
-                tool:text="中奖后再付：340"
-                android:textColor="@color/tv_navigation"
-                android:textSize="@dimen/dm_10" />
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_below="@+id/tv_yuyue">
 
-            <TextView
-                android:id="@+id/tv_price"
+                <TextView
+                    android:id="@+id/tv_yu_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dm_15"
+                    tool:text="中奖后再付：340"
+                    android:textColor="@color/tv_navigation"
+                    android:textSize="@dimen/dm_10" />
+
+                <ImageView
+                    android:layout_width="@dimen/dm_10"
+                    android:layout_height="@dimen/dm_10"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/dm_2"
+                    android:src="@drawable/ic_yudou"
+                    android:layout_marginBottom="@dimen/dm_2"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dm_5"
-                android:layout_marginTop="@dimen/dm_10"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dm_5"
+                android:orientation="horizontal"
                 android:layout_toRightOf="@+id/tv_yuyue"
-                tool:text="10"
-                android:textColor="@color/goods_price"
-                android:textSize="@dimen/dm_15" />
+                android:layout_marginBottom="@dimen/dm_5"
+                android:layout_marginTop="@dimen/dm_10">
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/goods_price"
+                    android:textSize="@dimen/dm_15"
+                    android:text="12"/>
+
+                <ImageView
+                    android:layout_width="@dimen/dm_15"
+                    android:layout_height="@dimen/dm_15"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/dm_2"
+                    android:src="@drawable/ic_yudou"
+                    android:layout_marginBottom="@dimen/dm_2"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_canyu"

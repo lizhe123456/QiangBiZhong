@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.presenter.shop;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
@@ -25,10 +26,10 @@ import java.util.Map;
 
 public class GoodsPresenter {
 
-    private Context context;
+    private Activity context;
     private int page;
 
-    public GoodsPresenter(Context context) {
+    public GoodsPresenter(Activity context) {
         this.context = context;
     }
 
@@ -37,16 +38,20 @@ public class GoodsPresenter {
         OkhttpUtil.postString(context.getString(R.string.server_address) + (type == 0 ?  context.getString(R.string.submitgoods) : context.getString(R.string.updategoodsinfo)), GsonUtil.createGsonString(goodsParam), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (releaseGoodsCall != null){
-                    releaseGoodsCall.releaseS();
+                if (!context.isDestroyed()) {
+                    if (releaseGoodsCall != null) {
+                        releaseGoodsCall.releaseS();
+                    }
+                    ToastUtils.showShort("发布成功");
                 }
-                ToastUtils.showShort("发布成功");
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (releaseGoodsCall != null){
-                    releaseGoodsCall.error();
+                if (!context.isDestroyed()) {
+                    if (releaseGoodsCall != null) {
+                        releaseGoodsCall.error();
+                    }
                 }
             }
         });
@@ -56,16 +61,20 @@ public class GoodsPresenter {
         OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.updategoodsinfo), GsonUtil.createGsonString(goodsParam), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (releaseGoodsCall != null){
-                    releaseGoodsCall.releaseS();
+                if (!context.isDestroyed()) {
+                    if (releaseGoodsCall != null) {
+                        releaseGoodsCall.releaseS();
+                    }
+                    ToastUtils.showShort("修改成功");
                 }
-                ToastUtils.showShort("修改成功");
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (releaseGoodsCall != null){
-                    releaseGoodsCall.error();
+                if (!context.isDestroyed()) {
+                    if (releaseGoodsCall != null) {
+                        releaseGoodsCall.error();
+                    }
                 }
             }
         });
@@ -83,22 +92,26 @@ public class GoodsPresenter {
             @Override
             public void onSuccess(String data) {
                 List<GoodsManageBean> list = GsonUtil.changeGsonToList(data,GoodsManageBean.class);
-                if (goodsListCall != null){
-                    if (list != null) {
-                        if (isR) {
-                            goodsListCall.getGoods(list);
-                        }else {
-                            goodsListCall.loadMore(list);
+                if (!context.isDestroyed()) {
+                    if (goodsListCall != null) {
+                        if (list != null) {
+                            if (isR) {
+                                goodsListCall.getGoods(list);
+                            } else {
+                                goodsListCall.loadMore(list);
+                            }
+                            page++;
                         }
-                        page++;
                     }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (goodsListCall != null){
-                    goodsListCall.error();
+                if (!context.isDestroyed()) {
+                    if (goodsListCall != null) {
+                        goodsListCall.error();
+                    }
                 }
             }
         });
@@ -111,15 +124,19 @@ public class GoodsPresenter {
                     @Override
                     public void onSuccess(String data) {
                         List<EditBannerBean> list = GsonUtil.changeGsonToList(data,EditBannerBean.class);
-                        if (goodsBannerCall != null){
-                            goodsBannerCall.getgoodsbanner(list);
+                        if (!context.isDestroyed()) {
+                            if (goodsBannerCall != null) {
+                                goodsBannerCall.getgoodsbanner(list);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(int code, String errorMsg) {
-                        if (goodsBannerCall != null){
-                            goodsBannerCall.error();
+                        if (!context.isDestroyed()) {
+                            if (goodsBannerCall != null) {
+                                goodsBannerCall.error();
+                            }
                         }
                     }
                 });
@@ -129,16 +146,20 @@ public class GoodsPresenter {
         OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.addgoodsbanner) ,GsonUtil.createGsonString(imgs), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (addGoodsBannerCall != null){
-                    addGoodsBannerCall.addGoodsBanner();
+                if (!context.isDestroyed()) {
+                    if (addGoodsBannerCall != null) {
+                        addGoodsBannerCall.addGoodsBanner();
+                    }
                 }
                 ToastUtils.showShort("添加成功");
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (addGoodsBannerCall != null){
-                    addGoodsBannerCall.error();
+                if (!context.isDestroyed()) {
+                    if (addGoodsBannerCall != null) {
+                        addGoodsBannerCall.error();
+                    }
                 }
             }
         });
@@ -150,20 +171,24 @@ public class GoodsPresenter {
                 + goodsId + "&type=" + type, new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (goodsGoupCall != null){
-                    if (type == 0){
-                        ToastUtils.showShort("下架成功");
-                    }else {
-                        ToastUtils.showShort("上架成功");
+                if (!context.isDestroyed()) {
+                    if (goodsGoupCall != null) {
+                        if (type == 0) {
+                            ToastUtils.showShort("下架成功");
+                        } else {
+                            ToastUtils.showShort("上架成功");
+                        }
+                        goodsGoupCall.goodsgoup();
                     }
-                    goodsGoupCall.goodsgoup();
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (goodsGoupCall != null){
-                    goodsGoupCall.error();
+                if (!context.isDestroyed()) {
+                    if (goodsGoupCall != null) {
+                        goodsGoupCall.error();
+                    }
                 }
             }
         });
@@ -174,20 +199,24 @@ public class GoodsPresenter {
                 + storeId + "&type=" + type, new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (goodsListCall != null){
-                    if (type == 0){
-                        ToastUtils.showShort("下架成功");
-                    }else {
-                        ToastUtils.showShort("上架成功");
+                if (!context.isDestroyed()) {
+                    if (goodsListCall != null) {
+                        if (type == 0) {
+                            ToastUtils.showShort("下架成功");
+                        } else {
+                            ToastUtils.showShort("上架成功");
+                        }
+                        goodsListCall.goodsgoup();
                     }
-                    goodsListCall.goodsgoup();
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (goodsListCall != null){
-                    goodsListCall.error();
+                if (!context.isDestroyed()) {
+                    if (goodsListCall != null) {
+                        goodsListCall.error();
+                    }
                 }
             }
         });
@@ -207,7 +236,7 @@ public class GoodsPresenter {
     }
 
     public interface GoodsBannerCall extends BaseCall{
-        void getgoodsbanner(List<EditBannerBean> editBannerBeans);
+        void getgoodsbanner(@NonNull List<EditBannerBean> editBannerBeans);
     }
 
     public interface AddGoodsBannerCall extends BaseCall{

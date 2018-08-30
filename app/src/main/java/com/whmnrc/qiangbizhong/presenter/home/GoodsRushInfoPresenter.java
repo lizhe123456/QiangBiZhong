@@ -2,6 +2,7 @@ package com.whmnrc.qiangbizhong.presenter.home;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -44,8 +45,10 @@ public class GoodsRushInfoPresenter {
                     try {
                         if (!TextUtils.isEmpty(data)) {
                             GoodsRushinfoBean goodsRushinfoBean = GsonUtil.changeGsonToBean(data, GoodsRushinfoBean.class);
-                            if (goodsInfoCall != null) {
-                                goodsInfoCall.goodsInfoBack(goodsRushinfoBean);
+                            if (!context.isDestroyed()) {
+                                if (goodsInfoCall != null) {
+                                    goodsInfoCall.goodsInfoBack(goodsRushinfoBean);
+                                }
                             }
                         }
                     }catch (Exception e) {
@@ -55,8 +58,10 @@ public class GoodsRushInfoPresenter {
 
                 @Override
                 public void onFailure(int code, String errorMsg) {
-                    if (goodsInfoCall != null){
-                        goodsInfoCall.error();
+                    if (!context.isDestroyed()) {
+                        if (goodsInfoCall != null) {
+                            goodsInfoCall.error();
+                        }
                     }
                 }
 
@@ -81,13 +86,15 @@ public class GoodsRushInfoPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (code == 101 && errorMsg.equals("101")){
-                    if (canYuCall != null) {
-                        canYuCall.canyuBack();
-                    }
-                }else {
-                    if (canYuCall != null) {
-                        canYuCall.error();
+                if (!context.isDestroyed()) {
+                    if (code == 101 && errorMsg.equals("101")) {
+                        if (canYuCall != null) {
+                            canYuCall.canyuBack();
+                        }
+                    } else {
+                        if (canYuCall != null) {
+                            canYuCall.error();
+                        }
                     }
                 }
             }
@@ -103,8 +110,10 @@ public class GoodsRushInfoPresenter {
             public void onSuccess(String data) {
                 try {
                     AwardBeanInfo awardBeanInfo = GsonUtil.changeGsonToBean(data,AwardBeanInfo.class);
-                    if (awardCall != null){
-                        awardCall.awardBack(awardBeanInfo);
+                    if (!context.isDestroyed()) {
+                        if (awardCall != null) {
+                            awardCall.awardBack(awardBeanInfo);
+                        }
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -114,13 +123,15 @@ public class GoodsRushInfoPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (code == 101 && errorMsg.equals("101")){
-                    if (awardCall != null) {
-                        awardCall.canyuBack();
-                    }
-                }else {
-                    if (awardCall != null) {
-                        awardCall.error();
+                if (!context.isDestroyed()) {
+                    if (code == 101 && errorMsg.equals("101")) {
+                        if (awardCall != null) {
+                            awardCall.canyuBack();
+                        }
+                    } else {
+                        if (awardCall != null) {
+                            awardCall.error();
+                        }
                     }
                 }
             }
@@ -135,8 +146,10 @@ public class GoodsRushInfoPresenter {
             public void onSuccess(String data) {
                 try {
                     AwardBeanInfo awardBeanInfo = GsonUtil.changeGsonToBean(data,AwardBeanInfo.class);
-                    if (awardCall != null){
-                        awardCall.awardBack(awardBeanInfo);
+                    if (!context.isDestroyed()) {
+                        if (awardCall != null) {
+                            awardCall.awardBack(awardBeanInfo);
+                        }
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -146,13 +159,15 @@ public class GoodsRushInfoPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (code == 101 && errorMsg.equals("101")){
-                    if (awardCall != null) {
-                        awardCall.canyuBack();
-                    }
-                }else {
-                    if (awardCall != null) {
-                        awardCall.error();
+                if (!context.isDestroyed()) {
+                    if (code == 101 && errorMsg.equals("101")) {
+                        if (awardCall != null) {
+                            awardCall.canyuBack();
+                        }
+                    } else {
+                        if (awardCall != null) {
+                            awardCall.error();
+                        }
                     }
                 }
             }
@@ -167,15 +182,19 @@ public class GoodsRushInfoPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.validatePay), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (payPassCall != null){
-                    payPassCall.payPassBack();
+                if (!context.isDestroyed()) {
+                    if (payPassCall != null) {
+                        payPassCall.payPassBack();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (payPassCall != null){
-                    payPassCall.error();
+                if (!context.isDestroyed()) {
+                    if (payPassCall != null) {
+                        payPassCall.error();
+                    }
                 }
             }
         });
@@ -186,7 +205,7 @@ public class GoodsRushInfoPresenter {
 
     public interface GoodsInfoCall extends BaseCall {
 
-        void goodsInfoBack(GoodsRushinfoBean goodsRushinfoBean);
+        void goodsInfoBack(@NonNull GoodsRushinfoBean goodsRushinfoBean);
 
     }
 
@@ -198,7 +217,7 @@ public class GoodsRushInfoPresenter {
 
     public interface AwardCall extends BaseCall{
 
-        void awardBack(AwardBeanInfo awardBeanInfo);
+        void awardBack(@NonNull AwardBeanInfo awardBeanInfo);
 
         void canyuBack();
     }

@@ -71,7 +71,7 @@ public class SalesVolumeFragment extends BaseFragment implements StorePresenter.
     protected void initData() {
         sortId = getArguments().getString("sortId");
         type = getArguments().getString("type");
-        storePresenter = new StorePresenter(mContext);
+        storePresenter = new StorePresenter(getActivity());
         latitude = ((YiMeiDetailsActivity) getActivity()).latitude;
         longitude = ((YiMeiDetailsActivity) getActivity()).longitude;
         showLoading("加载中..");

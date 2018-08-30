@@ -83,7 +83,7 @@ public class LuckDrawFragment extends BaseFragment implements AwardPresenter.Awa
 
     @Override
     protected void initData() {
-        awardPresenter = new AwardPresenter(getContext());
+        awardPresenter = new AwardPresenter(getActivity());
         luckDrawItemAdapter = new LuckDrawItemAdapter(getContext());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         rvGoods.setLayoutManager(gridLayoutManager);

@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -20,11 +22,11 @@ import java.util.Map;
 
 public class CouponPresenter {
 
-    private Context context;
+    private Activity context;
 
     private int page;
 
-    public CouponPresenter(Context context) {
+    public CouponPresenter(Activity context) {
         this.context = context;
     }
 
@@ -40,20 +42,24 @@ public class CouponPresenter {
             @Override
             public void onSuccess(String data) {
                 List<CouponBean> couponBeans = GsonUtil.changeGsonToList(data,CouponBean.class);
-                if (couponListCall != null){
-                    if (isR){
-                        couponListCall.getcouponlist(couponBeans);
-                    }else {
-                        couponListCall.loadMore(couponBeans);
-                    }
+                if (!context.isDestroyed()) {
+                    if (couponListCall != null) {
+                        if (isR) {
+                            couponListCall.getcouponlist(couponBeans);
+                        } else {
+                            couponListCall.loadMore(couponBeans);
+                        }
 
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (couponListCall != null){
-                    couponListCall.error();
+                if (!context.isDestroyed()) {
+                    if (couponListCall != null) {
+                        couponListCall.error();
+                    }
                 }
             }
         });
@@ -63,8 +69,8 @@ public class CouponPresenter {
 
     public interface CouponListCall extends BaseCall{
 
-        void getcouponlist(List<CouponBean> couponBeans);
+        void getcouponlist(@NonNull List<CouponBean> couponBeans);
 
-        void loadMore(List<CouponBean> couponBeans);
+        void loadMore(@NonNull List<CouponBean> couponBeans);
     }
 }

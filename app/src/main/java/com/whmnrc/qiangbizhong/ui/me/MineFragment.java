@@ -134,7 +134,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
 
         initMenu(mineBean.getMenuBeans());
         initOption(mineBean.getItemBeans());
-        orderPresenter = new OrderPresenter(getContext());
+        orderPresenter = new OrderPresenter(getActivity());
     }
 
     @Override
@@ -204,7 +204,7 @@ public class MineFragment extends BaseFragment implements UserManage.UserInfoCal
 //                            SanActivity.start(mContext);
                             RxPermissions rxPermissions = new RxPermissions(getActivity());
                             rxPermissions
-                                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
                                     .subscribe(granted -> {
                                         if (granted) {
                                             Intent intent = new Intent(getActivity(), SecondActivity.class);

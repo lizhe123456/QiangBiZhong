@@ -87,4 +87,5 @@
     <dimen name="dm_130">130dp</dimen>
     <dimen name="dm_160">160dp</dimen>
     <dimen name="dm_260">260dp</dimen>
+    <dimen name="dm_250">250dp</dimen>
 </resources>

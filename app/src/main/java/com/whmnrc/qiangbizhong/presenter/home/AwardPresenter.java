@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.home;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
 import com.blankj.utilcode.util.ToastUtils;
@@ -23,11 +25,11 @@ import java.util.Map;
 
 public class AwardPresenter {
 
-    private Context context;
+    private Activity context;
     private int page = 1;
     private int size = 10;
 
-    public AwardPresenter(Context context) {
+    public AwardPresenter(Activity context) {
         this.context = context;
     }
 
@@ -72,20 +74,24 @@ public class AwardPresenter {
             @Override
             public void onSuccess(String data) {
                 List<UserInfoBean> userInfoBeans = GsonUtil.changeGsonToList(data,UserInfoBean.class);
-                if (userCall != null){
-                    if (isR) {
-                        userCall.awardUserBack(userInfoBeans);
-                    }else {
-                        userCall.loadMore(userInfoBeans);
+                if (!context.isDestroyed()) {
+                    if (userCall != null) {
+                        if (isR) {
+                            userCall.awardUserBack(userInfoBeans);
+                        } else {
+                            userCall.loadMore(userInfoBeans);
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (userCall != null){
-                    userCall.error();
+                if (!context.isDestroyed()) {
+                    if (userCall != null) {
+                        userCall.error();
+                    }
                 }
             }
         });
@@ -93,17 +99,17 @@ public class AwardPresenter {
 
     public interface AwardCall extends BaseCall{
 
-        void awardBack(LuckDrawBean luckDrawBeans);
+        void awardBack(@NonNull LuckDrawBean luckDrawBeans);
 
-        void loadMore(List<LuckDrawBean.GoodsBean> goodsBean);
+        void loadMore(@NonNull List<LuckDrawBean.GoodsBean> goodsBean);
 
     }
 
     public interface UserCall extends BaseCall{
 
-        void awardUserBack(List<UserInfoBean> list);
+        void awardUserBack(@NonNull List<UserInfoBean> list);
 
-        void loadMore(List<UserInfoBean> list);
+        void loadMore(@NonNull List<UserInfoBean> list);
     }
 
 }

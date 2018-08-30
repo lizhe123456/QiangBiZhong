@@ -1,8 +1,10 @@
 package com.whmnrc.qiangbizhong.presenter.home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -27,10 +29,10 @@ import java.util.Map;
 
 public class HomePresenter {
 
-    private Context mContext;
+    private Activity mContext;
     private HomePageCall homePageCall;
 
-    public HomePresenter(Context mContext, HomePageCall homePageCall) {
+    public HomePresenter(Activity mContext, HomePageCall homePageCall) {
         this.mContext = mContext;
         this.homePageCall = homePageCall;
     }
@@ -44,15 +46,19 @@ public class HomePresenter {
                 if (UserManage.getInstance().getLoginBean() != null) {
                     getnoticecount();
                 }
-                if (homePageCall != null) {
-                    homePageCall.homePage(JSON.parseObject(data, HomeResult.class));
+                if (!mContext.isDestroyed()) {
+                    if (homePageCall != null) {
+                        homePageCall.homePage(JSON.parseObject(data, HomeResult.class));
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (homePageCall != null) {
-                    homePageCall.error();
+                if (!mContext.isDestroyed()) {
+                    if (homePageCall != null) {
+                        homePageCall.error();
+                    }
                 }
             }
         });
@@ -63,11 +69,13 @@ public class HomePresenter {
                 + "?userId=" + UserManage.getInstance().getUserID(), new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (homePageCall != null) {
-                    if (!TextUtils.isEmpty(data)) {
-                        homePageCall.noticeCount(data);
-                    } else {
-                        homePageCall.noticeCount("0");
+                if (!mContext.isDestroyed()) {
+                    if (homePageCall != null) {
+                        if (!TextUtils.isEmpty(data)) {
+                            homePageCall.noticeCount(data);
+                        } else {
+                            homePageCall.noticeCount("0");
+                        }
                     }
                 }
             }
@@ -138,7 +146,7 @@ public class HomePresenter {
 
     public interface HomePageCall extends BaseCall {
 
-        void homePage(HomeResult homeResult);
+        void homePage(@NonNull HomeResult homeResult);
 
         void noticeCount(String count);
 

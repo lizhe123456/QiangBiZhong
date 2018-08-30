@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.shop;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -15,9 +17,9 @@ import java.util.List;
 
 public class ImagePresenter {
 
-    private Context context;
+    private Activity context;
 
-    public ImagePresenter(Context context) {
+    public ImagePresenter(Activity context) {
         this.context = context;
     }
 
@@ -26,15 +28,19 @@ public class ImagePresenter {
         OkhttpUtil.uploadImages(context.getString(R.string.server_address) + context.getString(R.string.uploadfile), list, new OkhttpUtil.ImageCallback() {
             @Override
             public void onSuccess(List<String> data) {
-                if (imageCall != null){
-                    imageCall.img(data);
+                if (!context.isDestroyed()) {
+                    if (imageCall != null) {
+                        imageCall.img(data);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (imageCall != null){
-                    imageCall.error();
+                if (!context.isDestroyed()) {
+                    if (imageCall != null) {
+                        imageCall.error();
+                    }
                 }
             }
         });
@@ -45,15 +51,19 @@ public class ImagePresenter {
         OkhttpUtil.uploadImages(context.getString(R.string.server_address) + context.getString(R.string.uploadfilepublic), list, new OkhttpUtil.ImageCallback() {
             @Override
             public void onSuccess(List<String> data) {
-                if (imageCall != null){
-                    imageCall.img(data);
+                if (!context.isDestroyed()) {
+                    if (imageCall != null) {
+                        imageCall.img(data);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (imageCall != null){
-                    imageCall.error();
+                if (!context.isDestroyed()) {
+                    if (imageCall != null) {
+                        imageCall.error();
+                    }
                 }
             }
         });
@@ -80,7 +90,7 @@ public class ImagePresenter {
 
 
     public interface ImageCall extends BaseCall{
-        void img(List<String> list);
+        void img(@NonNull List<String> list);
     }
 
 

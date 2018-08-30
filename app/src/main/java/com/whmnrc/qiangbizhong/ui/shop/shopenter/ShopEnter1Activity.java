@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.app.Constants;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,7 +54,7 @@ public class ShopEnter1Activity extends BaseActivity {
         wvContent.getSettings().setLoadWithOverviewMode(true);
 //        wvContent.loadUrl("http://192.168.1.157:8011/Protocol/AdmissionInstructions");
 //        wvContent.loadUrl("http://192.168.1.157:8011/Protocol/AdmissionInstructions");
-        wvContent.loadUrl(getResources().getString(R.string.server_address)+"/Protocol/AdmissionInstructions");
+        wvContent.loadUrl("http://qbz.aimeilian.com.cn/Protocol/AdmissionInstructions");
     }
 
 

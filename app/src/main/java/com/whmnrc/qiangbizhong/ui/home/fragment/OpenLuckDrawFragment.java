@@ -72,7 +72,7 @@ public class OpenLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(openLuckDrawAdapter);
-        luckDrawPresenter = new LuckDrawPresenter(mContext);
+        luckDrawPresenter = new LuckDrawPresenter(getActivity());
         showLoading("加载中..");
         luckDrawPresenter.awardlist2(0, this,true);
 

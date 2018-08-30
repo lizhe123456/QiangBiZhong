@@ -46,7 +46,8 @@
                         android:layout_alignBottom="@+id/ll_now_moeny1"
                         android:layout_toRightOf="@+id/ll_now_moeny1"
                         android:layout_marginBottom="@dimen/dm_2"
-                        android:layout_marginLeft="@dimen/dm_20">
+                        android:layout_marginLeft="@dimen/dm_20"
+                        android:gravity="bottom">
                         <TextView
                             android:id="@+id/tv_old_price"
                             android:layout_width="wrap_content"
@@ -54,8 +55,8 @@
                             android:textSize="@dimen/dm_10"
                             android:textColor="@color/tv_navigation"/>
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/dm_10"
+                            android:layout_height="@dimen/dm_10"
                             android:layout_gravity="bottom"
                             android:layout_marginBottom="@dimen/dm_2"
                             android:layout_marginLeft="@dimen/dm_5"
@@ -81,10 +82,10 @@
                             android:textSize="@dimen/dm_18" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/dm_18"
+                            android:layout_height="@dimen/dm_18"
                             android:layout_gravity="bottom"
-                            android:layout_marginBottom="@dimen/dm_5"
+                            android:layout_marginBottom="@dimen/dm_2"
                             android:layout_marginLeft="@dimen/dm_5"
                             android:src="@drawable/ic_yudou" />
                     </LinearLayout>
@@ -220,49 +221,49 @@
             android:orientation="horizontal">
 
 
-            <TextView
-                android:id="@+id/tv_price_title"
+            <!--<TextView-->
+                <!--android:id="@+id/tv_price_title"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="@dimen/dm_15"-->
+                <!--android:textColor="@color/tv_191"-->
+                <!--android:textSize="@dimen/dm_12"-->
+                <!--android:text="价格：" />-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/ll_now_moeny"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBottom="@+id/tv_price_title"-->
+                <!--android:layout_marginLeft="@dimen/dm_11"-->
+                <!--android:layout_toRightOf="@+id/tv_price_title"-->
+
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_now_moeny"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="bottom"-->
+                    <!--tool:text="5000"-->
+                    <!--android:textColor="@color/goods_price"-->
+                    <!--android:textSize="18sp" />-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="@dimen/dm_18"-->
+                    <!--android:layout_height="@dimen/dm_18"-->
+                    <!--android:layout_gravity="bottom"-->
+                    <!--android:layout_marginBottom="@dimen/dm_2"-->
+                    <!--android:layout_marginLeft="@dimen/dm_5"-->
+                    <!--android:src="@drawable/ic_yudou" />-->
+            <!--</LinearLayout>-->
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dm_15"
-                android:textColor="@color/tv_191"
-                android:textSize="@dimen/dm_12"
-                android:text="价格：" />
-
-            <LinearLayout
-                android:id="@+id/ll_now_moeny"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_price_title"
-                android:layout_marginLeft="@dimen/dm_11"
-                android:layout_toRightOf="@+id/tv_price_title"
-
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_now_moeny"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    tool:text="5000"
-                    android:textColor="@color/goods_price"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="@dimen/dm_5"
-                    android:layout_marginLeft="@dimen/dm_5"
-                    android:src="@drawable/ic_yudou" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dm_30"
+                android:layout_marginLeft="@dimen/dm_10"
                 android:layout_toRightOf="@+id/ll_now_moeny"
                 android:orientation="horizontal">
 
@@ -294,7 +295,7 @@
 
             <TextView
                 android:id="@+id/tv_buy"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dm_245"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/bg_color_btn"

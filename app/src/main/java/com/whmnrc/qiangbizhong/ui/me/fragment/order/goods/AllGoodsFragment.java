@@ -72,7 +72,7 @@ public class AllGoodsFragment extends BaseFragment implements GoodsPresenter.Goo
 
     @Override
     protected void initData() {
-        goodsPresenter = new GoodsPresenter(getContext());
+        goodsPresenter = new GoodsPresenter(getActivity());
         type = getArguments().getString("type");
         goodsPresenter.getgoodslist(type, UserManage.getInstance().getLoginBean().getStoreInfo().getId(), true, this);
         goodManageAdapter = new GoodManageAdapter(getContext());

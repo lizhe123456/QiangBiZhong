@@ -129,11 +129,9 @@ public class RechargeCoreActivity extends BaseActivity implements RechargePresen
                     return;
                 }
                 if (!TextUtils.isEmpty(etRecharge.getText().toString().trim())) {
-                    if (20 <= Number * Integer.parseInt(etRecharge.getText().toString().trim())) {
+                    if (30 <= Number * Integer.parseInt(etRecharge.getText().toString().trim())) {
                         showLoading("购买中..");
                         rechargePresenter.submitorder(etRecharge.getText().toString().trim(), "0", agentshopId, agentShopDiscountId, this);
-                    } else {
-                        ToastUtils.showShort("最少充值数量为20");
                     }
                 }
                 break;
@@ -204,7 +202,7 @@ public class RechargeCoreActivity extends BaseActivity implements RechargePresen
                         .setText(R.id.tv_old_price, "¥"+item.getOldPrice() + "").setTextColor(R.id.tv_old_price,R.color.white)
                         .setText(R.id.tv_price,"¥"+item.getTotalPrice() + "").setTextColor(R.id.tv_price,R.color.white);
                 holder.setBackgroundColor(R.id.tv_xian,R.color.white);
-                holder.setImageResource(R.id.iv_img,R.drawable.ic_white_dou);
+                holder.setImageResource(R.id.iv_img,R.drawable.ic_yudou);
             }else {
                 linearLayout.setSelected(false);
                 holder.setText(R.id.tv_stock,item.getNumber() + "").setTextColor(R.id.tv_old_price,R.color.colorAccent)

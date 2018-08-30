@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.presenter.home;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.whmnrc.qiangbizhong.R;
@@ -17,9 +18,9 @@ import java.util.List;
 
 public class QuestionnairePresenter {
 
-    private Context context;
+    private Activity context;
 
-    public QuestionnairePresenter(Context context) {
+    public QuestionnairePresenter(Activity context) {
         this.context = context;
     }
 
@@ -29,15 +30,19 @@ public class QuestionnairePresenter {
                 + "?phone=" + phone, GsonUtil.createGsonString(questionnaireParams), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (questionnaireCall != null){
-                    questionnaireCall.submitS();
+                if (!context.isDestroyed()) {
+                    if (questionnaireCall != null) {
+                        questionnaireCall.submitS();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (questionnaireCall != null){
-                    questionnaireCall.error();
+                if (!context.isDestroyed()) {
+                    if (questionnaireCall != null) {
+                        questionnaireCall.error();
+                    }
                 }
             }
         });

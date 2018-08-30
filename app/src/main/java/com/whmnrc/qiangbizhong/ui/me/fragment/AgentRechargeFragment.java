@@ -76,7 +76,7 @@ public class AgentRechargeFragment extends BaseFragment implements RechargePrese
 
     @Override
     protected void initData() {
-        rechargePresenter = new RechargePresenter(getContext());
+        rechargePresenter = new RechargePresenter(getActivity());
         rechargePresenter.agentshopQuery(sortName, sortType, keyWord, true, this);
         agentRechargeAdapter = new AgentRechargeAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

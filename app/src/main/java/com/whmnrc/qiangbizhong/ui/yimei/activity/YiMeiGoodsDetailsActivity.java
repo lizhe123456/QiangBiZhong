@@ -76,12 +76,6 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
     TextView tvCollection;
     @BindView(R.id.rv_comment_list)
     RecyclerView rvCommentList;
-    @BindView(R.id.tv_price_title)
-    TextView tvPriceTitle;
-    @BindView(R.id.tv_now_moeny)
-    TextView tvNowMoeny;
-    @BindView(R.id.ll_now_moeny)
-    LinearLayout llNowMoeny;
     @BindView(R.id.tv_buy)
     TextView tvBuy;
     @BindView(R.id.tv_title)
@@ -188,7 +182,7 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
         //中划线
         tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         tvPrice.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
-        tvNowMoeny.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
+//        tvNowMoeny.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
 
         GlideuUtil.loadImageView(this, yiMeiGoodsDetailBean.getStoreInfo().getStoreHeadImage(), ivImg);
         tvAddress.setText("地址："+yiMeiGoodsDetailBean.getStoreInfo().getAddress());

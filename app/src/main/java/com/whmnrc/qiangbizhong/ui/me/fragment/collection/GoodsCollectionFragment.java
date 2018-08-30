@@ -80,7 +80,7 @@ public class GoodsCollectionFragment extends BaseFragment implements
 
     @Override
     protected void initData() {
-        collectionPresenter = new CollectionPresenter(mContext);
+        collectionPresenter = new CollectionPresenter(getActivity());
         showLoading("加载中..");
         collectionPresenter.getcollectionlist(0, true, this);
         goodsCollectionAdapter = new GoodsCollectionAdapter(getContext());

@@ -55,8 +55,8 @@
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dm_18"
+                    android:layout_height="@dimen/dm_18"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="@dimen/dm_2"
                     android:layout_marginLeft="@dimen/dm_5"
@@ -164,8 +164,8 @@ C座7F 办公室"
                 android:textSize="@dimen/dm_13" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dm_13"
+                android:layout_height="@dimen/dm_13"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="@dimen/dm_2"
                 android:layout_marginLeft="@dimen/dm_5"

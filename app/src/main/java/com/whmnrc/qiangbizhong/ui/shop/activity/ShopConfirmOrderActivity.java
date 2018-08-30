@@ -207,8 +207,8 @@ public class ShopConfirmOrderActivity extends BaseActivity implements OrderPrese
 
     @Override
     public void error() {
-        this.finish();
         PayStuActivity.start(this,0);
+        this.finish();
     }
 
     @Override

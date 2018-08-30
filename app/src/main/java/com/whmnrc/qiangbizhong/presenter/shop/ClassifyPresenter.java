@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.presenter.shop;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
@@ -20,9 +21,9 @@ import java.util.Map;
 
 public class ClassifyPresenter {
 
-    Context context;
+    Activity context;
 
-    public ClassifyPresenter(Context context) {
+    public ClassifyPresenter(Activity context) {
         this.context = context;
     }
 
@@ -32,9 +33,11 @@ public class ClassifyPresenter {
             @Override
             public void onSuccess(String data) {
                 List<ClassifyBean> classifyBeans = GsonUtil.changeGsonToList(data,ClassifyBean.class);
-                if (classifyListCall != null){
-                    if (classifyBeans != null) {
-                        classifyListCall.classifyListBack(classifyBeans);
+                if (!context.isDestroyed()) {
+                    if (classifyListCall != null) {
+                        if (classifyBeans != null) {
+                            classifyListCall.classifyListBack(classifyBeans);
+                        }
                     }
                 }
 

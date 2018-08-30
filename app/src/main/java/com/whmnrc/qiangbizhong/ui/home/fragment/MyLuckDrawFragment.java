@@ -79,7 +79,7 @@ public class MyLuckDrawFragment extends BaseFragment implements LuckDrawPresente
     protected void initData() {
         ivBack.setVisibility(View.VISIBLE);
         tvTitle.setText("我的奖品");
-        luckDrawPresenter = new LuckDrawPresenter(mContext);
+        luckDrawPresenter = new LuckDrawPresenter(getActivity());
         showLoading("加载中..");
         luckDrawPresenter.awardlist(this,true);
         myLuckDrawAdapter = new MyLuckDrawAdapter(mContext);

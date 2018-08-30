@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -21,11 +23,11 @@ import java.util.Map;
 
 public class GivePresenter {
 
-    private Context context;
+    private Activity context;
     private int page;
 
 
-    public GivePresenter(Context context) {
+    public GivePresenter(Activity context) {
         this.context = context;
     }
 
@@ -42,20 +44,24 @@ public class GivePresenter {
             @Override
             public void onSuccess(String data) {
                 List<GiveRBean> giveRBeans = GsonUtil.changeGsonToList(data,GiveRBean.class);
-                if (giveListCall != null){
-                    if (isR) {
-                        giveListCall.getGiveList(giveRBeans);
-                    }else {
-                        giveListCall.loadMore(giveRBeans);
+                if (!context.isDestroyed()) {
+                    if (giveListCall != null) {
+                        if (isR) {
+                            giveListCall.getGiveList(giveRBeans);
+                        } else {
+                            giveListCall.loadMore(giveRBeans);
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (giveListCall != null){
-                    giveListCall.error();
+                if (!context.isDestroyed()) {
+                    if (giveListCall != null) {
+                        giveListCall.error();
+                    }
                 }
             }
         });
@@ -69,15 +75,19 @@ public class GivePresenter {
             @Override
             public void onSuccess(String data) {
                 GiveOrderDetailBean giveOrderDetailBean = GsonUtil.changeGsonToBean(data,GiveOrderDetailBean.class);
-                if (giveOrderDetailCall != null){
-                    giveOrderDetailCall.getGiveOrderDetail(giveOrderDetailBean);
+                if (!context.isDestroyed()) {
+                    if (giveOrderDetailCall != null) {
+                        giveOrderDetailCall.getGiveOrderDetail(giveOrderDetailBean);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (giveOrderDetailCall != null){
-                    giveOrderDetailCall.error();
+                if (!context.isDestroyed()) {
+                    if (giveOrderDetailCall != null) {
+                        giveOrderDetailCall.error();
+                    }
                 }
             }
         });
@@ -92,7 +102,7 @@ public class GivePresenter {
     }
 
     public interface GiveOrderDetailCall extends BaseCall{
-        void getGiveOrderDetail(GiveOrderDetailBean giveOrderDetailBean);
+        void getGiveOrderDetail(@NonNull GiveOrderDetailBean giveOrderDetailBean);
     }
 
 }

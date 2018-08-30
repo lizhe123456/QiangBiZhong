@@ -1,7 +1,10 @@
 package com.whmnrc.qiangbizhong.ui.me.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -11,7 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.luck.picture.lib.permissions.RxPermissions;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.presenter.yimei.NewsPresenter;
@@ -26,7 +32,7 @@ import butterknife.OnClick;
  * 意见反馈
  */
 
-public class OpinionBackActivity extends BaseActivity implements NewsPresenter.FeedbackCall{
+public class OpinionBackActivity extends BaseActivity implements NewsPresenter.FeedbackCall {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -49,7 +55,7 @@ public class OpinionBackActivity extends BaseActivity implements NewsPresenter.F
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (s.toString().length() <= 20){
+            if (s.toString().length() <= 20) {
                 tvCount.setText("（" + count + "/20）");
             }
         }
@@ -81,22 +87,48 @@ public class OpinionBackActivity extends BaseActivity implements NewsPresenter.F
     }
 
 
-    @OnClick({R.id.iv_back, R.id.tv_menu})
+    @OnClick({R.id.iv_back, R.id.tv_menu,R.id.tv_cs_1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 this.finish();
                 break;
             case R.id.tv_menu:
-                if (TextUtils.isEmpty(etContent.getText().toString())){
+                if (TextUtils.isEmpty(etContent.getText().toString())) {
                     ToastUtils.showShort("请填写反馈意见");
                     return;
                 }
                 showLoading("提交中..");
                 //提交
-                newsPresenter.feedback(etContent.getText().toString(),this);
+                newsPresenter.feedback(etContent.getText().toString(), this);
                 break;
+            case R.id.tv_cs_1:
+                RxPermissions rxPermissions = new RxPermissions(this);
+                rxPermissions
+                        .request(Manifest.permission.CALL_PHONE)
+                        .subscribe(granted -> {
+                            callPhone("027-87898381");
+                        });
+
+                break;
+//            case R.id.tv_cs_2:
+//                RxPermissions rxPermissions1 = new RxPermissions(this);
+//                rxPermissions1
+//                        .request(Manifest.permission.CALL_PHONE)
+//                        .subscribe(granted -> {
+//                            callPhone("4001089086");
+//                        });
+
+//                break;
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    public void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
     }
 
     @Override
@@ -108,4 +140,5 @@ public class OpinionBackActivity extends BaseActivity implements NewsPresenter.F
     public void feedBack() {
         this.finish();
     }
+
 }

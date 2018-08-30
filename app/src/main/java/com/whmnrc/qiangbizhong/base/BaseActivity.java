@@ -10,6 +10,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseLiveData;
 import com.whmnrc.qiangbizhong.model.bean.LodingBean;
+import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 import com.whmnrc.qiangbizhong.util.SoftHideKeyBoardUtil;
 import com.whmnrc.qiangbizhong.widget.LoadingDialog;
 

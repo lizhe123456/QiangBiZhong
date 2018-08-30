@@ -2,6 +2,7 @@ package com.whmnrc.qiangbizhong.presenter.me;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -32,11 +33,11 @@ import java.util.Map;
 
 public class OrderPresenter {
 
-    private Context context;
+    private Activity context;
     private int page = 0;
     private int size = 10;
 
-    public OrderPresenter(Context context) {
+    public OrderPresenter(Activity context) {
         this.context = context;
     }
 
@@ -54,11 +55,13 @@ public class OrderPresenter {
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)){
                     List<OrderListBean> orderListBeans = JSON.parseArray(data, OrderListBean.class);
-                    if (orderCall != null){
-                        if (isRefresh) {
-                            orderCall.orderlistBack(orderListBeans);
-                        }else {
-                            orderCall.loadMore(orderListBeans);
+                    if (!context.isDestroyed()) {
+                        if (orderCall != null) {
+                            if (isRefresh) {
+                                orderCall.orderlistBack(orderListBeans);
+                            } else {
+                                orderCall.loadMore(orderListBeans);
+                            }
                         }
                     }
                 }
@@ -66,8 +69,10 @@ public class OrderPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderCall != null){
-                    orderCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderCall != null) {
+                        orderCall.error();
+                    }
                 }
             }
 
@@ -88,11 +93,13 @@ public class OrderPresenter {
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)){
                     List<OrderListBean> orderListBeans = JSON.parseArray(data, OrderListBean.class);
-                    if (orderCall != null){
-                        if (isRefresh) {
-                            orderCall.orderlistBack(orderListBeans);
-                        }else {
-                            orderCall.loadMore(orderListBeans);
+                    if (!context.isDestroyed()) {
+                        if (orderCall != null) {
+                            if (isRefresh) {
+                                orderCall.orderlistBack(orderListBeans);
+                            } else {
+                                orderCall.loadMore(orderListBeans);
+                            }
                         }
                     }
                 }
@@ -100,8 +107,10 @@ public class OrderPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderCall != null){
-                    orderCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderCall != null) {
+                        orderCall.error();
+                    }
                 }
             }
 
@@ -116,21 +125,25 @@ public class OrderPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.submitOrder)+ "?goodsRushId="+goodsId+"&userId="+UserManage.getInstance().getUserID()+"&addressId="+addressId,map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (submitOrederCall != null){
-                    submitOrederCall.submitOrederBack();
+                if (!context.isDestroyed()) {
+                    if (submitOrederCall != null) {
+                        submitOrederCall.submitOrederBack();
+                    }
                 }
                 UserManage.getInstance().getUserInfo(null);
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (code == 101 && errorMsg.equals("101")){
-                    if (submitOrederCall != null) {
-                        submitOrederCall.recharge();
-                    }
-                }else {
-                    if (submitOrederCall != null) {
-                        submitOrederCall.error();
+                if (!context.isDestroyed()) {
+                    if (code == 101 && errorMsg.equals("101")) {
+                        if (submitOrederCall != null) {
+                            submitOrederCall.recharge();
+                        }
+                    } else {
+                        if (submitOrederCall != null) {
+                            submitOrederCall.error();
+                        }
                     }
                 }
             }
@@ -144,8 +157,10 @@ public class OrderPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.abandon),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (cancelCall != null){
-                    cancelCall.cancelS();
+                if (!context.isDestroyed()) {
+                    if (cancelCall != null) {
+                        cancelCall.cancelS();
+                    }
                 }
                 UserManage.getInstance().getUserInfo(null);
             }
@@ -162,21 +177,25 @@ public class OrderPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.buy)+"?awardId="+awardId+"&userId="+UserManage.getInstance().getUserID(),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                UserManage.getInstance().getUserInfo(null);
-                if (payBackS != null){
-                    payBackS.payS();
+                if (!context.isDestroyed()) {
+                    UserManage.getInstance().getUserInfo(null);
+                    if (payBackS != null) {
+                        payBackS.payS();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (code == 101 && errorMsg.equals("101")){
-                    if (payBackS != null) {
-                        payBackS.recharge();
-                    }
-                }else {
-                    if (payBackS != null) {
-                        payBackS.error();
+                if (!context.isDestroyed()) {
+                    if (code == 101 && errorMsg.equals("101")) {
+                        if (payBackS != null) {
+                            payBackS.recharge();
+                        }
+                    } else {
+                        if (payBackS != null) {
+                            payBackS.error();
+                        }
                     }
                 }
             }
@@ -189,8 +208,10 @@ public class OrderPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.collectgoods),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (cancelCall != null){
-                    cancelCall.collect();
+                if (!context.isDestroyed()) {
+                    if (cancelCall != null) {
+                        cancelCall.collect();
+                    }
                 }
             }
 
@@ -206,21 +227,25 @@ public class OrderPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address)+context.getString(R.string.awardSubmitOrder) + "?awardId=" +awardId+"&userId="+UserManage.getInstance().getUserID()+"&addressId="+addressId,map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (submitOrederCall != null){
-                    submitOrederCall.submitOrederBack();
+                if (!context.isDestroyed()) {
+                    if (submitOrederCall != null) {
+                        submitOrederCall.submitOrederBack();
+                    }
+                    UserManage.getInstance().getUserInfo(null);
                 }
-                UserManage.getInstance().getUserInfo(null);
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (code == 101 && errorMsg.equals("101")){
-                    if (submitOrederCall != null) {
-                        submitOrederCall.recharge();
-                    }
-                }else {
-                    if (submitOrederCall != null) {
-                        submitOrederCall.error();
+                if (!context.isDestroyed()) {
+                    if (code == 101 && errorMsg.equals("101")) {
+                        if (submitOrederCall != null) {
+                            submitOrederCall.recharge();
+                        }
+                    } else {
+                        if (submitOrederCall != null) {
+                            submitOrederCall.error();
+                        }
                     }
                 }
             }
@@ -235,15 +260,19 @@ public class OrderPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.validatePay), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (payPassCall != null){
-                    payPassCall.payPassBack();
+                if (!context.isDestroyed()) {
+                    if (payPassCall != null) {
+                        payPassCall.payPassBack();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (payPassCall != null){
-                    payPassCall.error();
+                if (!context.isDestroyed()) {
+                    if (payPassCall != null) {
+                        payPassCall.error();
+                    }
                 }
             }
         });
@@ -253,29 +282,33 @@ public class OrderPresenter {
         OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.submitshoppingorder), GsonUtil.createGsonString(parameter), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (submitShoppingOrderCall != null){
-                    submitShoppingOrderCall.submitOrederBack();
-                }
-                if (TextUtils.isEmpty(data)){
+                if (!context.isDestroyed()) {
+                    if (submitShoppingOrderCall != null) {
+                        submitShoppingOrderCall.submitOrederBack();
+                    }
+                    if (TextUtils.isEmpty(data)) {
 
-                }else {
-                    ToastUtils.showShort(data);
+                    } else {
+                        ToastUtils.showShort(data);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (submitShoppingOrderCall != null){
-                    submitShoppingOrderCall.error();
-                }
-
-                if (code == 101 && errorMsg.equals("101")){
-                    if (submitShoppingOrderCall != null) {
-                        submitShoppingOrderCall.recharge();
-                    }
-                }else {
+                if (!context.isDestroyed()) {
                     if (submitShoppingOrderCall != null) {
                         submitShoppingOrderCall.error();
+                    }
+
+                    if (code == 101 && errorMsg.equals("101")) {
+                        if (submitShoppingOrderCall != null) {
+                            submitShoppingOrderCall.recharge();
+                        }
+                    } else {
+                        if (submitShoppingOrderCall != null) {
+                            submitShoppingOrderCall.error();
+                        }
                     }
                 }
             }
@@ -289,20 +322,24 @@ public class OrderPresenter {
                 "?userId=" + UserManage.getInstance().getUserID() + "&orderId=" + orderId + "&refundremark=" + refundremark, map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (orderUpdateCall != null) {
-                    if (TextUtils.isEmpty(data)) {
-                        orderUpdateCall.updateData();
-                        ToastUtils.showShort("提交成功");
-                    } else {
-                        ToastUtils.showShort(data);
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        if (TextUtils.isEmpty(data)) {
+                            orderUpdateCall.updateData();
+                            ToastUtils.showShort("提交成功");
+                        } else {
+                            ToastUtils.showShort(data);
+                        }
                     }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderUpdateCall != null) {
-                    orderUpdateCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.error();
+                    }
                 }
             }
         });
@@ -314,20 +351,24 @@ public class OrderPresenter {
                 "?userId=" + UserManage.getInstance().getUserID() + "&orderId=" + orderId, map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (orderUpdateCall != null) {
-                    if (TextUtils.isEmpty(data)) {
-                        orderUpdateCall.updateData();
-                        ToastUtils.showShort("取消成功");
-                    } else {
-                        ToastUtils.showShort(data);
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        if (TextUtils.isEmpty(data)) {
+                            orderUpdateCall.updateData();
+                            ToastUtils.showShort("取消成功");
+                        } else {
+                            ToastUtils.showShort(data);
+                        }
                     }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderUpdateCall != null) {
-                    orderUpdateCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.error();
+                    }
                 }
             }
         });
@@ -340,15 +381,19 @@ public class OrderPresenter {
             @Override
             public void onSuccess(String data) {
                 OrderdetailBean orderdetailBean = GsonUtil.changeGsonToBean(data,OrderdetailBean.class);
-                if (orderUpdateCall != null) {
-                    orderUpdateCall.orderDetail(orderdetailBean);
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.orderDetail(orderdetailBean);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderUpdateCall != null) {
-                    orderUpdateCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.error();
+                    }
                 }
             }
         });
@@ -359,15 +404,19 @@ public class OrderPresenter {
                 + "?orderId=" + orderId, new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.updateData();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.updateData();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.error();
+                    }
                 }
             }
         });
@@ -378,15 +427,19 @@ public class OrderPresenter {
                 + "?orderId=" + orderId, new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.updateData();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.updateData();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.error();
+                    }
                 }
             }
         });
@@ -397,29 +450,33 @@ public class OrderPresenter {
                 GsonUtil.createGsonString(yiMeiOrderParam), new OkhttpUtil.BeanCallback() {
                     @Override
                     public void onSuccess(String data) {
-                        if (submitOrederCall != null){
-                            submitOrederCall.submitOrederBack();
-                        }
-                        if (TextUtils.isEmpty(data)){
+                        if (!context.isDestroyed()) {
+                            if (submitOrederCall != null) {
+                                submitOrederCall.submitOrederBack();
+                            }
+                            if (TextUtils.isEmpty(data)) {
 
-                        }else {
-                            ToastUtils.showShort(data);
+                            } else {
+                                ToastUtils.showShort(data);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(int code, String errorMsg) {
-                        if (submitOrederCall != null){
-                            submitOrederCall.error();
-                        }
-
-                        if (code == 101 && errorMsg.equals("101")){
-                            if (submitOrederCall != null) {
-                                submitOrederCall.recharge();
-                            }
-                        }else {
+                        if (!context.isDestroyed()) {
                             if (submitOrederCall != null) {
                                 submitOrederCall.error();
+                            }
+
+                            if (code == 101 && errorMsg.equals("101")) {
+                                if (submitOrederCall != null) {
+                                    submitOrederCall.recharge();
+                                }
+                            } else {
+                                if (submitOrederCall != null) {
+                                    submitOrederCall.error();
+                                }
                             }
                         }
                     }
@@ -434,17 +491,21 @@ public class OrderPresenter {
             public void onSuccess(String data) {
                 YiMeiOrderDetailBean yiMeiOrderDetailBean = JSON.parseObject(data,YiMeiOrderDetailBean.class);
 //                YiMeiOrderDetailBean yiMeiOrderDetailBean = GsonUtil.changeGsonToBean(data,YiMeiOrderDetailBean.class);
-                if (orderDetailMedicalCall != null){
-                    if (yiMeiOrderDetailBean != null) {
-                        orderDetailMedicalCall.orderDetailMedical(yiMeiOrderDetailBean);
+                if (!context.isDestroyed()) {
+                    if (orderDetailMedicalCall != null) {
+                        if (yiMeiOrderDetailBean != null) {
+                            orderDetailMedicalCall.orderDetailMedical(yiMeiOrderDetailBean);
+                        }
                     }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderDetailMedicalCall != null){
-                    orderDetailMedicalCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderDetailMedicalCall != null) {
+                        orderDetailMedicalCall.error();
+                    }
                 }
             }
         });
@@ -455,19 +516,23 @@ public class OrderPresenter {
                 + orderId, new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.updateData();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.updateData();
+                    }
+                    if (TextUtils.isEmpty(data)) {
+                        return;
+                    }
+                    ToastUtils.showShort(data);
                 }
-                if (TextUtils.isEmpty(data)){
-                    return;
-                }
-                ToastUtils.showShort(data);
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.error();
+                    }
                 }
             }
         });
@@ -478,19 +543,23 @@ public class OrderPresenter {
                 + orderId, new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.updateData();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.updateData();
+                    }
+                    if (TextUtils.isEmpty(data)) {
+                        return;
+                    }
+                    ToastUtils.showShort(data);
                 }
-                if (TextUtils.isEmpty(data)){
-                    return;
-                }
-                ToastUtils.showShort(data);
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.error();
+                    }
                 }
             }
         });
@@ -522,19 +591,23 @@ public class OrderPresenter {
                 + orderId + "&userId=" + UserManage.getInstance().getUserID(), new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.updateData();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.updateData();
+                    }
+                    if (TextUtils.isEmpty(data)) {
+                        return;
+                    }
+                    ToastUtils.showShort(data);
                 }
-                if (TextUtils.isEmpty(data)){
-                    return;
-                }
-                ToastUtils.showShort(data);
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (orderUpdateCall != null){
-                    orderUpdateCall.error();
+                if (!context.isDestroyed()) {
+                    if (orderUpdateCall != null) {
+                        orderUpdateCall.error();
+                    }
                 }
             }
         });
@@ -577,12 +650,12 @@ public class OrderPresenter {
 
 
     public interface OrderDetailMedicalCall extends BaseCall{
-        void orderDetailMedical(YiMeiOrderDetailBean yiMeiOrderDetailBean);
+        void orderDetailMedical(@NonNull YiMeiOrderDetailBean yiMeiOrderDetailBean);
 
     }
 
     public interface OrderDetailCall extends BaseCall{
-        void orderDetail(OrderdetailBean orderdetailBean);
+        void orderDetail(@NonNull OrderdetailBean orderdetailBean);
     }
 
 
@@ -592,9 +665,9 @@ public class OrderPresenter {
     }
 
     public interface OrderCall extends BaseCall {
-        void orderlistBack(List<OrderListBean> orderListBeans);
+        void orderlistBack(@NonNull List<OrderListBean> orderListBeans);
 
-        void loadMore(List<OrderListBean> orderListBeans);
+        void loadMore(@NonNull List<OrderListBean> orderListBeans);
     }
 
     public interface OrderUpdateCall extends BaseCall {

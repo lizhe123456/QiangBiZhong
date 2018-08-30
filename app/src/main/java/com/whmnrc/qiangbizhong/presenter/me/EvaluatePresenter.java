@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
@@ -22,11 +24,11 @@ import java.util.Map;
 
 public class EvaluatePresenter {
 
-    private Context context;
+    private Activity context;
 
     private int page;
 
-    public EvaluatePresenter(Context context) {
+    public EvaluatePresenter(Activity context) {
         this.context = context;
     }
 
@@ -34,16 +36,20 @@ public class EvaluatePresenter {
         OkhttpUtil.postString(context.getString(R.string.server_address) + context.getString(R.string.submitcommentinfo), GsonUtil.createGsonString(evaluateParams), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (evaluateCallBack != null){
-                    evaluateCallBack.evaluateS();
+                if (!context.isDestroyed()) {
+                    if (evaluateCallBack != null) {
+                        evaluateCallBack.evaluateS();
+                    }
+                    ToastUtils.showShort("评论成功");
                 }
-                ToastUtils.showShort("评论成功");
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (evaluateCallBack != null){
-                    evaluateCallBack.error();
+                if (!context.isDestroyed()) {
+                    if (evaluateCallBack != null) {
+                        evaluateCallBack.error();
+                    }
                 }
             }
         });
@@ -62,20 +68,24 @@ public class EvaluatePresenter {
             @Override
             public void onSuccess(String data) {
                 List<CommentBean> commentBeans = GsonUtil.changeGsonToList(data,CommentBean.class);
-                if (evaluateListCall != null){
-                    if (isR){
-                        evaluateListCall.evaluateList(commentBeans);
-                    }else {
-                        evaluateListCall.loadMore(commentBeans);
+                if (!context.isDestroyed()) {
+                    if (evaluateListCall != null) {
+                        if (isR) {
+                            evaluateListCall.evaluateList(commentBeans);
+                        } else {
+                            evaluateListCall.loadMore(commentBeans);
+                        }
+                        page++;
                     }
-                   page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (evaluateListCall != null){
-                    evaluateListCall.error();
+                if (!context.isDestroyed()) {
+                    if (evaluateListCall != null) {
+                        evaluateListCall.error();
+                    }
                 }
             }
         });
@@ -88,9 +98,9 @@ public class EvaluatePresenter {
 
     public interface EvaluateListCall extends BaseCall{
 
-        void evaluateList(List<CommentBean> commentBeans);
+        void evaluateList(@NonNull List<CommentBean> commentBeans);
 
-        void loadMore(List<CommentBean> commentBeans);
+        void loadMore(@NonNull List<CommentBean> commentBeans);
 
     }
 }

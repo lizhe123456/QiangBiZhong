@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.whmnrc.qiangbizhong.R;
@@ -20,9 +22,9 @@ import java.util.Map;
 
 public class AddressPresenter {
 
-    private Context context;
+    private Activity context;
 
-    public AddressPresenter(Context context) {
+    public AddressPresenter(Activity context) {
         this.context = context;
     }
 
@@ -31,8 +33,10 @@ public class AddressPresenter {
         OkhttpUtil.post(context.getString(R.string.server_address) + context.getString(R.string.addAddress),params, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (addressCall != null){
-                    addressCall.addressBack();
+                if (!context.isDestroyed()) {
+                    if (addressCall != null) {
+                        addressCall.addressBack();
+                    }
                 }
             }
 
@@ -51,8 +55,10 @@ public class AddressPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.deleteAddress),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (addManageCall != null){
-                    addManageCall.updateData();
+                if (!context.isDestroyed()) {
+                    if (addManageCall != null) {
+                        addManageCall.updateData();
+                    }
                 }
             }
 
@@ -71,8 +77,10 @@ public class AddressPresenter {
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.setdefault),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (addManageCall != null){
-                    addManageCall.updateData();
+                if (!context.isDestroyed()) {
+                    if (addManageCall != null) {
+                        addManageCall.updateData();
+                    }
                 }
             }
 
@@ -92,16 +100,20 @@ public class AddressPresenter {
             public void onSuccess(String data) {
                 if (!TextUtils.isEmpty(data)) {
                     List<AddressBean> list = GsonUtil.changeGsonToList(data, AddressBean.class);
-                    if (addManageCall != null){
-                        addManageCall.getAddressList(list);
+                    if (!context.isDestroyed()) {
+                        if (addManageCall != null) {
+                            addManageCall.getAddressList(list);
+                        }
                     }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (addManageCall != null){
-                    addManageCall.error();
+                if (!context.isDestroyed()) {
+                    if (addManageCall != null) {
+                        addManageCall.error();
+                    }
                 }
             }
 
@@ -113,7 +125,7 @@ public class AddressPresenter {
     }
 
     public interface AddManageCall extends BaseCall{
-        void getAddressList(List<AddressBean> list);
+        void getAddressList(@NonNull List<AddressBean> list);
 
         void updateData();
     }

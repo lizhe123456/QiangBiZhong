@@ -30,7 +30,7 @@ public class HomePageBean {
         List<MenuBean> menuBeans = new ArrayList<>();
         menuBeans.add(new MenuBean(R.drawable.ic_recharge,"账户充值"));
         menuBeans.add(new MenuBean(R.drawable.ic_luck_draw,"抽奖专区"));
-        menuBeans.add(new MenuBean(R.drawable.ic_second_kill,"秒杀专区"));
+        menuBeans.add(new MenuBean(R.drawable.ic_second_kill,"砍价专区"));
         menuBeans.add(new MenuBean(R.drawable.ic_open_prize,"最新揭晓"));
         menuBeans.add(new MenuBean(R.drawable.ic_record,"抢购记录"));
         homePageBean.menuBeans = menuBeans;

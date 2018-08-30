@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.yimei;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -15,9 +17,9 @@ import java.util.HashMap;
 
 public class SubstitutePresenter {
 
-    Context context;
+    Activity context;
 
-    public SubstitutePresenter(Context context) {
+    public SubstitutePresenter(Activity context) {
         this.context = context;
     }
 
@@ -27,15 +29,19 @@ public class SubstitutePresenter {
                 , new HashMap<>(), new OkhttpUtil.BeanCallback() {
                     @Override
                     public void onSuccess(String data) {
-                        if (agentUserIdCall != null){
-                            agentUserIdCall.getAgentUserIdS(data);
+                        if (!context.isDestroyed()) {
+                            if (agentUserIdCall != null) {
+                                agentUserIdCall.getAgentUserIdS(data);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(int code, String errorMsg) {
-                        if (agentUserIdCall != null){
-                            agentUserIdCall.error();
+                        if (!context.isDestroyed()) {
+                            if (agentUserIdCall != null) {
+                                agentUserIdCall.error();
+                            }
                         }
                     }
                 });
@@ -44,7 +50,7 @@ public class SubstitutePresenter {
     }
 
     public interface AgentUserIdCall extends BaseCall{
-        void getAgentUserIdS(String userId);
+        void getAgentUserIdS(@NonNull String userId);
     }
 
 }

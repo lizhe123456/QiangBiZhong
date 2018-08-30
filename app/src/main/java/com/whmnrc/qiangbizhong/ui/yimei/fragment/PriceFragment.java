@@ -29,6 +29,6 @@ public class PriceFragment extends BaseFragment{
 
     @Override
     protected void initData() {
-        storePresenter = new StorePresenter(mContext);
+        storePresenter = new StorePresenter(getActivity());
     }
 }

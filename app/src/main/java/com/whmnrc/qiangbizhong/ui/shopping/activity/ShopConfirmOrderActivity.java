@@ -208,6 +208,7 @@ public class ShopConfirmOrderActivity extends BaseActivity implements AddressPre
     public void submitOrederBack() {
 //        StatusActivity.start(this,R.id.s);
         MyOrderActivity.start(this,0);
+        this.finish();
     }
 
     @Override

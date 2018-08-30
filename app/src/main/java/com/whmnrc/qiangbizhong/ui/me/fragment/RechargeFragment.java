@@ -75,7 +75,7 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
 
     @Override
     protected void initData() {
-        rechargePresenter = new RechargePresenter(getContext());
+        rechargePresenter = new RechargePresenter(getActivity());
         rechargePresenter.rechargeQuery(0, this);
     }
 
@@ -118,12 +118,8 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
     @OnClick(R.id.btn_confirm)
     public void onViewClicked() {
         if (!TextUtils.isEmpty(etRecharge.getText().toString().trim())){
-            if(Integer.parseInt(etRecharge.getText().toString().trim()) >= 20){
-                showLoading("充值中..");
-                rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"2","","",this);
-            }else {
-                ToastUtils.showShort("最少充值数量为20");
-            }
+            showLoading("充值中..");
+            rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"2","","",this);
         }
     }
 

@@ -89,8 +89,7 @@ public class MainActivity extends BaseActivity {
         fragments.add(ShopFragment.newInstance());
         fragments.add(ShopCarFragment.newInstance());
         fragments.add(MineFragment.newInstance());
-        FragmentUtils.add(getSupportFragmentManager(),fragments,R.id.fl_content,shopIndex);
-        showFragment = fragments.get(shopIndex);
+        switchFragment(shopIndex);
         switchBtn(shopIndex);
         if (!SPUtils.getInstance().getBoolean("isFrist",false)){
             QuestionnaireDialog questionnaireDialog = new QuestionnaireDialog(this);
@@ -114,12 +113,17 @@ public class MainActivity extends BaseActivity {
 
 
     private void switchFragment(int index){
-        if (index != shopIndex) {
-            FragmentUtils.showHide(fragments.get(index), showFragment);
-            switchBtn(index);
-            showFragment = fragments.get(index);
-            shopIndex = index;
+        if (FragmentUtils.getFragments(getSupportFragmentManager()).contains(fragments.get(index))) {
+            FragmentUtils.showHide(fragments.get(index),showFragment);
+        }else {
+            FragmentUtils.add(getSupportFragmentManager(),fragments.get(index),R.id.fl_content,false);
+            if (showFragment != null) {
+                FragmentUtils.hide(showFragment);
+            }
         }
+        switchBtn(index);
+        showFragment = fragments.get(index);
+        shopIndex = index;
     }
 
     private void switchBtn(int index){

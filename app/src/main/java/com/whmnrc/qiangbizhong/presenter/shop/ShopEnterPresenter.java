@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.presenter.shop;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -16,9 +17,9 @@ import com.whmnrc.qiangbizhong.util.OkhttpUtil;
 
 public class ShopEnterPresenter {
 
-    private Context context;
+    private Activity context;
 
-    public ShopEnterPresenter(Context context) {
+    public ShopEnterPresenter(Activity context) {
         this.context = context;
     }
 
@@ -27,16 +28,20 @@ public class ShopEnterPresenter {
                 GsonUtil.createGsonString(shopEnterP), new OkhttpUtil.BeanCallback() {
                     @Override
                     public void onSuccess(String data) {
-                        if (submitadmissionCall != null){
-                            submitadmissionCall.submitadmissionBack();
+                        if (!context.isDestroyed()) {
+                            if (submitadmissionCall != null) {
+                                submitadmissionCall.submitadmissionBack();
+                            }
+                            ToastUtils.showShort("提交成功");
                         }
-                        ToastUtils.showShort("提交成功");
                     }
 
                     @Override
                     public void onFailure(int code, String errorMsg) {
-                        if (submitadmissionCall != null){
-                            submitadmissionCall.error();
+                        if (!context.isDestroyed()) {
+                            if (submitadmissionCall != null) {
+                                submitadmissionCall.error();
+                            }
                         }
                     }
                 });

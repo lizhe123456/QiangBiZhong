@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -28,9 +30,9 @@ import java.util.Map;
 
 public class LoginPresenter{
 
-    private Context context;
+    private Activity context;
 
-    public LoginPresenter(Context context) {
+    public LoginPresenter(Activity context) {
         this.context = context;
     }
 
@@ -54,7 +56,11 @@ public class LoginPresenter{
             public void onSuccess(String st) {
                 if (!TextUtils.isEmpty(st)) {
                     LoginBean response = JSON.parseObject(st,LoginBean.class);
-                    loginCall.loginBack(response);
+                    if (!context.isDestroyed()) {
+                        if (loginCall != null) {
+                            loginCall.loginBack(response);
+                        }
+                    }
                 }
             }
 
@@ -73,12 +79,12 @@ public class LoginPresenter{
             @Override
             public void onSuccess(String st) {
                 if (!TextUtils.isEmpty(st)) {
-                    BaseResponse response = GsonUtil.changeGsonToBean(st,BaseResponse.class);
-                    if (response.getStatus() == 1){
-                        ToastUtils.showShort("验证码发送成功");
-                        return;
-                    }
-                    ToastUtils.showShort(response.getMessage());
+//                    BaseResponse response = GsonUtil.changeGsonToBean(st,BaseResponse.class);
+//                    if (response.getStatus() == 1){
+//                        ToastUtils.showShort("验证码发送成功");
+//                        return;
+//                    }
+//                    ToastUtils.showShort(response.getMessage());
                 }
 
             }
@@ -98,9 +104,11 @@ public class LoginPresenter{
         OkhttpUtil.post(App.getContext().getString(R.string.server_address) + App.getContext().getString(R.string.register), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String st) {
-                ToastUtils.showShort("注册成功");
-                if (registerCall != null){
-                    registerCall.registerBack();
+                if (!context.isDestroyed()) {
+                    ToastUtils.showShort("注册成功");
+                    if (registerCall != null) {
+                        registerCall.registerBack();
+                    }
                 }
             }
 
@@ -121,15 +129,19 @@ public class LoginPresenter{
 
             @Override
             public void onSuccess(String data) {
-                if (updatePwdCall != null){
-                    updatePwdCall.updatePaw();
+                if (!context.isDestroyed()) {
+                    if (updatePwdCall != null) {
+                        updatePwdCall.updatePaw();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (updatePwdCall != null){
-                    updatePwdCall.error();
+                if (!context.isDestroyed()) {
+                    if (updatePwdCall != null) {
+                        updatePwdCall.error();
+                    }
                 }
             }
         });
@@ -145,15 +157,19 @@ public class LoginPresenter{
 
             @Override
             public void onSuccess(String data) {
-                if (updatePwdCall != null){
-                    updatePwdCall.updatePaw();
+                if (!context.isDestroyed()) {
+                    if (updatePwdCall != null) {
+                        updatePwdCall.updatePaw();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (updatePwdCall != null){
-                    updatePwdCall.error();
+                if (!context.isDestroyed()) {
+                    if (updatePwdCall != null) {
+                        updatePwdCall.error();
+                    }
                 }
             }
         });
@@ -168,22 +184,26 @@ public class LoginPresenter{
         OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.retrievePwd), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (zhaoPassCall != null){
-                    zhaoPassCall.zhaoPassBack();
+                if (!context.isDestroyed()) {
+                    if (zhaoPassCall != null) {
+                        zhaoPassCall.zhaoPassBack();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (zhaoPassCall != null){
-                    zhaoPassCall.error();
+                if (!context.isDestroyed()) {
+                    if (zhaoPassCall != null) {
+                        zhaoPassCall.error();
+                    }
                 }
             }
         });
     }
 
     public interface LoginCall extends BaseCall {
-        void loginBack(LoginBean loginBean);
+        void loginBack(@NonNull LoginBean loginBean);
     }
 
     public interface RegisterCall extends BaseCall{

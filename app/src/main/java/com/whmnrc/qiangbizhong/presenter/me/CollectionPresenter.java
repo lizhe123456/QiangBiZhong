@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -25,11 +27,11 @@ import java.util.Map;
 
 public class CollectionPresenter {
 
-    private Context context;
+    private Activity context;
 
     private int page;
 
-    public CollectionPresenter(Context context) {
+    public CollectionPresenter(Activity context) {
         this.context = context;
     }
 
@@ -40,16 +42,20 @@ public class CollectionPresenter {
                 + "?type=" + type + "&goodsIdOrStoreId=" + cId +"&userId=" + UserManage.getInstance().getUserID() + "&shopType=" + showType, map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (collectionCall != null) {
-                    collectionCall.cS();
-                    ToastUtils.showShort("收藏成功");
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        collectionCall.cS();
+                        ToastUtils.showShort("收藏成功");
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (collectionCall != null){
-                    collectionCall.error();
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        collectionCall.error();
+                    }
                 }
             }
         });
@@ -62,17 +68,20 @@ public class CollectionPresenter {
                 + "?type=" + type + "&goodsIdOrStoreId=" + gsId +"&userId=" + UserManage.getInstance().getUserID(), map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (collectionCall != null) {
-                    collectionCall.cS();
-                    ToastUtils.showShort("取消成功");
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        collectionCall.cS();
+                        ToastUtils.showShort("取消成功");
+                    }
                 }
-
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (collectionCall != null){
-                    collectionCall.error();
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        collectionCall.error();
+                    }
                 }
             }
         });
@@ -84,15 +93,19 @@ public class CollectionPresenter {
                 "&type=" + type , GsonUtil.createGsonString(list), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (collectionCall != null){
-                    collectionCall.cS();
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        collectionCall.cS();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (collectionCall != null){
-                    collectionCall.error();
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        collectionCall.error();
+                    }
                 }
             }
         });
@@ -103,11 +116,13 @@ public class CollectionPresenter {
                 + "?userId=" + UserManage.getInstance().getUserID() , GsonUtil.createGsonString(list), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (collectionCall != null){
-                    if (TextUtils.isEmpty(data)){
-                        ToastUtils.showShort("添加成功");
-                    }else {
-                        ToastUtils.showShort(data);
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        if (TextUtils.isEmpty(data)) {
+                            ToastUtils.showShort("添加成功");
+                        } else {
+                            ToastUtils.showShort(data);
+                        }
                     }
                 }
 
@@ -116,8 +131,10 @@ public class CollectionPresenter {
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (collectionCall != null){
-                    collectionCall.error();
+                if (!context.isDestroyed()) {
+                    if (collectionCall != null) {
+                        collectionCall.error();
+                    }
                 }
             }
         });
@@ -135,20 +152,24 @@ public class CollectionPresenter {
             @Override
             public void onSuccess(String data) {
                 List<CollectionBean> collectionBeans = GsonUtil.changeGsonToList(data,CollectionBean.class);
-                if (collectionListCall != null){
-                    if (isR) {
-                        collectionListCall.collectionList(collectionBeans);
-                    }else {
-                        collectionListCall.loadMore(collectionBeans);
+                if (!context.isDestroyed()) {
+                    if (collectionListCall != null) {
+                        if (isR) {
+                            collectionListCall.collectionList(collectionBeans);
+                        } else {
+                            collectionListCall.loadMore(collectionBeans);
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (collectionListCall != null){
-                    collectionListCall.error();
+                if (!context.isDestroyed()) {
+                    if (collectionListCall != null) {
+                        collectionListCall.error();
+                    }
                 }
             }
         });
@@ -160,9 +181,9 @@ public class CollectionPresenter {
 
     public interface CollectionListCall extends BaseCall{
 
-        void collectionList(List<CollectionBean> collectionBeans);
+        void collectionList(@NonNull List<CollectionBean> collectionBeans);
 
-        void loadMore(List<CollectionBean> collectionBeans);
+        void loadMore(@NonNull List<CollectionBean> collectionBeans);
     }
 
 

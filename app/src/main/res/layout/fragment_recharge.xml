@@ -33,8 +33,8 @@
             android:textSize="30sp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dm_18"
+            android:layout_height="@dimen/dm_18"
             android:layout_marginLeft="@dimen/dm_5"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/dm_5"
@@ -110,8 +110,8 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dm_18"
+                android:layout_height="@dimen/dm_18"
                 android:layout_marginLeft="@dimen/dm_5"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="@dimen/dm_3"
@@ -147,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/goods_price"
-        android:textSize="12sp"
+        android:textSize="@dimen/dm_12"
         android:text="注意：可购买的豆子数量不得超过平台剩余数量"
         android:layout_marginLeft="@dimen/dm_15"
         android:layout_marginRight="@dimen/dm_15"

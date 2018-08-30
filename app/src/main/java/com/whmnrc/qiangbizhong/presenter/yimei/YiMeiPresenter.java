@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.yimei;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -29,9 +31,9 @@ public class YiMeiPresenter {
 
     private int page;
 
-    private Context context;
+    private Activity context;
 
-    public YiMeiPresenter(Context context) {
+    public YiMeiPresenter(Activity context) {
         this.context = context;
     }
 
@@ -46,25 +48,29 @@ public class YiMeiPresenter {
             @Override
             public void onSuccess(String data) {
                 YiMeiIndexBean yiMeiIndexBean = GsonUtil.changeGsonToBean(data,YiMeiIndexBean.class);
-                if (medicalIndexCall != null){
-                    if (isR) {
-                        medicalIndexCall.medicalIndexBack(yiMeiIndexBean);
-                    }else {
-                        if (yiMeiIndexBean != null) {
-                            medicalIndexCall.loadMore(yiMeiIndexBean.getMedicalList());
-                        }else {
-                            medicalIndexCall.error();
+                if (!context.isDestroyed()) {
+                    if (medicalIndexCall != null) {
+                        if (isR) {
+                            medicalIndexCall.medicalIndexBack(yiMeiIndexBean);
+                        } else {
+                            if (yiMeiIndexBean != null) {
+                                medicalIndexCall.loadMore(yiMeiIndexBean.getMedicalList());
+                            } else {
+                                medicalIndexCall.error();
+                            }
                         }
+                        page++;
                     }
-                    page++;
                 }
 
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (medicalIndexCall != null) {
-                    medicalIndexCall.error();
+                if (!context.isDestroyed()) {
+                    if (medicalIndexCall != null) {
+                        medicalIndexCall.error();
+                    }
                 }
             }
         });
@@ -87,20 +93,24 @@ public class YiMeiPresenter {
             @Override
             public void onSuccess(String data) {
                 List<YiMeiGoodsBean> yiMeiGoodsBeans = GsonUtil.changeGsonToList(data,YiMeiGoodsBean.class);
-                if (searchCall != null){
-                    if (isR) {
-                        searchCall.searchGoods(yiMeiGoodsBeans);
-                    }else {
-                        searchCall.loadMore(yiMeiGoodsBeans);
+                if (!context.isDestroyed()) {
+                    if (searchCall != null) {
+                        if (isR) {
+                            searchCall.searchGoods(yiMeiGoodsBeans);
+                        } else {
+                            searchCall.loadMore(yiMeiGoodsBeans);
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (searchCall != null){
-                    searchCall.error();
+                if (!context.isDestroyed()) {
+                    if (searchCall != null) {
+                        searchCall.error();
+                    }
                 }
             }
         });
@@ -115,15 +125,19 @@ public class YiMeiPresenter {
             @Override
             public void onSuccess(String data) {
                 YiMeiGoodsDetailBean yiMeiGoodsDetailBean = GsonUtil.changeGsonToBean(data,YiMeiGoodsDetailBean.class);
-                if (medicaldetailCall != null){
-                    medicaldetailCall.medicaldetai(yiMeiGoodsDetailBean);
+                if (!context.isDestroyed()) {
+                    if (medicaldetailCall != null) {
+                        medicaldetailCall.medicaldetai(yiMeiGoodsDetailBean);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (medicaldetailCall != null){
-                    medicaldetailCall.error();
+                if (!context.isDestroyed()) {
+                    if (medicaldetailCall != null) {
+                        medicaldetailCall.error();
+                    }
                 }
             }
         });
@@ -131,20 +145,20 @@ public class YiMeiPresenter {
     }
 
     public interface SearchCall extends BaseCall{
-        void searchGoods(List<YiMeiGoodsBean> yiMeiGoodsBeanList);
+        void searchGoods(@NonNull List<YiMeiGoodsBean> yiMeiGoodsBeanList);
 
-        void loadMore(List<YiMeiGoodsBean> yiMeiGoodsBeanList);
+        void loadMore(@NonNull List<YiMeiGoodsBean> yiMeiGoodsBeanList);
     }
 
     public interface MedicalIndexCall extends BaseCall{
 
-        void medicalIndexBack(YiMeiIndexBean yiMeiIndexBean);
+        void medicalIndexBack(@NonNull YiMeiIndexBean yiMeiIndexBean);
 
-        void loadMore(List<YiMeiIndexBean.MedicalListBean> listBeans);
+        void loadMore(@NonNull List<YiMeiIndexBean.MedicalListBean> listBeans);
     }
 
     public interface MedicaldetailCall extends BaseCall{
-        void medicaldetai(YiMeiGoodsDetailBean yiMeiGoodsDetailBean);
+        void medicaldetai(@NonNull YiMeiGoodsDetailBean yiMeiGoodsDetailBean);
     }
 
 }

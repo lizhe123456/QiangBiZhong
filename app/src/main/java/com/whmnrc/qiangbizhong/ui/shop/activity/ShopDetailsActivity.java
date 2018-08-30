@@ -271,7 +271,7 @@ public class ShopDetailsActivity extends BaseActivity implements ShopPresenter.S
             tvPrice.setText(shopBean.getGoods().getGoods_PriceMin() + "~" + shopBean.getGoods().getGoods_PriceMax());
         }
 //        tvPrice.setText(shopBean.getGoods().getGoods_PriceMin() + "~" + shopBean.getGoods().getGoods_PriceMax());
-        tvOldPrice.setText("原价 "+shopBean.getGoods().getGoods_PriceMax()+"");
+        tvOldPrice.setText("原价："+shopBean.getGoods().getGoods_PriceMax()+"");
         tvOldPrice.getPaint().setAntiAlias(true);//抗锯齿
         tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
         tvSalesVolume.setText("销量  "+shopBean.getGoods().getGoods_MonthCount()+"");

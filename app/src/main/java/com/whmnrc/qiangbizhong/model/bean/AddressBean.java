@@ -121,6 +121,8 @@ public class AddressBean implements Parcelable {
         return Address_Detail;
     }
 
+
+
     public void setAddress_Detail(String Address_Detail) {
         this.Address_Detail = Address_Detail;
     }

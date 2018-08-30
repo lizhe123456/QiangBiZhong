@@ -37,12 +37,12 @@
                 tool:text="58,000"/>
             <ImageView
                 android:id="@+id/iv_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dm_25"
+                android:layout_height="@dimen/dm_25"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/dm_4"
+                android:layout_marginBottom="@dimen/dm_2"
                 android:layout_marginLeft="@dimen/dm_5"
-                android:src="@drawable/ic_white_dou" />
+                android:src="@drawable/ic_yudou" />
         </LinearLayout>
         <TextView
             android:id="@+id/tv_name"

@@ -1,5 +1,6 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -22,9 +23,9 @@ import java.util.Map;
 
 public class UserPresenter {
 
-    private Context context;
+    private Activity context;
 
-    public UserPresenter(Context context) {
+    public UserPresenter(Activity context) {
         this.context = context;
     }
 
@@ -60,8 +61,10 @@ public class UserPresenter {
             public void onSuccess(String data) {
                 ToastUtils.showShort("上传成功");
                 UserManage.getInstance().getUserInfo(null);
-                if (headCall != null){
-                    headCall.headBack();
+                if (!context.isDestroyed()) {
+                    if (headCall != null) {
+                        headCall.headBack();
+                    }
                 }
             }
 

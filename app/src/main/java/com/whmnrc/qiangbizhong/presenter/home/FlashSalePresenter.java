@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.home;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -27,11 +29,11 @@ import java.util.Map;
 
 public class FlashSalePresenter {
 
-    private Context context;
+    private Activity context;
 
     private int page = 1;
 
-    public FlashSalePresenter(Context context) {
+    public FlashSalePresenter(Activity context) {
         this.context = context;
     }
 
@@ -106,21 +108,25 @@ public class FlashSalePresenter {
             @Override
             public void onSuccess(String data) {
                 List<RushRecordBean> rushRecordBeans = GsonUtil.changeGsonToList(data,RushRecordBean.class);
-                if (flashSaleRecordCall != null){
-                    if (isR) {
-                        flashSaleRecordCall.onFlashSaleRecord(rushRecordBeans);
-                    }else {
-                        flashSaleRecordCall.loadMore(rushRecordBeans);
+                if (!context.isDestroyed()) {
+                    if (flashSaleRecordCall != null) {
+                        if (isR) {
+                            flashSaleRecordCall.onFlashSaleRecord(rushRecordBeans);
+                        } else {
+                            flashSaleRecordCall.loadMore(rushRecordBeans);
+                        }
+                        page++;
                     }
-                    page++;
                 }
 
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (flashSaleRecordCall != null){
-                    flashSaleRecordCall.error();
+                if (!context.isDestroyed()) {
+                    if (flashSaleRecordCall != null) {
+                        flashSaleRecordCall.error();
+                    }
                 }
             }
         });
@@ -128,22 +134,22 @@ public class FlashSalePresenter {
 
     public interface FlashSaleCall extends BaseCall{
 
-        void onKillGoodsBack(KillGoodsBean killGoodsBeans);
+        void onKillGoodsBack(@NonNull KillGoodsBean killGoodsBeans);
 
-        void loadMore(KillGoodsBean killGoodsBean);
+        void loadMore(@NonNull KillGoodsBean killGoodsBean);
     }
 
     public interface FlashSaleTimeCall extends BaseCall {
 
-        void onFlashSaleTime(List<FlashSaleBean.TimeBean> list);
+        void onFlashSaleTime(@NonNull List<FlashSaleBean.TimeBean> list);
 
     }
 
     public interface FlashSaleRecordCall extends BaseCall{
 
-        void onFlashSaleRecord(List<RushRecordBean> rushRecordBeans);
+        void onFlashSaleRecord(@NonNull List<RushRecordBean> rushRecordBeans);
 
-        void loadMore(List<RushRecordBean> rushRecordBeans);
+        void loadMore(@NonNull List<RushRecordBean> rushRecordBeans);
 
     }
 

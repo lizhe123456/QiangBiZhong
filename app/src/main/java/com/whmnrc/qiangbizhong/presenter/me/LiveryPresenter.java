@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.me;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -18,10 +20,10 @@ import java.util.List;
 
 public class LiveryPresenter {
 
-    private Context context;
+    private Activity context;
     private LiveryPresenterCall liveryPresenterCall;
 
-    public LiveryPresenter(Context context, LiveryPresenterCall liveryPresenterCall) {
+    public LiveryPresenter(Activity context, LiveryPresenterCall liveryPresenterCall) {
         this.context = context;
         this.liveryPresenterCall = liveryPresenterCall;
     }
@@ -31,15 +33,19 @@ public class LiveryPresenter {
             @Override
             public void onSuccess(String data) {
                 List<LiveryBean> liveryBeans = GsonUtil.changeGsonToList(data,LiveryBean.class);
-                if (liveryPresenterCall != null){
-                    liveryPresenterCall.getexpressdelivery(liveryBeans);
+                if (!context.isDestroyed()) {
+                    if (liveryPresenterCall != null) {
+                        liveryPresenterCall.getexpressdelivery(liveryBeans);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (liveryPresenterCall != null){
-                    liveryPresenterCall.error();
+                if (!context.isDestroyed()) {
+                    if (liveryPresenterCall != null) {
+                        liveryPresenterCall.error();
+                    }
                 }
             }
         });
@@ -50,15 +56,19 @@ public class LiveryPresenter {
                 +"?orderId="+orderId+"&waybillCompany="+waybillCompany+"&waybillNumber="+waybillNumber, new HashMap<>(), new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
-                if (liveryPresenterCall != null){
+                if (!context.isDestroyed()) {
+                    if (liveryPresenterCall != null) {
                         liveryPresenterCall.updateOrder();
+                    }
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (liveryPresenterCall != null){
-                    liveryPresenterCall.error();
+                if (!context.isDestroyed()) {
+                    if (liveryPresenterCall != null) {
+                        liveryPresenterCall.error();
+                    }
                 }
             }
         });
@@ -66,7 +76,7 @@ public class LiveryPresenter {
 
     public interface LiveryPresenterCall extends BaseCall{
 
-        void getexpressdelivery(List<LiveryBean> liveryBeans);
+        void getexpressdelivery(@NonNull List<LiveryBean> liveryBeans);
 
         void updateOrder();
     }

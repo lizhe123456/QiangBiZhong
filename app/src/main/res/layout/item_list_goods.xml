@@ -62,11 +62,11 @@
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="@dimen/dm_18"
             android:textColor="@color/goods_price"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dm_18"
+            android:layout_height="@dimen/dm_18"
             android:layout_marginLeft="@dimen/dm_5"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/dm_3"
@@ -85,11 +85,11 @@
             android:id="@+id/tv_old_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="@dimen/dm_10"
             android:textColor="@color/tv_989898"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dm_10"
+            android:layout_height="@dimen/dm_10"
             android:layout_marginLeft="@dimen/dm_5"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/dm_3"

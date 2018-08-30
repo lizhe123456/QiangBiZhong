@@ -1,6 +1,8 @@
 package com.whmnrc.qiangbizhong.presenter.yimei;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseCall;
@@ -21,11 +23,11 @@ import java.util.Map;
 
 public class StorePresenter {
 
-    private Context context;
+    private Activity context;
 
     private int page;
 
-    public StorePresenter(Context context) {
+    public StorePresenter(Activity context) {
         this.context = context;
     }
 
@@ -41,20 +43,24 @@ public class StorePresenter {
             @Override
             public void onSuccess(String data) {
                 YiMeiSortBean yiMeiSortBean = GsonUtil.changeGsonToBean(data,YiMeiSortBean.class);
-                if (medicalStoreCall != null){
-                    if (isR){
-                        medicalStoreCall.medicalStoreBack(yiMeiSortBean);
-                    }else {
-                        medicalStoreCall.loadMore(yiMeiSortBean.getGoods());
+                if (!context.isDestroyed()) {
+                    if (medicalStoreCall != null) {
+                        if (isR) {
+                            medicalStoreCall.medicalStoreBack(yiMeiSortBean);
+                        } else {
+                            medicalStoreCall.loadMore(yiMeiSortBean.getGoods());
+                        }
+                        page++;
                     }
-                    page++;
                 }
             }
 
             @Override
             public void onFailure(int code, String errorMsg) {
-                if (medicalStoreCall != null){
-                    medicalStoreCall.error();
+                if (!context.isDestroyed()) {
+                    if (medicalStoreCall != null) {
+                        medicalStoreCall.error();
+                    }
                 }
             }
         });
@@ -63,9 +69,9 @@ public class StorePresenter {
 
     public interface MedicalStoreCall extends BaseCall{
 
-        void medicalStoreBack(YiMeiSortBean yiMeiSortBean);
+        void medicalStoreBack(@NonNull YiMeiSortBean yiMeiSortBean);
 
-        void loadMore(List<YiMeiGoodsBean> goodsBeans);
+        void loadMore(@NonNull List<YiMeiGoodsBean> goodsBeans);
 
     }
 }

@@ -71,7 +71,7 @@ public class WaitLuckDrawFragment extends BaseFragment implements LuckDrawPresen
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter = new OpenLuckDrawAdapter(mContext);
         recyclerView.setAdapter(adapter);
-        luckDrawPresenter = new LuckDrawPresenter(mContext);
+        luckDrawPresenter = new LuckDrawPresenter(getActivity());
         showLoading("加载中..");
         luckDrawPresenter.awardlist2(1,this,true);
         adapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
