@@ -17,6 +17,7 @@ import com.whmnrc.qiangbizhong.ui.shop.activity.ShopsListActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiOrderDetailsActivity;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 
 /**
  * Company 武汉麦诺软创
@@ -47,15 +48,15 @@ public class OrderAdapter extends BaseAdapter<OrderListBean> {
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, OrderListBean item, int position) {
         int num = 0;
-        int moeny = 0;
+        double moeny = 0;
         for (OrderListBean.DetailBean orderListBean : item.getDetail()) {
             num += orderListBean.getOrderItem_Number();
-            moeny += orderListBean.getSpecAttr_Price() * orderListBean.getOrderItem_Number();
+            moeny += orderListBean.getSpecAttr_Price() * (double)orderListBean.getOrderItem_Number();
         }
         holder.setText(R.id.tv_num, "共有" + num + "件商品");
 //        holder.setVisible(R.id.tv_btn_2,false);
 //        holder.setVisible(R.id.tv_btn_3,false);
-        holder.setText(R.id.tv_moeny, moeny + "");
+        holder.setText(R.id.tv_moeny, StringUtil.wanString(moeny) + "");
         holder.setVisible(R.id.tv_btn_3, true);
         holder.setVisible(R.id.tv_btn_2, true);
         if (item.getOrder_CreateType() == 0) {

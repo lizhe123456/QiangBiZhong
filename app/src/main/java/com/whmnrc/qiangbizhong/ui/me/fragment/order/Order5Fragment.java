@@ -11,8 +11,6 @@ import com.whmnrc.qiangbizhong.ui.shopping.activity.EvaluateActivity;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-
 /**
  * Company 武汉麦诺软创
  * Created by lizhe on 2018/7/11.

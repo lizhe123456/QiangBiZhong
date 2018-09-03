@@ -190,10 +190,10 @@ public class ShopBean {
             private boolean Goods_IsOn;
             private boolean Goods_IsBuy;
             private int GoodsPrice_Stock;
-            private int GoodsPrice_Price;
+            private double GoodsPrice_Price;
             private String GoodsPrice_SpecName;
             private String GoodsPrice_AttrName;
-            private int GoodsPrice_VirtualPrice;
+            private double GoodsPrice_VirtualPrice;
 
             public String getId() {
                 return Id;
@@ -323,11 +323,11 @@ public class ShopBean {
                 this.GoodsPrice_Stock = GoodsPrice_Stock;
             }
 
-            public int getGoodsPrice_Price() {
+            public double getGoodsPrice_Price() {
                 return GoodsPrice_Price;
             }
 
-            public void setGoodsPrice_Price(int GoodsPrice_Price) {
+            public void setGoodsPrice_Price(double GoodsPrice_Price) {
                 this.GoodsPrice_Price = GoodsPrice_Price;
             }
 
@@ -347,11 +347,11 @@ public class ShopBean {
                 this.GoodsPrice_AttrName = GoodsPrice_AttrName;
             }
 
-            public int getGoodsPrice_VirtualPrice() {
+            public double getGoodsPrice_VirtualPrice() {
                 return GoodsPrice_VirtualPrice;
             }
 
-            public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+            public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
                 this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
             }
         }

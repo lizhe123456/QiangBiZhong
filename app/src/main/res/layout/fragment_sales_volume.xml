@@ -2,5 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include layout="@layout/layout_refresh"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fl_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_60"
+                app:srlTextSizeTitle="@dimen/dm_14"
+                app:srlTextSizeTime="@dimen/dm_14"
+                app:srlAccentColor="@color/tv_191"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+            <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_60"
+                app:srlTextSizeTitle="@dimen/dm_14"
+                app:srlTextSizeTime="@dimen/dm_14"
+                app:srlAccentColor="@color/tv_191"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        <ViewStub
+            android:id="@+id/vs_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/layout_empty"
+            android:layout_marginTop="@dimen/dm_40"/>
+    </FrameLayout>
 </LinearLayout>

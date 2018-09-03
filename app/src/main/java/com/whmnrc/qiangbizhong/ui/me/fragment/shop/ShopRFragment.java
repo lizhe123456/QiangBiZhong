@@ -95,7 +95,7 @@ public class ShopRFragment extends BaseFragment implements AgentPresenter.AgentS
             recyclerView.setVisibility(View.VISIBLE);
         }
         tvOrder.setText(agentSalesRecordBean.getRecordList().size()+"个");
-        tvPrice.setText("¥ "+ StringUtil.weiString1(agentSalesRecordBean.getSumMoney()));
+        tvPrice.setText("¥ "+ StringUtil.wanString(agentSalesRecordBean.getSumMoney()));
         rAdapter.addFirstDataSet(agentSalesRecordBean.getRecordList());
         refresh.finishRefresh(true);
     }

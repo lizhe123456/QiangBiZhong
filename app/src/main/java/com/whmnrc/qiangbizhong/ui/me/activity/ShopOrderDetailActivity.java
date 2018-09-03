@@ -17,7 +17,6 @@ import com.whmnrc.qiangbizhong.ui.me.fragment.order.OrderGoodsAdapter;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by admin on 2018/8/10.
@@ -199,18 +198,16 @@ public class ShopOrderDetailActivity extends BaseActivity implements OrderPresen
             tvBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new SweetAlertDialog(ShopOrderDetailActivity.this)
-                            .setTitleText("提示")
-                            .setContentText("确定要收货吗？")
-                            .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+                    new AlertDialog(ShopOrderDetailActivity.this).builder()
+                            .setTitle("提示")
+                            .setMsg("确定要收货吗？")
+                            .setNegativeButton("取消", new View.OnClickListener() {
                                 @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    sweetAlertDialog.dismiss();
+                                public void onClick(View dialog) {
                                 }
-                            }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                            }).setPositiveButton("确认", new View.OnClickListener() {
                         @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            sweetAlertDialog.dismiss();
+                        public void onClick(View dialog) {
                             showLoading("收货中..");
                             orderPresenter.collectgoods(orderdetailBean.getOrder_ID(), ShopOrderDetailActivity.this);
                         }

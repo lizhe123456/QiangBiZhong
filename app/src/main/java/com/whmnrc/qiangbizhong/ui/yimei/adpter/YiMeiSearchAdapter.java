@@ -28,10 +28,10 @@ public class YiMeiSearchAdapter extends BaseAdapter<YiMeiGoodsBean>{
         holder.setGlieuImage(R.id.iv_img,item.getGoods_ImaPath())
                 .setText(R.id.tv_title,item.getGoods_Name())
                 .setText(R.id.tv_yimei_name,item.getStoreName())
-                .setText(R.id.tv_goods_price,String.valueOf(item.getGoods_PriceMin()))
+                .setText(R.id.tv_goods_price,StringUtil.wanString(item.getGoods_PriceMin()))
                 .setText(R.id.tv_juli, StringUtil.kmString(item.getDistance()));
         TextView tvOldMoeny = holder.getView(R.id.tv_old_goods_price);
-        tvOldMoeny.setText("原价："+String.valueOf(item.getGoods_PriceMax()));
+        tvOldMoeny.setText("原价："+StringUtil.wanString(item.getGoods_PriceMax()));
         tvOldMoeny.getPaint().setAntiAlias(true);//抗锯齿
         tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
         holder.setOnClickListener(R.id.iv_img, new View.OnClickListener() {

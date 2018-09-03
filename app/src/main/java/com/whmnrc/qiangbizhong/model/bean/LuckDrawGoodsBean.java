@@ -42,8 +42,8 @@ public class LuckDrawGoodsBean {
     private String AwardTime;
     private int Bond;
     private int Price;
-    private int GoodsPrice_Price;
-    private int GoodsPrice_VirtualPrice;
+    private double GoodsPrice_Price;
+    private double GoodsPrice_VirtualPrice;
     private String Product_ImgPath;
     private String UserNick;
     private String UserInfo_Mobile;
@@ -168,19 +168,19 @@ public class LuckDrawGoodsBean {
         this.Price = Price;
     }
 
-    public int getGoodsPrice_Price() {
+    public double getGoodsPrice_Price() {
         return GoodsPrice_Price;
     }
 
-    public void setGoodsPrice_Price(int GoodsPrice_Price) {
+    public void setGoodsPrice_Price(double GoodsPrice_Price) {
         this.GoodsPrice_Price = GoodsPrice_Price;
     }
 
-    public int getGoodsPrice_VirtualPrice() {
+    public double getGoodsPrice_VirtualPrice() {
         return GoodsPrice_VirtualPrice;
     }
 
-    public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+    public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
         this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
     }
 

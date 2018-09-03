@@ -155,10 +155,10 @@ public class HomeFragment extends BaseFragment implements HomePresenter.HomePage
 //            @Override
 //            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
 //
-////                int y =  oldScrollY - scrollY;
+//                int y =  oldScrollY - scrollY;
 //                if (scrollY <= 0) {   //设置标题的背景颜色
 //                    llTitleBg.setBackgroundColor(getResources().getColor(R.color.transparent));
-////                    llAllTtile.setBackgroundColor(Color.argb((int) 0, 144,151,166));
+//                    llAllTtile.setBackgroundColor(Color.argb((int) 0, 144,151,166));
 //                } else if (scrollY > 0 && scrollY <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
 //                    float scale = (float) scrollY / height;
 //                    float alpha = (255 * scale);

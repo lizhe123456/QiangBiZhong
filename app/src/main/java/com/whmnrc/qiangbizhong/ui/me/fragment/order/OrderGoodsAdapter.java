@@ -9,6 +9,7 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 
 /**
  * Company 武汉麦诺软创
@@ -27,7 +28,7 @@ public class OrderGoodsAdapter extends BaseAdapter<OrderListBean.DetailBean>{
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, OrderListBean.DetailBean item, int position) {
         holder.setText(R.id.tv_goods_desc,item.getProduct_Name()).setText(R.id.tv_desc,item.getSpec_Name() +"  " + item.getSpecAttr_Name())
-                .setText(R.id.tv_moeny,item.getSpecAttr_Price()+"")
+                .setText(R.id.tv_moeny, StringUtil.wanString(item.getSpecAttr_Price()))
                 .setGlieuImage(R.id.iv_goods,item.getProduct_ImgPath())
                 .setText(R.id.tv_goods_num,"x"+item.getOrderItem_Number());
 

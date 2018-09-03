@@ -11,6 +11,7 @@ import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.HomePageBean;
 import com.whmnrc.qiangbizhong.model.bean.HomeResult;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 
 /**
  * Company 武汉麦诺软创
@@ -32,7 +33,7 @@ public class KillAdapter extends BaseAdapter<HomeResult.GoodsRushBean>{
 
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, HomeResult.GoodsRushBean item, int position) {
-        holder.setText(R.id.tv_moeny,item.getGoodsPrice_Price()+"").setText(R.id.tv_goods_name,item.getGoods_Name()).setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
+        holder.setText(R.id.tv_moeny, StringUtil.wanString(item.getGoodsPrice_Price())).setText(R.id.tv_goods_name,item.getGoods_Name()).setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
         ImageView imageView = holder.getView(R.id.iv_img);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
         layoutParams.width = width;

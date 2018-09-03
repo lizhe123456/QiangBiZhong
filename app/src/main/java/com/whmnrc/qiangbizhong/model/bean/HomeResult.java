@@ -110,13 +110,13 @@ public class HomeResult {
         private Object Goods_Parameter;
         private String GoodsPrice_SpecName;
         private String GoodsPrice_AttrName;
-        private int GoodsPrice_VirtualPrice;
+        private double GoodsPrice_VirtualPrice;
         private String RushStartTime;
         private String RushEndTime;
         private int RushNumber;
         private int Bond;
         private int Price;
-        private int GoodsPrice_Price;
+        private double GoodsPrice_Price;
         private int IsEnd;
 
         public String getRushId() {
@@ -215,11 +215,11 @@ public class HomeResult {
             this.GoodsPrice_AttrName = GoodsPrice_AttrName;
         }
 
-        public int getGoodsPrice_VirtualPrice() {
+        public double getGoodsPrice_VirtualPrice() {
             return GoodsPrice_VirtualPrice;
         }
 
-        public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+        public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
             this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
         }
 
@@ -263,11 +263,11 @@ public class HomeResult {
             this.Price = Price;
         }
 
-        public int getGoodsPrice_Price() {
+        public double getGoodsPrice_Price() {
             return GoodsPrice_Price;
         }
 
-        public void setGoodsPrice_Price(int GoodsPrice_Price) {
+        public void setGoodsPrice_Price(double GoodsPrice_Price) {
             this.GoodsPrice_Price = GoodsPrice_Price;
         }
 
@@ -312,7 +312,7 @@ public class HomeResult {
         private Object Goods_Parameter;
         private Object GoodsPrice_SpecName;
         private String GoodsPrice_AttrName;
-        private int GoodsPrice_VirtualPrice;
+        private double GoodsPrice_VirtualPrice;
         private int GoodsPrice_Stock;
         private int AwardPeopleCount;
         private int NeedCount;
@@ -401,11 +401,11 @@ public class HomeResult {
             this.GoodsPrice_AttrName = GoodsPrice_AttrName;
         }
 
-        public int getGoodsPrice_VirtualPrice() {
+        public double getGoodsPrice_VirtualPrice() {
             return GoodsPrice_VirtualPrice;
         }
 
-        public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+        public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
             this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
         }
 
@@ -498,7 +498,7 @@ public class HomeResult {
         private Object Goods_Parameter;
         private Object GoodsPrice_SpecName;
         private String GoodsPrice_AttrName;
-        private int GoodsPrice_VirtualPrice;
+        private double GoodsPrice_VirtualPrice;
         private int GoodsPrice_Stock;
         private int AwardPeopleCount;
         private int NeedCount;
@@ -587,11 +587,11 @@ public class HomeResult {
             this.GoodsPrice_AttrName = GoodsPrice_AttrName;
         }
 
-        public int getGoodsPrice_VirtualPrice() {
+        public double getGoodsPrice_VirtualPrice() {
             return GoodsPrice_VirtualPrice;
         }
 
-        public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+        public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
             this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
         }
 
@@ -700,8 +700,8 @@ public class HomeResult {
         private String TypeName;
         private String StoreName;
         private int StoreStatus;
-        private int Goods_PriceMin;
-        private int Goods_PriceMax;
+        private double Goods_PriceMin;
+        private double Goods_PriceMax;
         private String Address;
         private String Latitude;
         private String Longitude;
@@ -858,19 +858,19 @@ public class HomeResult {
             this.StoreStatus = StoreStatus;
         }
 
-        public int getGoods_PriceMin() {
+        public double getGoods_PriceMin() {
             return Goods_PriceMin;
         }
 
-        public void setGoods_PriceMin(int Goods_PriceMin) {
+        public void setGoods_PriceMin(double Goods_PriceMin) {
             this.Goods_PriceMin = Goods_PriceMin;
         }
 
-        public int getGoods_PriceMax() {
+        public double getGoods_PriceMax() {
             return Goods_PriceMax;
         }
 
-        public void setGoods_PriceMax(int Goods_PriceMax) {
+        public void setGoods_PriceMax(double Goods_PriceMax) {
             this.Goods_PriceMax = Goods_PriceMax;
         }
 

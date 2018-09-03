@@ -35,6 +35,7 @@ import com.whmnrc.qiangbizhong.presenter.yimei.YiMeiPresenter;
 import com.whmnrc.qiangbizhong.ui.yimei.adpter.CommentAdapter;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.ImageUtil;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.WxShareUtils;
 import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
@@ -176,12 +177,12 @@ public class YiMeiGoodsDetailsActivity extends BaseActivity implements YiMeiPres
         tvTitle.setText(yiMeiGoodsDetailBean.getGoods().getGoods_Name());
         tvZizhi.setText("资质：" + yiMeiGoodsDetailBean.getStoreInfo().getExplain());
         tvLoction.setText("地址：" +yiMeiGoodsDetailBean.getStoreInfo().getAddress());
-        tvOldPrice.setText("原价：" + yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_VirtualPrice() + "");
+        tvOldPrice.setText("原价：" + StringUtil.wanString(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_VirtualPrice()));
         //抗锯齿
         tvOldPrice.getPaint().setAntiAlias(true);
         //中划线
         tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        tvPrice.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
+        tvPrice.setText(StringUtil.wanString(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()));
 //        tvNowMoeny.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
 
         GlideuUtil.loadImageView(this, yiMeiGoodsDetailBean.getStoreInfo().getStoreHeadImage(), ivImg);

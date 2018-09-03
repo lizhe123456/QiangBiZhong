@@ -32,14 +32,14 @@ public class ShopConfirmAdapter extends BaseAdapter<ShopCarBean> {
         recyclerView.setAdapter(goodsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         goodsAdapter.addFirstDataSet(item.getGoods());
-        int num = 0;
+        double num = 0;
         int count = 0;
         for (ShopCarBean.GoodsBean goodsBean :item.getGoods()) {
-            num += goodsBean.getGoodsPrice_Price() * goodsBean.getBuyCar_Num();
+            num += goodsBean.getGoodsPrice_Price() * (double) goodsBean.getBuyCar_Num();
             count += goodsBean.getBuyCar_Num();
         }
 
-        holder.setText(R.id.tv_price,StringUtil.weiString1(num)).setText(R.id.tv_num,"共有"+count+"件商品");
+        holder.setText(R.id.tv_price,StringUtil.wanString(num)).setText(R.id.tv_num,"共有"+count+"件商品");
 
         EditText editText = holder.getView(R.id.et_desc);
         editText.addTextChangedListener(new TextWatcher() {
@@ -76,7 +76,7 @@ public class ShopConfirmAdapter extends BaseAdapter<ShopCarBean> {
             holder.setText(R.id.tv_goods_name,item.getGoods_Name())
                     .setText(R.id.tv_goods_spec,item.getGoodsPrice_SpecName()+" "+item.getGoodsPrice_AttrName())
                     .setText(R.id.tv_count, "x" + item.getBuyCar_Num()).setGlieuImage(R.id.iv_img,item.getGoods_ImaPath())
-                    .setText(R.id.tv_price, StringUtil.weiString1(item.getGoodsPrice_Price()));
+                    .setText(R.id.tv_price, StringUtil.wanString(item.getGoodsPrice_Price()));
         }
 
         @Override

@@ -33,6 +33,7 @@ import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
+import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
 import com.whmnrc.qiangbizhong.widget.SnapUpCountDownTimerView;
@@ -45,7 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Company 武汉麦诺软创
@@ -190,18 +190,16 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
 
     @Override
     public void canyuBack() {
-        new SweetAlertDialog(this)
-                .setTitleText("提示")
-                .setContentText("余额不足,请充值！")
-                .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+        new AlertDialog(this).builder()
+                .setTitle("提示")
+                .setMsg("余额不足,请充值！")
+                .setNegativeButton("取消", new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
+                    public void onClick(View dialog) {
                     }
-                }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                }).setPositiveButton("确认", new View.OnClickListener() {
             @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                sweetAlertDialog.dismiss();
+            public void onClick(View dialog) {
                 AccountRechargeActivity.start(AwardDetailActivity.this,1);
             }
         }).show();
@@ -244,8 +242,8 @@ public class AwardDetailActivity extends BaseActivity implements GoodsRushInfoPr
             try {
                 tvGoodsName.setText(awardBeanInfo.getAwardGoodsInfo().getGoods_Name());
                 tvGoodsDesc.setText(awardBeanInfo.getAwardGoodsInfo().getGoods_Describe());
-                tvMoeny.setText("现价："+StringUtil.weiString1(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price()));
-                tvOldMoeny.setText("原价：" + StringUtil.weiString1(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_VirtualPrice()));
+                tvMoeny.setText("现价："+StringUtil.wanString(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_Price()));
+                tvOldMoeny.setText("原价：" + StringUtil.wanString(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_VirtualPrice()));
                 tvOldMoeny.getPaint().setAntiAlias(true);//抗锯齿
                 tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
                 tvScep.setText(awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_SpecName() == null ? "" : awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_SpecName() + "   " + awardBeanInfo.getAwardGoodsInfo().getGoodsPrice_AttrName());

@@ -62,7 +62,6 @@ public class OrderdetailBean {
     private String Order_ID;
     private String Order_No;
     private String UserInfo_ID;
-    private Object UserInfo_ParentID;
     private String UserInfo_HeadImg;
     private String Order_PayNo;
     private String Order_CreateTime;
@@ -74,37 +73,33 @@ public class OrderdetailBean {
     private String Address_Region;
     private String Address_Detail;
     private String Address_FullAddress;
-    private int Order_PayType;
     private int Order_State;
-    private int Order_Money;
-    private int ORder_Freight;
-    private int Order_Seed;
-    private int Order_Type;
-    private Object OrderStartDate;
-    private Object OrderEndDate;
-    private int Order_Integer;
-    private String Order_Remark;
-    private int Order_IntegerMoney;
-    private int Order_IntegerMoneyRate;
-    private int Order_Number;
     private String Order_WaybillCompany;
     private String Order_WaybillNumber;
-    private Object Order_DeliverGoodsUserInfoID;
-    private int Order_RebateMoney;
+    private double Order_RebateMoney;
     private boolean Order_HasNewGoods;
     private String Order_DeliverGoodsTime;
-    private int Order_RebateNumber;
     private String UserInfo_Mobile;
     private String UserInfo_NickName;
-    private Object UserInfo_RealName;
     private int Order_CreateType;
     private String Order_StoreId;
-    private Object AgentPayUserId;
     private String StoreName;
     private String StoreAddress;
     private String StorePhone;
     private Object Order_RefundRemark;
     private List<OrderListBean.DetailBean> Detail;
+
+    public void setOrder_RebateMoney(double order_RebateMoney) {
+        Order_RebateMoney = order_RebateMoney;
+    }
+
+    public Object getOrder_RefundRemark() {
+        return Order_RefundRemark;
+    }
+
+    public void setOrder_RefundRemark(Object order_RefundRemark) {
+        Order_RefundRemark = order_RefundRemark;
+    }
 
     public String getOrder_ID() {
         return Order_ID;
@@ -130,20 +125,22 @@ public class OrderdetailBean {
         this.UserInfo_ID = UserInfo_ID;
     }
 
-    public Object getUserInfo_ParentID() {
-        return UserInfo_ParentID;
-    }
-
-    public void setUserInfo_ParentID(Object UserInfo_ParentID) {
-        this.UserInfo_ParentID = UserInfo_ParentID;
-    }
-
     public String getUserInfo_HeadImg() {
         return UserInfo_HeadImg;
     }
 
     public void setUserInfo_HeadImg(String UserInfo_HeadImg) {
         this.UserInfo_HeadImg = UserInfo_HeadImg;
+    }
+
+
+
+    public int getOrder_State() {
+        return Order_State;
+    }
+
+    public void setOrder_State(int order_State) {
+        Order_State = order_State;
     }
 
     public String getOrder_PayNo() {
@@ -226,110 +223,6 @@ public class OrderdetailBean {
         this.Address_FullAddress = Address_FullAddress;
     }
 
-    public int getOrder_PayType() {
-        return Order_PayType;
-    }
-
-    public void setOrder_PayType(int Order_PayType) {
-        this.Order_PayType = Order_PayType;
-    }
-
-    public int getOrder_State() {
-        return Order_State;
-    }
-
-    public void setOrder_State(int Order_State) {
-        this.Order_State = Order_State;
-    }
-
-    public int getOrder_Money() {
-        return Order_Money;
-    }
-
-    public void setOrder_Money(int Order_Money) {
-        this.Order_Money = Order_Money;
-    }
-
-    public int getORder_Freight() {
-        return ORder_Freight;
-    }
-
-    public void setORder_Freight(int ORder_Freight) {
-        this.ORder_Freight = ORder_Freight;
-    }
-
-    public int getOrder_Seed() {
-        return Order_Seed;
-    }
-
-    public void setOrder_Seed(int Order_Seed) {
-        this.Order_Seed = Order_Seed;
-    }
-
-    public int getOrder_Type() {
-        return Order_Type;
-    }
-
-    public void setOrder_Type(int Order_Type) {
-        this.Order_Type = Order_Type;
-    }
-
-    public Object getOrderStartDate() {
-        return OrderStartDate;
-    }
-
-    public void setOrderStartDate(Object OrderStartDate) {
-        this.OrderStartDate = OrderStartDate;
-    }
-
-    public Object getOrderEndDate() {
-        return OrderEndDate;
-    }
-
-    public void setOrderEndDate(Object OrderEndDate) {
-        this.OrderEndDate = OrderEndDate;
-    }
-
-    public int getOrder_Integer() {
-        return Order_Integer;
-    }
-
-    public void setOrder_Integer(int Order_Integer) {
-        this.Order_Integer = Order_Integer;
-    }
-
-    public String getOrder_Remark() {
-        return Order_Remark;
-    }
-
-    public void setOrder_Remark(String Order_Remark) {
-        this.Order_Remark = Order_Remark;
-    }
-
-    public int getOrder_IntegerMoney() {
-        return Order_IntegerMoney;
-    }
-
-    public void setOrder_IntegerMoney(int Order_IntegerMoney) {
-        this.Order_IntegerMoney = Order_IntegerMoney;
-    }
-
-    public int getOrder_IntegerMoneyRate() {
-        return Order_IntegerMoneyRate;
-    }
-
-    public void setOrder_IntegerMoneyRate(int Order_IntegerMoneyRate) {
-        this.Order_IntegerMoneyRate = Order_IntegerMoneyRate;
-    }
-
-    public int getOrder_Number() {
-        return Order_Number;
-    }
-
-    public void setOrder_Number(int Order_Number) {
-        this.Order_Number = Order_Number;
-    }
-
     public String getOrder_WaybillCompany() {
         return Order_WaybillCompany;
     }
@@ -346,15 +239,7 @@ public class OrderdetailBean {
         this.Order_WaybillNumber = Order_WaybillNumber;
     }
 
-    public Object getOrder_DeliverGoodsUserInfoID() {
-        return Order_DeliverGoodsUserInfoID;
-    }
-
-    public void setOrder_DeliverGoodsUserInfoID(Object Order_DeliverGoodsUserInfoID) {
-        this.Order_DeliverGoodsUserInfoID = Order_DeliverGoodsUserInfoID;
-    }
-
-    public int getOrder_RebateMoney() {
+    public double getOrder_RebateMoney() {
         return Order_RebateMoney;
     }
 
@@ -378,14 +263,6 @@ public class OrderdetailBean {
         this.Order_DeliverGoodsTime = Order_DeliverGoodsTime;
     }
 
-    public int getOrder_RebateNumber() {
-        return Order_RebateNumber;
-    }
-
-    public void setOrder_RebateNumber(int Order_RebateNumber) {
-        this.Order_RebateNumber = Order_RebateNumber;
-    }
-
     public String getUserInfo_Mobile() {
         return UserInfo_Mobile;
     }
@@ -402,14 +279,6 @@ public class OrderdetailBean {
         this.UserInfo_NickName = UserInfo_NickName;
     }
 
-    public Object getUserInfo_RealName() {
-        return UserInfo_RealName;
-    }
-
-    public void setUserInfo_RealName(Object UserInfo_RealName) {
-        this.UserInfo_RealName = UserInfo_RealName;
-    }
-
     public int getOrder_CreateType() {
         return Order_CreateType;
     }
@@ -424,14 +293,6 @@ public class OrderdetailBean {
 
     public void setOrder_StoreId(String Order_StoreId) {
         this.Order_StoreId = Order_StoreId;
-    }
-
-    public Object getAgentPayUserId() {
-        return AgentPayUserId;
-    }
-
-    public void setAgentPayUserId(Object AgentPayUserId) {
-        this.AgentPayUserId = AgentPayUserId;
     }
 
     public String getStoreName() {
@@ -456,14 +317,6 @@ public class OrderdetailBean {
 
     public void setStorePhone(String StorePhone) {
         this.StorePhone = StorePhone;
-    }
-
-    public Object getOrder_RefundRemark() {
-        return Order_RefundRemark;
-    }
-
-    public void setOrder_RefundRemark(Object Order_RefundRemark) {
-        this.Order_RefundRemark = Order_RefundRemark;
     }
 
     public List<OrderListBean.DetailBean> getDetail() {

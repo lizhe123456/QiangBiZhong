@@ -8,6 +8,7 @@ import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
 import com.whmnrc.qiangbizhong.model.bean.MyLuckDrawBean;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 
 /**
  * Company 武汉麦诺软创
@@ -23,8 +24,8 @@ public class MyLuckDrawAdapter extends BaseAdapter<MyLuckDrawBean>{
     @Override
     protected void bindDataToItemView(BaseViewHolder holder, MyLuckDrawBean item, int position) {
         holder.setText(R.id.tv_goods_name,item.getGoods_Name())
-                .setText(R.id.tv_now_moeny,item.getGoodsPrice_Price()+"")
-                .setText(R.id.tv_old_moeny,item.getGoodsPrice_VirtualPrice()+"")
+                .setText(R.id.tv_now_moeny,StringUtil.wanString(item.getGoodsPrice_Price()))
+                .setText(R.id.tv_old_moeny, StringUtil.wanString(item.getGoodsPrice_VirtualPrice()))
                 .setText(R.id.tv_yuyue,"预约金"+item.getBond())
                 .setGlieuImage(R.id.iv_img,item.getProduct_ImgPath());
         TextView textView = holder.getView(R.id.tv_old_moeny);

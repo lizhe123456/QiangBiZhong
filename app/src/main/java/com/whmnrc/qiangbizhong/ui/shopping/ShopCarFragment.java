@@ -322,17 +322,17 @@ public class ShopCarFragment extends BaseFragment implements ShopCarPresenter.Ca
 
     //合计
     private void heji(){
-        int num = 0;
+        double num = 0;
         zS = 0;
         for (ShopCarBean shopCarBean :shopCarAdapter.getDataSource()) {
             for (ShopCarBean.GoodsBean goodsBean :shopCarBean.getGoods()) {
                 if (goodsBean.isSelect()){
-                    num += goodsBean.getGoodsPrice_Price() * goodsBean.getBuyCar_Num();
+                    num += goodsBean.getGoodsPrice_Price() * (double) goodsBean.getBuyCar_Num();
                     zS += goodsBean.getBuyCar_Num();
                 }
             }
         }
-        tvMoeny.setText(StringUtil.weiString1(num));
+        tvMoeny.setText(StringUtil.wanString(num));
         if (isEdit) {
             tvDelete.setText("删除");
         }else {

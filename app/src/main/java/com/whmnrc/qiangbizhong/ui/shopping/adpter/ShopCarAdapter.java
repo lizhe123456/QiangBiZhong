@@ -314,7 +314,7 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarBean> {
                 holder.setVisible(R.id.ll_edit,false);
                 holder.setText(R.id.tv_goods_name,item.getGoods_Name())
                         .setText(R.id.tv_guige_name,item.getGoodsPrice_SpecName() + " "+item.getGoodsPrice_AttrName())
-                        .setText(R.id.tv_moeny, StringUtil.weiString1(item.getGoodsPrice_Price()))
+                        .setText(R.id.tv_moeny, StringUtil.wanString(item.getGoodsPrice_Price()))
                         .setText(R.id.tv_count,"x"+item.getBuyCar_Num() + "");
             }
 

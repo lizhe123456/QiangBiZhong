@@ -15,6 +15,7 @@ import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.OrderListBean;
 import com.whmnrc.qiangbizhong.model.bean.OrderdetailBean;
 import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
+import com.whmnrc.qiangbizhong.ui.me.fragment.order.Order2Fragment;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.OrderGoodsAdapter;
 import com.whmnrc.qiangbizhong.ui.shop.activity.ShopsListActivity;
 import com.whmnrc.qiangbizhong.ui.shopping.activity.EvaluateActivity;
@@ -22,7 +23,6 @@ import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Company 武汉麦诺软创
@@ -151,11 +151,11 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
         tvOrderUser.setText(orderdetailBean.getUserInfo_NickName());
         tvOrderPhone.setText(orderdetailBean.getAddress_Mobile());
 
-        int num = 0;
-        int moeny = 0;
+        double num = 0;
+        double moeny = 0;
         for (OrderListBean.DetailBean detailBean :orderdetailBean.getDetail()) {
             num += detailBean.getOrderItem_Number();
-            moeny += detailBean.getSpecAttr_Price() * detailBean.getOrderItem_Number();
+            moeny += detailBean.getSpecAttr_Price() * (double)detailBean.getOrderItem_Number();
         }
 
         tvMoeny.setText(moeny+"");
@@ -222,18 +222,17 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
             tvBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new SweetAlertDialog(OrderDetailsActivity.this)
-                            .setTitleText("提示")
-                            .setContentText("确定要收货吗？")
-                            .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+                    new AlertDialog(OrderDetailsActivity.this).builder()
+                            .setTitle("提示")
+                            .setMsg("确定要收货吗？")
+                            .setNegativeButton("取消", new View.OnClickListener() {
                                 @Override
-                                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                    sweetAlertDialog.dismiss();
+                                public void onClick(View v) {
+
                                 }
-                            }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                            }).setNegativeButton("确认", new View.OnClickListener() {
                         @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            sweetAlertDialog.dismiss();
+                        public void onClick(View sweetAlertDialog) {
                             showLoading("收货中..");
                             orderPresenter.collectgoods(orderdetailBean.getOrder_ID(), OrderDetailsActivity.this);
                         }

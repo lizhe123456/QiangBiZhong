@@ -18,6 +18,7 @@ import com.whmnrc.qiangbizhong.ui.PayStuActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.GsonUtil;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
@@ -88,8 +89,8 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
         }
 
         tvGoodsName.setText(yiMeiGoodsDetailBean.getGoods().getGoods_Name());
-        tvPrice.setText(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()+"");
-        tvYuyue.setText(""+(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price() * count));
+        tvPrice.setText(StringUtil.wanString(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price()));
+        tvYuyue.setText(StringUtil.wanString((yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price() * count)));
         tvEditCount.setText("1");
     }
 
@@ -116,7 +117,7 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
             //代付
 //            跳转页面
             SubstitutePayActivity.start(this,yiMeiOrderParam,
-                    ""+(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price() * count),yiMeiGoodsDetailBean.getGoods().getGoods_Name());
+                    StringUtil.wanString(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price() * count),yiMeiGoodsDetailBean.getGoods().getGoods_Name());
         }else {
             //自己支付
             //提交订单
@@ -144,13 +145,13 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
             case R.id.tv_jia:
                 count++;
                 tvEditCount.setText(count+"");
-                tvYuyue.setText(""+(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price() * count));
+                tvYuyue.setText(StringUtil.wanString(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price() * count));
                 break;
             case R.id.tv_jian:
                 if (count > 1) {
                     count--;
                     tvEditCount.setText(count + "");
-                    tvYuyue.setText(""+(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price() * count));
+                    tvYuyue.setText(StringUtil.wanString(yiMeiGoodsDetailBean.getGoodsPrice().getGoodsPrice_Price() * count));
                 }
                 break;
             case R.id.tv_substitute:

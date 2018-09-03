@@ -122,8 +122,8 @@ public class AwardBeanInfo implements Parcelable {
         private boolean Goods_IsBuy;
         private String GoodsPrice_SpecName;
         private String GoodsPrice_AttrName;
-        private int GoodsPrice_Price;
-        private int GoodsPrice_VirtualPrice;
+        private double GoodsPrice_Price;
+        private double GoodsPrice_VirtualPrice;
         private int GoodsPrice_Stock;
         private int AwardPeopleCount;
         private int NeedCount;
@@ -145,8 +145,8 @@ public class AwardBeanInfo implements Parcelable {
             Goods_IsBuy = in.readByte() != 0;
             GoodsPrice_SpecName = in.readString();
             GoodsPrice_AttrName = in.readString();
-            GoodsPrice_Price = in.readInt();
-            GoodsPrice_VirtualPrice = in.readInt();
+            GoodsPrice_Price = in.readDouble();
+            GoodsPrice_VirtualPrice = in.readDouble();
             GoodsPrice_Stock = in.readInt();
             AwardPeopleCount = in.readInt();
             NeedCount = in.readInt();
@@ -265,19 +265,19 @@ public class AwardBeanInfo implements Parcelable {
             this.GoodsPrice_AttrName = GoodsPrice_AttrName;
         }
 
-        public int getGoodsPrice_Price() {
+        public double getGoodsPrice_Price() {
             return GoodsPrice_Price;
         }
 
-        public void setGoodsPrice_Price(int GoodsPrice_Price) {
+        public void setGoodsPrice_Price(double GoodsPrice_Price) {
             this.GoodsPrice_Price = GoodsPrice_Price;
         }
 
-        public int getGoodsPrice_VirtualPrice() {
+        public double getGoodsPrice_VirtualPrice() {
             return GoodsPrice_VirtualPrice;
         }
 
-        public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+        public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
             this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
         }
 
@@ -363,8 +363,8 @@ public class AwardBeanInfo implements Parcelable {
             dest.writeByte((byte) (Goods_IsBuy ? 1 : 0));
             dest.writeString(GoodsPrice_SpecName);
             dest.writeString(GoodsPrice_AttrName);
-            dest.writeInt(GoodsPrice_Price);
-            dest.writeInt(GoodsPrice_VirtualPrice);
+            dest.writeDouble(GoodsPrice_Price);
+            dest.writeDouble(GoodsPrice_VirtualPrice);
             dest.writeInt(GoodsPrice_Stock);
             dest.writeInt(AwardPeopleCount);
             dest.writeInt(NeedCount);
@@ -469,8 +469,8 @@ public class AwardBeanInfo implements Parcelable {
         private String AwardTime;
         private int Bond;
         private int Price;
-        private int GoodsPrice_Price;
-        private int GoodsPrice_VirtualPrice;
+        private double GoodsPrice_Price;
+        private double GoodsPrice_VirtualPrice;
         private String Product_ImgPath;
         private String UserNick;
 
@@ -586,19 +586,19 @@ public class AwardBeanInfo implements Parcelable {
             this.Price = Price;
         }
 
-        public int getGoodsPrice_Price() {
+        public double getGoodsPrice_Price() {
             return GoodsPrice_Price;
         }
 
-        public void setGoodsPrice_Price(int GoodsPrice_Price) {
+        public void setGoodsPrice_Price(double GoodsPrice_Price) {
             this.GoodsPrice_Price = GoodsPrice_Price;
         }
 
-        public int getGoodsPrice_VirtualPrice() {
+        public double getGoodsPrice_VirtualPrice() {
             return GoodsPrice_VirtualPrice;
         }
 
-        public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+        public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
             this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
         }
 

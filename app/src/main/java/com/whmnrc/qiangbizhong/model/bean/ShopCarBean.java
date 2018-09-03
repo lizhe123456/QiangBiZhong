@@ -95,7 +95,7 @@ public class ShopCarBean {
         private String UserInfo_ID;
         private int BuyCar_Num;
         private String BuyCar_CreateDate;
-        private int GoodsPrice_Price;
+        private double GoodsPrice_Price;
         private String Goods_Name;
         private String GoodsPrice_AttrName;
         private String GoodsPrice_SpecName;
@@ -160,11 +160,11 @@ public class ShopCarBean {
             this.BuyCar_CreateDate = BuyCar_CreateDate;
         }
 
-        public int getGoodsPrice_Price() {
+        public double getGoodsPrice_Price() {
             return GoodsPrice_Price;
         }
 
-        public void setGoodsPrice_Price(int GoodsPrice_Price) {
+        public void setGoodsPrice_Price(double GoodsPrice_Price) {
             this.GoodsPrice_Price = GoodsPrice_Price;
         }
 

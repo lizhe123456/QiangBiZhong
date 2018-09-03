@@ -193,7 +193,7 @@ public class StroeBean {
              */
 
             private int Goods_ShopType;
-            private int Goods_PriceMax;
+            private double Goods_PriceMax;
             private String TypeName;
             private String Goods_ID;
             private String StoreName;
@@ -208,7 +208,7 @@ public class StroeBean {
             private String StoreId;
             private int StoreStatus;
             private int Goods_MonthCount;
-            private int Goods_PriceMin;
+            private double Goods_PriceMin;
             private boolean Goods_IsBuy;
             private int Goods_Sort;
             private int Goods_LimitCount;
@@ -225,11 +225,11 @@ public class StroeBean {
                 this.Goods_ShopType = Goods_ShopType;
             }
 
-            public int getGoods_PriceMax() {
+            public double getGoods_PriceMax() {
                 return Goods_PriceMax;
             }
 
-            public void setGoods_PriceMax(int Goods_PriceMax) {
+            public void setGoods_PriceMax(double Goods_PriceMax) {
                 this.Goods_PriceMax = Goods_PriceMax;
             }
 
@@ -345,11 +345,11 @@ public class StroeBean {
                 this.Goods_MonthCount = Goods_MonthCount;
             }
 
-            public int getGoods_PriceMin() {
+            public double getGoods_PriceMin() {
                 return Goods_PriceMin;
             }
 
-            public void setGoods_PriceMin(int Goods_PriceMin) {
+            public void setGoods_PriceMin(double Goods_PriceMin) {
                 this.Goods_PriceMin = Goods_PriceMin;
             }
 

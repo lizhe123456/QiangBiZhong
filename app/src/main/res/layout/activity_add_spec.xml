@@ -220,7 +220,7 @@
                 android:gravity="right"
                 android:hint="请输入库存"
                 android:inputType="numberSigned"
-                android:digits="123456789"
+                android:digits="1234567890"
                 android:maxLength="10"
                 android:paddingLeft="@dimen/dm_10"
                 android:textColor="@color/tv_navigation"

@@ -72,8 +72,8 @@ public class EditSpecBean {
         private String StoreId;
         private Object Goods_Parameter;
         private int Goods_ShopType;
-        private int Goods_PriceMin;
-        private int Goods_PriceMax;
+        private double Goods_PriceMin;
+        private double Goods_PriceMax;
 
         public String getGoods_ID() {
             return Goods_ID;
@@ -203,19 +203,19 @@ public class EditSpecBean {
             this.Goods_ShopType = Goods_ShopType;
         }
 
-        public int getGoods_PriceMin() {
+        public double getGoods_PriceMin() {
             return Goods_PriceMin;
         }
 
-        public void setGoods_PriceMin(int Goods_PriceMin) {
+        public void setGoods_PriceMin(double Goods_PriceMin) {
             this.Goods_PriceMin = Goods_PriceMin;
         }
 
-        public int getGoods_PriceMax() {
+        public double getGoods_PriceMax() {
             return Goods_PriceMax;
         }
 
-        public void setGoods_PriceMax(int Goods_PriceMax) {
+        public void setGoods_PriceMax(double Goods_PriceMax) {
             this.Goods_PriceMax = Goods_PriceMax;
         }
     }
@@ -237,13 +237,13 @@ public class EditSpecBean {
         private String GoodsPrice_ID;
         private String GoodsPrice_SpecName;
         private String GoodsPrice_AttrName;
-        private int GoodsPrice_Price;
+        private double GoodsPrice_Price;
         private String Goods_ID;
         private int GoodsPrice_Sort;
         private int GoodsPrice_Stock;
         private int GoodsPrice_TotalStock;
-        private int GoodsPrice_VirtualPrice;
-        private int GoodsPrice_PayMaxCount;
+        private double GoodsPrice_VirtualPrice;
+        private double GoodsPrice_PayMaxCount;
 
         public String getGoodsPrice_ID() {
             return GoodsPrice_ID;
@@ -269,11 +269,11 @@ public class EditSpecBean {
             this.GoodsPrice_AttrName = GoodsPrice_AttrName;
         }
 
-        public int getGoodsPrice_Price() {
+        public double getGoodsPrice_Price() {
             return GoodsPrice_Price;
         }
 
-        public void setGoodsPrice_Price(int GoodsPrice_Price) {
+        public void setGoodsPrice_Price(double GoodsPrice_Price) {
             this.GoodsPrice_Price = GoodsPrice_Price;
         }
 
@@ -309,19 +309,19 @@ public class EditSpecBean {
             this.GoodsPrice_TotalStock = GoodsPrice_TotalStock;
         }
 
-        public int getGoodsPrice_VirtualPrice() {
+        public double getGoodsPrice_VirtualPrice() {
             return GoodsPrice_VirtualPrice;
         }
 
-        public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+        public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
             this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
         }
 
-        public int getGoodsPrice_PayMaxCount() {
+        public double getGoodsPrice_PayMaxCount() {
             return GoodsPrice_PayMaxCount;
         }
 
-        public void setGoodsPrice_PayMaxCount(int GoodsPrice_PayMaxCount) {
+        public void setGoodsPrice_PayMaxCount(double GoodsPrice_PayMaxCount) {
             this.GoodsPrice_PayMaxCount = GoodsPrice_PayMaxCount;
         }
     }

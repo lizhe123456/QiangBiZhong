@@ -191,7 +191,7 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
         //下单时间
         tvOrderNum3.setText(yiMeiOrderDetailBean.getOrder_CreateTime());
         tvDesc.setText("数量：x"+yiMeiOrderDetailBean.getOrder_Number());
-        tvMoeny.setText(yiMeiOrderDetailBean.getOrder_Money()+"");
+        tvMoeny.setText(StringUtil.wanString(yiMeiOrderDetailBean.getOrder_Money()));
         GlideuUtil.loadImageView(this,yiMeiOrderDetailBean.getDetail().get(0).getProduct_ImgPath(),ivGoods);
 
         if (timer != null){
@@ -351,7 +351,7 @@ public class YiMeiOrderDetailsActivity extends BaseActivity implements OrderPres
                     public void onClick(View v) {
                         finish();
                         //赠送
-                        GiveActivity.start(YiMeiOrderDetailsActivity.this, yiMeiOrderDetailBean.getDetail().get(0).getProduct_ImgPath(), yiMeiOrderDetailBean.getDetail().get(0).getProduct_Name(), StringUtil.weiString1(yiMeiOrderDetailBean.getOrder_Money()), yiMeiOrderDetailBean.getOrder_Number() + "", yiMeiOrderDetailBean.getUserInfo_ID(), yiMeiOrderDetailBean.getOrder_ID());
+                        GiveActivity.start(YiMeiOrderDetailsActivity.this, yiMeiOrderDetailBean.getDetail().get(0).getProduct_ImgPath(), yiMeiOrderDetailBean.getDetail().get(0).getProduct_Name(), StringUtil.wanString(yiMeiOrderDetailBean.getOrder_Money()), yiMeiOrderDetailBean.getOrder_Number() + "", yiMeiOrderDetailBean.getUserInfo_ID(), yiMeiOrderDetailBean.getOrder_ID());
                     }
                 });
             }

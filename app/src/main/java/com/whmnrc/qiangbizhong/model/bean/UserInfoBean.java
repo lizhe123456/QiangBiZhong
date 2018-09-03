@@ -37,7 +37,7 @@ public class UserInfoBean {
 
     private int Status;
     private String Goods_Id;
-    private int GoodsPrice_Price;
+    private double GoodsPrice_Price;
     private int Order_State;
     private int IsEnd;
     private String OrderId;
@@ -46,7 +46,7 @@ public class UserInfoBean {
     private String CreateDate;
     private String AwardRecordId;
     private String Goods_PriceId;
-    private int GoodsPrice_VirtualPrice;
+    private double GoodsPrice_VirtualPrice;
     private String AwardTime;
     private int Price;
     private String UserId;
@@ -76,11 +76,11 @@ public class UserInfoBean {
         this.Goods_Id = Goods_Id;
     }
 
-    public int getGoodsPrice_Price() {
+    public double getGoodsPrice_Price() {
         return GoodsPrice_Price;
     }
 
-    public void setGoodsPrice_Price(int GoodsPrice_Price) {
+    public void setGoodsPrice_Price(double GoodsPrice_Price) {
         this.GoodsPrice_Price = GoodsPrice_Price;
     }
 
@@ -148,11 +148,11 @@ public class UserInfoBean {
         this.Goods_PriceId = Goods_PriceId;
     }
 
-    public int getGoodsPrice_VirtualPrice() {
+    public double getGoodsPrice_VirtualPrice() {
         return GoodsPrice_VirtualPrice;
     }
 
-    public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+    public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
         this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
     }
 

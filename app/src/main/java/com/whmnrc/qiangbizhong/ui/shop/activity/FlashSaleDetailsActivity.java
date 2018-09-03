@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -31,6 +32,7 @@ import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.TimeUtils;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
+import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
 import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 import com.whmnrc.qiangbizhong.widget.GlideImageLoader;
@@ -40,19 +42,20 @@ import com.whmnrc.qiangbizhong.widget.WrapContentHeightViewPager;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Company 武汉麦诺软创
  * Created by lizhe on 2018/7/11.
  */
 
-public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushInfoPresenter.GoodsInfoCall,GoodsRushInfoPresenter.CanYuCall, OrderPresenter.PayPassCall{
+public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushInfoPresenter.GoodsInfoCall, GoodsRushInfoPresenter.CanYuCall, OrderPresenter.PayPassCall {
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
@@ -188,19 +191,22 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                 } else if (goodsRushinfoBeans.getParticipate() == 1) {
                     if (btnStatu() == 1) {
                         //再活动时间内
-                        new SweetAlertDialog(this)
-                                .setTitleText("提示")
-                                .setContentText("确定要支付吗" + (goodsRushinfoBean.getGoodsPrice_Price() - goodsRushinfoBean.getBond()) + "？")
-                                .setCancelButton("取消", Dialog::dismiss).setConfirmButton("确认", sweetAlertDialog -> {
-                            sweetAlertDialog.dismiss();
+                        new AlertDialog(this).builder()
+                                .setTitle("提示")
+                                .setMsg("确定要支付吗" + (goodsRushinfoBean.getGoodsPrice_Price() - goodsRushinfoBean.getBond()) + "？")
+                                .setNegativeButton("取消", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
 
-                            showLoading("支付中..");
-                            PayDialogUtil.payDialogShow(FlashSaleDetailsActivity.this, new AlertEditTextDialog.ConfirmListenter(){
-                                @Override
-                                public void comfrim(String content) {
-                                    goodsRushInfoPresenter.yzPass(content,FlashSaleDetailsActivity.this);
-                                }
-                            });
+                                    }
+                                }).setPositiveButton("确认", dialog -> {
+                                showLoading("支付中..");
+                                PayDialogUtil.payDialogShow(FlashSaleDetailsActivity.this, new AlertEditTextDialog.ConfirmListenter() {
+                                    @Override
+                                    public void comfrim(String content) {
+                                        goodsRushInfoPresenter.yzPass(content, FlashSaleDetailsActivity.this);
+                                    }
+                                });
 
                         }).show();
                     }
@@ -236,8 +242,8 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
             }
             tvGoodsName.setText(goodsRushinfoBean.getRushGoodsInfo().getGoods_Name());
             tvGoodsDesc.setText(goodsRushinfoBean.getRushGoodsInfo().getGoods_Describe());
-            tvMoeny.setText("现价："+StringUtil.weiString1(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_Price()));
-            tvOldMoeny.setText("原价：" + StringUtil.weiString1(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_VirtualPrice()));
+            tvMoeny.setText("现价：" + StringUtil.wanString(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_Price()));
+            tvOldMoeny.setText("原价：" + StringUtil.wanString(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_VirtualPrice()));
             tvOldMoeny.getPaint().setAntiAlias(true);//抗锯齿
             tvOldMoeny.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
             tvScep.setText(goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_SpecName() == null ? "" : goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_SpecName() + "   " + goodsRushinfoBean.getRushGoodsInfo().getGoodsPrice_AttrName());
@@ -303,7 +309,7 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                     countDownTimerView1.setVisibility(View.GONE);
                     rlCanYu.setVisibility(View.VISIBLE);
                     llTime.setVisibility(View.GONE);
-                }else {
+                } else {
                     rlCanYu.setVisibility(View.GONE);
                     llTime.setVisibility(View.VISIBLE);
                 }
@@ -340,7 +346,7 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
                 }
             } else if (goodsRushinfoBean.getParticipate() == 2) {
                 tvCanYu.setText("已抢购");
-            }else if (goodsRushinfoBean.getParticipate() == 3){
+            } else if (goodsRushinfoBean.getParticipate() == 3) {
                 tvCanYu.setText("已放弃");
             }
         } catch (Exception e) {
@@ -383,19 +389,18 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
 
     @Override
     public void canyuBack() {
-        new SweetAlertDialog(this)
-                .setTitleText("提示")
-                .setContentText("余额不足,请充值！")
-                .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+        new AlertDialog(this).builder()
+                .setTitle("提示")
+                .setMsg("余额不足,请充值！")
+                .setNegativeButton("取消", new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
+                    public void onClick(View v) {
+
                     }
-                }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                }).setPositiveButton("确认", new View.OnClickListener() {
             @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                sweetAlertDialog.dismiss();
-                AccountRechargeActivity.start(FlashSaleDetailsActivity.this,1);
+            public void onClick(View v) {
+                AccountRechargeActivity.start(FlashSaleDetailsActivity.this, 1);
             }
         }).show();
     }
@@ -403,6 +408,6 @@ public class FlashSaleDetailsActivity extends BaseActivity implements GoodsRushI
     @Override
     public void payPassBack() {
         showLoading("抢购中..");
-        goodsRushInfoPresenter.cayu(goodsRushinfoBean.getRushId(),FlashSaleDetailsActivity.this);
+        goodsRushInfoPresenter.cayu(goodsRushinfoBean.getRushId(), FlashSaleDetailsActivity.this);
     }
 }

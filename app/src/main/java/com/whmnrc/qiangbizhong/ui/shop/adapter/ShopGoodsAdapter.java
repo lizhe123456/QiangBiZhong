@@ -62,7 +62,7 @@ public class ShopGoodsAdapter extends BaseAdapter<ShopBean.PalteListBean>{
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, ShopBean.PalteListBean.GoodsBean item, int position) {
             holder.setText(R.id.tv_goods_name,item.getGoods_Name())
-                    .setText(R.id.tv_moeny, StringUtil.weiString1(item.getGoodsPrice_Price()))
+                    .setText(R.id.tv_moeny, StringUtil.wanString(item.getGoodsPrice_Price()))
                     .setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
         }
 

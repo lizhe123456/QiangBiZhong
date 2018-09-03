@@ -97,7 +97,7 @@ public class OpenVipFragment extends BaseFragment implements RechargePresenter.R
         tvMoeny.setText(rechargeBean.getGoodsPrice_Stock() + "");
         tvRmb.setText(rechargeBean.getPrice() + "");
         tvKegoumai.setText(StringUtil.wanString(rechargeBean.getCanPayCount()));
-        tvYue.setText(StringUtil.wanString((int) UserManage.getInstance().getLoginBean().getUserInfo_Money()));
+        tvYue.setText(StringUtil.wanString(UserManage.getInstance().getLoginBean().getUserInfo_Money()));
         tvKegou.setText(StringUtil.wanString(rechargeBean.getTodayPayCount()));
     }
 

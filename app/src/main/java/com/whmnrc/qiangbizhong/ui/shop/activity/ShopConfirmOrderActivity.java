@@ -130,9 +130,9 @@ public class ShopConfirmOrderActivity extends BaseActivity implements OrderPrese
     }
 
     private void initGoods(OrderBeanReq shopDetailsBean) {
-        tvPrice.setText(StringUtil.weiString1(Double.parseDouble(shopDetailsBean.getPrice())));
-        tvPrice1.setText(StringUtil.weiString1(Double.parseDouble(shopDetailsBean.getPrice())*shopDetailsBean.getCount()));
-        tvYuyue.setText(StringUtil.weiString1(Double.parseDouble(shopDetailsBean.getPrice())*shopDetailsBean.getCount()));
+        tvPrice.setText(StringUtil.wanString(Double.parseDouble(shopDetailsBean.getPrice())));
+        tvPrice1.setText(StringUtil.wanString(Double.parseDouble(shopDetailsBean.getPrice())*shopDetailsBean.getCount()));
+        tvYuyue.setText(StringUtil.wanString(Double.parseDouble(shopDetailsBean.getPrice())*shopDetailsBean.getCount()));
         tvGoodsSpec.setText(shopDetailsBean.getSpec());
         tvGoodsName.setText(shopDetailsBean.getGoodsInfoBean().getGoods_Name());
         GlideuUtil.loadImageView(this, shopDetailsBean.getGoodsInfoBean().getGoods_ImaPath(), ivImg);

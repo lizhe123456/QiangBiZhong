@@ -86,7 +86,7 @@ public class SelectParamPopupWindow extends PopupWindow {
             if (specBean.getItems().get(position).getSpecItems().size() > 0) {
                 if (specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_Stock() > 0) {
                     spceAdapter2.setSelect(0);
-                    textPrice.setText(StringUtil.weiString1(specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_Price()));
+                    textPrice.setText(StringUtil.wanString(specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_Price()));
                     textSpec.setText("已选 " + specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_AttrName() + " " + specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_SpecName());
                     priceId = specBean.getItems().get(position).getSpecItems().get(0).getGoodsPrice_ID();
                 }
@@ -108,7 +108,7 @@ public class SelectParamPopupWindow extends PopupWindow {
                     }
                 }
                 priceId = specItemsBean.getGoodsPrice_ID();
-                textPrice.setText(StringUtil.weiString1(specItemsBean.getGoodsPrice_Price()));
+                textPrice.setText(StringUtil.wanString(specItemsBean.getGoodsPrice_Price()));
                 textSpec.setText("已选 " + specItemsBean.getGoodsPrice_AttrName() + " " + specItemsBean.getGoodsPrice_SpecName());
             }
         });
@@ -119,9 +119,9 @@ public class SelectParamPopupWindow extends PopupWindow {
         GlideuUtil.loadImageView(activity, specBean.getGoodsInfo().getGoods_ImaPath(), mRealContentLayout.findViewById(R.id.iv_image));
         textPrice = mRealContentLayout.findViewById(R.id.tv_price);
         if (specBean.getGoodsInfo().getGoods_PriceMin() == specBean.getGoodsInfo().getGoods_PriceMax()) {
-            textPrice.setText(specBean.getGoodsInfo().getGoods_PriceMin() + "");
+            textPrice.setText(StringUtil.wanString(specBean.getGoodsInfo().getGoods_PriceMin()));
         }else {
-            textPrice.setText(specBean.getGoodsInfo().getGoods_PriceMin() + "~" + specBean.getGoodsInfo().getGoods_PriceMax());
+            textPrice.setText(StringUtil.wanString(specBean.getGoodsInfo().getGoods_PriceMin()) + "~" + StringUtil.wanString(specBean.getGoodsInfo().getGoods_PriceMax()));
         }
         textSpec = mRealContentLayout.findViewById(R.id.tv_spec);
         textSpec.setText("已选");

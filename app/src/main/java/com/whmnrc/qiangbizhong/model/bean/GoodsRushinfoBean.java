@@ -124,7 +124,7 @@ public class GoodsRushinfoBean implements Parcelable {
         private String RushEndTime;
         private int RushNumber;
         private int Bond;
-        private int GoodsPrice_Price;
+        private double GoodsPrice_Price;
         private int IsGoUp;
         private int IsEnd;
         private String CreateDate;
@@ -150,7 +150,7 @@ public class GoodsRushinfoBean implements Parcelable {
             RushEndTime = in.readString();
             RushNumber = in.readInt();
             Bond = in.readInt();
-            GoodsPrice_Price = in.readInt();
+            GoodsPrice_Price = in.readDouble();
             IsGoUp = in.readInt();
             IsEnd = in.readInt();
             CreateDate = in.readString();
@@ -328,11 +328,11 @@ public class GoodsRushinfoBean implements Parcelable {
             this.Bond = Bond;
         }
 
-        public int getGoodsPrice_Price() {
+        public double getGoodsPrice_Price() {
             return GoodsPrice_Price;
         }
 
-        public void setGoodsPrice_Price(int GoodsPrice_Price) {
+        public void setGoodsPrice_Price(double GoodsPrice_Price) {
             this.GoodsPrice_Price = GoodsPrice_Price;
         }
 
@@ -387,7 +387,7 @@ public class GoodsRushinfoBean implements Parcelable {
             dest.writeString(RushEndTime);
             dest.writeInt(RushNumber);
             dest.writeInt(Bond);
-            dest.writeInt(GoodsPrice_Price);
+            dest.writeDouble(GoodsPrice_Price);
             dest.writeInt(IsGoUp);
             dest.writeInt(IsEnd);
             dest.writeString(CreateDate);

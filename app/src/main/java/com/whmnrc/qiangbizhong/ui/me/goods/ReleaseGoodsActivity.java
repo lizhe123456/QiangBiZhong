@@ -233,6 +233,10 @@ public class ReleaseGoodsActivity extends BaseActivity implements ImagePresenter
                     ToastUtils.showShort("请输入最小购买");
                     return;
                 }
+                if (Integer.parseInt(etMinNum.getText().toString()) >=1){
+                    ToastUtils.showShort("最小购买不能为0");
+                    return;
+                }
                 goodsParam.setGoods_LimitCount(etMinNum.getText().toString());
                 showLoading("提交中..");
                 goodsPresenter.releaseGoods(goodsParam,type,this);

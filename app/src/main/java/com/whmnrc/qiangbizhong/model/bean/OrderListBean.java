@@ -481,8 +481,8 @@ public class OrderListBean {
         private String AwardTime;
         private int Bond;
         private int Price;
-        private int GoodsPrice_Price;
-        private int GoodsPrice_VirtualPrice;
+        private double GoodsPrice_Price;
+        private double GoodsPrice_VirtualPrice;
         private String Product_ImgPath;
         private String UserNick;
 
@@ -598,19 +598,19 @@ public class OrderListBean {
             this.Price = Price;
         }
 
-        public int getGoodsPrice_Price() {
+        public double getGoodsPrice_Price() {
             return GoodsPrice_Price;
         }
 
-        public void setGoodsPrice_Price(int GoodsPrice_Price) {
+        public void setGoodsPrice_Price(double GoodsPrice_Price) {
             this.GoodsPrice_Price = GoodsPrice_Price;
         }
 
-        public int getGoodsPrice_VirtualPrice() {
+        public double getGoodsPrice_VirtualPrice() {
             return GoodsPrice_VirtualPrice;
         }
 
-        public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+        public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
             this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
         }
 
@@ -660,22 +660,15 @@ public class OrderListBean {
         private String Product_ID;
         private String Product_Name;
         private String Product_ImgPath;
-        private int Product_Price;
+        private double Product_Price;
         private int OrderItem_Number;
-        private int OrderItem_Money;
         private String Order_ID;
         private String DotProduct_ID;
         private String Spec_ID;
         private String Spec_Name;
         private String SpecAttr_ID;
         private String SpecAttr_Name;
-        private int SpecAttr_Price;
-        private int SpecAttr_Integer;
-        private int OrderItem_Integer;
-        private int OrderItem_Discount;
-        private int OrderItem_Type;
-        private Object OrderItem_UseCode;
-        private Object RebateConfig_ID;
+        private double SpecAttr_Price;
         private int Bond;
         private String comment;
         private List<String> list = new ArrayList<>();
@@ -744,11 +737,11 @@ public class OrderListBean {
             this.Product_ImgPath = Product_ImgPath;
         }
 
-        public int getProduct_Price() {
+        public double getProduct_Price() {
             return Product_Price;
         }
 
-        public void setProduct_Price(int Product_Price) {
+        public void setProduct_Price(double Product_Price) {
             this.Product_Price = Product_Price;
         }
 
@@ -760,13 +753,6 @@ public class OrderListBean {
             this.OrderItem_Number = OrderItem_Number;
         }
 
-        public int getOrderItem_Money() {
-            return OrderItem_Money;
-        }
-
-        public void setOrderItem_Money(int OrderItem_Money) {
-            this.OrderItem_Money = OrderItem_Money;
-        }
 
         public String getOrder_ID() {
             return Order_ID;
@@ -816,60 +802,12 @@ public class OrderListBean {
             this.SpecAttr_Name = SpecAttr_Name;
         }
 
-        public int getSpecAttr_Price() {
+        public double getSpecAttr_Price() {
             return SpecAttr_Price;
         }
 
-        public void setSpecAttr_Price(int SpecAttr_Price) {
+        public void setSpecAttr_Price(double SpecAttr_Price) {
             this.SpecAttr_Price = SpecAttr_Price;
-        }
-
-        public int getSpecAttr_Integer() {
-            return SpecAttr_Integer;
-        }
-
-        public void setSpecAttr_Integer(int SpecAttr_Integer) {
-            this.SpecAttr_Integer = SpecAttr_Integer;
-        }
-
-        public int getOrderItem_Integer() {
-            return OrderItem_Integer;
-        }
-
-        public void setOrderItem_Integer(int OrderItem_Integer) {
-            this.OrderItem_Integer = OrderItem_Integer;
-        }
-
-        public int getOrderItem_Discount() {
-            return OrderItem_Discount;
-        }
-
-        public void setOrderItem_Discount(int OrderItem_Discount) {
-            this.OrderItem_Discount = OrderItem_Discount;
-        }
-
-        public int getOrderItem_Type() {
-            return OrderItem_Type;
-        }
-
-        public void setOrderItem_Type(int OrderItem_Type) {
-            this.OrderItem_Type = OrderItem_Type;
-        }
-
-        public Object getOrderItem_UseCode() {
-            return OrderItem_UseCode;
-        }
-
-        public void setOrderItem_UseCode(Object OrderItem_UseCode) {
-            this.OrderItem_UseCode = OrderItem_UseCode;
-        }
-
-        public Object getRebateConfig_ID() {
-            return RebateConfig_ID;
-        }
-
-        public void setRebateConfig_ID(Object RebateConfig_ID) {
-            this.RebateConfig_ID = RebateConfig_ID;
         }
 
         public int getBond() {
@@ -915,8 +853,8 @@ public class OrderListBean {
         private int IsEnd;
         private int RushNumber;
         private int Order_Money;
-        private int GoodsPrice_Price;
-        private int GoodsPrice_VirtualPrice;
+        private double GoodsPrice_Price;
+        private double GoodsPrice_VirtualPrice;
         private String RushEndTime;
         private String RushStartTime;
         private String Goods_ImaPath;
@@ -1017,19 +955,19 @@ public class OrderListBean {
             this.Order_Money = Order_Money;
         }
 
-        public int getGoodsPrice_Price() {
+        public double getGoodsPrice_Price() {
             return GoodsPrice_Price;
         }
 
-        public void setGoodsPrice_Price(int GoodsPrice_Price) {
+        public void setGoodsPrice_Price(double GoodsPrice_Price) {
             this.GoodsPrice_Price = GoodsPrice_Price;
         }
 
-        public int getGoodsPrice_VirtualPrice() {
+        public double getGoodsPrice_VirtualPrice() {
             return GoodsPrice_VirtualPrice;
         }
 
-        public void setGoodsPrice_VirtualPrice(int GoodsPrice_VirtualPrice) {
+        public void setGoodsPrice_VirtualPrice(double GoodsPrice_VirtualPrice) {
             this.GoodsPrice_VirtualPrice = GoodsPrice_VirtualPrice;
         }
 

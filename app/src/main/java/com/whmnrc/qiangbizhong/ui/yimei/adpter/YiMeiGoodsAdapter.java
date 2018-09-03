@@ -14,6 +14,7 @@ import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsDetailBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiIndexBean;
 import com.whmnrc.qiangbizhong.ui.LoginActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 
 /**
@@ -65,7 +66,7 @@ public class YiMeiGoodsAdapter extends BaseAdapter<YiMeiIndexBean.MedicalListBea
 
         @Override
         protected void bindDataToItemView(BaseViewHolder holder, YiMeiIndexBean.MedicalListBean.GoodsBean item, int position) {
-            holder.setText(R.id.tv_goods_name,item.getGoods_Name()).setText(R.id.tv_moeny,String.valueOf(item.getGoodsPrice_Price())).setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
+            holder.setText(R.id.tv_goods_name,item.getGoods_Name()).setText(R.id.tv_moeny, StringUtil.wanString(item.getGoodsPrice_Price())).setGlieuImage(R.id.iv_img,item.getGoods_ImaPath());
 
 
         }

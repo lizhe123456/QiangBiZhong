@@ -373,7 +373,7 @@
                     android:maxLength="10"
                     android:paddingLeft="@dimen/dm_10"
                     android:hint="请输入最小购买"
-                    android:digits="123456789"
+                    android:digits="1234567890"
                     android:gravity="right"
                     android:textColor="@color/tv_navigation"
                     android:textSize="@dimen/dm_14" />

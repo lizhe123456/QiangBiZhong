@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ import com.whmnrc.qiangbizhong.ui.yimei.activity.CommentListActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.activity.YiMeiGoodsDetailsActivity;
 import com.whmnrc.qiangbizhong.ui.yimei.adpter.CommentAdapter;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.util.UserManage;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
 import com.whmnrc.qiangbizhong.util.WxShareUtils;
@@ -260,20 +262,24 @@ public class ShopDetailsActivity extends BaseActivity implements ShopPresenter.S
     private void addData(ShopDetailsBean shopBean) {
 //        GlideuUtil.loadImageView(this,shopBean.getGoods().getGoods_ImaPath(),ivGoodsImg);
 
-        GlideuUtil.loadImageView(this,shopBean.getStoreInfo().getStoreHeadImage(),ivImg);
+        GlideuUtil.loadImageView(this, shopBean.getStoreInfo().getStoreHeadImage(), ivImg);
         tvName.setText(shopBean.getStoreInfo().getStoreName());
         tvShopDesc.setText(shopBean.getStoreInfo().getExplain());
 
         tvTitle.setText(shopBean.getGoods().getGoods_Name());
         if (shopBean.getGoods().getGoods_PriceMin() == shopBean.getGoods().getGoods_PriceMax()) {
-            tvPrice.setText(shopBean.getGoods().getGoods_PriceMin() + "");
-        }else {
-            tvPrice.setText(shopBean.getGoods().getGoods_PriceMin() + "~" + shopBean.getGoods().getGoods_PriceMax());
+            tvPrice.setText(StringUtil.wanString(shopBean.getGoods().getGoods_PriceMin()) + "");
+//            tvPrice.setText(shopBean.getGoods().getGoods_PriceMin() + "");
+        } else {
+            tvPrice.setText(StringUtil.wanString(shopBean.getGoods().getGoods_PriceMin()) + "~" + StringUtil.wanString(shopBean.getGoods().getGoods_PriceMax()));
+//            tvPrice.setText(shopBean.getGoods().getGoods_PriceMin() + "~" + shopBean.getGoods().getGoods_PriceMax());
         }
 //        tvPrice.setText(shopBean.getGoods().getGoods_PriceMin() + "~" + shopBean.getGoods().getGoods_PriceMax());
-        tvOldPrice.setText("原价："+shopBean.getGoods().getGoods_PriceMax()+"");
-        tvOldPrice.getPaint().setAntiAlias(true);//抗锯齿
-        tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
+        if (!TextUtils.isEmpty(shopBean.getGoodsPrice())){
+            tvOldPrice.setText("原价：" + shopBean.getGoodsPrice());
+            tvOldPrice.getPaint().setAntiAlias(true);//抗锯齿
+            tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
+        }
         tvSalesVolume.setText("销量  "+shopBean.getGoods().getGoods_MonthCount()+"");
         if (shopBean.getEvaluate().size() == 0){
             tvNoComment.setVisibility(View.VISIBLE);

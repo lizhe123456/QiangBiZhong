@@ -23,6 +23,7 @@ import com.whmnrc.qiangbizhong.ui.me.activity.AccountRechargeActivity;
 import com.whmnrc.qiangbizhong.ui.me.activity.MyOrderActivity;
 import com.whmnrc.qiangbizhong.ui.me.fragment.order.Order4Fragment;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
+import com.whmnrc.qiangbizhong.util.StringUtil;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
 import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
@@ -30,9 +31,7 @@ import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Company 武汉麦诺软创
@@ -94,12 +93,12 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
         awardBeanInfo = getIntent().getParcelableExtra("awardBeanInfo");
         if (goodsRushinfoBean != null) {
             GlideuUtil.loadImageView(this, goodsRushinfoBean.getGoods_ImaPath(), ivImg);
-            tvPrice.setText(String.valueOf(goodsRushinfoBean.getGoodsPrice_Price()));
+            tvPrice.setText(StringUtil.wanString(goodsRushinfoBean.getGoodsPrice_Price()));
             tvGoodsName.setText(goodsRushinfoBean.getGoods_Name());
             tvYuyue.setText(String.valueOf(goodsRushinfoBean.getBond()));
         }else {
             GlideuUtil.loadImageView(this, awardBeanInfo.getGoods_ImaPath(), ivImg);
-            tvPrice.setText(String.valueOf(awardBeanInfo.getGoodsPrice_Price()));
+            tvPrice.setText(StringUtil.wanString(awardBeanInfo.getGoodsPrice_Price()));
             tvGoodsName.setText(awardBeanInfo.getGoods_Name());
             tvYuyue.setText(String.valueOf(awardBeanInfo.getBond()));
         }
@@ -135,7 +134,7 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
                             }
                         }).setPositiveButton("确认", new View.OnClickListener() {
                     @Override
-                    public void onClick(View sweetAlertDialog) {
+                    public void onClick(View dialog) {
                         PayDialogUtil.payDialogShow(ConfirmOrderActivity.this, new AlertEditTextDialog.ConfirmListenter(){
 
                             @Override
@@ -184,18 +183,17 @@ public class ConfirmOrderActivity extends BaseActivity implements OrderPresenter
 
     @Override
     public void recharge() {
-        new SweetAlertDialog(this)
-                .setTitleText("提示")
-                .setContentText("余额不足,请充值！")
-                .setCancelButton("取消", new SweetAlertDialog.OnSweetClickListener() {
+        new AlertDialog(this).builder()
+                .setTitle("提示")
+                .setMsg("余额不足,请充值！")
+                .setNegativeButton("取消", new View.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        sweetAlertDialog.dismiss();
+                    public void onClick(View v) {
+
                     }
-                }).setConfirmButton("确认", new SweetAlertDialog.OnSweetClickListener() {
+                }).setPositiveButton("确认", new View.OnClickListener() {
             @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                sweetAlertDialog.dismiss();
+            public void onClick(View v) {
                 AccountRechargeActivity.start(ConfirmOrderActivity.this,1);
             }
         }).show();

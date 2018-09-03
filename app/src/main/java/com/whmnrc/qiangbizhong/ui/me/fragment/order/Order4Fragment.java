@@ -16,7 +16,6 @@ import com.whmnrc.qiangbizhong.widget.AlertEditTextDialog;
 import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 import com.whmnrc.qiangbizhong.widget.PayDialogUtil;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Company 武汉麦诺软创
@@ -75,7 +74,7 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
                             }
                         }).setNegativeButton("确认", new View.OnClickListener() {
                     @Override
-                    public void onClick(View sweetAlertDialog) {
+                    public void onClick(View dialog) {
                         showLoading("收货中..");
                         orderPresenter.collectgoods(item.getOrder_ID(), Order4Fragment.this);
                     }
@@ -96,7 +95,7 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
                             }
                         }).setNegativeButton("确认", new View.OnClickListener() {
                     @Override
-                    public void onClick(View sweetAlertDialog) {
+                    public void onClick(View dialog) {
                         PayDialogUtil.payDialogShow(mContext, new AlertEditTextDialog.ConfirmListenter() {
 
                             @Override
@@ -184,11 +183,11 @@ public class Order4Fragment extends BaseOrderFragment implements OrderPresenter.
                 .setMsg("余额不足,请充值！")
                 .setNegativeButton("取消", new View.OnClickListener() {
                     @Override
-                    public void onClick(View sweetAlertDialog) {
+                    public void onClick(View dialog) {
                     }
                 }).setPositiveButton("确认", new View.OnClickListener() {
             @Override
-            public void onClick(View sweetAlertDialog) {
+            public void onClick(View dialog) {
                 AccountRechargeActivity.start(mContext, 1);
             }
         }).show();

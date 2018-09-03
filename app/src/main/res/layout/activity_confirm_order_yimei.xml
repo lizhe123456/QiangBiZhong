@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:textColor="@color/goods_price"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/dm_18" />
 
                 <ImageView
                     android:layout_width="@dimen/dm_18"

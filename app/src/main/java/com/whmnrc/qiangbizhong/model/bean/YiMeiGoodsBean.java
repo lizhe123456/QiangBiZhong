@@ -55,8 +55,8 @@ public class YiMeiGoodsBean {
     private String TypeName;
     private String StoreName;
     private int StoreStatus;
-    private int Goods_PriceMin;
-    private int Goods_PriceMax;
+    private double Goods_PriceMin;
+    private double Goods_PriceMax;
     private String Address;
     private String Latitude;
     private String Longitude;
@@ -214,19 +214,19 @@ public class YiMeiGoodsBean {
         this.StoreStatus = StoreStatus;
     }
 
-    public int getGoods_PriceMin() {
+    public double getGoods_PriceMin() {
         return Goods_PriceMin;
     }
 
-    public void setGoods_PriceMin(int Goods_PriceMin) {
+    public void setGoods_PriceMin(double Goods_PriceMin) {
         this.Goods_PriceMin = Goods_PriceMin;
     }
 
-    public int getGoods_PriceMax() {
+    public double getGoods_PriceMax() {
         return Goods_PriceMax;
     }
 
-    public void setGoods_PriceMax(int Goods_PriceMax) {
+    public void setGoods_PriceMax(double Goods_PriceMax) {
         this.Goods_PriceMax = Goods_PriceMax;
     }
 

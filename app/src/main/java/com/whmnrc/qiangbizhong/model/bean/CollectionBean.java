@@ -35,7 +35,7 @@ public class CollectionBean {
     private String Address;
     private String Explain;
     private String Goods_Name;
-    private int Goods_PriceMin;
+    private double Goods_PriceMin;
     private String Goods_ImaPath;
     private int Goods_ShopType;
     private String CreateDate;
@@ -129,11 +129,11 @@ public class CollectionBean {
         this.Goods_Name = Goods_Name;
     }
 
-    public int getGoods_PriceMin() {
+    public double getGoods_PriceMin() {
         return Goods_PriceMin;
     }
 
-    public void setGoods_PriceMin(int Goods_PriceMin) {
+    public void setGoods_PriceMin(double Goods_PriceMin) {
         this.Goods_PriceMin = Goods_PriceMin;
     }
 

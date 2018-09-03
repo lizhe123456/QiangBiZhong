@@ -9,7 +9,6 @@ import com.whmnrc.qiangbizhong.presenter.me.OrderPresenter;
 import com.whmnrc.qiangbizhong.widget.AlertDialog;
 import com.whmnrc.qiangbizhong.widget.CustomerServiceDialog;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Company 武汉麦诺软创
