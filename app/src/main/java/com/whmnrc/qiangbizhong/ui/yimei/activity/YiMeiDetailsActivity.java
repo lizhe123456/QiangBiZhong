@@ -19,20 +19,17 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.app.Constants;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsBean;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiSortBean;
 import com.whmnrc.qiangbizhong.presenter.me.CollectionPresenter;
 import com.whmnrc.qiangbizhong.presenter.yimei.StorePresenter;
-import com.whmnrc.qiangbizhong.ui.yimei.fragment.ComprehensiveFragment;
-import com.whmnrc.qiangbizhong.ui.yimei.fragment.PriceFragment;
 import com.whmnrc.qiangbizhong.ui.yimei.fragment.SalesVolumeFragment;
 import com.whmnrc.qiangbizhong.util.GlideuUtil;
 import com.whmnrc.qiangbizhong.util.ViewPagerUtil;
 import com.whmnrc.qiangbizhong.widget.RoundedImageView;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -65,9 +62,6 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
     private StorePresenter storePresenter;
     private CollectionPresenter collectionPresenter;
 
-    public double latitude;
-    public double longitude;
-
     private AMapLocationClient mapLocationClient = null;
     private boolean isFrist;
     private String sId;
@@ -80,10 +74,10 @@ public class YiMeiDetailsActivity extends BaseActivity implements StorePresenter
             if (amapLocation != null) {
                 if (amapLocation.getErrorCode() == 0) {
                     //可在其中解析amapLocation获取相应内容。
-                    latitude = amapLocation.getLatitude();
-                    longitude = amapLocation.getLongitude();
+                    Constants.latitude = amapLocation.getLatitude();
+                    Constants.longitude = amapLocation.getLongitude();
                     if (!isFrist) {
-                        storePresenter.getmedicalstorelist(true,sId,"0",latitude,longitude,YiMeiDetailsActivity.this);
+                        storePresenter.getmedicalstorelist(true,sId,"0",Constants.latitude,Constants.longitude,YiMeiDetailsActivity.this);
                         isFrist = true;
                     }
                 } else {

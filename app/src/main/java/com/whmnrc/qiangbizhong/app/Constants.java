@@ -16,6 +16,9 @@ public class Constants {
 //    public static final String INFO_ADDRESS = "http://192.168.1.157:8011/GoodsDetail/index";
     public static final String WX_APP_ID = "wx572d4c6551e02121";
 
+    public static double latitude;
+    public static double longitude;
+
     /**
      * 微信SECRET
      */

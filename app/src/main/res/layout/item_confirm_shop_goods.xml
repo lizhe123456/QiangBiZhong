@@ -24,6 +24,8 @@
             android:layout_marginLeft="@dimen/dm_15"
             android:layout_toRightOf="@+id/iv_img"
             android:textColor="@color/tv_191"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:textSize="@dimen/dm_15" />
 
         <TextView

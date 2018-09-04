@@ -8,7 +8,7 @@
         android:id="@+id/iv_img"
         android:layout_width="@dimen/dm_66"
         android:layout_height="@dimen/dm_66"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:layout_gravity="center_horizontal"/>
 
     <TextView

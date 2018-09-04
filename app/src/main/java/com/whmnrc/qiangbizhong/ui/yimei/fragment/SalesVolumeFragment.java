@@ -15,6 +15,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.whmnrc.qiangbizhong.R;
+import com.whmnrc.qiangbizhong.app.Constants;
 import com.whmnrc.qiangbizhong.base.BaseFragment;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.model.bean.YiMeiGoodsBean;
@@ -72,8 +73,8 @@ public class SalesVolumeFragment extends BaseFragment implements StorePresenter.
         sortId = getArguments().getString("sortId");
         type = getArguments().getString("type");
         storePresenter = new StorePresenter(getActivity());
-        latitude = ((YiMeiDetailsActivity) getActivity()).latitude;
-        longitude = ((YiMeiDetailsActivity) getActivity()).longitude;
+        latitude = Constants.latitude;
+        longitude = Constants.longitude;
         showLoading("加载中..");
         storePresenter.getmedicalstorelist(true, sortId,type, latitude, longitude, this);
         refresh.setOnRefreshListener(refreshLayout -> storePresenter.getmedicalstorelist(true, sortId,type, latitude, longitude, this));
@@ -83,7 +84,7 @@ public class SalesVolumeFragment extends BaseFragment implements StorePresenter.
         mYiMeiSearchAdapter = new YiMeiSearchAdapter(mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(mYiMeiSearchAdapter);
-        recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.setNestedScrollingEnabled(false);
 
     }
 

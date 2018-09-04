@@ -158,6 +158,7 @@ public class SelectAddressActivity extends AppCompatActivity {
         }
         if (null != locationClient) {
             locationClient.onDestroy();
+            locationClient.setLocationListener(null);
         }
     }
 

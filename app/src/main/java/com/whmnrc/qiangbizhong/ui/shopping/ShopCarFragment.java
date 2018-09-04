@@ -112,6 +112,7 @@ public class ShopCarFragment extends BaseFragment implements ShopCarPresenter.Ca
         mShopCarPresenter = new ShopCarPresenter(getActivity());
         mSpecPresenter = new SpecPresenter(getActivity());
         mCollectionPresenter = new CollectionPresenter(getActivity());
+        showLoading("加载中..");
         mShopCarPresenter.getcarlist(this);
         rvGoodsList.setLayoutManager(new LinearLayoutManager(getContext()));
         shopCarAdapter = new ShopCarAdapter(getContext(),mShopCarPresenter);

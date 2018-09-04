@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -109,8 +108,6 @@ public class MainActivity extends BaseActivity {
                 });
 
     }
-
-
 
     private void switchFragment(int index){
         if (FragmentUtils.getFragments(getSupportFragmentManager()).contains(fragments.get(index))) {

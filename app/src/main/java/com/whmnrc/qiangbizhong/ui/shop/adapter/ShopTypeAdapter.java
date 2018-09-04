@@ -51,6 +51,7 @@ public class ShopTypeAdapter extends BaseAdapter<ShopBean.TypeListBean>{
     protected void bindDataToItemView(BaseViewHolder holder, ShopBean.TypeListBean item, int position) {
         holder.setGlieuImage(R.id.iv_img,item.getImage_url()).setText(R.id.tv_text,item.getTypeName());
         ImageView imageView = holder.getView(R.id.iv_img);
+
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
         layoutParams.width = width;
         layoutParams.height = width;

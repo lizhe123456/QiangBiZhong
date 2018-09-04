@@ -151,7 +151,7 @@ public class OrderDetailsActivity extends BaseActivity implements OrderPresenter
         tvOrderUser.setText(orderdetailBean.getUserInfo_NickName());
         tvOrderPhone.setText(orderdetailBean.getAddress_Mobile());
 
-        double num = 0;
+        int num = 0;
         double moeny = 0;
         for (OrderListBean.DetailBean detailBean :orderdetailBean.getDetail()) {
             num += detailBean.getOrderItem_Number();

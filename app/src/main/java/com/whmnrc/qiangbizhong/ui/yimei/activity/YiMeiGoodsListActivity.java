@@ -30,6 +30,8 @@ import com.whmnrc.qiangbizhong.ui.yimei.adpter.YiMeiSearchAdapter;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
+import static com.whmnrc.qiangbizhong.app.Constants.latitude;
+import static com.whmnrc.qiangbizhong.app.Constants.longitude;
 
 /**
  * Company 武汉麦诺软创
@@ -64,8 +66,6 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
     //请求类型
     private int type;
 
-    private double latitude;
-    private double longitude;
 
     private YiMeiPresenter yiMeiPresenter;
 
@@ -216,8 +216,11 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
 
     @Override
     protected void onDestroy() {
-        mapLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
-        mapLocationClient.onDestroy();
+        if (mapLocationClient != null) {
+            mapLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
+            mapLocationClient.onDestroy();
+            mapLocationClient.setLocationListener(null);
+        }
         super.onDestroy();
     }
 
@@ -269,4 +272,5 @@ public class YiMeiGoodsListActivity extends BaseActivity implements YiMeiPresent
         vsEmpty.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
     }
+
 }
