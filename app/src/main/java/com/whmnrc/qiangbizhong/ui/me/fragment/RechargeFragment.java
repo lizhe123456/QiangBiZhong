@@ -92,7 +92,7 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
     }
 
     @Override
-    public void payS(String data) {
+    public void payS(String data,int type) {
         AliPayTools.aliSignPay(getActivity(), data, new OnSuccessAndErrorListener() {
             @Override
             public void onSuccess(String s) {
@@ -119,7 +119,7 @@ public class RechargeFragment extends BaseFragment implements RechargePresenter.
     public void onViewClicked() {
         if (!TextUtils.isEmpty(etRecharge.getText().toString().trim())){
             showLoading("充值中..");
-            rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"2","","",this);
+//            rechargePresenter.submitorder(etRecharge.getText().toString().trim(),"2","","",this);
         }
     }
 

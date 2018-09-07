@@ -8,8 +8,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
-//        versionName "1.09"
-        versionName "1.0"
+        versionName "1.10"
+//        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -31,7 +31,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
-
         debug {
             debuggable true
             signingConfig signingConfigs.config
@@ -88,22 +87,18 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:3.2.7'
     implementation files('libs/alipaySdk-20180403.jar')
     //微信登录，支付，分享包
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+//    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:'
     //okgo 网络请求框架包
     compile 'com.lzy.net:okgo:3.0.4'
     compile 'com.google.android:flexbox:0.2.7'
     implementation files('libs/AMap2DMap_5.2.0_AMapSearch_6.1.0_AMapLocation_4.1.0_20180619.jar')
     implementation 'com.android.support:multidex:1.0.1'
     implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
-
     implementation('com.github.gzu-liyujiang.AndroidPicker:WheelPicker:1.5.6') {
         exclude group: 'com.android.support'
     }
-
     compile 'cn.yipianfengye.android:zxing-library:2.2'
     implementation 'com.umeng.sdk:common:1.5.0'
     //PushSDK
     implementation 'com.umeng.sdk:push:4.1.0'
-
-
 }

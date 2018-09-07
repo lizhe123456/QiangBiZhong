@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dm_15"
+        android:text="请选择您的支付方式"
+        android:textColor="@color/tv_000"
+        android:textSize="@dimen/dm_15" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:layout_marginLeft="@dimen/dm_15"
+        android:background="@color/slide_line" />
+
+    <LinearLayout
+        android:id="@+id/ali_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/btn_effect"
+        android:padding="@dimen/dm_15">
+
+        <ImageView
+            android:id="@+id/select_ali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_10"
+            android:src="@drawable/ic_selece_no" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_15"
+            android:src="@drawable/ali_pay" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_15"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="支付宝支付"
+                android:textColor="@color/tv_000"
+                android:textSize="@dimen/dm_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dm_2"
+                android:text="推荐有支付宝账号的用户使用"
+                android:textColor="@color/tv_999"
+                android:textSize="@dimen/dm_12" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_1"
+        android:layout_marginLeft="@dimen/dm_15"
+        android:background="@color/slide_line" />
+
+    <LinearLayout
+        android:id="@+id/wx_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:background="@drawable/btn_effect"
+        android:orientation="horizontal"
+        android:padding="@dimen/dm_15">
+
+        <ImageView
+            android:id="@+id/select_wx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_10"
+            android:src="@drawable/ic_selece_no" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_15"
+            android:src="@drawable/wx_pay" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_15"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信支付"
+                android:textColor="@color/tv_000"
+                android:textSize="@dimen/dm_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dm_2"
+                android:text="推荐安装微信的用户使用"
+                android:textColor="@color/tv_999"
+                android:textSize="@dimen/dm_12" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_50"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="去支付"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dm_15" />
+</LinearLayout>

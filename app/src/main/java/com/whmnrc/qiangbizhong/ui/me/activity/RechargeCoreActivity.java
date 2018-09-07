@@ -3,9 +3,8 @@ package com.whmnrc.qiangbizhong.ui.me.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,25 +12,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.ToastUtils;
 import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.base.adapter.BaseAdapter;
 import com.whmnrc.qiangbizhong.base.adapter.BaseViewHolder;
-import com.whmnrc.qiangbizhong.model.bean.AgentshopQueryTypeBean;
 import com.whmnrc.qiangbizhong.model.bean.RechargeBean;
 import com.whmnrc.qiangbizhong.model.bean.RechargeCoreBean;
-import com.whmnrc.qiangbizhong.pay.alipay.AliPayTools;
-import com.whmnrc.qiangbizhong.pay.listener.OnSuccessAndErrorListener;
 import com.whmnrc.qiangbizhong.presenter.me.RechargePresenter;
-import com.whmnrc.qiangbizhong.ui.me.fragment.OpenVipFragment;
-import com.whmnrc.qiangbizhong.util.PwdCheckUtil;
-import com.whmnrc.qiangbizhong.util.ToastUtil;
-import com.whmnrc.qiangbizhong.util.UserManage;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -131,7 +120,7 @@ public class RechargeCoreActivity extends BaseActivity implements RechargePresen
                 if (!TextUtils.isEmpty(etRecharge.getText().toString().trim())) {
                     if (30 <= Number * Integer.parseInt(etRecharge.getText().toString().trim())) {
                         showLoading("购买中..");
-                        rechargePresenter.submitorder(etRecharge.getText().toString().trim(), "0", agentshopId, agentShopDiscountId, this);
+//                        rechargePresenter.submitorder(etRecharge.getText().toString().trim(), "0", agentshopId, agentShopDiscountId, this);
                     }
                 }
                 break;
@@ -167,29 +156,13 @@ public class RechargeCoreActivity extends BaseActivity implements RechargePresen
     }
 
     @Override
-    public void payS(String data) {
-        AliPayTools.aliSignPay(this, data, new OnSuccessAndErrorListener() {
-            @Override
-            public void onSuccess(String s) {
-                ToastUtils.showShort("充值成功");
-                rechargePresenter.rechargeQuery(1, RechargeCoreActivity.this);
-            }
+    public void payS(@NonNull String data, int type) {
 
-            @Override
-            public void onError(String s) {
-                rechargePresenter.rechargeQuery(1, RechargeCoreActivity.this);
-                if (s.equals("4000")) {
-                    ToastUtils.showShort("请确认支付宝是否安装");
-                }else {
-                    ToastUtils.showShort("充值失败");
-                }
-            }
-        });
     }
 
     public class RechargeAdapter extends BaseAdapter<RechargeCoreBean.ItemsBean>{
 
-        public RechargeAdapter(Context context) {
+        private RechargeAdapter(Context context) {
             super(context);
         }
 

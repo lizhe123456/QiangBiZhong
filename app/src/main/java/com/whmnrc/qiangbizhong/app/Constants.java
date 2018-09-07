@@ -14,7 +14,7 @@ public class Constants {
     public static final String INFO_ADDRESS = "http://qbz.aimeilian.com.cn/GoodsDetail/index";
 
 //    public static final String INFO_ADDRESS = "http://192.168.1.157:8011/GoodsDetail/index";
-    public static final String WX_APP_ID = "wx572d4c6551e02121";
+    public static final String WX_APP_ID = "wx047407a9f3cde3c9";
 
     public static double latitude;
     public static double longitude;
@@ -22,6 +22,6 @@ public class Constants {
     /**
      * 微信SECRET
      */
-    public static final String WX_SECRET = "152b2eb2ee41a70fc346033b30af2df4";
+    public static final String WX_SECRET = "3c0e566eb6356d62dd35f12a89d5b3d2";
 
 }

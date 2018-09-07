@@ -35,8 +35,6 @@
     <string name="sendSmsCode">/api/user/sendsmscode</string>
     <!--登录-->
     <string name="login">/api/user/login</string>
-    <!--微信支付-->
-    <string name="wechatPay">/api/pay/wechatpay</string>
     <!--首页-->
     <string name="homeIndex">/api/home/index</string>
     <!--限时折扣-->
@@ -234,6 +232,11 @@
     <string name="getappversion">/api/app/getappversion</string>
     <string name="downloadapp">/api/app/downloadapp</string>
     <string name="submitquestion">/api/app/submitquestion</string>
+
+    <string name="json">{\"appId\":\"wx572d4c6551e02121\",\"partnerId\":\"1511222231\",\"prepayId\":\"wx07155714958843be0d7cb3943232466596\",\"nonceStr\":\"1595af6435015c77a7149e92a551338e\",\"timeStamp\":\"1536307035\",\"packageValue\":\"Sign=WXPay\",\"sign\":\"FD5FCB7922EFCA44CD55C14AAA5929AC\"}</string>
+
+
+
 
 
 </resources>

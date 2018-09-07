@@ -42,7 +42,7 @@ public class RechargePresenter {
     }
 
 
-    public void submitorder(String monery,String orderType,String agentshopId,String agentShopDiscountId,RechargeCall rechargeCall){
+    public void submitorder(int payType,String monery,String orderType,String agentshopId,String agentShopDiscountId,RechargeCall rechargeCall){
         Map<String,String> map = new HashMap<>();
         map.put("UserId", UserManage.getInstance().getUserID());
         if (orderType.equals("0")){
@@ -60,7 +60,7 @@ public class RechargePresenter {
             public void onSuccess(String data) {
                 if (!context.isDestroyed()) {
                     if (data != null) {
-                        pay(data, rechargeCall);
+                        pay(payType,data, rechargeCall);
                     } else {
                         ToastUtils.showShort("请确认支付宝是否安装");
                     }
@@ -158,16 +158,16 @@ public class RechargePresenter {
 
     }
 
-
-    public void pay(String orerId,RechargeCall rechargeCall){
+    //0 支付宝 1 微信
+    public void pay(int type,String orerId,RechargeCall rechargeCall){
         Map<String,String> map = new HashMap<>();
         map.put("orderNo",orerId);
-        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(R.string.alipay),map, new OkhttpUtil.BeanCallback() {
+        OkhttpUtil.get(context.getString(R.string.server_address) + context.getString(type == 0 ? R.string.alipay : R.string.wechatpay),map, new OkhttpUtil.BeanCallback() {
             @Override
             public void onSuccess(String data) {
                 if (!context.isDestroyed()) {
                     if (rechargeCall != null) {
-                        rechargeCall.payS(data);
+                        rechargeCall.payS(data,type);
                     }
                 }
             }
@@ -230,7 +230,7 @@ public class RechargePresenter {
 
         void rechargeData(@NonNull RechargeBean rechargeBean);
 
-        void payS(@NonNull String data);
+        void payS(@NonNull String data,int type);
     }
 
     public interface RechargeRCall extends BaseCall {

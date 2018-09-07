@@ -1,4 +1,4 @@
-package com.whmnrc.qiangbizhong.pay.wechat.share;
+package com.whmnrc.qiangbizhong.wxapi;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.whmnrc.qiangbizhong.R;
 import com.whmnrc.qiangbizhong.app.Constants;
 import com.whmnrc.qiangbizhong.base.BaseActivity;
 import com.whmnrc.qiangbizhong.model.bean.WeiXin;
@@ -33,7 +34,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         wxAPI = WXAPIFactory.createWXAPI(this, Constants.WX_APP_ID,true);
-        wxAPI.registerApp(Constants.WX_APP_ID);
+//        wxAPI.registerApp(Constants.WX_APP_ID);
         wxAPI.handleIntent(getIntent(), this);
     }
 
@@ -57,6 +58,8 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
             SendAuth.Resp authResp = (SendAuth.Resp) resp;
             WeiXin weiXin=new WeiXin(1,resp.errCode,authResp.code,authResp.openId);
             EventBus.getDefault().post(weiXin);
+        }else if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+            //...
         }
         finish();
     }

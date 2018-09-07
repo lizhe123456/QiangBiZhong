@@ -267,13 +267,17 @@
         <activity android:name=".ui.PayStuActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".pay.wechat.share.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Fullscreen.Translucent"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <activity android:name=".ui.WxRegisterActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name="com.whmnrc.qiangbizhong.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <service android:name="com.amap.api.location.APSService"/>
     </application>
